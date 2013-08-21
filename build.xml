@@ -256,7 +256,7 @@
       srcdir="${src.dir}"
       destdir="${build}"
       deprecation="true"
-      target="5"
+      target="7"
       includeantruntime="false"
       classpathref="build.classes">
       <classpath>
@@ -273,7 +273,7 @@
       srcdir="${src.dir}"
       destdir="${build}"
       deprecation="true"
-      target="5"
+      target="7"
       includeantruntime="false"
       classpathref="build.classes">
       <exclude name="**/db/*" />
