@@ -597,6 +597,11 @@ function showCloud (show)
   _showPane(_selById(CLOUD_VIEW));
 }
 
+function showMadDogs()
+{
+	// SLUTZ
+}
+
 /**
  * Raw results pane loaded on demand.
  * @param show
