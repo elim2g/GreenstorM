@@ -32,7 +32,7 @@
 
 <div id="q-advanced" class="hidden">
  <table class="query-form">
-  <tr><td colspan="2"><em>Advanced search not yet implemented</em>
+  <tr><td colspan="2"><em>Advanced search not yet implemented. Sorry!!!</em>
   <tr class="hidden">
    <td class="td-name">Zone:</td>
    <td>
