@@ -437,7 +437,8 @@ function resetQueryPane ()
     $('select#z1').val('newspaper');
     break;
   case Q_ADVANCED :
-    // FIXME: todo
+	  $('input#q1').val('');
+	  $('select#z1').val('newspaper');
     break;
   case Q_CUSTOM :
     // FIXME: todo
@@ -993,7 +994,15 @@ function _createQueryString ()
           '&q=' + encodeURIComponent(m_currentTerm);
     break;
   case Q_ADVANCED:
-    m_currentZone = $('select#z1').val();
+    m_currentTerm = $('input#aq1').val();
+    
+    if($('select#z1').val() == 'All'){
+    	m_currentZone = 'newspaper';
+    } else {
+    	m_currentZone = $('select#z1').val();
+    }
+    str = '&zone=' + m_currentZone + 
+          '&q=' + encodeURIComponent(m_currentTerm);
     break;
   case Q_CUSTOM:
     break;
@@ -1084,7 +1093,6 @@ function _updateTimeDisplay ()
  */
 function _doQuery (pos)
 {
-  // ASSERT m_key != null
   if (pos === 0) {
     _resetState();
     $('#cc-pb11').button('enable');   
@@ -1098,7 +1106,7 @@ function _doQuery (pos)
             '&s=' + pos + '&n=' + m_fetchSize +
             '&encoding=json' + 
             '&callback=?';
-
+  
   $.getJSON(uri, function (data, status, jqXHR) {
       try {
         if (status == "success") {
@@ -1336,8 +1344,8 @@ function _updateMapDisplay (pos)
   var _addMarker = function (idx)
   {
     // FIXME: only newspaper will have this
-    //var pubId = eval(m_resultSet[idx].data.title.id);
-    var pubId = m_resultSet[idx].data.title.id;
+    var pubId = eval(m_resultSet[idx].data.title.id);
+    //var pubId = m_resultSet[idx].data.title.id;
     var info = m_pubCache[pubId];
     if (typeof info !== UNDEF) {
       _insertPublisherMapMarker(idx, info);
@@ -1436,8 +1444,8 @@ function _updateLocationRefs (pos)
 {
   var arg = '';
   for (var i = pos; i < m_resultSet.length; i++) {
-    //var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-    //var troveId = eval('m_resultSet[i].data.' + zoneInfo.tags[0].tag);
+    var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
+    //var troveId = eval('m_resultSet[i].data.id' + zoneInfo.tags[0].tag);
     var troveId = m_resultSet[i].data.id;
     arg += ',' + troveId;
     m_locations[troveId] = { pos: i, list: new Array() };
@@ -1732,7 +1740,11 @@ function _updateCurrQueryPane ()
       _setCurrentQueryButtonState();
       break;
     case Q_ADVANCED :
-      // FIXME: todo
+    	$('td#q11').html(m_currentTerm);
+        $('td#z11').html(m_currentZone);
+        $('td#n11').html(m_totalRecs);
+        $('td#n12').html(m_resultSet == null ? 0 : m_resultSet.length);
+        _setCurrentQueryButtonState();
       break;
     case Q_CUSTOM :
       // FIXME: todo
@@ -2261,5 +2273,3 @@ function locnDel ()
 
 
 // EOF
-
-
