@@ -38,6 +38,10 @@
    <td><input id="aq1" type="text"/></td>
   </tr>
   <tr>
+   <td class="td-name">NOT:</td>
+   <td><input id="aq2" type="text"/></td>
+  </tr>
+  <tr>
    <td class="td-name">Zone:</td>
    <td>
     <select id="z1">
@@ -45,8 +49,10 @@
       <option>book</option>
       <option>picture</option>
       <option>article</option>
-      <option>map</option>
-      <option>All</option>
+      <!-- Map is not being used as it doesnt return a map file it only returns
+      showing that they have a map and which library can be found
+      <option>map</option> -->
+      
     </select>
    </td>
   </tr>

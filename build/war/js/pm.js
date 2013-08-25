@@ -132,6 +132,7 @@ var ZONE_PICTURE = { // FIXME: how to handle array of image links?
     { tag:'versionCount', title:'Version', isLink:false },
     { tag:'relevance.value', title:'Score', isLink:false },
     { tag:'relevance.score', title:'Revelance', isLink:false },
+    { tag:'identifier[1].value', title:'Thumbnail', isLink:false },
     { tag:'troveUrl', title:'URL', isLink:true }
   ]};
 var ZONE_MAP = {
@@ -437,7 +438,8 @@ function resetQueryPane ()
     $('select#z1').val('newspaper');
     break;
   case Q_ADVANCED :
-    // FIXME: todo
+	  $('input#q1').val('');
+	  $('select#z1').val('newspaper');
     break;
   case Q_CUSTOM :
     // FIXME: todo
@@ -993,7 +995,13 @@ function _createQueryString ()
           '&q=' + encodeURIComponent(m_currentTerm);
     break;
   case Q_ADVANCED:
+    m_currentTerm = $('input#aq1').val();
     m_currentZone = $('select#z1').val();
+    if ($('select#z1').val() != ""){
+    	m_currentTerm += ('NOT' + $('input#aq2').val());
+    }
+    str = '&zone=' + m_currentZone + 
+          '&q=' + encodeURIComponent(m_currentTerm);
     break;
   case Q_CUSTOM:
     break;
@@ -1084,7 +1092,6 @@ function _updateTimeDisplay ()
  */
 function _doQuery (pos)
 {
-  // ASSERT m_key != null
   if (pos === 0) {
     _resetState();
     $('#cc-pb11').button('enable');   
@@ -1336,8 +1343,8 @@ function _updateMapDisplay (pos)
   var _addMarker = function (idx)
   {
     // FIXME: only newspaper will have this
-    //var pubId = eval(m_resultSet[idx].data.title.id);
-    var pubId = m_resultSet[idx].data.title.id;
+    var pubId = eval(m_resultSet[idx].data.title.id);
+    //var pubId = m_resultSet[idx].data.title.id;
     var info = m_pubCache[pubId];
     if (typeof info !== UNDEF) {
       _insertPublisherMapMarker(idx, info);
@@ -1436,9 +1443,9 @@ function _updateLocationRefs (pos)
 {
   var arg = '';
   for (var i = pos; i < m_resultSet.length; i++) {
-    //var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-    //var troveId = eval('m_resultSet[i].data.' + zoneInfo.tags[0].tag);
-    var troveId = m_resultSet[i].data.id;
+    var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
+    var troveId = eval('m_resultSet[i].data.id' + zoneInfo.tags[0].tag);
+    //var troveId = m_resultSet[i].data.id;
     arg += ',' + troveId;
     m_locations[troveId] = { pos: i, list: new Array() };
   }
@@ -1732,7 +1739,11 @@ function _updateCurrQueryPane ()
       _setCurrentQueryButtonState();
       break;
     case Q_ADVANCED :
-      // FIXME: todo
+    	$('td#q11').html(m_currentTerm);
+        $('td#z11').html(m_currentZone);
+        $('td#n11').html(m_totalRecs);
+        $('td#n12').html(m_resultSet == null ? 0 : m_resultSet.length);
+        _setCurrentQueryButtonState();
       break;
     case Q_CUSTOM :
       // FIXME: todo
@@ -1815,15 +1826,23 @@ function _displayRawDataItem (id)
       '<a id="raw-trove-link" href="' + value + '" target="_blank">' + value + '</a></td></tr>';
     }
     else {
-      html += '<tr><td class="td-crud-name">' + zoneInfo.tags[i].title + ':</td><td>' + value + '</td></tr>';
+    	if(zoneInfo.tags[i].title == 'Thumbnail') {
+    		value = eval('m_resultSet[' + id + '].data.' + zoneInfo.tags[9].tag);
+    		html += '<tr><td class="td-crud=name">' + zoneInfo.tags[9].title + '</td><td>' + '<img src="' + value + '" alt=" ---FAIL pic didnt load---"></td></tr>';
+    	} else {
+    		html += '<tr><td class="td-crud-name">' + zoneInfo.tags[i].title + ':</td><td>' + value + '</td></tr>';
+  
+    	}
     }
   }
+  
   html += '</table>';
   $(_selById(RAW_RECORD)).html(html);
   m_rawRecordId = id;
   if (m_currentZone === 'newspaper') {
     $('button#rdv-pb1').button('enable');
   }
+  
   $('button#rdv-pb3').button('enable');
 }
 

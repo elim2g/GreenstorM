@@ -132,6 +132,7 @@ var ZONE_PICTURE = { // FIXME: how to handle array of image links?
     { tag:'versionCount', title:'Version', isLink:false },
     { tag:'relevance.value', title:'Score', isLink:false },
     { tag:'relevance.score', title:'Revelance', isLink:false },
+    { tag:'identifier[1].value', title:'Thumbnail', isLink:false },
     { tag:'troveUrl', title:'URL', isLink:true }
   ]};
 var ZONE_MAP = {
@@ -995,11 +996,9 @@ function _createQueryString ()
     break;
   case Q_ADVANCED:
     m_currentTerm = $('input#aq1').val();
-    
-    if($('select#z1').val() == 'All'){
-    	m_currentZone = 'newspaper';
-    } else {
-    	m_currentZone = $('select#z1').val();
+    m_currentZone = $('select#z1').val();
+    if ($('select#z1').val() != ""){
+    	m_currentTerm += ('NOT' + $('input#aq2').val());
     }
     str = '&zone=' + m_currentZone + 
           '&q=' + encodeURIComponent(m_currentTerm);
@@ -1106,7 +1105,7 @@ function _doQuery (pos)
             '&s=' + pos + '&n=' + m_fetchSize +
             '&encoding=json' + 
             '&callback=?';
-  
+
   $.getJSON(uri, function (data, status, jqXHR) {
       try {
         if (status == "success") {
@@ -1445,8 +1444,8 @@ function _updateLocationRefs (pos)
   var arg = '';
   for (var i = pos; i < m_resultSet.length; i++) {
     var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-    //var troveId = eval('m_resultSet[i].data.id' + zoneInfo.tags[0].tag);
-    var troveId = m_resultSet[i].data.id;
+    var troveId = eval('m_resultSet[i].data.id' + zoneInfo.tags[0].tag);
+    //var troveId = m_resultSet[i].data.id;
     arg += ',' + troveId;
     m_locations[troveId] = { pos: i, list: new Array() };
   }
@@ -1827,15 +1826,23 @@ function _displayRawDataItem (id)
       '<a id="raw-trove-link" href="' + value + '" target="_blank">' + value + '</a></td></tr>';
     }
     else {
-      html += '<tr><td class="td-crud-name">' + zoneInfo.tags[i].title + ':</td><td>' + value + '</td></tr>';
+    	if(zoneInfo.tags[i].title == 'Thumbnail') {
+    		value = eval('m_resultSet[' + id + '].data.' + zoneInfo.tags[9].tag);
+    		html += '<tr><td class="td-crud=name">' + zoneInfo.tags[9].title + '</td><td>' + '<img src="' + value + '" alt=" ---FAIL pic didnt load---"></td></tr>';
+    	} else {
+    		html += '<tr><td class="td-crud-name">' + zoneInfo.tags[i].title + ':</td><td>' + value + '</td></tr>';
+  
+    	}
     }
   }
+  
   html += '</table>';
   $(_selById(RAW_RECORD)).html(html);
   m_rawRecordId = id;
   if (m_currentZone === 'newspaper') {
     $('button#rdv-pb1').button('enable');
   }
+  
   $('button#rdv-pb3').button('enable');
 }
 
@@ -2273,3 +2280,5 @@ function locnDel ()
 
 
 // EOF
+
+
