@@ -997,11 +997,10 @@ function _createQueryString ()
   case Q_ADVANCED:
     m_currentTerm = $('input#aq1').val();
     m_currentZone = $('select#z1').val();
-    if ($('select#z1').val() != ""){
+    if ($('input#aq2').val() != ""){
     	m_currentTerm += ('NOT' + $('input#aq2').val());
     }
-    str = '&zone=' + m_currentZone + 
-          '&q=' + encodeURIComponent(m_currentTerm);
+    str = '&zone=' + m_currentZone + '&q=' + encodeURIComponent(m_currentTerm);
     break;
   case Q_CUSTOM:
     break;
