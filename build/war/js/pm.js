@@ -146,6 +146,7 @@ var ZONE_MAP = {
     { tag:'versionCount', title:'Version', isLink:false },
     { tag:'relevance.value', title:'Score', isLink:false },
     { tag:'relevance.score', title:'Revelance', isLink:false },
+    { tag:'identifier[1].value', title:'Thumbnail', isLink:false },
     { tag:'troveUrl', title:'URL', isLink:true }
   ]};
 var ZONE_COLLECTION = {
@@ -599,10 +600,6 @@ function showCloud (show)
   _showPane(_selById(CLOUD_VIEW));
 }
 
-function showMadDogs()
-{
-	// SLUTZ
-}
 
 /**
  * Raw results pane loaded on demand.
@@ -1068,7 +1065,6 @@ function _resetState ()
   rbGroup.prop('checked', false);
   rbGroup[3].checked = true;
   $('div#y2k-timeline div').remove();
-
 }
 
 function _updateTimeDisplay ()
@@ -1089,8 +1085,7 @@ function _updateTimeDisplay ()
  * Clears form if position < zero.
  * @param pos position in TROVE result set
  */
-function _doQuery (pos)
-{
+function _doQuery (pos){
   if (pos === 0) {
     _resetState();
     $('#cc-pb11').button('enable');   
@@ -1442,9 +1437,9 @@ function _updateLocationRefs (pos)
 {
   var arg = '';
   for (var i = pos; i < m_resultSet.length; i++) {
-    var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-    var troveId = eval('m_resultSet[i].data.id' + zoneInfo.tags[0].tag);
-    //var troveId = m_resultSet[i].data.id;
+    //var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
+    //var troveId = eval('m_resultSet[i].data.id' + zoneInfo.tags[0].tag);
+    var troveId = m_resultSet[i].data.id;
     arg += ',' + troveId;
     m_locations[troveId] = { pos: i, list: new Array() };
   }

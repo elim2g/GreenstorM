@@ -49,7 +49,9 @@
       <option>book</option>
       <option>picture</option>
       <option>article</option>
-      <option>map</option>
+      <!-- Map is not being used as it doesnt return a map file it only returns
+      showing that they have a map and which library can be found
+      <option>map</option> -->
       
     </select>
    </td>
