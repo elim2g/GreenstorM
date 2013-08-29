@@ -66,6 +66,10 @@ var Q_SAVE           = 'save-query';
 var Q_STORE          = 'stored-queries';
 var Q_STORE_TABLE    = 'qstore-table';
 
+
+var MINYEAR			= '1800';
+var MAXYEAR			= '2000';
+
 // %age ranges and associated color for timeline and map pins
 var FREQ_DISTR = [
     [0,0.5, '#ffffff'], [0.5,1, '#ccccff'], [1,1.5, '#6666ff'], 
@@ -230,6 +234,65 @@ var m_currentTerm  = null;
 var m_currentZone  = null;
 var m_currentQuery = null;
 var m_locations    = null;
+
+
+$(document).ready(function (){
+	
+});
+
+function checkAdvanced(){
+	if(id = 'q-advanced'){
+
+		var yearOptionsStart = '<select id="aqYearStart">';
+		var yearOptionsEnd = '<select id="aqYearEnd">';
+		var yearOptions = '';
+		for (var i = MINYEAR; i <= MAXYEAR; i++){
+			yearOptions += '<option>' + i + '</option>';
+		}
+		  
+		yearOptionsStart += yearOptions + '</select>';
+		yearOptionsEnd += yearOptions + '</select>';
+		  
+		  
+		  
+		$('span#aqYrStart').html(yearOptionsStart);
+		$('span#aqYrEnd').html(yearOptionsEnd);
+
+		$('#aqYearEnd').prop('selectedIndex', 200);
+		  
+		$('#aqYrStart').on('change', function(){
+			yearOptionsEnd = '<select id="aqYearEnd">';
+			yearOptions = '';
+			var newStartYear = $('select#aqYearStart option:selected').val();
+			for (var i = newStartYear; i <= MAXYEAR; i++){
+				yearOptions += '<option>' + i + '</option>';
+			}
+			yearOptionsEnd += yearOptions + '</select>';
+			$('span#aqYrEnd').html(yearOptionsEnd);
+		});
+		  
+		hideYear();
+		
+		$('#z1').prop('selectedIndex', 0);
+		$('#aq1').val("");
+		$('#searchYear').show();
+	}
+}
+
+function hideYear(){
+	$('#z1').on('change', function(){
+		if($('select#z1 option:selected').val() != 'newspaper'){
+			$('#searchYear').hide();
+			$('#aqYearStart').hide();
+			$('#aqYearEnd').hide();
+		} else {
+			$('#searchYear').show();
+			$('#aqYearStart').show();
+			$('#aqYearEnd').show();
+		}
+	});
+}
+
 
 
 /**
@@ -948,25 +1011,30 @@ function _openQuery (idx)
  * Swaps different forms of query
  * @param id The one to make visible
  */
-function _showQueryForm (id)
-{
-  $('div#' + m_currentQueryFormPane).toggle('fade','swing',100,
+function _showQueryForm (id){
+	
+	checkAdvanced(id);
+
+	$('div#' + m_currentQueryFormPane).toggle('fade','swing',100,
     function () { 
-      if ($('div#' + id).hasClass('hidden')) {
-        $('div#' + id).toggle(); 
-        $('div#' + id).removeClass('hidden');
-      }
-      $('div#' + id).toggle('fade','swing',100); 
-      m_currentQueryFormPane = id;
+    	if ($('div#' + id).hasClass('hidden')) {
+    		$('div#' + id).toggle(); 
+    		$('div#' + id).removeClass('hidden');
+    	}
+    	$('div#' + id).toggle('fade','swing',100); 
+    	m_currentQueryFormPane = id;
     });
+  
+	checkAdvanced(id);
 }
 
 /**
  * Swaps different forms of query
  * @param id The one to make visible
  */
-function _showStoredQueryForm (id)
-{
+function _showStoredQueryForm (id){
+	
+	
   $('div#' + m_currentSaveFormPane).toggle('fade','swing',100,
     function () { 
       if ($('div#' + id).hasClass('hidden')) {
@@ -994,10 +1062,13 @@ function _createQueryString ()
   case Q_ADVANCED:
     m_currentTerm = $('input#aq1').val();
     m_currentZone = $('select#z1').val();
-    if ($('input#aq2').val() != ""){
-    	m_currentTerm += ('NOT' + $('input#aq2').val());
-    }
+    
     str = '&zone=' + m_currentZone + '&q=' + encodeURIComponent(m_currentTerm);
+    
+    if(m_currentZone == 'newspaper'){
+    	str += ' date:[' + $('select#aqYearStart').val() + ' TO ' 
+    		+ $('select#aqYearEnd').val() + ']';
+    }
     break;
   case Q_CUSTOM:
     break;
