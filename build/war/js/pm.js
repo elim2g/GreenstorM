@@ -65,6 +65,7 @@ var Q_CUSTOM         = 'q-custom';
 var Q_SAVE           = 'save-query';
 var Q_STORE          = 'stored-queries';
 var Q_STORE_TABLE    = 'qstore-table';
+var testList = new Array();
 
 // %age ranges and associated color for timeline and map pins
 var FREQ_DISTR = [
@@ -229,6 +230,11 @@ var m_currentZone  = null;
 var m_currentQuery = null;
 var m_locations    = null;
 
+
+$(document).ready (function() {  
+	
+
+});
 
 /**
  * Invoked by index page onload trigger, does any required configuration.
@@ -1752,7 +1758,34 @@ function _resetRawRecordList (list)
     var listData =  '';
     var prefix = '';
     var len = list.length;
-    for (var idx = 0; idx < len; idx++) {
+    var remainder = len % MAX_FETCH_SIZE;
+    var pageCount = (len - remainder) / MAX_FETCH_SIZE;
+    var currentPage = 0;
+    var lastPage = pageCount - 1;
+    var pgStart = 0;
+    var pgEnd = len;
+      
+    document.getElementById("page-count-message").innerHTML = "Showing results 1- " + remainder;
+   
+    if (document.getElementById("page-options") != null) {
+    	currentPage = document.getElementById("page-options").selectedIndex;
+    	$('#page-options').remove();
+    }
+
+    if (len > MAX_FETCH_SIZE) {
+    	_paginateResults(pageCount, currentPage, remainder);
+    	$("#page-options").on("change", function() {
+    		_resetRawRecordList(list);
+    	});
+        pgStart = currentPage * MAX_FETCH_SIZE;
+        pgEnd = pgStart + MAX_FETCH_SIZE;
+    }
+         
+    if (currentPage == lastPage) {
+    	pgEnd = pgStart + remainder;
+    }
+    
+    for (var idx = pgStart; idx < pgEnd; idx++) {
       listData += prefix + '<a class="raw-data-selector info" href="#" onClick="_displayRawDataItem(' + list[idx].idx + ')">';
       if (list[idx].hover.length > 0) {
         listData += '<span>' + list[idx].hover + '</span>';
@@ -1771,6 +1804,36 @@ function _resetRawRecordList (list)
       $('button#rdv-pb3').button('disable');
     }
   }
+}
+
+
+/**
+ * Splits raw results into pages
+ * 
+ * @param len
+ */
+function _paginateResults(pgCount, currentPage, remainder) {
+	document.getElementById("page-count-message").innerHTML = "Showing results ";
+	var pageOptions = '<select id="page-options">';
+	var lastPage = pgCount - 1;
+    //build page numbers
+    for (var i = 0; i < pgCount; i++) {
+    	var initialIndex = i * MAX_FETCH_SIZE + 1;
+    	var finalIndex = initialIndex + (MAX_FETCH_SIZE);
+    	if (i == lastPage) {
+    		finalIndex = initialIndex + remainder;
+    	}
+    	
+    	var range = initialIndex + '-' + finalIndex;
+    	if (i == currentPage) {
+    		pageOptions += '<option class="pg-number" selected="selected">' + range + '</option>';
+    	} else {
+    		pageOptions += '<option class="pg-number">' + range + '</option>';
+    	}
+    	
+    }
+    pageOptions += '</select>';
+	$('span#raw-page-numbers').html(pageOptions);
 }
 
 /**
@@ -1972,6 +2035,9 @@ function _sortRaw (sortType)
         return a.val > b.val ? 1 :
                a.val < b.val ? -1 : 0;
       });
+    }
+    if (document.getElementById("page-options") != null) {
+    	$("select#page-options").prop('selectedIndex', 0);  
     }
     _resetRawRecordList (tmp);
   }
