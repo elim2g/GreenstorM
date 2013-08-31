@@ -65,7 +65,7 @@ var Q_CUSTOM         = 'q-custom';
 var Q_SAVE           = 'save-query';
 var Q_STORE          = 'stored-queries';
 var Q_STORE_TABLE    = 'qstore-table';
-var testList = new Array();
+
 
 // %age ranges and associated color for timeline and map pins
 var FREQ_DISTR = [
@@ -231,10 +231,61 @@ var m_currentQuery = null;
 var m_locations    = null;
 
 
-$(document).ready (function() {  
-	
 
-});
+function checkAdvanced(){
+	if(id = 'q-advanced'){
+
+		var yearOptionsStart = '<select id="aqYearStart">';
+		var yearOptionsEnd = '<select id="aqYearEnd">';
+		var yearOptions = '';
+		for (var i = MINYEAR; i <= MAXYEAR; i++){
+			yearOptions += '<option>' + i + '</option>';
+		}
+		  
+		yearOptionsStart += yearOptions + '</select>';
+		yearOptionsEnd += yearOptions + '</select>';
+		  
+		  
+		  
+		$('span#aqYrStart').html(yearOptionsStart);
+		$('span#aqYrEnd').html(yearOptionsEnd);
+
+		$('#aqYearEnd').prop('selectedIndex', 200);
+		  
+		$('#aqYrStart').on('change', function(){
+			yearOptionsEnd = '<select id="aqYearEnd">';
+			yearOptions = '';
+			var newStartYear = $('select#aqYearStart option:selected').val();
+			for (var i = newStartYear; i <= MAXYEAR; i++){
+				yearOptions += '<option>' + i + '</option>';
+			}
+			yearOptionsEnd += yearOptions + '</select>';
+			$('span#aqYrEnd').html(yearOptionsEnd);
+		});
+		  
+		hideYear();
+		
+		$('#z1').prop('selectedIndex', 0);
+		$('#aq1').val("");
+		$('#searchYear').show();
+	}
+}
+
+function hideYear(){
+	$('#z1').on('change', function(){
+		if($('select#z1 option:selected').val() != 'newspaper'){
+			$('#searchYear').hide();
+			$('#aqYearStart').hide();
+			$('#aqYearEnd').hide();
+		} else {
+			$('#searchYear').show();
+			$('#aqYearStart').show();
+			$('#aqYearEnd').show();
+		}
+	});
+}
+
+
 
 /**
  * Invoked by index page onload trigger, does any required configuration.
@@ -443,7 +494,8 @@ function resetQueryPane ()
     $('select#z1').val('newspaper');
     break;
   case Q_ADVANCED :
-    // FIXME: todo
+	  $('input#q1').val('');
+	  $('select#z1').val('newspaper');
     break;
   case Q_CUSTOM :
     // FIXME: todo
@@ -603,10 +655,6 @@ function showCloud (show)
   _showPane(_selById(CLOUD_VIEW));
 }
 
-function showMadDogs()
-{
-	// SLUTZ
-}
 
 /**
  * Raw results pane loaded on demand.
@@ -955,25 +1003,30 @@ function _openQuery (idx)
  * Swaps different forms of query
  * @param id The one to make visible
  */
-function _showQueryForm (id)
-{
-  $('div#' + m_currentQueryFormPane).toggle('fade','swing',100,
+function _showQueryForm (id){
+	
+	checkAdvanced(id);
+
+	$('div#' + m_currentQueryFormPane).toggle('fade','swing',100,
     function () { 
-      if ($('div#' + id).hasClass('hidden')) {
-        $('div#' + id).toggle(); 
-        $('div#' + id).removeClass('hidden');
-      }
-      $('div#' + id).toggle('fade','swing',100); 
-      m_currentQueryFormPane = id;
+    	if ($('div#' + id).hasClass('hidden')) {
+    		$('div#' + id).toggle(); 
+    		$('div#' + id).removeClass('hidden');
+    	}
+    	$('div#' + id).toggle('fade','swing',100); 
+    	m_currentQueryFormPane = id;
     });
+  
+	checkAdvanced(id);
 }
 
 /**
  * Swaps different forms of query
  * @param id The one to make visible
  */
-function _showStoredQueryForm (id)
-{
+function _showStoredQueryForm (id){
+	
+	
   $('div#' + m_currentSaveFormPane).toggle('fade','swing',100,
     function () { 
       if ($('div#' + id).hasClass('hidden')) {
@@ -999,7 +1052,15 @@ function _createQueryString ()
           '&q=' + encodeURIComponent(m_currentTerm);
     break;
   case Q_ADVANCED:
+    m_currentTerm = $('input#aq1').val();
     m_currentZone = $('select#z1').val();
+    
+    str = '&zone=' + m_currentZone + '&q=' + encodeURIComponent(m_currentTerm);
+    
+    if(m_currentZone == 'newspaper'){
+    	str += ' date:[' + $('select#aqYearStart').val() + ' TO ' 
+    		+ $('select#aqYearEnd').val() + ']';
+    }
     break;
   case Q_CUSTOM:
     break;
@@ -1067,7 +1128,6 @@ function _resetState ()
   rbGroup.prop('checked', false);
   rbGroup[3].checked = true;
   $('div#y2k-timeline div').remove();
-
 }
 
 function _updateTimeDisplay ()
@@ -1088,9 +1148,7 @@ function _updateTimeDisplay ()
  * Clears form if position < zero.
  * @param pos position in TROVE result set
  */
-function _doQuery (pos)
-{
-  // ASSERT m_key != null
+function _doQuery (pos){
   if (pos === 0) {
     _resetState();
     $('#cc-pb11').button('enable');   
@@ -1342,8 +1400,8 @@ function _updateMapDisplay (pos)
   var _addMarker = function (idx)
   {
     // FIXME: only newspaper will have this
-    //var pubId = eval(m_resultSet[idx].data.title.id);
-    var pubId = m_resultSet[idx].data.title.id;
+    var pubId = eval(m_resultSet[idx].data.title.id);
+    //var pubId = m_resultSet[idx].data.title.id;
     var info = m_pubCache[pubId];
     if (typeof info !== UNDEF) {
       _insertPublisherMapMarker(idx, info);
@@ -1443,7 +1501,7 @@ function _updateLocationRefs (pos)
   var arg = '';
   for (var i = pos; i < m_resultSet.length; i++) {
     //var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-    //var troveId = eval('m_resultSet[i].data.' + zoneInfo.tags[0].tag);
+    //var troveId = eval('m_resultSet[i].data.id' + zoneInfo.tags[0].tag);
     var troveId = m_resultSet[i].data.id;
     arg += ',' + troveId;
     m_locations[troveId] = { pos: i, list: new Array() };
@@ -1738,7 +1796,11 @@ function _updateCurrQueryPane ()
       _setCurrentQueryButtonState();
       break;
     case Q_ADVANCED :
-      // FIXME: todo
+    	$('td#q11').html(m_currentTerm);
+        $('td#z11').html(m_currentZone);
+        $('td#n11').html(m_totalRecs);
+        $('td#n12').html(m_resultSet == null ? 0 : m_resultSet.length);
+        _setCurrentQueryButtonState();
       break;
     case Q_CUSTOM :
       // FIXME: todo
@@ -1878,15 +1940,23 @@ function _displayRawDataItem (id)
       '<a id="raw-trove-link" href="' + value + '" target="_blank">' + value + '</a></td></tr>';
     }
     else {
-      html += '<tr><td class="td-crud-name">' + zoneInfo.tags[i].title + ':</td><td>' + value + '</td></tr>';
+    	if(zoneInfo.tags[i].title == 'Thumbnail') {
+    		value = eval('m_resultSet[' + id + '].data.' + zoneInfo.tags[9].tag);
+    		html += '<tr><td class="td-crud=name">' + zoneInfo.tags[9].title + '</td><td>' + '<img src="' + value + '" alt=" ---FAIL pic didnt load---"></td></tr>';
+    	} else {
+    		html += '<tr><td class="td-crud-name">' + zoneInfo.tags[i].title + ':</td><td>' + value + '</td></tr>';
+  
+    	}
     }
   }
+  
   html += '</table>';
   $(_selById(RAW_RECORD)).html(html);
   m_rawRecordId = id;
   if (m_currentZone === 'newspaper') {
     $('button#rdv-pb1').button('enable');
   }
+  
   $('button#rdv-pb3').button('enable');
 }
 

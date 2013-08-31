@@ -67,6 +67,10 @@ var Q_STORE          = 'stored-queries';
 var Q_STORE_TABLE    = 'qstore-table';
 
 
+
+var MINYEAR			= '1800';
+var MAXYEAR			= '2000';
+
 // %age ranges and associated color for timeline and map pins
 var FREQ_DISTR = [
     [0,0.5, '#ffffff'], [0.5,1, '#ccccff'], [1,1.5, '#6666ff'], 
@@ -133,6 +137,7 @@ var ZONE_PICTURE = { // FIXME: how to handle array of image links?
     { tag:'versionCount', title:'Version', isLink:false },
     { tag:'relevance.value', title:'Score', isLink:false },
     { tag:'relevance.score', title:'Revelance', isLink:false },
+    { tag:'identifier[1].value', title:'Thumbnail', isLink:false },
     { tag:'troveUrl', title:'URL', isLink:true }
   ]};
 var ZONE_MAP = {
@@ -146,6 +151,7 @@ var ZONE_MAP = {
     { tag:'versionCount', title:'Version', isLink:false },
     { tag:'relevance.value', title:'Score', isLink:false },
     { tag:'relevance.score', title:'Revelance', isLink:false },
+    { tag:'identifier[1].value', title:'Thumbnail', isLink:false },
     { tag:'troveUrl', title:'URL', isLink:true }
   ]};
 var ZONE_COLLECTION = {
@@ -1867,7 +1873,6 @@ function _resetRawRecordList (list)
     }
   }
 }
-
 
 /**
  * Splits raw results into pages
