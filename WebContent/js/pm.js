@@ -1877,7 +1877,9 @@ function _resetRawRecordList (list)
 /**
  * Splits raw results into pages
  * 
- * @param len
+ * @param pgCount: The number of pages to construct
+ * @param currentPage: The current selected page
+ * @param remainder: The result count for the final page
  */
 function _paginateResults(pgCount, currentPage, remainder) {
 	document.getElementById("page-count-message").innerHTML = "Showing results ";
