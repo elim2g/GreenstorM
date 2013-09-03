@@ -67,7 +67,6 @@ var Q_STORE          = 'stored-queries';
 var Q_STORE_TABLE    = 'qstore-table';
 
 
-
 var MINYEAR			= '1800';
 var MAXYEAR			= '2000';
 
@@ -237,6 +236,65 @@ var m_currentQuery = null;
 var m_locations    = null;
 
 
+
+function checkAdvanced(){
+	if(id = 'q-advanced'){
+
+		var yearOptionsStart = '<select id="aqYearStart">';
+		var yearOptionsEnd = '<select id="aqYearEnd">';
+		var yearOptions = '';
+		for (var i = MINYEAR; i <= MAXYEAR; i++){
+			yearOptions += '<option>' + i + '</option>';
+		}
+		  
+		yearOptionsStart += yearOptions + '</select>';
+		yearOptionsEnd += yearOptions + '</select>';
+		  
+		  
+		  
+		$('span#aqYrStart').html(yearOptionsStart);
+		$('span#aqYrEnd').html(yearOptionsEnd);
+
+		$('#aqYearEnd').prop('selectedIndex', 200);
+		  
+		$('#aqYrStart').on('change', function(){
+			yearOptionsEnd = '<select id="aqYearEnd">';
+			yearOptions = '';
+			var newStartYear = $('select#aqYearStart option:selected').val();
+			for (var i = newStartYear; i <= MAXYEAR; i++){
+				yearOptions += '<option>' + i + '</option>';
+			}
+			yearOptionsEnd += yearOptions + '</select>';
+			$('span#aqYrEnd').html(yearOptionsEnd);
+		});
+		  
+		hideYear();
+		
+		$('#z1').prop('selectedIndex', 0);
+		$('#aq1').val("");
+		$('#searchYear').show();
+	}
+}
+
+function hideYear(){
+	$('#z1').on('change', function(){
+		if($('select#z1 option:selected').val() != 'newspaper'){
+			$('#searchYear').hide();
+			$('#aqYearStart').hide();
+			$('#aqYearEnd').hide();
+		} else {
+			$('#searchYear').show();
+			$('#aqYearStart').show();
+			$('#aqYearEnd').show();
+		}
+	});
+}
+
+
+
+$(document).ready(function (){
+	
+});
 
 function checkAdvanced(){
 	if(id = 'q-advanced'){

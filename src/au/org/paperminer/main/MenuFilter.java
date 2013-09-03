@@ -70,7 +70,7 @@ public class MenuFilter implements Filter
            "<li class=\"%s\">%sHistogram%s</li>" +
            "<li class=\"%s\">%sTerm Cloud%s</li>" +
            "<li class=\"%s\">%sRaw Results%s</li>" +
-           "<li class=\"%s\">%sThe Maddest Dog%s</li>" +
+           //"<li class=\"%s\">%sThe Maddest Dog%s</li>" +
           "</ul>" +
          "</li>";
 
