@@ -67,7 +67,6 @@ var Q_STORE          = 'stored-queries';
 var Q_STORE_TABLE    = 'qstore-table';
 
 
-
 var MINYEAR			= '1800';
 var MAXYEAR			= '2000';
 
