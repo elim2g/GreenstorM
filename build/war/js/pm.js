@@ -236,6 +236,12 @@ var m_currentQuery = null;
 var m_locations    = null;
 
 
+<<<<<<< HEAD
+=======
+$(document).ready(function (){
+	
+});
+>>>>>>> branch 'master' of https://github.com/elim2g/GreenstorM.git
 
 function checkAdvanced(){
 	if(id = 'q-advanced'){
