@@ -73,9 +73,7 @@
    </td>
   </tr>
   <tr>
-  	<p>
-  	*Searching by article types other than newspaper will not populate data on map view*</br>
-  	</p>
+  		* Searching by article types other than newspaper will not populate data on map view or graphs *</br>
   </tr>
  </table>
 </div>
