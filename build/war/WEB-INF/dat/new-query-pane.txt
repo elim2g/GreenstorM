@@ -39,16 +39,11 @@
   </tr>
   <tr>
    <td class="td-name">Zone:</td>
-   <td>
-    <select id="z1">
-      <option>newspaper</option>
-      <option>book</option>
-      <option>picture</option>
-      <option>article</option>
-      <!-- Map is not being used as it doesnt return a map file it only returns
-      showing that they have a map and which library can be found
-      <option>map</option> -->
-    </select>
+   <td>   
+	<input type="checkbox" id="z1a" value="newspaper">Newspaper<br>
+	<input type="checkbox" id="z1b" value="book">Book<br>
+	<input type="checkbox" id="z1c" value="picture">Picture<br>
+	<input type="checkbox" id="z1d" value="article">Article<br>
    </td>
   </tr>
   </tr>
@@ -73,9 +68,7 @@
    </td>
   </tr>
   <tr>
-  	<p>
-  	*Searching by article types other than newspaper will not populate data on map view*</br>
-  	</p>
+  		* Searching by article types other than newspaper will not populate data on map view or graphs *</br>
   </tr>
  </table>
 </div>
