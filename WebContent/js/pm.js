@@ -245,7 +245,7 @@ h_data[0]		= 69;
 
 
 $(document).ready(function (){
-	
+
 });
 
 function checkAdvanced(){
@@ -1292,6 +1292,8 @@ function _resetState ()
   $('#ctl-table button').button('disable');   
   $('#cc-pb11').button('option', 'label', 'Pause Query');
   $('#cc-pb11').button('disable');   
+  $('button#btn-pause').attr('src', 'images/button_grey_pause'); 
+  $('button#btn-pause').css('visibility', 'hidden'); 
   var rbGroup = $('input[name="raw-sort-rb"]');
   rbGroup.prop('checked', false);
   rbGroup[3].checked = true;
@@ -1319,8 +1321,8 @@ function _updateTimeDisplay ()
 function _doQuery (pos){
   if (pos === 0) {
     _resetState();
-    $('#cc-pb11').button('enable');   
-
+    $('#cc-pb11').button('enable'); 
+    $('button#btn-pause').css('visibility', 'visible'); 
   }
   var queryId = m_queryId;
   if (m_fetchSize < MAX_FETCH_SIZE) {
@@ -1369,6 +1371,7 @@ function _processData (data, pos, id)
       m_run = true;
       $('#busy-box').activity(true);
       $('#cc-pb11').button('option', 'label', 'Pause Query');
+      $('img#img-pause').attr('src', 'images/button_grey_pause.png');
       _doQuery(m_resultSet.length);
     }
     else {
@@ -1376,6 +1379,7 @@ function _processData (data, pos, id)
       m_paused = true;
       $('#busy-box').activity(false);
       $('#cc-pb11').button('option', 'label', 'Resume Query');
+      $('img#img-pause').attr('src', 'images/button_grey_play.png');
     }
     _updateCurrQueryPane();
   }
@@ -1420,6 +1424,7 @@ function _processData (data, pos, id)
       else {
         $('#busy-box').activity(false);
         $('#cc-pb11').button('disable');
+        $('button#btn-pause').css('visibility', 'hidden'); 
         m_run = false;
         ++m_queryId;
       }
