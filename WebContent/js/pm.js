@@ -1981,17 +1981,11 @@ function _updateCurrQueryPane ()
   if ($(_selById(CURR_QUERY_PANE)).length > 0) {
     switch (m_currentQueryFormPane) {
     case Q_SIMPLE : 
-      $('td#q11').html(m_currentTerm);
-      $('td#z11').html(m_currentZone);
-      $('td#n11').html(m_totalRecs);
-      $('td#n12').html(m_resultSet == null ? 0 : m_resultSet.length);
+      _updateSearchProgressFields();
       _setCurrentQueryButtonState();
       break;
     case Q_ADVANCED :
-    	$('td#q11').html(m_currentTerm);
-        $('td#z11').html(m_currentZone);
-        $('td#n11').html(m_totalRecs);
-        $('td#n12').html(m_resultSet == null ? 0 : m_resultSet.length);
+    	_updateSearchProgressFields();
         _setCurrentQueryButtonState();
       break;
     case Q_CUSTOM :
@@ -1999,6 +1993,19 @@ function _updateCurrQueryPane ()
       break;
     }
   }
+}
+
+/**
+ * Updates the fields on all (currently current query page and master page)
+ * with new numbers for the amount of results processed, etc.
+ * @author Rob Dempsey
+ */
+function _updateSearchProgressFields() {
+    $('td#q11').html(m_currentTerm);
+    $('td#z11').html(m_currentZone);
+    $('td#n11').html(m_totalRecs);
+    $('td#n12').html(m_resultSet == null ? 0 : m_resultSet.length);
+    $('div#div-progress').html(m_resultSet == null ? "" : m_resultSet.length + " / " + m_totalRecs + "<br>records retrieved</br>");
 }
 
 /**

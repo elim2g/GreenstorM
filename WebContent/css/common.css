@@ -283,7 +283,7 @@ table.raw-record { cell-padding:6px; }
 
 table#header-logos {
  height:64px;
- padding-left:596px;
+ padding-left:396px;
 }
 
 table#query-form { 
@@ -343,6 +343,7 @@ button#btn-pause {
 	cursor: pointer;
 }
 
+div#div-progress { font-size: 100%; color: #707070;  width: 200px; vertical-align: top; text-align: right; }
 span.sub-header { font-weight:bolder; }
 span.help-button { background:white; border:solid 1px; border-radius:6px; }
 span.menu-text { font-weight:bolder; font-family:"Lucida Console", Monaco, monospace; }
