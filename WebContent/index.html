@@ -10,27 +10,28 @@
  <link href="css/jquery.slider.min.css" type="text/css" rel="stylesheet" charset="utf-8">
  
  <script src="js/jquery-1.9.0.min.js" type="text/javascript"></script>
+ <script src="js/jquery.cookie.js" type="text/javascript"></script>
  <script src="js/jquery-ui.min.js" type="text/javascript"></script>
  <script src="js/jquery.ui.dialog.min.js" type="text/javascript"></script>
  <script src="js/activity-indicator.js" type="text/javascript"></script>
- <script src="js/jquery.slider.all.js" type="text/javascript"></script> 
+ <script src="js/jquery.slider.all.js" type="text/javascript"></script>
  <script src="js/pm.js" type="text/javascript"></script>
  
  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
- <script type="text/javascript">  window.onload = init;  </script>
+ <script type="text/javascript"> window.onload = init; </script>
 </head>
 <body>
 <div class="content">
  <div id="header-bar">
   <table id="header-logos">
-  <tr>  	
+  <tr>
     <td>
-		<div id="div-progress"></div>
+<div id="div-progress"></div>
     </td>
     <td>
-    	<button onclick="_processData(null, -2)" id="btn-pause">
-    		<img src="images/button_grey_pause.png" alt="Pause Query" title="Pause Query" id="img-pause" />
-    	</button>
+     <button onclick="_processData(null, -2)" id="btn-pause">
+     <img src="images/button_grey_pause.png" alt="Pause Query" title="Pause Query" id="img-pause" />
+     </button>
     </td>
     <td><div class="spinner" id="busy-box"></div></td>
     <td><img src="images/trove-api-logo-dark.png" alt="TROVE" width="73" height="30" title="National Archives of Australia"/></td>
@@ -87,7 +88,7 @@
     </tr>
    </table>
    <div id="y2k-section">
-    <div id="y2k-timespan"><input id="y2k-slider" value="1803;1954" ></div>      
+    <div id="y2k-timespan"><input id="y2k-slider" value="1803;1954" ></div>
     <div id="y2k-timeline"></div>
    </div>
    <div id="map-options">

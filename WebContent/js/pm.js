@@ -1,84 +1,84 @@
 /*
- * Copyright (c) 2013 The University of Queensland. This software is being developed 
- * for the UQ School of History, Philosophy, Religion and Classics (HPRC).
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+* Copyright (c) 2013 The University of Queensland. This software is being developed
+* for the UQ School of History, Philosophy, Religion and Classics (HPRC).
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 // The webapp base URI is set by ANT build task
-var PM_URI           = '@PM_PREFIX@';
+var PM_URI = '@PM_PREFIX@';
 
-var TROVE_URL        = 'http://api.trove.nla.gov.au/';
-var TROVE_QUERY_URL  = TROVE_URL + 'result?key=';
-var GOOGLE_MAPS_URL  = 'http://maps.googleapis.com/maps/api/geocode/json?address=';
+var TROVE_URL = 'http://api.trove.nla.gov.au/';
+var TROVE_QUERY_URL = TROVE_URL + 'result?key=';
+var GOOGLE_MAPS_URL = 'http://maps.googleapis.com/maps/api/geocode/json?address=';
 
-var ALERT            = 'Alert';
-var INFO             = 'Information';
-var QUESTION         = 'Question';
-var UNDEF            = 'undefined';
+var ALERT = 'Alert';
+var INFO = 'Information';
+var QUESTION = 'Question';
+var UNDEF = 'undefined';
 
-var MAX_FETCH_SIZE   = 100;
-var YEAR_OFFSET      = 44;
-var YEAR_PX          = 4;
+var MAX_FETCH_SIZE = 100;
+var YEAR_OFFSET = 44;
+var YEAR_PX = 4;
 
 // names of user preference keys
-var PMC_USER_ID      = 'id';
-var PMC_TROVE_KEY    = 'key';
-var PMC_USER_EMAIL   = 'em';
-var PMC_USER_STATUS  = 'stat';
+var PMC_USER_ID = 'id';
+var PMC_TROVE_KEY = 'key';
+var PMC_USER_EMAIL = 'em';
+var PMC_USER_STATUS = 'stat';
 
-var MAIN_VIEW        = 'main-view';
-var MAP_VIEW         = 'map-view';
-var RAW_VIEW         = 'raw-view';
-var CLOUD_VIEW       = 'cloud-view';
-var HIST_VIEW        = 'histogram-view';
-var MAP_CANVAS       = 'map-canvas';
-var NEW_QUERY_PANE   = 'new-query-pane';
-var CURR_QUERY_PANE  = 'current-query-pane';
-var SAVE_QUERY_PANE  = 'save-query-pane';
-var PARTNERS_PANE    = 'partners-pane';
-var CONTACTS_PANE    = 'contact-pane';
-var LOCN_EDIT_PANE   = 'locn-edit-pane';
-var HELP_ABOUT       = 'help-about';
-var HELP_TROVE       = 'help-trove';
-var HELP_PM          = 'help-pm';
-var HELP_RELEASE     = 'release-notes';
-var TERMS_OF_USE     = 'help-tou';
-var RAW_RECORD       = 'raw-record-container';
+var MAIN_VIEW = 'main-view';
+var MAP_VIEW = 'map-view';
+var RAW_VIEW = 'raw-view';
+var CLOUD_VIEW = 'cloud-view';
+var HIST_VIEW = 'histogram-view';
+var MAP_CANVAS = 'map-canvas';
+var NEW_QUERY_PANE = 'new-query-pane';
+var CURR_QUERY_PANE = 'current-query-pane';
+var SAVE_QUERY_PANE = 'save-query-pane';
+var PARTNERS_PANE = 'partners-pane';
+var CONTACTS_PANE = 'contact-pane';
+var LOCN_EDIT_PANE = 'locn-edit-pane';
+var HELP_ABOUT = 'help-about';
+var HELP_TROVE = 'help-trove';
+var HELP_PM = 'help-pm';
+var HELP_RELEASE = 'release-notes';
+var TERMS_OF_USE = 'help-tou';
+var RAW_RECORD = 'raw-record-container';
 var Y2K_TIMELINE_BAR = 'y2k-timeline';
-var Y2K_SLIDER       = 'y2k-slider';
-var FOOTER_BAR       = 'footer-bar';
-var Q_SIMPLE         = 'q-simple';
-var Q_ADVANCED       = 'q-advanced';
-var Q_CUSTOM         = 'q-custom';
-var Q_SAVE           = 'save-query';
-var Q_STORE          = 'stored-queries';
-var Q_STORE_TABLE    = 'qstore-table';
+var Y2K_SLIDER = 'y2k-slider';
+var FOOTER_BAR = 'footer-bar';
+var Q_SIMPLE = 'q-simple';
+var Q_ADVANCED = 'q-advanced';
+var Q_CUSTOM = 'q-custom';
+var Q_SAVE = 'save-query';
+var Q_STORE = 'stored-queries';
+var Q_STORE_TABLE = 'qstore-table';
 
 
-var MINYEAR			= '1800';
-var MAXYEAR			= '2000';
+var MINYEAR	= '1800';
+var MAXYEAR	= '2000';
 // %age ranges and associated color for timeline and map pins
 var FREQ_DISTR = [
-    [0,0.5, '#ffffff'], [0.5,1, '#ccccff'], [1,1.5, '#6666ff'], 
-    [1.5,2, '#0000ff'], [2,3,   '#00cccc'], [3,5,   '#009999'],
-    [5,7,   '#006666'], [7,9,   '#ffff00'], [9,11,  '#ffcc00'],
+    [0,0.5, '#ffffff'], [0.5,1, '#ccccff'], [1,1.5, '#6666ff'],
+    [1.5,2, '#0000ff'], [2,3, '#00cccc'], [3,5, '#009999'],
+    [5,7, '#006666'], [7,9, '#ffff00'], [9,11, '#ffcc00'],
     [11,13, '#ff9900'], [13,16, '#ff6600'], [16,20, '#ff0000'],
-    [20,30, '#cc0000'], [30,45, '#660000'], [45,100,'#000000']             
+    [20,30, '#cc0000'], [30,45, '#660000'], [45,100,'#000000']
  ];
 
-// Schemas for TROVE zone structs have been intuited by inspection.  No docs exist!
+// Schemas for TROVE zone structs have been intuited by inspection. No docs exist!
 // Currently (PM V1.0) only Newspaper is supported.
 var ZONE_NEWSPAPER = {
     id:'newspaper', holder:'article', dtag:'date', rtag:'relevance.score', stag:'title.id',
@@ -194,115 +194,120 @@ var ZONE_MUSIC = {
     { tag:'troveUrl', title:'URL', isLink:true }
   ]};
 
-var MARKER_Z_BASE    =  26;
-var PUBLISHER_MARKER =   0;
-var LOCATION_MARKER  =   1;
-var PAUSE_QUERY      =  -2;
-var USER_VALIDATED   =   2;
-var FADE_TD1         = 200;
-var FADE_TD2         = 350;
-var PREP_SAVE_QUERY  = 'prep';
+var MARKER_Z_BASE = 26;
+var PUBLISHER_MARKER = 0;
+var LOCATION_MARKER = 1;
+var PAUSE_QUERY = -2;
+var USER_VALIDATED = 2;
+var FADE_TD1 = 200;
+var FADE_TD2 = 350;
+var PREP_SAVE_QUERY = 'prep';
 
 // State variables
-var m_run            = false;
-var m_paused         = false;
-var m_map            = null;
-var m_pubCache       = null;
+var m_run = false;
+var m_paused = false;
+var m_map = null;
+var m_pubCache = null;
 var m_locationsCache = null;
-var m_qStore         = null;
-var m_user           = null;
+var m_qStore = null;
+var m_user = null;
 var m_locnSelections = null;
-var m_queryId        =  0;
-var m_rawRecordId    = -1;
-var m_restrictRawList      = false;
-var m_currentSaveFormPane  = Q_SAVE;
+var m_queryId = 0;
+var m_rawRecordId = -1;
+var m_restrictRawList = false;
+var m_currentSaveFormPane = Q_SAVE;
 var m_currentQueryFormPane = Q_SIMPLE;
-var m_currentPaneSelector  = _selById(MAP_VIEW);
-var m_defaultViewSelector  = _selById(MAP_VIEW);
+var m_currentPaneSelector = _selById(MAP_VIEW);
+var m_defaultViewSelector = _selById(MAP_VIEW);
 
 // FIXME: would be nice if this was an associative array
-var m_totalRecs    = 0;
-var m_fetchSize    = 100;
+var m_totalRecs = 0;
+var m_fetchSize = 100;
 var m_locationsSum = 0;
-var m_fetchStart   = 0;
-var m_totalTime    = 0;
-var m_trefIndex    = null;
-var m_resultSet    = null;
-var m_yearCount    = null;
-var m_currentTerm  = null;
-var m_currentZone  = null;
+var m_fetchStart = 0;
+var m_totalTime = 0;
+var m_trefIndex = null;
+var m_resultSet = null;
+var m_yearCount = null;
+var m_currentTerm = null;
+var m_currentZone = null;
 var m_currentQuery = null;
-var m_locations    = null;
+var m_locations = null;
 
 //Histogram global vars
 var H_STARTYEAR = 1800;
 var h_hashArray	= new Array(250);
 var h_labels	= new Array();
-h_labels[0] 	= "MADDOG420";
-var h_data 		= new Array();
-h_data[0]		= 69;
+h_labels[0] = "MADDOG420";
+var h_data = new Array();
+h_data[0]	= 69;
 
+//User global variables
+var rememberedUser = false;
 
-
-$(document).ready(function (){
-
+$(document).ready(function (){ 
+	//FIXME: checkbox needs to auto check if user has chosen to be remembered	
+    if ($.cookie('email') !== undefined) {
+	    $('#usr-info input[id=cb-remember]').attr('checked', 'checked');
+    }
 });
 
+
 function checkAdvanced(){
-	if(id = 'q-advanced'){
+if(id = 'q-advanced'){
 
-		var yearOptionsStart = '<select id="aqYearStart">';
-		var yearOptionsEnd = '<select id="aqYearEnd">';
-		var yearOptions = '';
-		for (var i = MINYEAR; i <= MAXYEAR; i++){
-			yearOptions += '<option>' + i + '</option>';
-		}
-		  
-		yearOptionsStart += yearOptions + '</select>';
-		yearOptionsEnd += yearOptions + '</select>';
-		  
-		$('span#aqYrStart').html(yearOptionsStart);
-		$('span#aqYrEnd').html(yearOptionsEnd);
-
-		$('#aqYearEnd').prop('selectedIndex', 200);
-		  
-		$('#aqYrStart').on('change', function(){
-			yearOptionsEnd = '<select id="aqYearEnd">';
-			yearOptions = '';
-			var newStartYear = $('select#aqYearStart option:selected').val();
-			for (var i = newStartYear; i <= MAXYEAR; i++){
-				yearOptions += '<option>' + i + '</option>';
-			}
-			yearOptionsEnd += yearOptions + '</select>';
-			$('span#aqYrEnd').html(yearOptionsEnd);
-		});
-		  
-		hideYear();
-		
-		$('#z1a').prop('selectedIndex', 0);
-		$('#aq1').val("");
-		$('#searchYear').show();
-	}
+var yearOptionsStart = '<select id="aqYearStart">';
+var yearOptionsEnd = '<select id="aqYearEnd">';
+var yearOptions = '';
+for (var i = MINYEAR; i <= MAXYEAR; i++){
+yearOptions += '<option>' + i + '</option>';
 }
 
+yearOptionsStart += yearOptions + '</select>';
+yearOptionsEnd += yearOptions + '</select>';
+
+$('span#aqYrStart').html(yearOptionsStart);
+$('span#aqYrEnd').html(yearOptionsEnd);
+
+$('#aqYearEnd').prop('selectedIndex', 200);
+
+$('#aqYrStart').on('change', function(){
+yearOptionsEnd = '<select id="aqYearEnd">';
+yearOptions = '';
+var newStartYear = $('select#aqYearStart option:selected').val();
+for (var i = newStartYear; i <= MAXYEAR; i++){
+yearOptions += '<option>' + i + '</option>';
+}
+yearOptionsEnd += yearOptions + '</select>';
+$('span#aqYrEnd').html(yearOptionsEnd);
+});
+
+hideYear();
+
+$('#z1a').prop('selectedIndex', 0);
+$('#aq1').val("");
+$('#searchYear').show();
+}
+
+
 function hideYear(){
-	$('#z1').on('change', function(){
-		if($('select#z1 option:selected').val() != 'newspaper'){
-			$('#searchYear').hide();
-			$('#aqYearStart').hide();
-			$('#aqYearEnd').hide();
-		} else {
-			$('#searchYear').show();
-			$('#aqYearStart').show();
-			$('#aqYearEnd').show();
-		}
-	});
+$('#z1').on('change', function(){
+if($('select#z1 option:selected').val() != 'newspaper'){
+$('#searchYear').hide();
+$('#aqYearStart').hide();
+$('#aqYearEnd').hide();
+} else {
+$('#searchYear').show();
+$('#aqYearStart').show();
+$('#aqYearEnd').show();
+}
+});
 }
 
 
 /**
- * Invoked by index page onload trigger, does any required configuration.
- */
+* Invoked by index page onload trigger, does any required configuration.
+*/
 function init ()
 {
   var script = document.createElement("script");
@@ -319,6 +324,12 @@ function init ()
   _getUserPrefs();
   getMenu();
   
+  // check for remember me cookie and log user in if found
+  if ($.cookie('email') !== undefined && $.cookie('didLogout') !== 'true') {
+	  rememberedUser = true;
+	  doLogin('ok');
+  }
+  
   // pre-load some panes but don't display
   newQuery(false);
   saveQuery(false);
@@ -328,8 +339,8 @@ function init ()
 }
 
 /**
- * activated by map radio buttons hides/shows marker groups
- */
+* activated by map radio buttons hides/shows marker groups
+*/
 function toggleMapMarkers ()
 {
   if (m_resultSet !== null) {
@@ -337,7 +348,7 @@ function toggleMapMarkers ()
     if (mtype === PUBLISHER_MARKER) {
       for (var i = 0; i < m_resultSet.length; i++) {
         if (m_resultSet[i].marker !== null) {
-          m_resultSet[i].marker.setVisible(_isInTimelineRange(i));     
+          m_resultSet[i].marker.setVisible(_isInTimelineRange(i));
         }
       }
       for (var locnId in m_locationsCache) {
@@ -349,7 +360,7 @@ function toggleMapMarkers ()
     else if (mtype === LOCATION_MARKER) {
       for (var i = 0; i < m_resultSet.length; i++) {
         if (m_resultSet[i].marker !== null) {
-          m_resultSet[i].marker.setVisible(false);     
+          m_resultSet[i].marker.setVisible(false);
         }
       }
       for (var locnId in m_locationsCache) {
@@ -362,20 +373,23 @@ function toggleMapMarkers ()
 }
 
 /**
- * Gets context adjusted menu html from server and inserts in document.
- */
+* Gets context adjusted menu html from server and inserts in document.
+*/
 function getMenu ()
 {
-  $.get(PM_URI + '/pm/men', function(data) { $('#menu-bar').html(data);  }, 'html')
+  $.get(PM_URI + '/pm/men', function(data) { $('#menu-bar').html(data); }, 'html')
       .error(function() { alert("ajax error fetching menu content"); });
 }
 
 /**
- * Logs out the user and resets the menu.
- * FIXME: should zonk last query state
- */
+* Logs out the user and resets the menu.
+* FIXME: should zonk last query state
+*/
 function doLogout ()
 {
+  rememberedUser = false;
+  $.cookie('didLogout', 'true');
+	
   $.get(PM_URI + '/pm/cls', function () {
     getMenu();
     m_user = null;
@@ -387,11 +401,11 @@ function doLogout ()
 }
 
 /**
- * Manages user login/register pane.
- * @param cmd Pne of cancel, ret(urning), new, or open
- */
+* Manages user login/register pane.
+* @param cmd Pne of cancel, ret(urning), new, or open
+*/
 function doLogin (cmd)
-{
+{	
   if (cmd == 'cancel') {
     $('#user-dlg').dialog('close');
   }
@@ -407,18 +421,27 @@ function doLogin (cmd)
   }
   else if (cmd == 'ok') {
     //var vfy = $('#usr-info input[name=usr-cb]:checked').val();
-    var vfy =   $('#usr-info input[id=cb-vfy]:checked').val();
+    var vfy = $('#usr-info input[id=cb-vfy]:checked').val();
     var agree = $('#usr-info input[id=cb-agree]:checked').val();
-    var sel =   $('#usr-selector input[name=usr-rb]:checked').val();
-    var email = encodeURIComponent($('#em').val());
+    var sel = $('#usr-selector input[name=usr-rb]:checked').val();
+    var remember = rememberedUser ? 'remember' : $('#usr-info input[id=cb-remember]:checked').val();
+    var email = rememberedUser ? $.cookie('email') : encodeURIComponent($('#em').val());
     var troveKey = encodeURIComponent($('#tk').val());
     var args = '?em=' + email + '&tk=' + troveKey + ((vfy == 'verify') ? '&vfy=y' : '');
     var option = (sel == 'new') ? 'add' : 'opn';
+       
     if ((sel === 'new') && (agree !== 'agree')) {
       _popupDialog(ALERT, 'You must agree to the Terms of Use in order to complete registration.');
       return;
     }
-    $.get(PM_URI + '/pm/' + option + args, function(data, option) { 
+        
+    if (remember === 'remember') {
+    	$.cookie('email', email, { expires: 365 });
+    } else {
+    	$.removeCookie('email');
+    	rememberedUser = false;
+    } 
+    $.get(PM_URI + '/pm/' + option + args, function(data, option) {
       if (data != 'ok') {
         _popupDialog(ALERT, data);
       }
@@ -427,6 +450,8 @@ function doLogin (cmd)
         $('#user-dlg').dialog('close');
         getMenu();
         _getStoredQueries();
+        $.cookie('didLogout', 'false');
+        
         if (option == 'add') {
           _popupDialog(INFO, '<h3>Registration Complete</h3><p>Thankyou. You are now a registered Paper Miner user.');
         }
@@ -446,10 +471,10 @@ function doLogin (cmd)
         var dlgOpts = {
             title:'Login or Register', resizable:false, autoOpen:false, hide:FADE_TD1, show:FADE_TD1,
             modal: 'true', minWidth: 400,
-            buttons: {'Cancel':function () { $(this).dialog("close"); }, "OK" : function () { doLogin('ok');  }},
-            position: [200, 200] 
+            buttons: {'Cancel':function () { $(this).dialog("close"); }, "OK" : function () { doLogin('ok'); }},
+            position: [200, 200]
         };
-      $.get(PM_URI + '/pm?pg=user_login', function(data) { 
+      $.get(PM_URI + '/pm?pg=user_login', function(data) {
         $('body').append(data);
         $('#user-dlg').dialog(dlgOpts);
         $('#user-dlg').dialog('open');
@@ -464,18 +489,18 @@ function doLogin (cmd)
 }
 
 /**
- * Manages pane allowing user to edit their settings and preferences.
- */
+* Manages pane allowing user to edit their settings and preferences.
+*/
 function doEditDetails ()
 {
-  $.get('/pm/mod', function(data) { 
+  $.get('/pm/mod', function(data) {
     var opts = { autoOpen:'true', show:FADE_TD1, hide: FADE_TD1,
-        position: [200, 200], 
-        resizable: 'false', 
-        buttons: {'Cancel':function () { $(this).dialog("destroy"); $('#user-mod').remove(); }, 'Update' : function () { 
+        position: [200, 200],
+        resizable: 'false',
+        buttons: {'Cancel':function () { $(this).dialog("destroy"); $('#user-mod').remove(); }, 'Update' : function () {
           var vfy = $('#user-mod input[name=usr-cb]:checked').val();
           var args = '/pm/mod?id=' + $('#id').val() + '&em=' + $('#em').val() + '&tk=' + $('#tk').val() + ((vfy == 'verify') ? '&vfy=y' : '');
-          $.get(PM_URI + args, function (data) { 
+          $.get(PM_URI + args, function (data) {
             if (data != 'ok') {
               _popupDialog(ALERT, data);
             }
@@ -485,8 +510,8 @@ function doEditDetails ()
             }
           }, 'html').error(function() { alert("ajax error user update"); });
 
-          $(this).dialog('destroy'); 
-          $('#user-mod').remove(); 
+          $(this).dialog('destroy');
+          $('#user-mod').remove();
         }},
         closeOnEscape:'false',
         open: function(event, ui) { $(this).parent().children().children(".ui-dialog-titlebar-close").hide(); }
@@ -497,18 +522,18 @@ function doEditDetails ()
 }
 
 /**
- * Reset query inputs to blank
- */
+* Reset query inputs to blank
+*/
 function resetQueryPane ()
 {
   switch (m_currentQueryFormPane) {
-  case Q_SIMPLE : 
+  case Q_SIMPLE :
     $('input#q1').val('');
     $('select#z1').val('newspaper');
     break;
   case Q_ADVANCED :
-	  $('input#q1').val('');
-	  $('select#z1').val('newspaper');
+$('input#q1').val('');
+$('select#z1').val('newspaper');
     break;
   case Q_CUSTOM :
     // FIXME: todo
@@ -519,15 +544,15 @@ function resetQueryPane ()
 
 
 /**
- * Show the New Query pane unless a query is running
- * @param state
- */
+* Show the New Query pane unless a query is running
+* @param state
+*/
 function newQuery (show)
 {
   if ($(_selById(NEW_QUERY_PANE)).length === 0) {
     var callback = function () {
       $('table#query-form button').button();
-    };    
+    };
     _createPane(NEW_QUERY_PANE, callback, null);
   }
   
@@ -542,16 +567,16 @@ function newQuery (show)
 }
 
 /**
- * Display info about current/last query. State will update while query is runnig,
- * and permits the user to abort the query.
- */
+* Display info about current/last query. State will update while query is runnig,
+* and permits the user to abort the query.
+*/
 function currentQuery (show)
 {
   if ($(_selById(CURR_QUERY_PANE)).length === 0) {
     var callback = function () {
       $('table#curr-query-form button').button();
       _setCurrentQueryButtonState();
-    };    
+    };
     _createPane(CURR_QUERY_PANE, callback, null);
   }
   
@@ -562,9 +587,9 @@ function currentQuery (show)
 }
 
 /**
- * Displays a list of the user's stored queries
- * @param show
- */
+* Displays a list of the user's stored queries
+* @param show
+*/
 function showStoredQueries (show)
 {
   if ($(_selById(SAVE_QUERY_PANE)).length === 0) {
@@ -578,17 +603,17 @@ function showStoredQueries (show)
 }
 
 /**
- * Display the normally hidden option to save the current query
- * @param show
- * @param opt
- */
+* Display the normally hidden option to save the current query
+* @param show
+* @param opt
+*/
 function saveQuery (show, opt)
 {
   if ($(_selById(SAVE_QUERY_PANE)).length === 0) {
     var callback = function () {
       $('table#qstore-table button').button();
       _getStoredQueries();
-    };    
+    };
     _createPane(SAVE_QUERY_PANE, callback, null);
   }
 
@@ -603,11 +628,11 @@ function saveQuery (show, opt)
     if (opt != null) {
       if (opt === 'can') {
         $(_selById(Q_SAVE)).toggle('fade', 'swing', FADE_TD2, function () {
-          _showPane(_selById(CURR_QUERY_PANE)); 
+          _showPane(_selById(CURR_QUERY_PANE));
         } );
       }
       else {
-          $.get(PM_URI + '/pm/qsave?c=1', function (resp) { 
+          $.get(PM_URI + '/pm/qsave?c=1', function (resp) {
             if (resp == 'ok') {
               $('#qd1').val($('input#q1').val().replace(/[+]/g, ' '));
               _showPane(_selById(SAVE_QUERY_PANE));
@@ -622,20 +647,20 @@ function saveQuery (show, opt)
     else {
       var descr = encodeURIComponent($('#qd1').val());
       var query = encodeURIComponent(m_currentQuery);
-      var qType = (m_currentQueryFormPane === Q_SIMPLE) ? 's' : 
+      var qType = (m_currentQueryFormPane === Q_SIMPLE) ? 's' :
                   (m_currentQueryFormPane === Q_ADVANCED) ? 'a' : 'c';
       if (descr.length === 0) {
         _popupDialog(ALERT, 'You must provide a description for your query.');
       }
       else {
-        $.get(PM_URI + '/pm/qsave?d=' + descr + '&q=' + query + '&t=' + qType + '&n=' + m_totalRecs, function(data) { 
+        $.get(PM_URI + '/pm/qsave?d=' + descr + '&q=' + query + '&t=' + qType + '&n=' + m_totalRecs, function(data) {
           if (data != 'ok') {
             _popupDialog(ALERT, data);
           }
           else {
             $(_selById(Q_SAVE)).toggle('fade', 'swing', FADE_TD2);
             _getStoredQueries();
-            _popupDialog(INFO, 'Query saved');        
+            _popupDialog(INFO, 'Query saved');
           }
         }, 'html').error(function() { alert("ajax error saving query"); });
       }
@@ -644,9 +669,9 @@ function saveQuery (show, opt)
 }
 
 /**
- * Map initialized and displayed on startup
- * @param show
- */
+* Map initialized and displayed on startup
+* @param show
+*/
 function showMap (show)
 {
   _showPane(_selById(MAP_VIEW));
@@ -655,162 +680,162 @@ function showMap (show)
 function showHistogram (show)
 {
     _createPane(HIST_VIEW, null, null);
-	_showPane(_selById(HIST_VIEW));
+_showPane(_selById(HIST_VIEW));
 }
 
 /**
- * Updates the Histogram page by rendering all retrieved data in the global array
- */
+* Updates the Histogram page by rendering all retrieved data in the global array
+*/
 function _updateHistogram()
 {
-	//Update Histogram data
-	
-	h_labels.length = 0;
-	h_data.length = 0;
-	for(var i = 0; i < 250; i++) {
-		h_hashArray[i] = null;
-	}
-	
-	// Grab dates from results in the global array
-	for (var i = 0; i < m_resultSet.length; i++) {
-		var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-		if (zoneInfo.id == "newspaper") {
-			if (zoneInfo.dtag.length > 0) {
-				var date = m_resultSet[i].data[zoneInfo.dtag];
-				var year = date;
-				// Format date to just the year
-				if (year.length > 4) {
-					var isoDate = /(\d\d\d\d)/;
-					var mat = year.match(isoDate);
-					if (mat != null) {
-						year = parseInt(mat[1]);
-						// Add the year as a label to the graph
-						h_hashArray[year-H_STARTYEAR] += 1;
-					}
-				}
-			}
-		}	
-	}
-	
-	// Group results into 8 year segments to be graphed easily
-	for(var i = 0; i < 25; i++) {
-		var newData = 0;
-		
-		// Accumulate all data across 8 year segment
-		for(var j = i*8; j < i*8+8; j++) {
-			if(h_hashArray[j] != null) {
-				newData += h_hashArray[j];
-			}
-		}
-		
-		// Generate and add label to labels array
-		var labelString = '';
-		var startYear = H_STARTYEAR+(i*8);
-		var endYear = H_STARTYEAR+(i*8+7);
-		labelString += startYear.toString();
-		labelString += ' - ';
-		labelString += endYear.toString();
-		
-		h_labels.push(labelString);
-		h_data.push(newData);
-	}
+//Update Histogram data
+
+h_labels.length = 0;
+h_data.length = 0;
+for(var i = 0; i < 250; i++) {
+h_hashArray[i] = null;
+}
+
+// Grab dates from results in the global array
+for (var i = 0; i < m_resultSet.length; i++) {
+var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
+if (zoneInfo.id == "newspaper") {
+if (zoneInfo.dtag.length > 0) {
+var date = m_resultSet[i].data[zoneInfo.dtag];
+var year = date;
+// Format date to just the year
+if (year.length > 4) {
+var isoDate = /(\d\d\d\d)/;
+var mat = year.match(isoDate);
+if (mat != null) {
+year = parseInt(mat[1]);
+// Add the year as a label to the graph
+h_hashArray[year-H_STARTYEAR] += 1;
+}
+}
+}
+}	
+}
+
+// Group results into 8 year segments to be graphed easily
+for(var i = 0; i < 25; i++) {
+var newData = 0;
+
+// Accumulate all data across 8 year segment
+for(var j = i*8; j < i*8+8; j++) {
+if(h_hashArray[j] != null) {
+newData += h_hashArray[j];
+}
+}
+
+// Generate and add label to labels array
+var labelString = '';
+var startYear = H_STARTYEAR+(i*8);
+var endYear = H_STARTYEAR+(i*8+7);
+labelString += startYear.toString();
+labelString += ' - ';
+labelString += endYear.toString();
+
+h_labels.push(labelString);
+h_data.push(newData);
+}
 }
 
 /**
- * Returns the array used for labelling a histogram
- * @returns {Array}
- */
-function _histLabelArray() 
+* Returns the array used for labelling a histogram
+* @returns {Array}
+*/
+function _histLabelArray()
 {
-	return h_labels;
+return h_labels;
 }
 
 /**
- * Returns the array used as the dataset in a chart/graph
- * @returns {Array}
- */
-function _histDataArray() 
+* Returns the array used as the dataset in a chart/graph
+* @returns {Array}
+*/
+function _histDataArray()
 {
-	return h_data;
-	_showPane(_selById(HIST_VIEW));
+return h_data;
+_showPane(_selById(HIST_VIEW));
 }
 
 /**
- * Updates the Histogram page by rendering all retrieved data in the global array
- */
+* Updates the Histogram page by rendering all retrieved data in the global array
+*/
 function _updateHistogram() {
-	
-	
-	//Update Histogram data
-	
-	h_labels.length = 0;
-	h_data.length = 0;
-	for(var i = 0; i < 250; i++) {
-		h_hashArray[i] = null;
-	}
-	
-	// Grab dates from results in the global array
-	for (var i = 0; i < m_resultSet.length; i++) {
-		var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-		if (zoneInfo.id == "newspaper") {
-			if (zoneInfo.dtag.length > 0) {
-				var date = m_resultSet[i].data[zoneInfo.dtag];
-				var year = date;
-				// Format date to just the year
-				if (year.length > 4) {
-					var isoDate = /(\d\d\d\d)/;
-					var mat = year.match(isoDate);
-					if (mat != null) {
-						year = parseInt(mat[1]);
-						// Add the year as a label to the graph
-						h_hashArray[year-H_STARTYEAR] += 1;
-					}
-				}
-			}
-		}	
-	}
-	
-	
-	// Group results into 8 year segments to be graphed easily
-	for(var i = 0; i < 25; i++) {
-		var newData = 0;
-		
-		// Accumulate all data across 8 year segment
-		for(var j = i*8; j < i*8+8; j++) {
-			if(h_hashArray[j] != null) {
-				newData += h_hashArray[j];
-			}
-		}
-		
-		// Generate and add label to labels array
-		var labelString = '';
-		var startYear = H_STARTYEAR+(i*8);
-		var endYear = H_STARTYEAR+(i*8+7);
-		labelString += startYear.toString();
-		labelString += ' - ';
-		labelString += endYear.toString();
-		
-		h_labels.push(labelString);
-		h_data.push(newData);
-	}
+
+
+//Update Histogram data
+
+h_labels.length = 0;
+h_data.length = 0;
+for(var i = 0; i < 250; i++) {
+h_hashArray[i] = null;
+}
+
+// Grab dates from results in the global array
+for (var i = 0; i < m_resultSet.length; i++) {
+var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
+if (zoneInfo.id == "newspaper") {
+if (zoneInfo.dtag.length > 0) {
+var date = m_resultSet[i].data[zoneInfo.dtag];
+var year = date;
+// Format date to just the year
+if (year.length > 4) {
+var isoDate = /(\d\d\d\d)/;
+var mat = year.match(isoDate);
+if (mat != null) {
+year = parseInt(mat[1]);
+// Add the year as a label to the graph
+h_hashArray[year-H_STARTYEAR] += 1;
+}
+}
+}
+}	
+}
+
+
+// Group results into 8 year segments to be graphed easily
+for(var i = 0; i < 25; i++) {
+var newData = 0;
+
+// Accumulate all data across 8 year segment
+for(var j = i*8; j < i*8+8; j++) {
+if(h_hashArray[j] != null) {
+newData += h_hashArray[j];
+}
+}
+
+// Generate and add label to labels array
+var labelString = '';
+var startYear = H_STARTYEAR+(i*8);
+var endYear = H_STARTYEAR+(i*8+7);
+labelString += startYear.toString();
+labelString += ' - ';
+labelString += endYear.toString();
+
+h_labels.push(labelString);
+h_data.push(newData);
+}
 }
 
 /**
- * Returns the array used for labelling a histogram
- * @returns {Array}
- */
-function _histLabelArray() 
+* Returns the array used for labelling a histogram
+* @returns {Array}
+*/
+function _histLabelArray()
 {
-	return h_labels;
+return h_labels;
 }
 
 /**
- * Returns the array used as the dataset in a chart/graph
- * @returns {Array}
- */
-function _histDataArray() 
+* Returns the array used as the dataset in a chart/graph
+* @returns {Array}
+*/
+function _histDataArray()
 {
-	return h_data;
+return h_data;
 }
 
 
@@ -824,15 +849,15 @@ function showCloud (show)
 
 
 /**
- * Raw results pane loaded on demand.
- * @param show
- */
+* Raw results pane loaded on demand.
+* @param show
+*/
 function showRawResults (show)
 {
   if ($(_selById(RAW_VIEW)).length === 0) {
     var callback = function () {
-      $('#ctl-table button').button();     
-      $('#ctl-table button').button('disable');     
+      $('#ctl-table button').button();
+      $('#ctl-table button').button('disable');
     };
     _createPane(RAW_VIEW, callback, null);
   }
@@ -844,13 +869,13 @@ function showRawResults (show)
 }
 
 /**
- * Displays the various help dialogs and panes.
- * @param section
- */
+* Displays the various help dialogs and panes.
+* @param section
+*/
 function showHelp (section)
 {
   if (section === 'about') {
-    $.get(PM_URI + '/pm?pg=' + HELP_ABOUT, function(data) { 
+    $.get(PM_URI + '/pm?pg=' + HELP_ABOUT, function(data) {
       _popupDialog(INFO, data, 400);
       }, 'html').error(function() { alert("ajax error help"); });
   }
@@ -867,10 +892,10 @@ function showHelp (section)
       }
     };
     switch (section) {
-    case 'pm':    __loadHelp(HELP_PM);      break;
-    case 'rel':   __loadHelp(HELP_RELEASE); break;
-    case 'tou':   __loadHelp(TERMS_OF_USE); break;
-    case 'trove': __loadHelp(HELP_TROVE);   break;
+    case 'pm': __loadHelp(HELP_PM); break;
+    case 'rel': __loadHelp(HELP_RELEASE); break;
+    case 'tou': __loadHelp(TERMS_OF_USE); break;
+    case 'trove': __loadHelp(HELP_TROVE); break;
     }
   }
 }
@@ -878,7 +903,7 @@ function showHelp (section)
 function showPartners ()
 {
   if ($(_selById(PARTNERS_PANE)).length === 0) {
-    _createPane(PARTNERS_PANE, null, null);  
+    _createPane(PARTNERS_PANE, null, null);
   }
   _showPane(_selById(PARTNERS_PANE));
 }
@@ -886,7 +911,7 @@ function showPartners ()
 function showContacts ()
 {
   if ($(_selById(CONTACTS_PANE)).length === 0) {
-    _createPane(CONTACTS_PANE, showContacts, null);  
+    _createPane(CONTACTS_PANE, showContacts, null);
   }
   _showPane(_selById(CONTACTS_PANE));
 }
@@ -898,9 +923,9 @@ function goHome ()
 
 
 /**
- * Cross-browser code prevents an event propogating any further
- * @param evt
- */
+* Cross-browser code prevents an event propogating any further
+* @param evt
+*/
 function preventDefaultAction (evt)
 {
   if (evt.preventDefault) {
@@ -919,30 +944,30 @@ function preventDefaultAction (evt)
 };
 
 /**
- * Convenience and reminder button opens TROVE on record in Raw display panel for editing in a new Tab.
- */
+* Convenience and reminder button opens TROVE on record in Raw display panel for editing in a new Tab.
+*/
 function fixRecord ()
 {
   if (m_rawRecordId >= 0) {
     var link = document.getElementById('raw-trove-link');
     var e = document.createEvent('MouseEvents');
     e.initEvent( 'click', true, true );
-    link.dispatchEvent(e); 
+    link.dispatchEvent(e);
     $('button#rdv-pb2').button('enable');
   }
 }
 
 /**
- * Reloads the currently viewed record.  Intended for use after fixing the record in TROVE.
- */
+* Reloads the currently viewed record. Intended for use after fixing the record in TROVE.
+*/
 function refreshRecord ()
 {
   // FIXME: possible race condition problems here with async response
   if (m_rawRecordId >= 0) {
-    var uri = TROVE_URL + m_currentZone + '/' + m_resultSet[m_rawRecordId].data.id + 
-        '?key=' + m_user.key + 
+    var uri = TROVE_URL + m_currentZone + '/' + m_resultSet[m_rawRecordId].data.id +
+        '?key=' + m_user.key +
         '&encoding=json' +
-        '&include=articletext' + 
+        '&include=articletext' +
         '&callback=?';
     try {
       $.getJSON(uri, function (data, status, jqXHR) {
@@ -954,7 +979,7 @@ function refreshRecord ()
               m_resultSet[m_rawRecordId].data.text = '&lt;nil&gt;';
             }
             else {
-              var text =  record.articleText.toString();
+              var text = record.articleText.toString();
               text = text.replace(/<p>/g, '');
               text = text.replace(/<\/p>/g, '');
               m_resultSet[m_rawRecordId].data.text = text;
@@ -975,7 +1000,7 @@ function locnEdit (show)
 {
   if ($(_selById(LOCN_EDIT_PANE)).length === 0) {
     var callback = function () {
-      $('div#location-ctl button').button();     
+      $('div#location-ctl button').button();
     };
     _createPane(LOCN_EDIT_PANE, callback, null);
   }
@@ -1007,12 +1032,12 @@ function locnAdd ()
   else {
     var dlgOpts = {
         title:'Add or Insert Location', resizable:false, autoOpen:false, hide:FADE_TD1, show:FADE_TD1,
-        modal: 'true', minWidth: 500,  autoOpen:false,
-        buttons: {'Cancel':function () { $(this).dialog("close"); }, 
+        modal: 'true', minWidth: 500, autoOpen:false,
+        buttons: {'Cancel':function () { $(this).dialog("close"); },
                   'Search Locations' : function () { _findLocation(0); },
-                  'Search Google Geocodes' : function () { _findLocation(1); } 
+                  'Search Google Geocodes' : function () { _findLocation(1); }
         },
-        position: [200, 200] 
+        position: [200, 200]
     };
     $('body').append(_formatAddLocations(text));
     $('#add-locns-dlg').dialog(dlgOpts);
@@ -1030,9 +1055,9 @@ function returnToRaw ()
 // --------------------- Private Functions ------------------------
 
 /**
- * Callback for Google maps API initialization
- */
-function _resetMap () 
+* Callback for Google maps API initialization
+*/
+function _resetMap ()
 {
   var latlngCenter = new google.maps.LatLng(-27, 135);
   var pmOptions = {
@@ -1049,16 +1074,16 @@ function _resetMap ()
 }
 
 /**
- * Macro turns a name into a JQuery ID selector
- */
+* Macro turns a name into a JQuery ID selector
+*/
 function _selById (id)
 {
   return '#' + id;
 }
 
 /**
- * Get user's TROVE key and ID
- */
+* Get user's TROVE key and ID
+*/
 function _getUserPrefs ()
 {
   $.getJSON(PM_URI + '/pm/info', function (data, status, jqXHR) {
@@ -1069,8 +1094,8 @@ function _getUserPrefs ()
 }
 
 /**
- * Fetches the user's stored queries from the server and displays them
- */
+* Fetches the user's stored queries from the server and displays them
+*/
 function _getStoredQueries ()
 {
   $.getJSON(PM_URI + '/pm/qget', function (data, status, jqXHR) {
@@ -1082,8 +1107,8 @@ function _getStoredQueries ()
 }
 
 /**
- * User has saved or deleted a query, so adjust the display accordingly.
- */
+* User has saved or deleted a query, so adjust the display accordingly.
+*/
 function _updateStoreQueriesPane ()
 {
   if ($(_selById(Q_STORE)).length > 0) {
@@ -1112,8 +1137,8 @@ function _updateStoreQueriesPane ()
 }
 
 /**
- * Deletes the selected (checked) stored queries from the server
- */
+* Deletes the selected (checked) stored queries from the server
+*/
 function _deleteSelectedQueries ()
 {
   var str = '';
@@ -1142,9 +1167,9 @@ function _deleteSelectedQueries ()
 }
 
 /**
- * Makes the clicked query the "current" query, ready for execution or modification
- * @param idx
- */
+* Makes the clicked query the "current" query, ready for execution or modification
+* @param idx
+*/
 function _openQuery (idx)
 {
   m_currentQuery = m_qStore[idx].query;
@@ -1167,78 +1192,78 @@ function _openQuery (idx)
 }
 
 /**
- * Swaps different forms of query
- * @param id The one to make visible
- */
+* Swaps different forms of query
+* @param id The one to make visible
+*/
 function _showQueryForm (id){
-	
-	checkAdvanced(id);
 
-	$('div#' + m_currentQueryFormPane).toggle('fade','swing',100,
-    function () { 
-    	if ($('div#' + id).hasClass('hidden')) {
-    		$('div#' + id).toggle(); 
-    		$('div#' + id).removeClass('hidden');
-    	}
-    	$('div#' + id).toggle('fade','swing',100); 
-    	m_currentQueryFormPane = id;
+checkAdvanced(id);
+
+$('div#' + m_currentQueryFormPane).toggle('fade','swing',100,
+    function () {
+     if ($('div#' + id).hasClass('hidden')) {
+     $('div#' + id).toggle();
+     $('div#' + id).removeClass('hidden');
+     }
+     $('div#' + id).toggle('fade','swing',100);
+     m_currentQueryFormPane = id;
     });
   
-	checkAdvanced(id);
+checkAdvanced(id);
 }
 
 /**
- * Swaps different forms of query
- * @param id The one to make visible
- */
+* Swaps different forms of query
+* @param id The one to make visible
+*/
 function _showStoredQueryForm (id){
   $('div#' + m_currentSaveFormPane).toggle('fade','swing',100,
-    function () { 
+    function () {
       if ($('div#' + id).hasClass('hidden')) {
-        $('div#' + id).toggle(); 
+        $('div#' + id).toggle();
         $('div#' + id).removeClass('hidden');
       }
-      $('div#' + id).toggle('fade','swing',100); 
+      $('div#' + id).toggle('fade','swing',100);
       m_currentSaveFormPane = id;
     });
 }
 
 /**
- * Builds the TROVE query string from user input.
- */
+* Builds the TROVE query string from user input.
+*/
 function _createQueryString ()
 {
   var str = '';
   switch (m_currentQueryFormPane) {
-  case Q_SIMPLE : 
+  case Q_SIMPLE :
     m_currentZone = 'newspaper';
     m_currentTerm = $('input#q1').val();
-    str = '&zone=' + m_currentZone + 
+    str = '&zone=' + m_currentZone +
           '&q=' + encodeURIComponent(m_currentTerm);
     break;
   case Q_ADVANCED:
-	m_currentZone = '';
+m_currentZone = '';
     m_currentTerm = $('input#aq1').val();
 
     $(':checkbox').each(function(){
-    	if(m_currentZone == ''){
-    		m_currentZone += this.checked ? this.value : '';
-    	} else {
-    		m_currentZone += this.checked ? ',' + this.value : '';
-    	}
+     if(m_currentZone == ''){
+     m_currentZone += this.checked ? this.value : '';
+     } else {
+     m_currentZone += this.checked ? ',' + this.value : '';
+     }
     });
 
     str = '&zone=' + encodeURIComponent(m_currentZone) + '&q=' + encodeURIComponent(m_currentTerm);
     break;
   case Q_CUSTOM:
     break;
-  }  
+  }
   return str;
 }
 
 /**
- * Reset all state vars to initial values for execution of a new query.
- */
+* Reset all state vars to initial values for execution of a new query.
+*/
 function _resetState ()
 {
   _resetMap();
@@ -1277,7 +1302,7 @@ function _resetState ()
   m_totalRecs = 0;
   m_fetchSize = 4;
   m_fetchStart = 0;
-  m_totalTime  = 0;
+  m_totalTime = 0;
   m_rawRecordId = -1;
   m_locationsSum = 0;
   m_trefIndex = new Array();
@@ -1289,11 +1314,11 @@ function _resetState ()
   m_currentQuery = _createQueryString();
   $('div#raw-list-container').html('');
   $('div#raw-record-container').html('');
-  $('#ctl-table button').button('disable');   
+  $('#ctl-table button').button('disable');
   $('#cc-pb11').button('option', 'label', 'Pause Query');
-  $('#cc-pb11').button('disable');   
-  $('button#btn-pause').attr('src', 'images/button_grey_pause'); 
-  $('button#btn-pause').css('visibility', 'hidden'); 
+  $('#cc-pb11').button('disable');
+  $('button#btn-pause').attr('src', 'images/button_grey_pause');
+  $('button#btn-pause').css('visibility', 'hidden');
   var rbGroup = $('input[name="raw-sort-rb"]');
   rbGroup.prop('checked', false);
   rbGroup[3].checked = true;
@@ -1308,29 +1333,29 @@ function _updateTimeDisplay ()
   var tsecs = Math.round(m_totalTime / 1000);
   var secs = tsecs % 60;
   var tmins = Math.floor(tsecs / 60);
-  var mins  = tmins % 60;
-  var hrs   = Math.floor(tmins / 3600);
+  var mins = tmins % 60;
+  var hrs = Math.floor(tmins / 3600);
   $('td#n13').html((hrs < 10 ? '0' : '') + hrs + ':' + (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs);
 }
 
 /**
- * Sends off a trove query using the data in the bew query form, starting at the position passed.
- * Clears form if position < zero.
- * @param pos position in TROVE result set
- */
+* Sends off a trove query using the data in the bew query form, starting at the position passed.
+* Clears form if position < zero.
+* @param pos position in TROVE result set
+*/
 function _doQuery (pos){
   if (pos === 0) {
     _resetState();
-    $('#cc-pb11').button('enable'); 
-    $('button#btn-pause').css('visibility', 'visible'); 
+    $('#cc-pb11').button('enable');
+    $('button#btn-pause').css('visibility', 'visible');
   }
   var queryId = m_queryId;
   if (m_fetchSize < MAX_FETCH_SIZE) {
     m_fetchSize = Math.min(MAX_FETCH_SIZE, m_fetchSize * 2);
   }
-  var uri = TROVE_QUERY_URL + m_user.key + m_currentQuery + 
+  var uri = TROVE_QUERY_URL + m_user.key + m_currentQuery +
             '&s=' + pos + '&n=' + m_fetchSize +
-            '&encoding=json' + 
+            '&encoding=json' +
             '&callback=?';
   $.getJSON(uri, function (data, status, jqXHR) {
       try {
@@ -1357,12 +1382,12 @@ function _doQuery (pos){
 }
 
 /**
- * Extracts records from a TROVE response placing them in global array.
- * Sends next query if more records exist and (re)starts processing of map pins.
- * If position is negative, the query is aborted and any pending fetch ignored when/if it arrives
- * @param data TROVE JSON response
- * @param pos start location in overall set for this group; or negative to stop the madness
- */
+* Extracts records from a TROVE response placing them in global array.
+* Sends next query if more records exist and (re)starts processing of map pins.
+* If position is negative, the query is aborted and any pending fetch ignored when/if it arrives
+* @param data TROVE JSON response
+* @param pos start location in overall set for this group; or negative to stop the madness
+*/
 function _processData (data, pos, id)
 {
   if (pos === PAUSE_QUERY) {
@@ -1384,58 +1409,58 @@ function _processData (data, pos, id)
     _updateCurrQueryPane();
   }
   else if (m_run && (id === m_queryId)) {
-	  
-	  /**
-	   * Upgraded to handle multiple zones
-	   * will stall at the end of search query and not complete...
-	   * requires further investigation
-	   * @author - Josh Wright
-	   */
-	  var _currentZones = m_currentZone.split(',');
-	  var zoneResults = data.response.zone;
-	  var zoneResult = null;
-	  var zoneInfo = null;
-	  
-	  for (var i = 0; i < _currentZones.length; i++){
-		  zoneInfo = _getZoneInfo(_currentZones[i]);
-		  for (var j = 0; j < _currentZones.length; j++){
-			  if (zoneResults[j].name == zoneInfo.id) {
-				  zoneResult = zoneResults[j].records[zoneInfo.holder];
-				  if (zoneResult) {
-					  var tempPos = pos + (m_fetchSize * i);
-					  for (var k = 0; k < zoneResult.length; k++) {
-						  m_resultSet[tempPos + k] = { zone: zoneInfo.id, data: zoneResult[k], marker:null };
-						  m_resultSet[tempPos + k].data.text = null;
-						  m_trefIndex[zoneResult[k]['id']] = tempPos + k;
-					  }
-				  }
-			  }
-		  }
-	  }
-	  if (m_totalRecs === 0) {
-		  for (var m  = 0; m < zoneResults.length; m++) {
-			  m_totalRecs += parseInt(zoneResults[m].records.total);
-		  }
-	  }
-	  // get next chunk underway before doing local housekeeping
+
+/**
+* Upgraded to handle multiple zones
+* will stall at the end of search query and not complete...
+* requires further investigation
+* @author - Josh Wright
+*/
+var _currentZones = m_currentZone.split(',');
+var zoneResults = data.response.zone;
+var zoneResult = null;
+var zoneInfo = null;
+
+for (var i = 0; i < _currentZones.length; i++){
+zoneInfo = _getZoneInfo(_currentZones[i]);
+for (var j = 0; j < _currentZones.length; j++){
+if (zoneResults[j].name == zoneInfo.id) {
+zoneResult = zoneResults[j].records[zoneInfo.holder];
+if (zoneResult) {
+var tempPos = pos + (m_fetchSize * i);
+for (var k = 0; k < zoneResult.length; k++) {
+m_resultSet[tempPos + k] = { zone: zoneInfo.id, data: zoneResult[k], marker:null };
+m_resultSet[tempPos + k].data.text = null;
+m_trefIndex[zoneResult[k]['id']] = tempPos + k;
+}
+}
+}
+}
+}
+if (m_totalRecs === 0) {
+for (var m = 0; m < zoneResults.length; m++) {
+m_totalRecs += parseInt(zoneResults[m].records.total);
+}
+}
+// get next chunk underway before doing local housekeeping
       if (m_resultSet.length < m_totalRecs) {
         _doQuery(m_resultSet.length);
       }
       else {
         $('#busy-box').activity(false);
         $('#cc-pb11').button('disable');
-        $('button#btn-pause').css('visibility', 'hidden'); 
+        $('button#btn-pause').css('visibility', 'hidden');
         m_run = false;
         ++m_queryId;
       }
-	  _updateLocationRefs(pos);
+_updateLocationRefs(pos);
       _updateMapDisplay(pos);
-	  _updateCurrQueryPane();
-	  _updateHistogram();
-	  
+_updateCurrQueryPane();
+_updateHistogram();
+
       // swap view on first response unless user already chnged it
       if ((pos === 0) && (m_currentPaneSelector === _selById(NEW_QUERY_PANE))) {
-        currentQuery(true);    
+        currentQuery(true);
       }
     }
  }
@@ -1443,30 +1468,30 @@ function _processData (data, pos, id)
 
 
 /**
- * Flips the currently visible pane
- * @param id Selector for pane to display
- */
+* Flips the currently visible pane
+* @param id Selector for pane to display
+*/
 function _showPane (id)
 {
   if ((id != m_currentPaneSelector) && ($(id).length > 0)) {
     $(m_currentPaneSelector).toggle('fade', 'swing', FADE_TD2, function () {
-      $(id).toggle('fade', 'swing', FADE_TD2); 
+      $(id).toggle('fade', 'swing', FADE_TD2);
     });
     m_currentPaneSelector = id;
   }
 }
 
 /**
- * A popup dialog (non-modal)
- * @param dtype QUESTION, INFO or ALERT
- * @param html formatted content for popup
- */
+* A popup dialog (non-modal)
+* @param dtype QUESTION, INFO or ALERT
+* @param html formatted content for popup
+*/
 function _popupDialog (dtype, html, width)
 {
-  var errOpts = { 
+  var errOpts = {
     autoOpen:'true', show:FADE_TD1, hide: FADE_TD1,
-    position: [140, 140], 
-    resizable:'false', 
+    position: [140, 140],
+    resizable:'false',
     buttons: {'OK' : function () { $(this).dialog('destroy'); $('#user-popup').remove(); }},
     closeOnEscape:'true',
     open: function(event, ui) { $(this).parent().children().children(".ui-dialog-titlebar-close").hide(); }
@@ -1481,25 +1506,25 @@ function _popupDialog (dtype, html, width)
 }
 
 /**
- * If the nominated pane does not exist, get its content from the server and create it as hidden,
- * then fade it out, removing the hidden when the fade is done. Pane will be made visible on next toggle.
- * @param id Pane selector
- * @param cssName optional class(es) to apply to new pane
- */
-function _createPane (id, callback, cssName) 
+* If the nominated pane does not exist, get its content from the server and create it as hidden,
+* then fade it out, removing the hidden when the fade is done. Pane will be made visible on next toggle.
+* @param id Pane selector
+* @param cssName optional class(es) to apply to new pane
+*/
+function _createPane (id, callback, cssName)
 {
   if ($(_selById(FOOTER_BAR)).length > 0) {
     var selector = _selById(id);
     $(_selById(FOOTER_BAR)).before('<div id="' + id + '" class="hidden"></div');
-    $(selector).toggle('fade', 'swing', 0, function () { 
-      $(selector).toggleClass('hidden ' + cssName); 
+    $(selector).toggle('fade', 'swing', 0, function () {
+      $(selector).toggleClass('hidden ' + cssName);
     });
     // do fetch asynch as Webkit has race condition isuues
     $.ajax({
       url: PM_URI + '/pm?pg=' + id,
       asynch: true,
       dataType: 'text',
-      success: function (data) { 
+      success: function (data) {
         $(selector).html(data);
         if (callback !== null) {
           callback();
@@ -1511,10 +1536,10 @@ function _createPane (id, callback, cssName)
 }
 
 /**
- * Checks if a record is inside the timeline range slider markers
- * @param idx Index of record
- * @returns {Boolean} true if in range
- */
+* Checks if a record is inside the timeline range slider markers
+* @param idx Index of record
+* @returns {Boolean} true if in range
+*/
 function _isInTimelineRange(idx)
 {
   var inRange = false;
@@ -1539,28 +1564,28 @@ function _isInTimelineRange(idx)
 }
 
 /**
- * Configure the default Y2K slider
- */
+* Configure the default Y2K slider
+*/
 function _initSlider ()
 {
-  $(_selById(Y2K_SLIDER)).slider({ 
-    from: 1800, 
-    to: 2000, 
-    heterogeneity: ['25/1850', '75/1950'], 
-    scale: [1800, 1825, 1850, 1875, 1900, 1925, 1950, 1975, 2000], 
-    limits: false, 
-    step: 1, 
-    dimension: '', 
-    callback: function( value ){ toggleMapMarkers(); } 
-  });  
+  $(_selById(Y2K_SLIDER)).slider({
+    from: 1800,
+    to: 2000,
+    heterogeneity: ['25/1850', '75/1950'],
+    scale: [1800, 1825, 1850, 1875, 1900, 1925, 1950, 1975, 2000],
+    limits: false,
+    step: 1,
+    dimension: '',
+    callback: function( value ){ toggleMapMarkers(); }
+  });
 }
 
 /**
- * Creates a Google map marker for a record and sets its initial visibility from
- * the timeline range markers. Hover text will be set to the source if zone is newspaper.
- * @param idx Index of record
- * @param data
- */
+* Creates a Google map marker for a record and sets its initial visibility from
+* the timeline range markers. Hover text will be set to the source if zone is newspaper.
+* @param idx Index of record
+* @param data
+*/
 function _insertPublisherMapMarker (idx, data)
 {
   var pos = new google.maps.LatLng(data.latitude, data.longitude);
@@ -1573,20 +1598,20 @@ function _insertPublisherMapMarker (idx, data)
 }
 
 /**
- * returns currently checked map marker button.
- */
+* returns currently checked map marker button.
+*/
 function _getCheckedMapButton ()
 {
   return parseInt($('#map-options input[name=radio-map]:checked').val());
 }
 
 /**
- * Adds timeline markers and map publisher pins for new records just received
- * starting at pos in global result array until the end.
- * The color of all timeline entries are revised based on the current
- * percentile groupings.
- * @param pos array offset.
- */
+* Adds timeline markers and map publisher pins for new records just received
+* starting at pos in global result array until the end.
+* The color of all timeline entries are revised based on the current
+* percentile groupings.
+* @param pos array offset.
+*/
 function _updateMapDisplay (pos)
 {
   var _addMarker = function (idx)
@@ -1643,8 +1668,8 @@ function _updateMapDisplay (pos)
 }
 
 /**
- * (re)set the color of all map markers based on hit count percentage per year
- */
+* (re)set the color of all map markers based on hit count percentage per year
+*/
 function _updateTimelineMarkerColors ()
 {
   var __innerCreate = function (idx, year, leftPos, color) {
@@ -1684,10 +1709,10 @@ function _updateTimelineMarkerColors ()
 }
 
 /**
- * Gets references to PM GS data for all TROVE IDs in result set starting at <pos>,
- * then fetches actual GS data for those we don't already have cached.
- * @param pos
- */
+* Gets references to PM GS data for all TROVE IDs in result set starting at <pos>,
+* then fetches actual GS data for those we don't already have cached.
+* @param pos
+*/
 function _updateLocationRefs (pos)
 {
   var arg = '';
@@ -1716,12 +1741,12 @@ function _updateLocationRefs (pos)
             if (! (locnId in m_locationsCache)) {
               tmp[locnId] = '';
               m_locationsCache[locnId] = {
-                  info: null, 
+                  info: null,
                   marker: null,
                   popup: null,
-                  tids: new Array(troveRef), 
-                  total: parseInt(m_locations[troveRef].list[i][1]), 
-                  yMin: parseInt(m_resultSet[m_trefIndex[troveRef]].data.date.substring(0,4)), 
+                  tids: new Array(troveRef),
+                  total: parseInt(m_locations[troveRef].list[i][1]),
+                  yMin: parseInt(m_resultSet[m_trefIndex[troveRef]].data.date.substring(0,4)),
                   yMax: parseInt(m_resultSet[m_trefIndex[troveRef]].data.date.substring(0,4))
               };
               m_locationsSum += m_locationsCache[locnId].total;
@@ -1750,14 +1775,14 @@ function _updateLocationRefs (pos)
         }
       }
     }
-  }); 
+  });
 }
 
 /**
- * Fetches actual GS data by its DB id and stores it in our cache
- * Creates google map marker for location.
- * @param list
- */
+* Fetches actual GS data by its DB id and stores it in our cache
+* Creates google map marker for location.
+* @param list
+*/
 function _getLocationData (list)
 {
   var uri = PM_URI + '/loc/gs?lst=' + list;
@@ -1773,14 +1798,14 @@ function _getLocationData (list)
       }
       _updateLocationMarkerColors();
     }
-  }); 
+  });
 }
 
 /**
- * Creates a map marker from location data, setting title and visibility with a default pin color
- * @param locnId index of location in cache
- * @returns {google.maps.Marker}
- */
+* Creates a map marker from location data, setting title and visibility with a default pin color
+* @param locnId index of location in cache
+* @returns {google.maps.Marker}
+*/
 function _createMapLocationMarker (locnId)
 {
   var info = m_locationsCache[locnId].info;
@@ -1798,18 +1823,18 @@ function _createMapLocationMarker (locnId)
 }
 
 /**
- * Creates the google Info Window popup for a specific location, and provides dynamic content
- * when the info window is opened.
- * Note! This is a separate function because of closure requirements.
- * @param locId Index into the location cache array.
- */
+* Creates the google Info Window popup for a specific location, and provides dynamic content
+* when the info window is opened.
+* Note! This is a separate function because of closure requirements.
+* @param locId Index into the location cache array.
+*/
 function _createMarkerPopup (locId)
 {
   m_locationsCache[locId].popup = new google.maps.InfoWindow({ content: '', disableAutoPan: true });
   m_locationsCache[locId].listener = google.maps.event.addListener(m_locationsCache[locId].marker, 'click', function () {
     var k1 = m_locationsCache[locId].total > 1 ? ' times in ' : ' time in ';
     var k2 = m_locationsCache[locId].tids.length > 1 ? ' records.' : ' record.';
-    var html = '<div class="marker-popup">' + m_locationsCache[locId].info.name + 
+    var html = '<div class="marker-popup">' + m_locationsCache[locId].info.name +
             ((m_locationsCache[locId].info.state_sn.length > 0) ? ', ' + m_locationsCache[locId].info.state_sn : '') +
             '<br>Occurs ' + m_locationsCache[locId].total + k1 + m_locationsCache[locId].tids.length + k2 +
             '<p><button id="loc-pb' + locId + '" onClick="_viewLocationRecords(' + locId + ')">View Records...</button></div>';
@@ -1820,13 +1845,13 @@ function _createMarkerPopup (locId)
 }
 
 /**
- * Marks the location(s) for a specific trove ID as deleted. Updates data structs to
- * remove location, its hit count, and zonks the marker if the count reaches zero.
- * @param locnList
- * @param troveId
- */
+* Marks the location(s) for a specific trove ID as deleted. Updates data structs to
+* remove location, its hit count, and zonks the marker if the count reaches zero.
+* @param locnList
+* @param troveId
+*/
 function _strikeOutLocations (locnList, troveId)
-{    
+{
   var uri = PM_URI + '/loc/rm?lid=' + locnList.join(',') + '&tid=' + troveId + '&uid=' + m_user.id;
   $.getJSON(uri, function (data, status, jqXHR) {
     var cnt = 0;
@@ -1843,7 +1868,7 @@ function _strikeOutLocations (locnList, troveId)
         locnSet[locnList[i]] = null;
       }
       var stack = new Array();
-      var locnEntry =  m_locations[troveId];
+      var locnEntry = m_locations[troveId];
       for (var i = 0; i < locnEntry.list.length; i++) {
         var lid = locnEntry.list[i][0];
         if (! (lid in locnSet)) {
@@ -1872,9 +1897,9 @@ function _strikeOutLocations (locnList, troveId)
 }
 
 /**
- * Resets the year range for TROVE results referring to this location ID
- * @param locnId
- */
+* Resets the year range for TROVE results referring to this location ID
+* @param locnId
+*/
 function _resetLocationMaxMinYear (locnId)
 {
   if (m_locationsCache[locnId].tids.length === 0) {
@@ -1900,10 +1925,10 @@ function _resetLocationMaxMinYear (locnId)
 }
 
 /**
- * Prepares a list of trove records referenced by a mined location and sets them up is sorted data order
- * in the Raw View pane.
- * @param locnId Index into the location cache array.
- */
+* Prepares a list of trove records referenced by a mined location and sets them up is sorted data order
+* in the Raw View pane.
+* @param locnId Index into the location cache array.
+*/
 function _viewLocationRecords (locnId)
 {
   m_locationsCache[locnId].popup.close();
@@ -1931,9 +1956,9 @@ function _viewLocationRecords (locnId)
 }
 
 /**
- * Adjust all 'active' location map marker icon colors based on the BOM color scale and percentage 
- * the frequency total for each is of the total location hit count.
- */
+* Adjust all 'active' location map marker icon colors based on the BOM color scale and percentage
+* the frequency total for each is of the total location hit count.
+*/
 function _updateLocationMarkerColors ()
 {
   for (var locn in m_locationsCache) {
@@ -1952,11 +1977,11 @@ function _updateLocationMarkerColors ()
 }
 
 /**
- * Checks if a range of years lies all or part within the current timelime marker positions
- * @param ymin
- * @param ymax
- * @returns {Boolean}
- */
+* Checks if a range of years lies all or part within the current timelime marker positions
+* @param ymin
+* @param ymax
+* @returns {Boolean}
+*/
 function _isRangeOverlap (ymin, ymax)
 {
   var span = $(_selById(Y2K_SLIDER)).slider('value').split(';');
@@ -1968,24 +1993,24 @@ function _isRangeOverlap (ymin, ymax)
 
 function _setCurrentQueryButtonState ()
 {
-  //$('button#cc-pb11').button((m_run ? 'enable' : 'disable'));   // || (m_resultSet == null) || (m_totalRecs > 0 && m_resultSet.length >= m_totalRecs)));
+  //$('button#cc-pb11').button((m_run ? 'enable' : 'disable')); // || (m_resultSet == null) || (m_totalRecs > 0 && m_resultSet.length >= m_totalRecs)));
   $('button#cc-pb12').button((m_currentQuery == null ? 'disable' : 'enable'));
   $('button#cc-pb13').button((m_currentQuery == null ? 'disable' : 'enable'));
 }
 
 /**
- * Populate details about the current query progress
- */
+* Populate details about the current query progress
+*/
 function _updateCurrQueryPane ()
 {
   if ($(_selById(CURR_QUERY_PANE)).length > 0) {
     switch (m_currentQueryFormPane) {
-    case Q_SIMPLE : 
+    case Q_SIMPLE :
       _updateSearchProgressFields();
       _setCurrentQueryButtonState();
       break;
     case Q_ADVANCED :
-    	_updateSearchProgressFields();
+     _updateSearchProgressFields();
         _setCurrentQueryButtonState();
       break;
     case Q_CUSTOM :
@@ -1996,10 +2021,10 @@ function _updateCurrQueryPane ()
 }
 
 /**
- * Updates the fields on all (currently current query page and master page)
- * with new numbers for the amount of results processed, etc.
- * @author Rob Dempsey
- */
+* Updates the fields on all (currently current query page and master page)
+* with new numbers for the amount of results processed, etc.
+* @author Rob Dempsey
+*/
 function _updateSearchProgressFields() {
     $('td#q11').html(m_currentTerm);
     $('td#z11').html(m_currentZone);
@@ -2009,14 +2034,14 @@ function _updateSearchProgressFields() {
 }
 
 /**
- * Creates a new list of identifiers for trove records in the scrollable left hand panel
- * of the Raw View pane.
- * @param list Structure of identifiers, link indicies, and optional hover text.
- */
+* Creates a new list of identifiers for trove records in the scrollable left hand panel
+* of the Raw View pane.
+* @param list Structure of identifiers, link indicies, and optional hover text.
+*/
 function _resetRawRecordList (list)
 {
   if (list != null) {
-    var listData =  '';
+    var listData = '';
     var prefix = '';
     var len = list.length;
     var remainder = len % MAX_FETCH_SIZE;
@@ -2029,21 +2054,21 @@ function _resetRawRecordList (list)
     document.getElementById("page-count-message").innerHTML = "Showing results 1- " + remainder;
    
     if (document.getElementById("page-options") != null) {
-    	currentPage = document.getElementById("page-options").selectedIndex;
-    	$('#page-options').remove();
+     currentPage = document.getElementById("page-options").selectedIndex;
+     $('#page-options').remove();
     }
 
     if (len > MAX_FETCH_SIZE) {
-    	_paginateResults(pageCount, currentPage, remainder);
-    	$("#page-options").on("change", function() {
-    		_resetRawRecordList(list);
-    	});
+     _paginateResults(pageCount, currentPage, remainder);
+     $("#page-options").on("change", function() {
+     _resetRawRecordList(list);
+     });
         pgStart = currentPage * MAX_FETCH_SIZE;
         pgEnd = pgStart + MAX_FETCH_SIZE;
     }
          
     if (currentPage == lastPage) {
-    	pgEnd = pgStart + remainder;
+     pgEnd = pgStart + remainder;
     }
     
     for (var idx = pgStart; idx < pgEnd; idx++) {
@@ -2068,62 +2093,62 @@ function _resetRawRecordList (list)
 }
 
 /**
- * Splits raw results into pages
- * 
- * @param pgCount: The number of pages to construct
- * @param currentPage: The current selected page
- * @param remainder: The result count for the final page
- */
+* Splits raw results into pages
+*
+* @param pgCount: The number of pages to construct
+* @param currentPage: The current selected page
+* @param remainder: The result count for the final page
+*/
 function _paginateResults(pgCount, currentPage, remainder) {
-	document.getElementById("page-count-message").innerHTML = "Showing results ";
-	var pageOptions = '<select id="page-options">';
-	var lastPage = pgCount - 1;
+document.getElementById("page-count-message").innerHTML = "Showing results ";
+var pageOptions = '<select id="page-options">';
+var lastPage = pgCount - 1;
     //build page numbers
     for (var i = 0; i < pgCount; i++) {
-    	var initialIndex = i * MAX_FETCH_SIZE + 1;
-    	var finalIndex = initialIndex + (MAX_FETCH_SIZE);
-    	if (i == lastPage) {
-    		finalIndex = initialIndex + remainder;
-    	}
-    	
-    	var range = initialIndex + '-' + finalIndex;
-    	if (i == currentPage) {
-    		pageOptions += '<option class="pg-number" selected="selected">' + range + '</option>';
-    	} else {
-    		pageOptions += '<option class="pg-number">' + range + '</option>';
-    	}
-    	
+     var initialIndex = i * MAX_FETCH_SIZE + 1;
+     var finalIndex = initialIndex + (MAX_FETCH_SIZE);
+     if (i == lastPage) {
+     finalIndex = initialIndex + remainder;
+     }
+    
+     var range = initialIndex + '-' + finalIndex;
+     if (i == currentPage) {
+     pageOptions += '<option class="pg-number" selected="selected">' + range + '</option>';
+     } else {
+     pageOptions += '<option class="pg-number">' + range + '</option>';
+     }
+    
     }
     pageOptions += '</select>';
-	$('span#raw-page-numbers').html(pageOptions);
+$('span#raw-page-numbers').html(pageOptions);
 }
 
 /**
- * Returns a structure giving the *possible* structure of a trove JSON response
- * (TROVE has no schema for these!)
- * @param zone
- * @returns
- */
+* Returns a structure giving the *possible* structure of a trove JSON response
+* (TROVE has no schema for these!)
+* @param zone
+* @returns
+*/
 function _getZoneInfo (zone)
 {
   var zoneInfo = null;
   switch (zone) {
-  case 'newspaper':  zoneInfo = ZONE_NEWSPAPER; break;
-  case 'article':    zoneInfo = ZONE_ARTICLE; break;
-  case 'picture':    zoneInfo = ZONE_PICTURE; break;
-  case 'map':        zoneInfo = ZONE_MAP; break;
-  case 'list':       zoneInfo = ZONE_LIST; break;
-  case 'music':      zoneInfo = ZONE_MUSIC; break;
+  case 'newspaper': zoneInfo = ZONE_NEWSPAPER; break;
+  case 'article': zoneInfo = ZONE_ARTICLE; break;
+  case 'picture': zoneInfo = ZONE_PICTURE; break;
+  case 'map': zoneInfo = ZONE_MAP; break;
+  case 'list': zoneInfo = ZONE_LIST; break;
+  case 'music': zoneInfo = ZONE_MUSIC; break;
   case 'collection': zoneInfo = ZONE_COLLECTION; break;
-  case 'book':       zoneInfo = ZONE_BOOK; break;
+  case 'book': zoneInfo = ZONE_BOOK; break;
   }
   return zoneInfo;
 }
 
 /**
- * Display info contained in a response
- * @param id Index in result set of record
- */
+* Display info contained in a response
+* @param id Index in result set of record
+*/
 function _displayRawDataItem (id)
 {
   var rec = m_resultSet[id];
@@ -2140,13 +2165,13 @@ function _displayRawDataItem (id)
       '<a id="raw-trove-link" href="' + value + '" target="_blank">' + value + '</a></td></tr>';
     }
     else {
-    	if(zoneInfo.tags[i].title == 'Thumbnail') {
-    		value = eval('m_resultSet[' + id + '].data.' + zoneInfo.tags[9].tag);
-    		html += '<tr><td class="td-crud=name">' + zoneInfo.tags[9].title + '</td><td>' + '<img src="' + value + '" alt=" ---FAIL pic didnt load---"></td></tr>';
-    	} else {
-    		html += '<tr><td class="td-crud-name">' + zoneInfo.tags[i].title + ':</td><td>' + value + '</td></tr>';
+     if(zoneInfo.tags[i].title == 'Thumbnail') {
+     value = eval('m_resultSet[' + id + '].data.' + zoneInfo.tags[9].tag);
+     html += '<tr><td class="td-crud=name">' + zoneInfo.tags[9].title + '</td><td>' + '<img src="' + value + '" alt=" --- Loading ---"></td></tr>';
+     } else {
+     html += '<tr><td class="td-crud-name">' + zoneInfo.tags[i].title + ':</td><td>' + value + '</td></tr>';
   
-    	}
+     }
     }
   }
   
@@ -2161,18 +2186,18 @@ function _displayRawDataItem (id)
 }
 
 /**
- * Retrieve full text and display in Location editor Pane
- */
-function _getFullTextForLocation () 
+* Retrieve full text and display in Location editor Pane
+*/
+function _getFullTextForLocation ()
 {
   if (m_resultSet[m_rawRecordId].data.text != null) {
     _displayLocationEditText(m_rawRecordId);
   }
   else {
-    var uri = TROVE_URL + m_currentZone + '/' + m_resultSet[m_rawRecordId].data.id + 
-    '?key=' + m_user.key + 
+    var uri = TROVE_URL + m_currentZone + '/' + m_resultSet[m_rawRecordId].data.id +
+    '?key=' + m_user.key +
     '&encoding=json' +
-    '&include=articletext' + 
+    '&include=articletext' +
     '&callback=?';
     $.getJSON(uri, function (data, status, jqXHR) {
       if (status == "success") {
@@ -2182,7 +2207,7 @@ function _getFullTextForLocation ()
             m_resultSet[m_rawRecordId].data.text = '&lt;nil&gt;';
           }
           else {
-            var text =  record.articleText.toString();
+            var text = record.articleText.toString();
             text = text.replace(/<p>/g, '');
             text = text.replace(/<\/p>/g, '');
             m_resultSet[m_rawRecordId].data.text = text;
@@ -2190,14 +2215,14 @@ function _getFullTextForLocation ()
           _displayLocationEditText(m_rawRecordId);
         }
       }
-    });  
+    });
   }
 }
 
 /**
- * Display snipped and full text (or button) for location editing.
- * @param id
- */
+* Display snipped and full text (or button) for location editing.
+* @param id
+*/
 function _displayLocationEditText (id)
 {
   var text = m_resultSet[id].data.text;
@@ -2211,10 +2236,10 @@ function _displayLocationEditText (id)
 }
 
 /**
- * Builds a table showing location names (with state/country as appropriate) for a TROVE record
- * with a checkbox for deletion selection and displays it in the edit locations pane.
- * @param id
- */
+* Builds a table showing location names (with state/country as appropriate) for a TROVE record
+* with a checkbox for deletion selection and displays it in the edit locations pane.
+* @param id
+*/
 function _updateLocationsListDisplay (id)
 {
   var tref = m_resultSet[id].data.id;
@@ -2237,9 +2262,9 @@ function _updateLocationsListDisplay (id)
 }
 
 /**
- * Builds a sorted index by type into the raw data array
- * @param sortType 1..4 (date, relevance, source, unsorted)
- */
+* Builds a sorted index by type into the raw data array
+* @param sortType 1..4 (date, relevance, source, unsorted)
+*/
 function _sortRaw (sortType)
 {
   var isInRange = function (idx) {
@@ -2306,16 +2331,16 @@ function _sortRaw (sortType)
       });
     }
     if (document.getElementById("page-options") != null) {
-    	$("select#page-options").prop('selectedIndex', 0);  
+     $("select#page-options").prop('selectedIndex', 0);
     }
     _resetRawRecordList (tmp);
   }
 }
 
 /**
- * Action when a timeline marker clicked builds a list of records for that year and activates RAW view
- * @param idx Index into year array.
- */
+* Action when a timeline marker clicked builds a list of records for that year and activates RAW view
+* @param idx Index into year array.
+*/
 function _viewRawByYear (idx)
 {
   var tmp = new Array();
@@ -2341,15 +2366,15 @@ function _viewRawByYear (idx)
 }
 
 /**
- * Basic layout for add location dailog
- * @param text User-selected text to display
- * @returns {String}
- */
+* Basic layout for add location dailog
+* @param text User-selected text to display
+* @returns {String}
+*/
 function _formatAddLocations (text)
 {
   var html = '<div id="add-locns-dlg">' +
       '<table id="add-locn-find"><tr><th>Place Name</th><th>State</th><th>Country</th></tr><tr>' +
-      '<td><input id="add-locn-name"  type="text" value="' + text + '"></td>' +
+      '<td><input id="add-locn-name" type="text" value="' + text + '"></td>' +
       '<td><input id="add-locn-state" type="text" value=""></td>' +
       '<td><input id="add-locn-cntry" type="text" value=""></td></tr></table>' +
       '<br>&nbsp;<table id="add-locns"></table' +
@@ -2358,10 +2383,10 @@ function _formatAddLocations (text)
 }
 
 /**
- * Find a location name (optionally with state and/or country) from our database, or google geocode service.
- * The location data is appended to the array of locations found since the add dialog was opened.
- * @param src
- */
+* Find a location name (optionally with state and/or country) from our database, or google geocode service.
+* The location data is appended to the array of locations found since the add dialog was opened.
+* @param src
+*/
 function _findLocation (src)
 {
   var __getNames = function(list, tag) {
@@ -2397,7 +2422,7 @@ function _findLocation (src)
     });
   }
   else {
-    var uri = GOOGLE_MAPS_URL + ln + 
+    var uri = GOOGLE_MAPS_URL + ln +
     (sn.length > 0 ? '+' + sn : '') +
     (cn.length > 0 ? '+' + sn : '') +
     '&sensor=false';
@@ -2441,26 +2466,26 @@ function _findLocation (src)
 }
 
 /**
- * Formates the list of locations "found" since the add location dialog was opened
- * and displayes them in the dialog.
- */
+* Formates the list of locations "found" since the add location dialog was opened
+* and displayes them in the dialog.
+*/
 function _formatLocationSelections ()
 {
   var tdat = '';
   for (var i = 0; i < m_locnSelections.length; i++) {
     var locn = m_locnSelections[i];
-    tdat += '<tr><td class="sel-name">' + locn.name + 
-            '</td><td class="sel-state">' + locn.state_sn + 
-            '</td><td class="sel-cntry">' + locn.iso_ln + 
+    tdat += '<tr><td class="sel-name">' + locn.name +
+            '</td><td class="sel-state">' + locn.state_sn +
+            '</td><td class="sel-cntry">' + locn.iso_ln +
             '</td><td class="sel-accept"><button onClick="_addNewLocation(' + i + ')">Accept</button></td></tr>';
   }
   $('#add-locns').html(tdat);
 }
 
 /**
- * Adds the selected location to the current trove record
- * @param idx Index of selected location element
- */
+* Adds the selected location to the current trove record
+* @param idx Index of selected location element
+*/
 function _addNewLocation(idx)
 {
   $('#add-locns-dlg').dialog('close');
@@ -2477,11 +2502,11 @@ function _addNewLocation(idx)
 }
 
 /**
- * Adds a new reference to an existing location for a TROVE id with a frequency count.
- * @param troveId The Trove ID
- * @param locnId The index in the locations cache
- * @param freq Occurence count for the location in the TROVE record
- */
+* Adds a new reference to an existing location for a TROVE id with a frequency count.
+* @param troveId The Trove ID
+* @param locnId The index in the locations cache
+* @param freq Occurence count for the location in the TROVE record
+*/
 function _addReference (troveId, obj, freq)
 {
   var locnId = obj.id;
@@ -2493,12 +2518,12 @@ function _addReference (troveId, obj, freq)
       }
       else {
         if (typeof m_locationsCache[locnId] === UNDEF) {
-          m_locationsCache[locnId] = { 
-              info:  obj,
+          m_locationsCache[locnId] = {
+              info: obj,
               total: 0,
-              yMin:  parseInt(m_resultSet[m_locations[troveId].pos].data.date.substring(0,4)),
-              yMax:  parseInt(m_resultSet[m_locations[troveId].pos].data.date.substring(0,4)),
-              tids:  new Array(),
+              yMin: parseInt(m_resultSet[m_locations[troveId].pos].data.date.substring(0,4)),
+              yMax: parseInt(m_resultSet[m_locations[troveId].pos].data.date.substring(0,4)),
+              tids: new Array(),
               popup: null,
               marker: null,
               listener: null
@@ -2506,7 +2531,7 @@ function _addReference (troveId, obj, freq)
           _createMapLocationMarker(locnId);
           _createMarkerPopup(locnId);
         }
-        var isViz = (_getCheckedMapButton() === LOCATION_MARKER) && 
+        var isViz = (_getCheckedMapButton() === LOCATION_MARKER) &&
                      _isRangeOverlap(m_locationsCache[locnId].yMin, m_locationsCache[locnId].yMax);
         m_locationsSum += freq;
         m_locationsCache[locnId].total += freq;
@@ -2522,12 +2547,12 @@ function _addReference (troveId, obj, freq)
 }
 
 /**
- * Adds a new location and a new reference to it.
- * @param troveId The record referencing the new location
- * @param obj The info details for the new location
- * @param freq Count of occurences of location in record
- */
-function _addLocation (troveId, obj, freq)  
+* Adds a new location and a new reference to it.
+* @param troveId The record referencing the new location
+* @param obj The info details for the new location
+* @param freq Count of occurences of location in record
+*/
+function _addLocation (troveId, obj, freq)
 {
   var uri = PM_URI + '/loc/ins?uid=' + m_user.id + '&tid=' + troveId + '&freq=' + freq +
             '&nm=' + obj.name +
@@ -2551,7 +2576,7 @@ function _addLocation (troveId, obj, freq)
         m_locationsSum += freq;
         obj.id = locnId;
         m_locations[troveId].list.push([locnId, freq]);
-        m_locationsCache[locnId] = { 
+        m_locationsCache[locnId] = {
             info: obj,
             total: freq,
             yMin: parseInt(m_resultSet[m_locations[troveId].pos].data.date.substring(0,4)),
@@ -2572,8 +2597,8 @@ function _addLocation (troveId, obj, freq)
 }
 
 /**
- * Deletes selected locations from currently selected/displayed raw record.
- */
+* Deletes selected locations from currently selected/displayed raw record.
+*/
 function locnDel ()
 {
   var tmp = new Array();
@@ -2593,7 +2618,27 @@ function locnDel ()
   }
 }
 
+// Trying to create a temporary array string as a csv formatted string.
+function downloadCsv(){
+	var tempArray= "";
+	var zoneInfo;
+	var tempTitle;
 
+	zoneInfo = _getZoneInfo(m_resultSet[0].zone);
+	for (var p = 0; p < zoneInfo.tags.length; p++) {
+		tempTitle = zoneInfo.tags[p].title;
+		tempArray += tempTitle + ',';
+	}
+	alert(tempArray);
+	
+	/*
+	var fso = new ActiveXObject('Scripting.FileSystemObject');
+    var oStream = fso.OpenTextFile(csvFilePath, 8, true, 0);
+    oStream.WriteLine(tempArray);
+    oStream.Close();
+    alert("Data Added Successfully");
+    */
+}
 
 // EOF
 

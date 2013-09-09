@@ -29,6 +29,11 @@
 	  <span class="" id="raw-page-numbers">	  	
 	  </span>
   </td>
+  <td>
+  	  <div class="pm-button-bar">
+	  	<button id="export-csv" onClick="downloadCsv()">Download data</button>
+	  </div>
+  </td>
   </tr>
  </table> 
     

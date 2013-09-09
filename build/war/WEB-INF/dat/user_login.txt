@@ -17,6 +17,9 @@
   <tr id="trove-key" class="hidden">
    <td>My TROVE API Key:</td><td><input id="tk" type="text"/></td>
   </tr>
+  <tr>
+   	<td>Remember me</td><td><input id="cb-remember" type="checkbox" value="remember" /></td>
+  </tr>
  </table>
  <br><span id="agree-opt" class="hidden"><input id="cb-agree"  type="checkbox" value="agree"  /> I have read and agree to the <a href="#" onCLick="showHelp('tou')">Terms of Use</a>.</span>
  <br><span id="vfy-opt"   class="hidden"><input id="cb-vfy"    type="checkbox" value="verify" /> Verify my eMail Address.</span>
