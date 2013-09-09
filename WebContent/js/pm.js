@@ -1717,7 +1717,7 @@ function _updateLocationRefs (pos)
 {
   var arg = '';
   for (var i = pos; i < m_resultSet.length; i++) {
-    var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
+    //var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
     //var troveId = eval('m_resultSet[i].data.id' + zoneInfo.tags[0].tag);
     var troveId = m_resultSet[i].data.id;
     arg += ',' + troveId;
@@ -2620,24 +2620,32 @@ function locnDel ()
 
 // Trying to create a temporary array string as a csv formatted string.
 function downloadCsv(){
-	var tempArray= "";
+	var tempArray = '';
 	var zoneInfo;
 	var tempTitle;
-
+	
 	zoneInfo = _getZoneInfo(m_resultSet[0].zone);
 	for (var p = 0; p < zoneInfo.tags.length; p++) {
 		tempTitle = zoneInfo.tags[p].title;
-		tempArray += tempTitle + ',';
+		tempArray += tempTitle + ';';
 	}
-	alert(tempArray);
 	
-	/*
-	var fso = new ActiveXObject('Scripting.FileSystemObject');
-    var oStream = fso.OpenTextFile(csvFilePath, 8, true, 0);
-    oStream.WriteLine(tempArray);
-    oStream.Close();
-    alert("Data Added Successfully");
-    */
+	tempArray += '\r\n';
+
+	for(var b = 0; b < m_resultSet.length; b++){
+		for (var c = 0; c < zoneInfo.tags.length; c++) {
+			zoneInfo = _getZoneInfo(m_resultSet[b].zone);
+			tempArray += eval('m_resultSet[' + b + '].data.' + zoneInfo.tags[c].tag) + ';';
+		}
+		tempArray += '\r\n';
+	}
+	tempArray = encodeURIComponent(tempArray);
+	var a = document.createElement('a');
+	a.href     = 'data:attachment/csv,' + tempArray;
+	a.target   = '_blank';
+	a.download = 'myFile.csv';
+	document.body.appendChild(a);
+	a.click();
 }
 
 // EOF
