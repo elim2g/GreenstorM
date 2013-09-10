@@ -483,7 +483,8 @@ function doLogin (cmd)
       _popupDialog(ALERT, 'You must agree to the Terms of Use in order to complete registration.');
       return;
     }
-        
+     
+    // add cookie if user selects 'remember me'
     if (remember === 'remember') {
     	$.cookie('email', email, { expires: 365 });
     } else {
