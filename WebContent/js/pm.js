@@ -83,116 +83,124 @@ var FREQ_DISTR = [
 var ZONE_NEWSPAPER = {
     id:'newspaper', holder:'article', dtag:'date', rtag:'relevance.score', stag:'title.id',
     tags: [
-    { tag:'id', title:'ID', isLink:false },
-    { tag:'date', title:'Date', isLink:false },
-    { tag:'title.value', title:'Source', isLink:false },
-    { tag:'category', title:'Category', isLink:false },
-    { tag:'heading', title:'Heading', isLink:false },
-    { tag:'relevance.value', title:'Score', isLink:false },
-    { tag:'relevance.score', title:'Revelance', isLink:false },
-    { tag:'page', title:'Page', isLink:false },
-    { tag:'snippet', title:'Snippet', isLink:false },
-    { tag:'text', title:'Full Text', isLink:false },
-    { tag:'troveUrl', title:'URL', isLink:true }
-  ]};
+	    { tag:'id', title:'ID', isLink:false },
+	    { tag:'date', title:'Date', isLink:false },
+	    { tag:'title.value', title:'Source', isLink:false },
+	    { tag:'category', title:'Category', isLink:false },
+	    { tag:'heading', title:'Heading', isLink:false },
+	    { tag:'relevance.value', title:'Score', isLink:false },
+	    { tag:'relevance.score', title:'Revelance', isLink:false },
+	    { tag:'page', title:'Page', isLink:false },
+	    { tag:'snippet', title:'Snippet', isLink:false },
+	    { tag:'text', title:'Full Text', isLink:false },
+	    { tag:'troveUrl', title:'URL', isLink:true }
+    ]
+};
 var ZONE_ARTICLE = {
     id:'article', holder:'work', dtag:'issued', rtag:'relevance.score', stag:'',
     tags: [
-    { tag:'id', title:'ID', isLink:false },
-    { tag:'title', title:'Title', isLink:false },
-    { tag:'issued', title:'Date Issued', isLink:false },
-    { tag:'isPartOf', title:'Part of', isLink:false },
-    { tag:'holdingsCount', title:'Holding', isLink:false },
-    { tag:'versionCount', title:'Version', isLink:false },
-    { tag:'relevance.value', title:'Score', isLink:false },
-    { tag:'relevance.score', title:'Revelance', isLink:false },
-    { tag:'type', title:'Type', isLink:false, mayRepeat:true },
-    { tag:'troveUrl', title:'URL', isLink:true }
-  ]};
+	    { tag:'id', title:'ID', isLink:false },
+	    { tag:'title', title:'Title', isLink:false },
+	    { tag:'issued', title:'Date Issued', isLink:false },
+	    { tag:'isPartOf', title:'Part of', isLink:false },
+	    { tag:'holdingsCount', title:'Holding', isLink:false },
+	    { tag:'versionCount', title:'Version', isLink:false },
+	    { tag:'relevance.value', title:'Score', isLink:false },
+	    { tag:'relevance.score', title:'Revelance', isLink:false },
+	    { tag:'type', title:'Type', isLink:false, mayRepeat:true },
+	    { tag:'troveUrl', title:'URL', isLink:true }
+    ]
+};
 var ZONE_BOOK = {
     id:'book', holder:'work', dtag:'issued', rtag:'relevance.score', stag:'',
     tags: [
-    { tag:'id', title:'ID', isLink:false },
-    { tag:'title', title:'Title', isLink:false },
-    { tag:'type', title:'Type', isLink:false, mayRepeat:true },
-    { tag:'issued', title:'Date Issued', isLink:false },
-    { tag:'contributor', title:'Contributor(s)', isLink:false },
-    { tag:'snippet', title:'Snippet', isLink:false },
-    { tag:'versionCount', title:'Version', isLink:false },
-    { tag:'relevance.value', title:'Score', isLink:false },
-    { tag:'relevance.score', title:'Revelance', isLink:false },
-    { tag:'troveUrl', title:'URL', isLink:true }
-  ]};
+	    { tag:'id', title:'ID', isLink:false },
+	    { tag:'title', title:'Title', isLink:false },
+	    { tag:'type', title:'Type', isLink:false, mayRepeat:true },
+	    { tag:'issued', title:'Date Issued', isLink:false },
+	    { tag:'contributor', title:'Contributor(s)', isLink:false },
+	    { tag:'snippet', title:'Snippet', isLink:false },
+	    { tag:'versionCount', title:'Version', isLink:false },
+	    { tag:'relevance.value', title:'Score', isLink:false },
+	    { tag:'relevance.score', title:'Revelance', isLink:false },
+	    { tag:'troveUrl', title:'URL', isLink:true }
+    ]
+};
 var ZONE_PICTURE = { // FIXME: how to handle array of image links?
     id:'picture', holder:'work', dtag:'issued', rtag:'relevance.score', stag:'',
     tags: [
-    { tag:'id', title:'ID', isLink:false },
-    { tag:'title', title:'Title', isLink:false },
-    { tag:'type', title:'Media Type', isLink:false, mayRepeat:true },
-    { tag:'issued', title:'Date Issued', isLink:false },
-    { tag:'snippet', title:'Snippet', isLink:false },
-    { tag:'holdingsCount', title:'Holding', isLink:false },
-    { tag:'versionCount', title:'Version', isLink:false },
-    { tag:'relevance.value', title:'Score', isLink:false },
-    { tag:'relevance.score', title:'Revelance', isLink:false },
-    { tag:'identifier[1].value', title:'Thumbnail', isLink:false },
-    { tag:'troveUrl', title:'URL', isLink:true }
-  ]};
+	    { tag:'id', title:'ID', isLink:false },
+	    { tag:'title', title:'Title', isLink:false },
+	    { tag:'type', title:'Media Type', isLink:false, mayRepeat:true },
+	    { tag:'issued', title:'Date Issued', isLink:false },
+	    { tag:'snippet', title:'Snippet', isLink:false },
+	    { tag:'holdingsCount', title:'Holding', isLink:false },
+	    { tag:'versionCount', title:'Version', isLink:false },
+	    { tag:'relevance.value', title:'Score', isLink:false },
+	    { tag:'relevance.score', title:'Revelance', isLink:false },
+	    { tag:'identifier[1].value', title:'Thumbnail', isLink:false },
+	    { tag:'troveUrl', title:'URL', isLink:true }
+	]
+};
 var ZONE_MAP = {
     id:'map', holder:'work', dtag:'', rtag:'relevance.score', stag:'',
     tags: [
-    { tag:'id', title:'ID', isLink:false },
-    { tag:'title', title:'Title', isLink:false },
-    { tag:'type', title:'Media Type', isLink:false, mayRepeat:true },
-    { tag:'snippet', title:'Snippet', isLink:false },
-    { tag:'holdingsCount', title:'Holding', isLink:false },
-    { tag:'versionCount', title:'Version', isLink:false },
-    { tag:'relevance.value', title:'Score', isLink:false },
-    { tag:'relevance.score', title:'Revelance', isLink:false },
-    { tag:'identifier[1].value', title:'Thumbnail', isLink:false },
-    { tag:'troveUrl', title:'URL', isLink:true }
-  ]};
+        { tag:'id', title:'ID', isLink:false },
+	    { tag:'title', title:'Title', isLink:false },
+	    { tag:'type', title:'Media Type', isLink:false, mayRepeat:true },
+	    { tag:'snippet', title:'Snippet', isLink:false },
+	    { tag:'holdingsCount', title:'Holding', isLink:false },
+	    { tag:'versionCount', title:'Version', isLink:false },
+	    { tag:'relevance.value', title:'Score', isLink:false },
+	    { tag:'relevance.score', title:'Revelance', isLink:false },
+	    { tag:'identifier[1].value', title:'Thumbnail', isLink:false },
+	    { tag:'troveUrl', title:'URL', isLink:true }
+	]
+};
 var ZONE_COLLECTION = {
     id:'collection', holder:'work', dtag:'issued', rtag:'relevance.score', stag:'',
     tags: [
-    { tag:'id', title:'ID', isLink:false },
-    { tag:'title', title:'Title', isLink:false },
-    { tag:'type', title:'Media Type', isLink:false, mayRepeat:true },
-    { tag:'issued', title:'Date Issued', isLink:false },
-    { tag:'holdingsCount', title:'Holding', isLink:false },
-    { tag:'versionCount', title:'Version', isLink:false },
-    { tag:'relevance.value', title:'Score', isLink:false },
-    { tag:'relevance.score', title:'Revelance', isLink:false },
-    { tag:'troveUrl', title:'URL', isLink:true }
-  ]};
+	    { tag:'id', title:'ID', isLink:false },
+	    { tag:'title', title:'Title', isLink:false },
+	    { tag:'type', title:'Media Type', isLink:false, mayRepeat:true },
+	    { tag:'issued', title:'Date Issued', isLink:false },
+	    { tag:'holdingsCount', title:'Holding', isLink:false },
+	    { tag:'versionCount', title:'Version', isLink:false },
+	    { tag:'relevance.value', title:'Score', isLink:false },
+	    { tag:'relevance.score', title:'Revelance', isLink:false },
+	    { tag:'troveUrl', title:'URL', isLink:true }
+	]
+};
 var ZONE_LIST = {
     id:'list', holder:'list', dtag:'date', rtag:'relevance.score', stag:'',
     tags: [
-    { tag:'id', title:'ID', isLink:false },
-    { tag:'title', title:'Title', isLink:false },
-    { tag:'creator', title:'Creator', isLink:false },
-    { tag:'description', title:'Description', isLink:false },
-    { tag:'listItemCount', title:'Items in list', isLink:false },
-    { tag:'identifier.type', title:'Type', isLink:false },
-    { tag:'identifier.value', title:'Link', isLink:true },
-    { tag:'relevance.value', title:'Score', isLink:false },
-    { tag:'relevance.score', title:'Revelance', isLink:false },
-    { tag:'troveUrl', title:'URL', isLink:true }
-  ]};
+	    { tag:'id', title:'ID', isLink:false },
+	    { tag:'title', title:'Title', isLink:false },
+	    { tag:'creator', title:'Creator', isLink:false },
+	    { tag:'description', title:'Description', isLink:false },
+	    { tag:'listItemCount', title:'Items in list', isLink:false },
+	    { tag:'identifier.type', title:'Type', isLink:false },
+	    { tag:'identifier.value', title:'Link', isLink:true },
+	    { tag:'relevance.value', title:'Score', isLink:false },
+	    { tag:'relevance.score', title:'Revelance', isLink:false },
+	    { tag:'troveUrl', title:'URL', isLink:true }
+	]
+};
 var ZONE_MUSIC = {
     id:'music', holder:'work', dtag:'issued', rtag:'relevance.score', stag:'',
     tags: [
-    { tag:'id', title:'ID', isLink:false },
-    { tag:'title', title:'Title', isLink:false },
-    { tag:'contributor', title:'Contributor', isLink:false },
-    { tag:'issued', title:'Date Issued', isLink:false },
-    { tag:'type', title:'Media Type', isLink:false, mayRepeat:true },
-    { tag:'snippet', title:'Snippet', isLink:false },
-    { tag:'holdingsCount', title:'Holding', isLink:false },
-    { tag:'relevence', title:'Relevence', isLink:false },
-    { tag:'versionCount', title:'Version', isLink:false },
-    { tag:'troveUrl', title:'URL', isLink:true }
-  ]};
+	    { tag:'id', title:'ID', isLink:false },
+	    { tag:'title', title:'Title', isLink:false },
+	    { tag:'contributor', title:'Contributor', isLink:false },
+	    { tag:'issued', title:'Date Issued', isLink:false },
+	    { tag:'type', title:'Media Type', isLink:false, mayRepeat:true },
+	    { tag:'snippet', title:'Snippet', isLink:false },
+	    { tag:'holdingsCount', title:'Holding', isLink:false },
+	    { tag:'relevence', title:'Relevence', isLink:false },
+	    { tag:'versionCount', title:'Version', isLink:false },
+	    { tag:'troveUrl', title:'URL', isLink:true }
+    ]
+};
 
 var MARKER_Z_BASE = 26;
 var PUBLISHER_MARKER = 0;
