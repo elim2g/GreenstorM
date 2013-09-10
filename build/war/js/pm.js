@@ -254,54 +254,103 @@ $(document).ready(function (){
 
 
 function checkAdvanced(){
-if(id = 'q-advanced'){
+	if(id = 'q-advanced'){
 
-var yearOptionsStart = '<select id="aqYearStart">';
-var yearOptionsEnd = '<select id="aqYearEnd">';
-var yearOptions = '';
-for (var i = MINYEAR; i <= MAXYEAR; i++){
-yearOptions += '<option>' + i + '</option>';
+		var yearOptionsStart = '<select id="aqYearStart">';
+		var yearOptionsEnd = '<select id="aqYearEnd">';
+		var yearOptions = '';
+		for (var i = MINYEAR; i <= MAXYEAR; i++){
+			yearOptions += '<option>' + i + '</option>';
+		}
+		  
+		yearOptionsStart += yearOptions + '</select>';
+		yearOptionsEnd += yearOptions + '</select>';
+		  
+		$('span#aqYrStart').html(yearOptionsStart);
+		$('span#aqYrEnd').html(yearOptionsEnd);
+
+		$('#aqYearEnd').prop('selectedIndex', 200);
+		  
+		$('#aqYrStart').on('change', function(){
+			yearOptionsEnd = '<select id="aqYearEnd">';
+			yearOptions = '';
+			var newStartYear = $('select#aqYearStart option:selected').val();
+			for (var i = newStartYear; i <= MAXYEAR; i++){
+				yearOptions += '<option>' + i + '</option>';
+			}
+			yearOptionsEnd += yearOptions + '</select>';
+			$('span#aqYrEnd').html(yearOptionsEnd);
+		});
+		  
+		hideYear();
+		
+		$('#z1a').prop('selectedIndex', 0);
+		$('#aq1').val("");
+		$('#searchYear').show();
+	}
 }
-
-yearOptionsStart += yearOptions + '</select>';
-yearOptionsEnd += yearOptions + '</select>';
-
-$('span#aqYrStart').html(yearOptionsStart);
-$('span#aqYrEnd').html(yearOptionsEnd);
-
-$('#aqYearEnd').prop('selectedIndex', 200);
-
-$('#aqYrStart').on('change', function(){
-yearOptionsEnd = '<select id="aqYearEnd">';
-yearOptions = '';
-var newStartYear = $('select#aqYearStart option:selected').val();
-for (var i = newStartYear; i <= MAXYEAR; i++){
-yearOptions += '<option>' + i + '</option>';
-}
-yearOptionsEnd += yearOptions + '</select>';
-$('span#aqYrEnd').html(yearOptionsEnd);
-});
-
-hideYear();
-
-$('#z1a').prop('selectedIndex', 0);
-$('#aq1').val("");
-$('#searchYear').show();
-}
-
 
 function hideYear(){
-$('#z1').on('change', function(){
-if($('select#z1 option:selected').val() != 'newspaper'){
-$('#searchYear').hide();
-$('#aqYearStart').hide();
-$('#aqYearEnd').hide();
-} else {
-$('#searchYear').show();
-$('#aqYearStart').show();
-$('#aqYearEnd').show();
+	$('#z1').on('change', function(){
+		if($('select#z1 option:selected').val() != 'newspaper'){
+			$('#searchYear').hide();
+			$('#aqYearStart').hide();
+			$('#aqYearEnd').hide();
+		} else {
+			$('#searchYear').show();
+			$('#aqYearStart').show();
+			$('#aqYearEnd').show();
+		}
+	});
+}function checkAdvanced(){
+	if(id = 'q-advanced'){
+
+		var yearOptionsStart = '<select id="aqYearStart">';
+		var yearOptionsEnd = '<select id="aqYearEnd">';
+		var yearOptions = '';
+		for (var i = MINYEAR; i <= MAXYEAR; i++){
+			yearOptions += '<option>' + i + '</option>';
+		}
+		  
+		yearOptionsStart += yearOptions + '</select>';
+		yearOptionsEnd += yearOptions + '</select>';
+		  
+		$('span#aqYrStart').html(yearOptionsStart);
+		$('span#aqYrEnd').html(yearOptionsEnd);
+
+		$('#aqYearEnd').prop('selectedIndex', 200);
+		  
+		$('#aqYrStart').on('change', function(){
+			yearOptionsEnd = '<select id="aqYearEnd">';
+			yearOptions = '';
+			var newStartYear = $('select#aqYearStart option:selected').val();
+			for (var i = newStartYear; i <= MAXYEAR; i++){
+				yearOptions += '<option>' + i + '</option>';
+			}
+			yearOptionsEnd += yearOptions + '</select>';
+			$('span#aqYrEnd').html(yearOptionsEnd);
+		});
+		  
+		hideYear();
+		
+		$('#z1a').prop('selectedIndex', 0);
+		$('#aq1').val("");
+		$('#searchYear').show();
+	}
 }
-});
+
+function hideYear(){
+	$('#z1').on('change', function(){
+		if($('select#z1 option:selected').val() != 'newspaper'){
+			$('#searchYear').hide();
+			$('#aqYearStart').hide();
+			$('#aqYearEnd').hide();
+		} else {
+			$('#searchYear').show();
+			$('#aqYearStart').show();
+			$('#aqYearEnd').show();
+		}
+	});
 }
 
 
@@ -434,7 +483,8 @@ function doLogin (cmd)
       _popupDialog(ALERT, 'You must agree to the Terms of Use in order to complete registration.');
       return;
     }
-        
+     
+    // add cookie if user selects 'remember me'
     if (remember === 'remember') {
     	$.cookie('email', email, { expires: 365 });
     } else {
@@ -680,162 +730,162 @@ function showMap (show)
 function showHistogram (show)
 {
     _createPane(HIST_VIEW, null, null);
-_showPane(_selById(HIST_VIEW));
+	_showPane(_selById(HIST_VIEW));
 }
 
 /**
-* Updates the Histogram page by rendering all retrieved data in the global array
-*/
+ * Updates the Histogram page by rendering all retrieved data in the global array
+ */
 function _updateHistogram()
 {
-//Update Histogram data
-
-h_labels.length = 0;
-h_data.length = 0;
-for(var i = 0; i < 250; i++) {
-h_hashArray[i] = null;
-}
-
-// Grab dates from results in the global array
-for (var i = 0; i < m_resultSet.length; i++) {
-var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-if (zoneInfo.id == "newspaper") {
-if (zoneInfo.dtag.length > 0) {
-var date = m_resultSet[i].data[zoneInfo.dtag];
-var year = date;
-// Format date to just the year
-if (year.length > 4) {
-var isoDate = /(\d\d\d\d)/;
-var mat = year.match(isoDate);
-if (mat != null) {
-year = parseInt(mat[1]);
-// Add the year as a label to the graph
-h_hashArray[year-H_STARTYEAR] += 1;
-}
-}
-}
-}	
-}
-
-// Group results into 8 year segments to be graphed easily
-for(var i = 0; i < 25; i++) {
-var newData = 0;
-
-// Accumulate all data across 8 year segment
-for(var j = i*8; j < i*8+8; j++) {
-if(h_hashArray[j] != null) {
-newData += h_hashArray[j];
-}
-}
-
-// Generate and add label to labels array
-var labelString = '';
-var startYear = H_STARTYEAR+(i*8);
-var endYear = H_STARTYEAR+(i*8+7);
-labelString += startYear.toString();
-labelString += ' - ';
-labelString += endYear.toString();
-
-h_labels.push(labelString);
-h_data.push(newData);
-}
+	//Update Histogram data
+	
+	h_labels.length = 0;
+	h_data.length = 0;
+	for(var i = 0; i < 250; i++) {
+		h_hashArray[i] = null;
+	}
+	
+	// Grab dates from results in the global array
+	for (var i = 0; i < m_resultSet.length; i++) {
+		var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
+		if (zoneInfo.id == "newspaper") {
+			if (zoneInfo.dtag.length > 0) {
+				var date = m_resultSet[i].data[zoneInfo.dtag];
+				var year = date;
+				// Format date to just the year
+				if (year.length > 4) {
+					var isoDate = /(\d\d\d\d)/;
+					var mat = year.match(isoDate);
+					if (mat != null) {
+						year = parseInt(mat[1]);
+						// Add the year as a label to the graph
+						h_hashArray[year-H_STARTYEAR] += 1;
+					}
+				}
+			}
+		}	
+	}
+	
+	// Group results into 8 year segments to be graphed easily
+	for(var i = 0; i < 25; i++) {
+		var newData = 0;
+		
+		// Accumulate all data across 8 year segment
+		for(var j = i*8; j < i*8+8; j++) {
+			if(h_hashArray[j] != null) {
+				newData += h_hashArray[j];
+			}
+		}
+		
+		// Generate and add label to labels array
+		var labelString = '';
+		var startYear = H_STARTYEAR+(i*8);
+		var endYear = H_STARTYEAR+(i*8+7);
+		labelString += startYear.toString();
+		labelString += ' - ';
+		labelString += endYear.toString();
+		
+		h_labels.push(labelString);
+		h_data.push(newData);
+	}
 }
 
 /**
-* Returns the array used for labelling a histogram
-* @returns {Array}
-*/
-function _histLabelArray()
+ * Returns the array used for labelling a histogram
+ * @returns {Array}
+ */
+function _histLabelArray() 
 {
-return h_labels;
+	return h_labels;
 }
 
 /**
-* Returns the array used as the dataset in a chart/graph
-* @returns {Array}
-*/
-function _histDataArray()
+ * Returns the array used as the dataset in a chart/graph
+ * @returns {Array}
+ */
+function _histDataArray() 
 {
-return h_data;
-_showPane(_selById(HIST_VIEW));
+	return h_data;
+	_showPane(_selById(HIST_VIEW));
 }
 
 /**
-* Updates the Histogram page by rendering all retrieved data in the global array
-*/
+ * Updates the Histogram page by rendering all retrieved data in the global array
+ */
 function _updateHistogram() {
-
-
-//Update Histogram data
-
-h_labels.length = 0;
-h_data.length = 0;
-for(var i = 0; i < 250; i++) {
-h_hashArray[i] = null;
-}
-
-// Grab dates from results in the global array
-for (var i = 0; i < m_resultSet.length; i++) {
-var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-if (zoneInfo.id == "newspaper") {
-if (zoneInfo.dtag.length > 0) {
-var date = m_resultSet[i].data[zoneInfo.dtag];
-var year = date;
-// Format date to just the year
-if (year.length > 4) {
-var isoDate = /(\d\d\d\d)/;
-var mat = year.match(isoDate);
-if (mat != null) {
-year = parseInt(mat[1]);
-// Add the year as a label to the graph
-h_hashArray[year-H_STARTYEAR] += 1;
-}
-}
-}
-}	
-}
-
-
-// Group results into 8 year segments to be graphed easily
-for(var i = 0; i < 25; i++) {
-var newData = 0;
-
-// Accumulate all data across 8 year segment
-for(var j = i*8; j < i*8+8; j++) {
-if(h_hashArray[j] != null) {
-newData += h_hashArray[j];
-}
-}
-
-// Generate and add label to labels array
-var labelString = '';
-var startYear = H_STARTYEAR+(i*8);
-var endYear = H_STARTYEAR+(i*8+7);
-labelString += startYear.toString();
-labelString += ' - ';
-labelString += endYear.toString();
-
-h_labels.push(labelString);
-h_data.push(newData);
-}
-}
-
-/**
-* Returns the array used for labelling a histogram
-* @returns {Array}
-*/
-function _histLabelArray()
-{
-return h_labels;
+	
+	
+	//Update Histogram data
+	
+	h_labels.length = 0;
+	h_data.length = 0;
+	for(var i = 0; i < 250; i++) {
+		h_hashArray[i] = null;
+	}
+	
+	// Grab dates from results in the global array
+	for (var i = 0; i < m_resultSet.length; i++) {
+		var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
+		if (zoneInfo.id == "newspaper") {
+			if (zoneInfo.dtag.length > 0) {
+				var date = m_resultSet[i].data[zoneInfo.dtag];
+				var year = date;
+				// Format date to just the year
+				if (year.length > 4) {
+					var isoDate = /(\d\d\d\d)/;
+					var mat = year.match(isoDate);
+					if (mat != null) {
+						year = parseInt(mat[1]);
+						// Add the year as a label to the graph
+						h_hashArray[year-H_STARTYEAR] += 1;
+					}
+				}
+			}
+		}	
+	}
+	
+	
+	// Group results into 8 year segments to be graphed easily
+	for(var i = 0; i < 25; i++) {
+		var newData = 0;
+		
+		// Accumulate all data across 8 year segment
+		for(var j = i*8; j < i*8+8; j++) {
+			if(h_hashArray[j] != null) {
+				newData += h_hashArray[j];
+			}
+		}
+		
+		// Generate and add label to labels array
+		var labelString = '';
+		var startYear = H_STARTYEAR+(i*8);
+		var endYear = H_STARTYEAR+(i*8+7);
+		labelString += startYear.toString();
+		labelString += ' - ';
+		labelString += endYear.toString();
+		
+		h_labels.push(labelString);
+		h_data.push(newData);
+	}
 }
 
 /**
-* Returns the array used as the dataset in a chart/graph
-* @returns {Array}
-*/
-function _histDataArray()
+ * Returns the array used for labelling a histogram
+ * @returns {Array}
+ */
+function _histLabelArray() 
 {
-return h_data;
+	return h_labels;
+}
+
+/**
+ * Returns the array used as the dataset in a chart/graph
+ * @returns {Array}
+ */
+function _histDataArray() 
+{
+	return h_data;
 }
 
 
@@ -1410,39 +1460,39 @@ function _processData (data, pos, id)
   }
   else if (m_run && (id === m_queryId)) {
 
-/**
-* Upgraded to handle multiple zones
-* will stall at the end of search query and not complete...
-* requires further investigation
-* @author - Josh Wright
-*/
-var _currentZones = m_currentZone.split(',');
-var zoneResults = data.response.zone;
-var zoneResult = null;
-var zoneInfo = null;
-
-for (var i = 0; i < _currentZones.length; i++){
-zoneInfo = _getZoneInfo(_currentZones[i]);
-for (var j = 0; j < _currentZones.length; j++){
-if (zoneResults[j].name == zoneInfo.id) {
-zoneResult = zoneResults[j].records[zoneInfo.holder];
-if (zoneResult) {
-var tempPos = pos + (m_fetchSize * i);
-for (var k = 0; k < zoneResult.length; k++) {
-m_resultSet[tempPos + k] = { zone: zoneInfo.id, data: zoneResult[k], marker:null };
-m_resultSet[tempPos + k].data.text = null;
-m_trefIndex[zoneResult[k]['id']] = tempPos + k;
-}
-}
-}
-}
-}
-if (m_totalRecs === 0) {
-for (var m = 0; m < zoneResults.length; m++) {
-m_totalRecs += parseInt(zoneResults[m].records.total);
-}
-}
-// get next chunk underway before doing local housekeeping
+	  /**
+	   * Upgraded to handle multiple zones
+	   * will stall at the end of search query and not complete...
+	   * requires further investigation
+	   * @author - Josh Wright
+	   */
+	  var _currentZones = m_currentZone.split(',');
+	  var zoneResults = data.response.zone;
+	  var zoneResult = null;
+	  var zoneInfo = null;
+	  
+	  for (var i = 0; i < _currentZones.length; i++){
+		  zoneInfo = _getZoneInfo(_currentZones[i]);
+		  for (var j = 0; j < _currentZones.length; j++){
+			  if (zoneResults[j].name == zoneInfo.id) {
+				  zoneResult = zoneResults[j].records[zoneInfo.holder];
+				  if (zoneResult) {
+					  var tempPos = pos + (m_fetchSize * i);
+					  for (var k = 0; k < zoneResult.length; k++) {
+						  m_resultSet[tempPos + k] = { zone: zoneInfo.id, data: zoneResult[k], marker:null };
+						  m_resultSet[tempPos + k].data.text = null;
+						  m_trefIndex[zoneResult[k]['id']] = tempPos + k;
+					  }
+				  }
+			  }
+		  }
+	  }
+	  if (m_totalRecs === 0) {
+		  for (var m  = 0; m < zoneResults.length; m++) {
+			  m_totalRecs += parseInt(zoneResults[m].records.total);
+		  }
+	  }
+	  // get next chunk underway before doing local housekeeping
       if (m_resultSet.length < m_totalRecs) {
         _doQuery(m_resultSet.length);
       }
