@@ -246,60 +246,62 @@ h_data[0]	= 69;
 var rememberedUser = false;
 
 $(document).ready(function (){ 
-	  if ($.cookie('email') !== undefined) {
-		  $('#usr-info input[id=cb-remember]').attr('checked', 'checked');
-	  }
+	//FIXME: checkbox needs to auto check if user has chosen to be remembered	
+    if ($.cookie('email') !== undefined) {
+	    $('#usr-info input[id=cb-remember]').attr('checked', 'checked');
+    }
 });
 
-function checkAdvanced(){
-	if(id = 'q-advanced'){
 
-		var yearOptionsStart = '<select id="aqYearStart">';
-		var yearOptionsEnd = '<select id="aqYearEnd">';
-		var yearOptions = '';
-		for (var i = MINYEAR; i <= MAXYEAR; i++){
-			yearOptions += '<option>' + i + '</option>';
-		}
-		
-		yearOptionsStart += yearOptions + '</select>';
-		yearOptionsEnd += yearOptions + '</select>';
-		
-		$('span#aqYrStart').html(yearOptionsStart);
-		$('span#aqYrEnd').html(yearOptionsEnd);
-		
-		$('#aqYearEnd').prop('selectedIndex', 200);
-		
-		$('#aqYrStart').on('change', function(){
-		yearOptionsEnd = '<select id="aqYearEnd">';
-		yearOptions = '';
-		var newStartYear = $('select#aqYearStart option:selected').val();
-		for (var i = newStartYear; i <= MAXYEAR; i++){
-			yearOptions += '<option>' + i + '</option>';
-		}
-		yearOptionsEnd += yearOptions + '</select>';
-		$('span#aqYrEnd').html(yearOptionsEnd);
-		});
-		
-		hideYear();
-		
-		$('#z1a').prop('selectedIndex', 0);
-		$('#aq1').val("");
-		$('#searchYear').show();
-	}
+function checkAdvanced(){
+if(id = 'q-advanced'){
+
+var yearOptionsStart = '<select id="aqYearStart">';
+var yearOptionsEnd = '<select id="aqYearEnd">';
+var yearOptions = '';
+for (var i = MINYEAR; i <= MAXYEAR; i++){
+yearOptions += '<option>' + i + '</option>';
 }
 
+yearOptionsStart += yearOptions + '</select>';
+yearOptionsEnd += yearOptions + '</select>';
+
+$('span#aqYrStart').html(yearOptionsStart);
+$('span#aqYrEnd').html(yearOptionsEnd);
+
+$('#aqYearEnd').prop('selectedIndex', 200);
+
+$('#aqYrStart').on('change', function(){
+yearOptionsEnd = '<select id="aqYearEnd">';
+yearOptions = '';
+var newStartYear = $('select#aqYearStart option:selected').val();
+for (var i = newStartYear; i <= MAXYEAR; i++){
+yearOptions += '<option>' + i + '</option>';
+}
+yearOptionsEnd += yearOptions + '</select>';
+$('span#aqYrEnd').html(yearOptionsEnd);
+});
+
+hideYear();
+
+$('#z1a').prop('selectedIndex', 0);
+$('#aq1').val("");
+$('#searchYear').show();
+}
+
+
 function hideYear(){
-	$('#z1').on('change', function(){
-		if($('select#z1 option:selected').val() != 'newspaper'){
-			$('#searchYear').hide();
-			$('#aqYearStart').hide();
-			$('#aqYearEnd').hide();
-		} else {
-			$('#searchYear').show();
-			$('#aqYearStart').show();
-			$('#aqYearEnd').show();
-		}
-	});
+$('#z1').on('change', function(){
+if($('select#z1 option:selected').val() != 'newspaper'){
+$('#searchYear').hide();
+$('#aqYearStart').hide();
+$('#aqYearEnd').hide();
+} else {
+$('#searchYear').show();
+$('#aqYearStart').show();
+$('#aqYearEnd').show();
+}
+});
 }
 
 
@@ -1715,7 +1717,7 @@ function _updateLocationRefs (pos)
 {
   var arg = '';
   for (var i = pos; i < m_resultSet.length; i++) {
-    var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
+    //var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
     //var troveId = eval('m_resultSet[i].data.id' + zoneInfo.tags[0].tag);
     var troveId = m_resultSet[i].data.id;
     arg += ',' + troveId;
@@ -2618,24 +2620,32 @@ function locnDel ()
 
 // Trying to create a temporary array string as a csv formatted string.
 function downloadCsv(){
-	var tempArray= "";
+	var tempArray = '';
 	var zoneInfo;
 	var tempTitle;
-
+	
 	zoneInfo = _getZoneInfo(m_resultSet[0].zone);
 	for (var p = 0; p < zoneInfo.tags.length; p++) {
 		tempTitle = zoneInfo.tags[p].title;
-		tempArray += tempTitle + ',';
+		tempArray += tempTitle + ';';
 	}
-	alert(tempArray);
 	
-	/*
-	var fso = new ActiveXObject('Scripting.FileSystemObject');
-    var oStream = fso.OpenTextFile(csvFilePath, 8, true, 0);
-    oStream.WriteLine(tempArray);
-    oStream.Close();
-    alert("Data Added Successfully");
-    */
+	tempArray += '\r\n';
+
+	for(var b = 0; b < m_resultSet.length; b++){
+		for (var c = 0; c < zoneInfo.tags.length; c++) {
+			zoneInfo = _getZoneInfo(m_resultSet[b].zone);
+			tempArray += eval('m_resultSet[' + b + '].data.' + zoneInfo.tags[c].tag) + ';';
+		}
+		tempArray += '\r\n';
+	}
+	tempArray = encodeURIComponent(tempArray);
+	var a = document.createElement('a');
+	a.href     = 'data:attachment/csv,' + tempArray;
+	a.target   = '_blank';
+	a.download = 'myFile.csv';
+	document.body.appendChild(a);
+	a.click();
 }
 
 // EOF
