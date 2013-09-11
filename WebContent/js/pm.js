@@ -148,12 +148,10 @@ var ZONE_MAP = {
         { tag:'id', title:'ID', isLink:false },
 	    { tag:'title', title:'Title', isLink:false },
 	    { tag:'type', title:'Media Type', isLink:false, mayRepeat:true },
-	    { tag:'snippet', title:'Snippet', isLink:false },
 	    { tag:'holdingsCount', title:'Holding', isLink:false },
 	    { tag:'versionCount', title:'Version', isLink:false },
 	    { tag:'relevance.value', title:'Score', isLink:false },
 	    { tag:'relevance.score', title:'Revelance', isLink:false },
-	    { tag:'identifier[1].value', title:'Thumbnail', isLink:false },
 	    { tag:'troveUrl', title:'URL', isLink:true }
 	]
 };
@@ -178,9 +176,8 @@ var ZONE_LIST = {
 	    { tag:'title', title:'Title', isLink:false },
 	    { tag:'creator', title:'Creator', isLink:false },
 	    { tag:'description', title:'Description', isLink:false },
+	    { tag:'snippet', title:'Snippet', isLink:false },
 	    { tag:'listItemCount', title:'Items in list', isLink:false },
-	    { tag:'identifier.type', title:'Type', isLink:false },
-	    { tag:'identifier.value', title:'Link', isLink:true },
 	    { tag:'relevance.value', title:'Score', isLink:false },
 	    { tag:'relevance.score', title:'Revelance', isLink:false },
 	    { tag:'troveUrl', title:'URL', isLink:true }
