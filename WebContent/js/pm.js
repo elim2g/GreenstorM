@@ -1170,16 +1170,16 @@ function _createQueryString ()
           '&q=' + encodeURIComponent(m_currentTerm);
     break;
   case Q_ADVANCED:
-m_currentZone = '';
-    m_currentTerm = $('input#aq1').val();
-
-    $(':checkbox').each(function(){
-     if(m_currentZone == ''){
-     m_currentZone += this.checked ? this.value : '';
-     } else {
-     m_currentZone += this.checked ? ',' + this.value : '';
-     }
-    });
+	  m_currentZone = '';
+	  m_currentTerm = $('input#aq1').val();
+	  
+	  $('#q-advanced :checkbox').each(function(){
+		  if(m_currentZone == ''){
+			  m_currentZone += this.checked ? this.value : '';
+		  } else {
+			  m_currentZone += this.checked ? ',' + this.value : '';
+		  }
+	  });
 
     str = '&zone=' + encodeURIComponent(m_currentZone) + '&q=' + encodeURIComponent(m_currentTerm);
     break;
