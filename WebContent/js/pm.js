@@ -246,9 +246,9 @@ var m_locations = null;
 var H_STARTYEAR = 1800;
 var h_hashArray	= new Array(250);
 var h_labels	= new Array();
-h_labels[0] = "MADDOG420";
+h_labels[0] = " ";
 var h_data = new Array();
-h_data[0]	= 69;
+h_data[0]	= 0;
 
 //User global variables
 var rememberedUser = false;
