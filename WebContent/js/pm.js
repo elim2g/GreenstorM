@@ -709,22 +709,22 @@ function _updateHistogram()
 	// Grab dates from results in the global array
 	for (var i = 0; i < m_resultSet.length; i++) {
 		var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-		if (zoneInfo.id == "newspaper") {
 			if (zoneInfo.dtag.length > 0) {
 				var date = m_resultSet[i].data[zoneInfo.dtag];
 				var year = date;
 				// Format date to just the year
-				if (year.length > 4) {
-					var isoDate = /(\d\d\d\d)/;
-					var mat = year.match(isoDate);
-					if (mat != null) {
-						year = parseInt(mat[1]);
-						// Add the year as a label to the graph
-						h_hashArray[year-H_STARTYEAR] += 1;
+				if (year !== undefined) {
+					if (year.length > 4) {
+						var isoDate = /(\d\d\d\d)/;
+						var mat = year.match(isoDate);
+						if (mat != null) {
+							year = parseInt(mat[1]);
+							// Add the year as a label to the graph
+							h_hashArray[year-H_STARTYEAR] += 1;
+						}
 					}
 				}
 			}
-		}	
 	}
 	
 	// Group results into 8 year segments to be graphed easily
