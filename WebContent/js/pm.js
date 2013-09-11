@@ -340,6 +340,7 @@ function init ()
   currentQuery(false);
   showRawResults(false);
   locnEdit(false);
+  showHistogram(false);
 }
 
 /**
@@ -686,8 +687,14 @@ function showHistogram (show)
 {
 	if ($(_selById(HIST_VIEW)).length === 0) {
 	    _createPane(HIST_VIEW, null, null);
-	  }
-	  _showPane(_selById(HIST_VIEW));
+	}
+
+	if (show) {
+		_showPane(_selById(HIST_VIEW));
+	}
+
+	$('h3#hd-bargraph-title').text("Hits versus time for search term: " + m_currentTerm);
+	$('h3#hd-linegraph-title').text("Hits versus time for search term: " + m_currentTerm);
 }
 
 /**
@@ -1330,7 +1337,7 @@ function _processData (data, pos, id)
       m_run = false;
       m_paused = true;
       $('#busy-box').activity(false);
-      $('#cc-pb11').button('option', 'label', 'Resume Query');
+      $('#cc-pb11').button('option', 'label', 'Resume query');
       $('img#img-pause').attr('src', 'images/button_grey_play.png');
     }
     _updateCurrQueryPane();
