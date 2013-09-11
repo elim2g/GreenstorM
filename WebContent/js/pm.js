@@ -2546,34 +2546,86 @@ function locnDel ()
   }
 }
 
-// Trying to create a temporary array string as a csv formatted string.
-function downloadCsv(){
-	var tempArray = '';
-	var zoneInfo;
-	var tempTitle;
-	
-	zoneInfo = _getZoneInfo(m_resultSet[0].zone);
-	for (var p = 0; p < zoneInfo.tags.length; p++) {
-		tempTitle = zoneInfo.tags[p].title;
-		tempArray += tempTitle + ';';
-	}
-	
-	tempArray += '\r\n';
 
-	for(var b = 0; b < m_resultSet.length; b++){
-		for (var c = 0; c < zoneInfo.tags.length; c++) {
-			zoneInfo = _getZoneInfo(m_resultSet[b].zone);
-			tempArray += eval('m_resultSet[' + b + '].data.' + zoneInfo.tags[c].tag) + ';';
+//Trying to create a temporary array string as a csv formatted string.
+function downloadCsv(){
+	var tempNewsArray = 'ID\tDate\tSource\tCategory\tHeading\tScore\tRelevance\tPage\tSnippet\tFullText\tURL\r\n';
+	var tempPicArray = 'ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tThumbnail\tURL\r\n';
+	var tempBookArray = 'ID\tTitle\tType\tDateIssued\tContributor(s)\tSnippet\tVersion\tScore\tRelevance\tURL\r\n';
+	var tempArticleArray = 'ID\tTitle\tDateIssued\tPartOf\tHolding\tVersion\tScore\tRelevance\tType\tURL\r\n';
+	var zoneInfo;
+	for(var e = 0; e < m_resultSet.length; e++){
+		zoneInfo = _getZoneInfo(m_resultSet[e].zone);
+		if(zoneInfo.id == 'newspaper'){	
+			for (var f = 0; f < zoneInfo.tags.length; f++) {
+				tempNewsArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[f].tag) + "\t";
+			}
+			tempNewsArray += '\r\n';
 		}
-		tempArray += '\r\n';
+		
+		if(zoneInfo.id == 'picture'){	
+			for (var g = 0; g < zoneInfo.tags.length; g++) {
+				if(zoneInfo.tags[g].title == 'Thumbnail') {
+				     tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[9].tag) + '\t';
+				} else {
+					tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[g].tag) + '\t';
+				}
+			}
+			tempPicArray += '\r\n';
+		}
+		
+		if(zoneInfo.id == 'book'){	
+			for (var h = 0; h < zoneInfo.tags.length; h++) {
+				tempBookArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[h].tag) + "\t";
+			}
+			tempBookArray += '\r\n';
+		}
+		
+		if(zoneInfo.id == 'article'){	
+			for (var i = 0; i < zoneInfo.tags.length; i++) {
+				tempArticleArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[i].tag) + "\t";
+			}
+			tempArticleArray += '\r\n';
+		}
 	}
-	tempArray = encodeURIComponent(tempArray);
-	var a = document.createElement('a');
-	a.href     = 'data:attachment/csv,' + tempArray;
-	a.target   = '_blank';
-	a.download = 'myFile.csv';
-	document.body.appendChild(a);
-	a.click();
+	
+	if(tempNewsArray != "ID\tDate\tSource\tCategory\tHeading\tScore\tRelevance\tPage\tSnippet\tFullText\tURL\r\n"){
+		var a = document.createElement('a');
+		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempNewsArray);
+		a.target   = '_blank';
+		a.download = 'pm-newspapers.csv';
+		document.body.appendChild(a);
+		a.click();
+	}
+	
+	if(tempPicArray != "ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tThumbnail\tURL\r\n"){
+		var b = document.createElement('b');
+		b.href     = 'data:attachment/csv,' + encodeURIComponent(tempPicArray);
+		b.target   = '_blank';
+		b.download = 'pm-picture.csv';
+		document.body.appendChild(b);
+		b.click();
+	}	
+	
+	if(tempBookArray != "ID\tTitle\tType\tDateIssued\tContributor(s)\tSnippet\tVersion\tScore\tRelevance\tURL\r\n"){
+		tempBookArray = encodeURIComponent(tempBookArray);
+		var a = document.createElement('a');
+		a.href     = 'data:attachment/csv,' + tempBookArray;
+		a.target   = '_blank';
+		a.download = 'pm-books.csv';
+		document.body.appendChild(a);
+		a.click();
+	}
+	
+	if(tempArticleArray != "ID\tTitle\tDateIssued\tPartOf\tHolding\tVersion\tScore\tRelevance\tType\tURL\r\n"){
+		tempArticleArray = encodeURIComponent(tempArticleArray);
+		var a = document.createElement('a');
+		a.href     = 'data:attachment/csv,' + tempArticleArray;
+		a.target   = '_blank';
+		a.download = 'pm-article.csv';
+		document.body.appendChild(a);
+		a.click();
+	}
 }
 
 // EOF
