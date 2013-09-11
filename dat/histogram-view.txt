@@ -1,49 +1,37 @@
 <h3>Histogram</h3>
 
 <script src="js/Chart.js"></script>
+<script src="js/histdata.js"></script>
+<script src="js/base64.js"></script>
+<script src="js/canvas2image.js"></script>
 <meta name = "viewport" content = "initial-scale = 1, user-scalable = no">
 <style>
 	canvas{
 	}
 </style>
 <body>
-	<h2>Bar Graph</h2>
-	<canvas id="canvas" height="500" width="800"></canvas>
 	<div id="chart-data">
-	<script>   	
-		var barChartData = {
-			labels : _histLabelArray(),
-			datasets : [
-				{
-					fillColor : "rgba(151,187,205,0.5)",
-					strokeColor : "rgba(151,187,205,1)",
-					data : _histDataArray()
-				}
-			]
-			
+	<h2>Bar Graph</h2>
+	<button id="exprt-bar" onClick="SaveBarGraph();">Save Graph</button>
+	<canvas id="canvas" height="500" width="800"></canvas>
+	<script type="text/javascript">
+		BarChartInit();
+		var myVar=setInterval(function(){RefreshHistogram()},8000);
+		function SaveBarGraph() {
+			var savCanvas = document.getElementById("canvas");  
+			Canvas2Image.saveAsPNG(savCanvas);
 		}
-		
-		var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Bar(barChartData);
 	</script>
 	<p></p>
 	<h2>Line Graph</h2>
+	<button id="exprt-line" onClick="SaveLineGraph();">Save Graph</button>
 	<canvas id="canvas2" height="500" width="800"></canvas>
 	<script>   	
-		var lineChartData = {
-			labels : _histLabelArray(),
-			datasets : [
-				{
-					fillColor : "rgba(151,187,205,0.5)",
-					strokeColor : "rgba(151,187,205,1)",
-					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "#fff",
-					data : _histDataArray()
-				}
-			]
-			
+		LineChartInit();
+		function SaveLineGraph() {
+			var savCanvas = document.getElementById("canvas2");  
+			Canvas2Image.saveAsPNG(savCanvas);
 		}
-		
-		var myLine = new Chart(document.getElementById("canvas2").getContext("2d")).Line(lineChartData);
 	</script>
 	</div>
 </body>

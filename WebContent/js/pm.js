@@ -246,9 +246,9 @@ var m_locations = null;
 var H_STARTYEAR = 1800;
 var h_hashArray	= new Array(250);
 var h_labels	= new Array();
-h_labels[0] = "MADDOG420";
+h_labels[0] = " ";
 var h_data = new Array();
-h_data[0]	= 69;
+h_data[0]	= 0;
 
 //User global variables
 var rememberedUser = false;
@@ -260,57 +260,7 @@ $(document).ready(function (){
     }
 });
 
-
 function checkAdvanced(){
-	if(id = 'q-advanced'){
-
-		var yearOptionsStart = '<select id="aqYearStart">';
-		var yearOptionsEnd = '<select id="aqYearEnd">';
-		var yearOptions = '';
-		for (var i = MINYEAR; i <= MAXYEAR; i++){
-			yearOptions += '<option>' + i + '</option>';
-		}
-		  
-		yearOptionsStart += yearOptions + '</select>';
-		yearOptionsEnd += yearOptions + '</select>';
-		  
-		$('span#aqYrStart').html(yearOptionsStart);
-		$('span#aqYrEnd').html(yearOptionsEnd);
-
-		$('#aqYearEnd').prop('selectedIndex', 200);
-		  
-		$('#aqYrStart').on('change', function(){
-			yearOptionsEnd = '<select id="aqYearEnd">';
-			yearOptions = '';
-			var newStartYear = $('select#aqYearStart option:selected').val();
-			for (var i = newStartYear; i <= MAXYEAR; i++){
-				yearOptions += '<option>' + i + '</option>';
-			}
-			yearOptionsEnd += yearOptions + '</select>';
-			$('span#aqYrEnd').html(yearOptionsEnd);
-		});
-		  
-		hideYear();
-		
-		$('#z1a').prop('selectedIndex', 0);
-		$('#aq1').val("");
-		$('#searchYear').show();
-	}
-}
-
-function hideYear(){
-	$('#z1').on('change', function(){
-		if($('select#z1 option:selected').val() != 'newspaper'){
-			$('#searchYear').hide();
-			$('#aqYearStart').hide();
-			$('#aqYearEnd').hide();
-		} else {
-			$('#searchYear').show();
-			$('#aqYearStart').show();
-			$('#aqYearEnd').show();
-		}
-	});
-}function checkAdvanced(){
 	if(id = 'q-advanced'){
 
 		var yearOptionsStart = '<select id="aqYearStart">';
@@ -737,8 +687,10 @@ function showMap (show)
 
 function showHistogram (show)
 {
-    _createPane(HIST_VIEW, null, null);
-	_showPane(_selById(HIST_VIEW));
+	if ($(_selById(HIST_VIEW)).length === 0) {
+	    _createPane(HIST_VIEW, null, null);
+	  }
+	  _showPane(_selById(HIST_VIEW));
 }
 
 /**
@@ -815,87 +767,7 @@ function _histLabelArray()
 function _histDataArray() 
 {
 	return h_data;
-	_showPane(_selById(HIST_VIEW));
 }
-
-/**
- * Updates the Histogram page by rendering all retrieved data in the global array
- */
-function _updateHistogram() {
-	
-	
-	//Update Histogram data
-	
-	h_labels.length = 0;
-	h_data.length = 0;
-	for(var i = 0; i < 250; i++) {
-		h_hashArray[i] = null;
-	}
-	
-	// Grab dates from results in the global array
-	for (var i = 0; i < m_resultSet.length; i++) {
-		var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-		if (zoneInfo.id == "newspaper") {
-			if (zoneInfo.dtag.length > 0) {
-				var date = m_resultSet[i].data[zoneInfo.dtag];
-				var year = date;
-				// Format date to just the year
-				if (year.length > 4) {
-					var isoDate = /(\d\d\d\d)/;
-					var mat = year.match(isoDate);
-					if (mat != null) {
-						year = parseInt(mat[1]);
-						// Add the year as a label to the graph
-						h_hashArray[year-H_STARTYEAR] += 1;
-					}
-				}
-			}
-		}	
-	}
-	
-	
-	// Group results into 8 year segments to be graphed easily
-	for(var i = 0; i < 25; i++) {
-		var newData = 0;
-		
-		// Accumulate all data across 8 year segment
-		for(var j = i*8; j < i*8+8; j++) {
-			if(h_hashArray[j] != null) {
-				newData += h_hashArray[j];
-			}
-		}
-		
-		// Generate and add label to labels array
-		var labelString = '';
-		var startYear = H_STARTYEAR+(i*8);
-		var endYear = H_STARTYEAR+(i*8+7);
-		labelString += startYear.toString();
-		labelString += ' - ';
-		labelString += endYear.toString();
-		
-		h_labels.push(labelString);
-		h_data.push(newData);
-	}
-}
-
-/**
- * Returns the array used for labelling a histogram
- * @returns {Array}
- */
-function _histLabelArray() 
-{
-	return h_labels;
-}
-
-/**
- * Returns the array used as the dataset in a chart/graph
- * @returns {Array}
- */
-function _histDataArray() 
-{
-	return h_data;
-}
-
 
 function showCloud (show)
 {
@@ -1300,16 +1172,16 @@ function _createQueryString ()
           '&q=' + encodeURIComponent(m_currentTerm);
     break;
   case Q_ADVANCED:
-m_currentZone = '';
-    m_currentTerm = $('input#aq1').val();
-
-    $(':checkbox').each(function(){
-     if(m_currentZone == ''){
-     m_currentZone += this.checked ? this.value : '';
-     } else {
-     m_currentZone += this.checked ? ',' + this.value : '';
-     }
-    });
+	  m_currentZone = '';
+	  m_currentTerm = $('input#aq1').val();
+	  
+	  $('#q-advanced :checkbox').each(function(){
+		  if(m_currentZone == ''){
+			  m_currentZone += this.checked ? this.value : '';
+		  } else {
+			  m_currentZone += this.checked ? ',' + this.value : '';
+		  }
+	  });
 
     str = '&zone=' + encodeURIComponent(m_currentZone) + '&q=' + encodeURIComponent(m_currentTerm);
     break;
@@ -1511,10 +1383,10 @@ function _processData (data, pos, id)
         m_run = false;
         ++m_queryId;
       }
-_updateLocationRefs(pos);
+      _updateLocationRefs(pos);
       _updateMapDisplay(pos);
-_updateCurrQueryPane();
-_updateHistogram();
+      _updateCurrQueryPane();
+      _updateHistogram();
 
       // swap view on first response unless user already chnged it
       if ((pos === 0) && (m_currentPaneSelector === _selById(NEW_QUERY_PANE))) {
@@ -2676,34 +2548,86 @@ function locnDel ()
   }
 }
 
-// Trying to create a temporary array string as a csv formatted string.
-function downloadCsv(){
-	var tempArray = '';
-	var zoneInfo;
-	var tempTitle;
-	
-	zoneInfo = _getZoneInfo(m_resultSet[0].zone);
-	for (var p = 0; p < zoneInfo.tags.length; p++) {
-		tempTitle = zoneInfo.tags[p].title;
-		tempArray += tempTitle + ';';
-	}
-	
-	tempArray += '\r\n';
 
-	for(var b = 0; b < m_resultSet.length; b++){
-		for (var c = 0; c < zoneInfo.tags.length; c++) {
-			zoneInfo = _getZoneInfo(m_resultSet[b].zone);
-			tempArray += eval('m_resultSet[' + b + '].data.' + zoneInfo.tags[c].tag) + ';';
+//Trying to create a temporary array string as a csv formatted string.
+function downloadCsv(){
+	var tempNewsArray = 'ID\tDate\tSource\tCategory\tHeading\tScore\tRelevance\tPage\tSnippet\tFullText\tURL\r\n';
+	var tempPicArray = 'ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tThumbnail\tURL\r\n';
+	var tempBookArray = 'ID\tTitle\tType\tDateIssued\tContributor(s)\tSnippet\tVersion\tScore\tRelevance\tURL\r\n';
+	var tempArticleArray = 'ID\tTitle\tDateIssued\tPartOf\tHolding\tVersion\tScore\tRelevance\tType\tURL\r\n';
+	var zoneInfo;
+	for(var e = 0; e < m_resultSet.length; e++){
+		zoneInfo = _getZoneInfo(m_resultSet[e].zone);
+		if(zoneInfo.id == 'newspaper'){	
+			for (var f = 0; f < zoneInfo.tags.length; f++) {
+				tempNewsArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[f].tag) + "\t";
+			}
+			tempNewsArray += '\r\n';
 		}
-		tempArray += '\r\n';
+		
+		if(zoneInfo.id == 'picture'){	
+			for (var g = 0; g < zoneInfo.tags.length; g++) {
+				if(zoneInfo.tags[g].title == 'Thumbnail') {
+				     tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[9].tag) + '\t';
+				} else {
+					tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[g].tag) + '\t';
+				}
+			}
+			tempPicArray += '\r\n';
+		}
+		
+		if(zoneInfo.id == 'book'){	
+			for (var h = 0; h < zoneInfo.tags.length; h++) {
+				tempBookArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[h].tag) + "\t";
+			}
+			tempBookArray += '\r\n';
+		}
+		
+		if(zoneInfo.id == 'article'){	
+			for (var i = 0; i < zoneInfo.tags.length; i++) {
+				tempArticleArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[i].tag) + "\t";
+			}
+			tempArticleArray += '\r\n';
+		}
 	}
-	tempArray = encodeURIComponent(tempArray);
-	var a = document.createElement('a');
-	a.href     = 'data:attachment/csv,' + tempArray;
-	a.target   = '_blank';
-	a.download = 'myFile.csv';
-	document.body.appendChild(a);
-	a.click();
+	
+	if(tempNewsArray != "ID\tDate\tSource\tCategory\tHeading\tScore\tRelevance\tPage\tSnippet\tFullText\tURL\r\n"){
+		var a = document.createElement('a');
+		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempNewsArray);
+		a.target   = '_blank';
+		a.download = 'pm-newspapers.csv';
+		document.body.appendChild(a);
+		a.click();
+	}
+	
+	if(tempPicArray != "ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tThumbnail\tURL\r\n"){
+		var b = document.createElement('b');
+		b.href     = 'data:attachment/csv,' + encodeURIComponent(tempPicArray);
+		b.target   = '_blank';
+		b.download = 'pm-picture.csv';
+		document.body.appendChild(b);
+		b.click();
+	}	
+	
+	if(tempBookArray != "ID\tTitle\tType\tDateIssued\tContributor(s)\tSnippet\tVersion\tScore\tRelevance\tURL\r\n"){
+		tempBookArray = encodeURIComponent(tempBookArray);
+		var a = document.createElement('a');
+		a.href     = 'data:attachment/csv,' + tempBookArray;
+		a.target   = '_blank';
+		a.download = 'pm-books.csv';
+		document.body.appendChild(a);
+		a.click();
+	}
+	
+	if(tempArticleArray != "ID\tTitle\tDateIssued\tPartOf\tHolding\tVersion\tScore\tRelevance\tType\tURL\r\n"){
+		tempArticleArray = encodeURIComponent(tempArticleArray);
+		var a = document.createElement('a');
+		a.href     = 'data:attachment/csv,' + tempArticleArray;
+		a.target   = '_blank';
+		a.download = 'pm-article.csv';
+		document.body.appendChild(a);
+		a.click();
+	}
 }
 
 // EOF
