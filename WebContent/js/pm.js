@@ -343,6 +343,7 @@ function init ()
   currentQuery(false);
   showRawResults(false);
   locnEdit(false);
+  showHistogram(false);
 }
 
 /**
@@ -689,8 +690,14 @@ function showHistogram (show)
 {
 	if ($(_selById(HIST_VIEW)).length === 0) {
 	    _createPane(HIST_VIEW, null, null);
-	  }
-	  _showPane(_selById(HIST_VIEW));
+	}
+
+	if (show) {
+		_showPane(_selById(HIST_VIEW));
+	}
+
+	$('h3#hd-bargraph-title').text("Hits versus time for search term: " + m_currentTerm);
+	$('h3#hd-linegraph-title').text("Hits versus time for search term: " + m_currentTerm);
 }
 
 /**
@@ -709,22 +716,22 @@ function _updateHistogram()
 	// Grab dates from results in the global array
 	for (var i = 0; i < m_resultSet.length; i++) {
 		var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-		if (zoneInfo.id == "newspaper") {
 			if (zoneInfo.dtag.length > 0) {
 				var date = m_resultSet[i].data[zoneInfo.dtag];
 				var year = date;
 				// Format date to just the year
-				if (year.length > 4) {
-					var isoDate = /(\d\d\d\d)/;
-					var mat = year.match(isoDate);
-					if (mat != null) {
-						year = parseInt(mat[1]);
-						// Add the year as a label to the graph
-						h_hashArray[year-H_STARTYEAR] += 1;
+				if (year !== undefined) {
+					if (year.length > 4) {
+						var isoDate = /(\d\d\d\d)/;
+						var mat = year.match(isoDate);
+						if (mat != null) {
+							year = parseInt(mat[1]);
+							// Add the year as a label to the graph
+							h_hashArray[year-H_STARTYEAR] += 1;
+						}
 					}
 				}
 			}
-		}	
 	}
 	
 	// Group results into 8 year segments to be graphed easily
@@ -1333,7 +1340,7 @@ function _processData (data, pos, id)
       m_run = false;
       m_paused = true;
       $('#busy-box').activity(false);
-      $('#cc-pb11').button('option', 'label', 'Resume Query');
+      $('#cc-pb11').button('option', 'label', 'Resume query');
       $('img#img-pause').attr('src', 'images/button_grey_play.png');
     }
     _updateCurrQueryPane();
