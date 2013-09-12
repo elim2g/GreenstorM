@@ -2552,10 +2552,14 @@ function locnDel ()
   }
 }
 
-//Trying to create a temporary array string as a csv formatted string.
+/*
+ *  Function for converting all data retrieved into a csv file and export so users
+ *  can have a copy of data on their computer
+ */
 function downloadCsv(){
 	var tempNewsArray = 'ID\tDate\tSource\tCategory\tHeading\tScore\tRelevance\tPage\tSnippet\tFullText\tURL\r\n';
-	var tempPicArray = 'ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tThumbnail\tURL\r\n';
+	//var tempPicArray = 'ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tThumbnail\tURL\r\n';
+	var tempPicArray = 'ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tURL\r\n';
 	var tempBookArray = 'ID\tTitle\tType\tDateIssued\tContributor(s)\tSnippet\tVersion\tScore\tRelevance\tURL\r\n';
 	var tempArticleArray = 'ID\tTitle\tDateIssued\tPartOf\tHolding\tVersion\tScore\tRelevance\tType\tURL\r\n';
 	var tempMapsArray = 'ID\tTitle\tMediaType\tHolding\tVersion\tScore\tRelevance\tURL\r\n';
@@ -2577,9 +2581,6 @@ function downloadCsv(){
 			for (var g = 0; g < zoneInfo.tags.length; g++) {
 				if(zoneInfo.tags[g].title != 'Thumbnail') {
 					tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[g].tag) + '\t';
-				} else {
-					tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[g].tag) + '\t';
-					//alert(zoneInfo.tags[i].title);
 				}
 			}
 			tempPicArray += '\r\n';
