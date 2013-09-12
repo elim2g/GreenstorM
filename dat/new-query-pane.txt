@@ -50,6 +50,10 @@
                 <input type="checkbox" id="z1b" value="book">Book<br>
                 <input type="checkbox" id="z1c" value="picture">Picture<br>
                 <input type="checkbox" id="z1d" value="article">Article<br>
+                <input type="checkbox" id="z1e" value="music">Music<br>
+                <input type="checkbox" id="z1f" value="map">Maps<br>
+                <input type="checkbox" id="z1g" value="collection">Collections<br>
+                <input type="checkbox" id="z1h" value="list">List<br>
             </td>
         </tr>
         <tr>
@@ -86,6 +90,22 @@
     		heightStyle: "content"
     	});
     });
+    $(function() {
+    	$( "#check" ).button();
+    	$( "#format" ).buttonset();
+   	});
+    $(function() {
+    	$( "#radio" ).buttonset();
+   	});
+   	$(function() {
+    	$( "#radio_Books" ).buttonset();
+   	});
+   	$(function() {
+    	$( "#radio_Picture" ).buttonset();
+   	});
+   	$(function() {
+    	$( "#radio_Articles" ).buttonset();
+   	});
 </script>
 <div id="q-custom" class="hidden">
     <table id="query-form">
@@ -103,385 +123,65 @@
         <tr>
             <td colspan="2">
                 <div id="accordion">
-                    <h3>Book</h3>
+                    <h3><table><tr><td width=75%>
+                    	Newspapers
+                    	</td><td width=25%>
+                    		<div id="radio">
+							<input type="radio" id="radio1" name="radio" /><label for="radio1">0</label>
+							<input type="radio" id="radio2" name="radio" checked="checked" /><label for="radio2">I</label>
+							</div></table>
+					</h3>
                     <div>
-                        <table id="BookCustomSearch">
-                            <tr>
-                                <td>Search for Books?</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Search Criteria</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Required Data</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Return All Data</td>
-                                <td><input type="checkbox" checked /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Tags</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Comments</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Public Lists</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Holding Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Link</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Subscribing Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Work Version</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                        </table>
+                    	<table>
+                    		<tr>
+                    			<td></td>
+                    		</tr>
+                    	</table>
                     </div>
-                    <h3>Picture</h3>
+                    <h3><table><tr><td width=75%>
+                    	Books
+                    	</td><td width=25%>
+                    		<div id="radio_Books">
+							<input type="radio" id="radio3" name="radio_Books" /><label for="radio3">0</label>
+							<input type="radio" id="radio4" name="radio_Books" checked="checked" /><label for="radio4">I</label>
+							</div></table>
+					</h3>
                     <div>
-                        <table id="PictureCustomSearch">
-                            <tr>
-                                <td>Search for Pictures?</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Search Criteria</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Required Data</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Return All Data</td>
-                                <td><input type="checkbox" checked /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Tags</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Comments</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Public Lists</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Holding Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Link</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Subscribing Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Work Version</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                        </table>
+                    	<table>
+                    		<tr>
+                    			<td></td>
+                    		</tr>
+                    	</table>
                     </div>
-                    <h3>Article</h3>
+                    <h3><table><tr><td width=75%>
+                    	Pictures
+                    	</td><td width=25%>
+                    		<div id="radio_Picture">
+							<input type="radio" id="radio5" name="radio_Picture" /><label for="radio5">0</label>
+							<input type="radio" id="radio6" name="radio_Picture" checked="checked" /><label for="radio6">I</label>
+							</div></table>
+					</h3>
                     <div>
-                        <table id="ArticleCustomSearch">
-                            <tr>
-                                <td>Search for Articles?</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Search Criteria</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Required Data</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Return All Data</td>
-                                <td><input type="checkbox" checked /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Tags</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Comments</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Public Lists</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Holding Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Link</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Subscribing Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Work Version</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                        </table>
+                    	<table>
+                    		<tr>
+                    			<td></td>
+                    		</tr>
+                    	</table>
                     </div>
-                    <h3>Music</h3>
+                    <h3><table><tr><td width=75%>
+                    	Articles
+                    	</td><td width=25%>
+                    		<div id="radio_Articles">
+							<input type="radio" id="radio7" name="radio_Articles" /><label for="radio7">0</label>
+							<input type="radio" id="radio8" name="radio_Articles" checked="checked" /><label for="radio8">I</label>
+							</div></table>
+					</h3>
                     <div>
-                        <table id="MusicCustomSearch">
-                            <tr>
-                                <td>Search for Music?</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Search Criteria</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Required Data</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Return All Data</td>
-                                <td><input type="checkbox" checked /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Tags</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Comments</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Public Lists</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Holding Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Link</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Subscribing Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Work Version</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <h3>Maps</h3>
-                    <div>
-                        <table id="MapCustomSearch">
-                            <tr>
-                                <td>Search for Maps?</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Search Criteria</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Required Data</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Return All Data</td>
-                                <td><input type="checkbox" checked /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Tags</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Comments</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Public Lists</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Holding Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Link</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Subscribing Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Work Version</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <h3>Collections</h3>
-                    <div>
-                        <table id="CollectionsCustomSearch">
-                            <tr>
-                                <td>Search for Collections?</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Search Criteria</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Required Data</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Return All Data</td>
-                                <td><input type="checkbox" checked /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Tags</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Comments</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Public Lists</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Holding Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Link</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Subscribing Organisation</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Work Version</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <h3>Newspapers</h3>
-                    <div>
-                        <table id="NewspaperCustomSearch">
-                            <tr>
-                                <td>Search for Newspapers?</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Search Criteria</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Required Data</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Return All Data</td>
-                                <td><input type="checkbox" checked /></td>
-                            </tr>
-                            <tr>
-                                <td>Full Article Text</td>
-                                <td><input type="checkbox"  /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Tags</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Comments</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Public Lists</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <h3>Lists</h3>
-                    <div>
-                        <table id="ListssCustomSearch">
-                            <tr>
-                                <td>Search for Lists?</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Search Criteria</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h4>Required Data</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Return All Data</td>
-                                <td><input type="checkbox" checked ></td>
-                            </tr>
-                            <tr>
-                                <td>Brief List Description</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Tags</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                            <tr>
-                                <td>Trove Comments</td>
-                                <td><input type="checkbox" /></td>
-                            </tr>
-                        </table>
+                    	<table>
+                    		<tr>
+                    			<td></td>
+                    		</tr>
+                    	</table>
                     </div>
                 </div>
         </tr>

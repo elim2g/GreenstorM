@@ -148,12 +148,10 @@ var ZONE_MAP = {
         { tag:'id', title:'ID', isLink:false },
 	    { tag:'title', title:'Title', isLink:false },
 	    { tag:'type', title:'Media Type', isLink:false, mayRepeat:true },
-	    { tag:'snippet', title:'Snippet', isLink:false },
 	    { tag:'holdingsCount', title:'Holding', isLink:false },
 	    { tag:'versionCount', title:'Version', isLink:false },
 	    { tag:'relevance.value', title:'Score', isLink:false },
 	    { tag:'relevance.score', title:'Revelance', isLink:false },
-	    { tag:'identifier[1].value', title:'Thumbnail', isLink:false },
 	    { tag:'troveUrl', title:'URL', isLink:true }
 	]
 };
@@ -178,9 +176,8 @@ var ZONE_LIST = {
 	    { tag:'title', title:'Title', isLink:false },
 	    { tag:'creator', title:'Creator', isLink:false },
 	    { tag:'description', title:'Description', isLink:false },
+	    { tag:'snippet', title:'Snippet', isLink:false },
 	    { tag:'listItemCount', title:'Items in list', isLink:false },
-	    { tag:'identifier.type', title:'Type', isLink:false },
-	    { tag:'identifier.value', title:'Link', isLink:true },
 	    { tag:'relevance.value', title:'Score', isLink:false },
 	    { tag:'relevance.score', title:'Revelance', isLink:false },
 	    { tag:'troveUrl', title:'URL', isLink:true }
@@ -343,6 +340,7 @@ function init ()
   currentQuery(false);
   showRawResults(false);
   locnEdit(false);
+  showHistogram(false);
 }
 
 /**
@@ -689,8 +687,14 @@ function showHistogram (show)
 {
 	if ($(_selById(HIST_VIEW)).length === 0) {
 	    _createPane(HIST_VIEW, null, null);
-	  }
-	  _showPane(_selById(HIST_VIEW));
+	}
+
+	if (show) {
+		_showPane(_selById(HIST_VIEW));
+	}
+
+	$('h3#hd-bargraph-title').text("Hits versus time for search term: " + m_currentTerm);
+	$('h3#hd-linegraph-title').text("Hits versus time for search term: " + m_currentTerm);
 }
 
 /**
@@ -1333,7 +1337,7 @@ function _processData (data, pos, id)
       m_run = false;
       m_paused = true;
       $('#busy-box').activity(false);
-      $('#cc-pb11').button('option', 'label', 'Resume Query');
+      $('#cc-pb11').button('option', 'label', 'Resume query');
       $('img#img-pause').attr('src', 'images/button_grey_play.png');
     }
     _updateCurrQueryPane();
@@ -2548,7 +2552,6 @@ function locnDel ()
   }
 }
 
-
 //Trying to create a temporary array string as a csv formatted string.
 function downloadCsv(){
 	var tempNewsArray = 'ID\tDate\tSource\tCategory\tHeading\tScore\tRelevance\tPage\tSnippet\tFullText\tURL\r\n';
@@ -2558,6 +2561,7 @@ function downloadCsv(){
 	var zoneInfo;
 	for(var e = 0; e < m_resultSet.length; e++){
 		zoneInfo = _getZoneInfo(m_resultSet[e].zone);
+		
 		if(zoneInfo.id == 'newspaper'){	
 			for (var f = 0; f < zoneInfo.tags.length; f++) {
 				tempNewsArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[f].tag) + "\t";
@@ -2567,13 +2571,10 @@ function downloadCsv(){
 		
 		if(zoneInfo.id == 'picture'){	
 			for (var g = 0; g < zoneInfo.tags.length; g++) {
-				if(zoneInfo.tags[g].title == 'Thumbnail') {
-				     tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[9].tag) + '\t';
-				} else {
 					tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[g].tag) + '\t';
-				}
 			}
 			tempPicArray += '\r\n';
+			//alert(tempPicArray);
 		}
 		
 		if(zoneInfo.id == 'book'){	
@@ -2581,6 +2582,8 @@ function downloadCsv(){
 				tempBookArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[h].tag) + "\t";
 			}
 			tempBookArray += '\r\n';
+			//alert(tempBookArray);
+			
 		}
 		
 		if(zoneInfo.id == 'article'){	
@@ -2590,7 +2593,7 @@ function downloadCsv(){
 			tempArticleArray += '\r\n';
 		}
 	}
-	
+	//alert(TempPicArray);
 	if(tempNewsArray != "ID\tDate\tSource\tCategory\tHeading\tScore\tRelevance\tPage\tSnippet\tFullText\tURL\r\n"){
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempNewsArray);
@@ -2612,7 +2615,7 @@ function downloadCsv(){
 	if(tempBookArray != "ID\tTitle\tType\tDateIssued\tContributor(s)\tSnippet\tVersion\tScore\tRelevance\tURL\r\n"){
 		tempBookArray = encodeURIComponent(tempBookArray);
 		var a = document.createElement('a');
-		a.href     = 'data:attachment/csv,' + tempBookArray;
+		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempBookArray);
 		a.target   = '_blank';
 		a.download = 'pm-books.csv';
 		document.body.appendChild(a);
@@ -2622,7 +2625,7 @@ function downloadCsv(){
 	if(tempArticleArray != "ID\tTitle\tDateIssued\tPartOf\tHolding\tVersion\tScore\tRelevance\tType\tURL\r\n"){
 		tempArticleArray = encodeURIComponent(tempArticleArray);
 		var a = document.createElement('a');
-		a.href     = 'data:attachment/csv,' + tempArticleArray;
+		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempArticleArray);
 		a.target   = '_blank';
 		a.download = 'pm-article.csv';
 		document.body.appendChild(a);
