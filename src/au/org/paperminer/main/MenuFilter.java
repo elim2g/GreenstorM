@@ -190,10 +190,9 @@ public class MenuFilter implements Filter
 						        		"active", "<a onCLick=\"currentQuery(true)\">", "</a>",  
 						        		"greyed", "", "");
         formatter.format(VIEW_SUBMENU,  "active", "<a onCLick=\"showMap(true)\">", "</a>",
-						        		"active", "<a onClick=\"showHistogram()\">", "</a>",
+						        		"active", "<a onClick=\"showHistogram(true)\">", "</a>",
         								"active", "<a onClick=\"showCloud(true)\">", "</a>",
-        								"active", "<a onClick=\"showRawResults(true)\">", "</a>",
-						        		"active", "<a onClick=\"showMadDogs()\">", "</a>");
+        								"active", "<a onClick=\"showRawResults(true)\">", "</a>");
         formatter.format(USER_SUBMENU,  "greyed", "", "",
 						        		"active", "<a onClick=\"doEditDetails()\">", "</a>",
 						        		"active", "<a onClick=\"doLogout()\">", "</a>");
