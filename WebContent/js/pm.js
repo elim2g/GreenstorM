@@ -2570,63 +2570,58 @@ function downloadCsv(){
 	for(var e = 0; e < m_resultSet.length; e++){
 		zoneInfo = _getZoneInfo(m_resultSet[e].zone);
 		//alert(JSON.stringify(zoneInfo.tags));
-		if(zoneInfo.id == 'newspaper'){	
-			for (var f = 0; f < zoneInfo.tags.length; f++) {
-				tempNewsArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[f].tag) + "\t";
-			}
-			tempNewsArray += '\r\n';
-		}
 		
-		if(zoneInfo.id == 'picture'){	
-			for (var g = 0; g < zoneInfo.tags.length; g++) {
-				if(zoneInfo.tags[g].title != 'Thumbnail') {
-					tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[g].tag) + '\t';
+		switch(zoneInfo.id){
+			case 'newspaper':
+				for (var f = 0; f < zoneInfo.tags.length; f++) {
+					tempNewsArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[f].tag) + "\t";
 				}
-			}
-			tempPicArray += '\r\n';
-		}
-		
-		if(zoneInfo.id == 'book'){	
-			for (var h = 0; h < zoneInfo.tags.length; h++) {
-				tempBookArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[h].tag) + "\t";
-			}
-			tempBookArray += '\r\n';
-			
-		}
-		
-		if(zoneInfo.id == 'article'){	
-			for (var i = 0; i < zoneInfo.tags.length; i++) {
-				tempArticleArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[i].tag) + "\t";
-			}
-			tempArticleArray += '\r\n';
-		}
-		
-		if(zoneInfo.id == 'music'){	
-			for (var j = 0; j < zoneInfo.tags.length; j++) {
-				tempMusicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[j].tag) + "\t";
-			}
-			tempMusicArray += '\r\n';
-		}
-		
-		if(zoneInfo.id == 'map'){	
-			for (var k = 0; k < zoneInfo.tags.length; k++) {
-				tempMapsArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[k].tag) + "\t";
-			}
-			tempMapsArray += '\r\n';
-		}
-		
-		if(zoneInfo.id == 'collection'){	
-			for (var l = 0; l < zoneInfo.tags.length; l++) {
-				tempCollectionArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[l].tag) + "\t";
-			}
-			tempCollectionArray += '\r\n';
-		}
-		
-		if(zoneInfo.id == 'list'){	
-			for (var m = 0; m < zoneInfo.tags.length; m++) {
-				tempListArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[m].tag) + "\t";
-			}
-			tempListArray += '\r\n';
+				tempNewsArray += '\r\n';
+				break;
+			case 'picture':
+				for (var g = 0; g < zoneInfo.tags.length; g++) {
+					if(zoneInfo.tags[g].title != 'Thumbnail') {
+						tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[g].tag) + '\t';
+					}
+				}
+				tempPicArray += '\r\n';
+				break;
+			case 'book':
+				for (var h = 0; h < zoneInfo.tags.length; h++) {
+					tempBookArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[h].tag) + "\t";
+				}
+				tempBookArray += '\r\n';
+				break;
+			case 'article':
+				for (var i = 0; i < zoneInfo.tags.length; i++) {
+					tempArticleArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[i].tag) + "\t";
+				}
+				tempArticleArray += '\r\n';
+				break;
+			case 'music':
+				for (var j = 0; j < zoneInfo.tags.length; j++) {
+					tempMusicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[j].tag) + "\t";
+				}
+				tempMusicArray += '\r\n';
+				break;
+			case 'map':
+				for (var k = 0; k < zoneInfo.tags.length; k++) {
+					tempMapsArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[k].tag) + "\t";
+				}
+				tempMapsArray += '\r\n';
+				break;
+			case 'collection':
+				for (var l = 0; l < zoneInfo.tags.length; l++) {
+					tempCollectionArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[l].tag) + "\t";
+				}
+				tempCollectionArray += '\r\n';
+				break;
+			case 'list':
+				for (var m = 0; m < zoneInfo.tags.length; m++) {
+					tempListArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[m].tag) + "\t";
+				}
+				tempListArray += '\r\n';
+				break;
 		}
 	}
 	
