@@ -2095,15 +2095,15 @@ function _displayRawDataItem (id)
       html += '<tr><td class="td-crud-name">' + zoneInfo.tags[i].title + ':</td><td><button id="rdv-pbx" onClick="refreshRecord()">Load full text</button></td></tr>';
     }
     else if (zoneInfo.tags[i].isLink) {
-      html += '<tr class="hidden"><td>' + zoneInfo.tags[i].title + ':</td><td>' +
-      '<a id="raw-trove-link" href="' + value + '" target="_blank">' + value + '</a></td></tr>';
+    	html += '<tr class="hidden"><td>' + zoneInfo.tags[i].title + ':</td><td>' +
+    	'<a id="raw-trove-link" href="' + value + '" target="_blank">' + value + '</a></td></tr>';
     }
     else {
      if(zoneInfo.tags[i].title == 'Thumbnail') {
-     value = eval('m_resultSet[' + id + '].data.' + zoneInfo.tags[9].tag);
-     html += '<tr><td class="td-crud=name">' + zoneInfo.tags[9].title + '</td><td>' + '<img src="' + value + '" alt=" --- Loading ---"></td></tr>';
+    	 value = eval('m_resultSet[' + id + '].data.' + zoneInfo.tags[9].tag);
+    	 html += '<tr><td class="td-crud=name">' + zoneInfo.tags[9].title + '</td><td>' + '<img src="' + value + '" alt=" --- Loading ---"></td></tr>';
      } else {
-     html += '<tr><td class="td-crud-name">' + zoneInfo.tags[i].title + ':</td><td>' + value + '</td></tr>';
+    	 html += '<tr><td class="td-crud-name">' + zoneInfo.tags[i].title + ':</td><td>' + value + '</td></tr>';
   
      }
     }
@@ -2558,10 +2558,14 @@ function downloadCsv(){
 	var tempPicArray = 'ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tThumbnail\tURL\r\n';
 	var tempBookArray = 'ID\tTitle\tType\tDateIssued\tContributor(s)\tSnippet\tVersion\tScore\tRelevance\tURL\r\n';
 	var tempArticleArray = 'ID\tTitle\tDateIssued\tPartOf\tHolding\tVersion\tScore\tRelevance\tType\tURL\r\n';
+	var tempMapsArray = 'ID\tTitle\tMediaType\tHolding\tVersion\tScore\tRelevance\tURL\r\n';
+	var tempMusicArray = 'ID\tTitle\tContributor\tDateIssued\tMediaType\tSnippet\tHolding\tRelevance\tVersion\tURL\r\n';
+	var tempCollectionArray = 'ID\tTitle\tMediaType\tDateIssued\tHolding\tVersion\tScore\tRelevance\tURL\r\n';
+	var tempListArray = 'ID\tTitle\tCreator\tDescription\tSnippet\tItems_in_list\tScore\tRelevance\tURL\r\n';
 	var zoneInfo;
 	for(var e = 0; e < m_resultSet.length; e++){
 		zoneInfo = _getZoneInfo(m_resultSet[e].zone);
-		
+		//alert(JSON.stringify(zoneInfo.tags));
 		if(zoneInfo.id == 'newspaper'){	
 			for (var f = 0; f < zoneInfo.tags.length; f++) {
 				tempNewsArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[f].tag) + "\t";
@@ -2571,10 +2575,14 @@ function downloadCsv(){
 		
 		if(zoneInfo.id == 'picture'){	
 			for (var g = 0; g < zoneInfo.tags.length; g++) {
+				if(zoneInfo.tags[g].title != 'Thumbnail') {
 					tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[g].tag) + '\t';
+				} else {
+					tempPicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[g].tag) + '\t';
+					//alert(zoneInfo.tags[i].title);
+				}
 			}
 			tempPicArray += '\r\n';
-			//alert(tempPicArray);
 		}
 		
 		if(zoneInfo.id == 'book'){	
@@ -2582,7 +2590,6 @@ function downloadCsv(){
 				tempBookArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[h].tag) + "\t";
 			}
 			tempBookArray += '\r\n';
-			//alert(tempBookArray);
 			
 		}
 		
@@ -2592,8 +2599,36 @@ function downloadCsv(){
 			}
 			tempArticleArray += '\r\n';
 		}
+		
+		if(zoneInfo.id == 'music'){	
+			for (var j = 0; j < zoneInfo.tags.length; j++) {
+				tempMusicArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[j].tag) + "\t";
+			}
+			tempMusicArray += '\r\n';
+		}
+		
+		if(zoneInfo.id == 'map'){	
+			for (var k = 0; k < zoneInfo.tags.length; k++) {
+				tempMapsArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[k].tag) + "\t";
+			}
+			tempMapsArray += '\r\n';
+		}
+		
+		if(zoneInfo.id == 'collection'){	
+			for (var l = 0; l < zoneInfo.tags.length; l++) {
+				tempCollectionArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[l].tag) + "\t";
+			}
+			tempCollectionArray += '\r\n';
+		}
+		
+		if(zoneInfo.id == 'list'){	
+			for (var m = 0; m < zoneInfo.tags.length; m++) {
+				tempListArray += eval('m_resultSet[' + e + '].data.' + zoneInfo.tags[m].tag) + "\t";
+			}
+			tempListArray += '\r\n';
+		}
 	}
-	//alert(TempPicArray);
+	
 	if(tempNewsArray != "ID\tDate\tSource\tCategory\tHeading\tScore\tRelevance\tPage\tSnippet\tFullText\tURL\r\n"){
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempNewsArray);
@@ -2604,16 +2639,15 @@ function downloadCsv(){
 	}
 	
 	if(tempPicArray != "ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tThumbnail\tURL\r\n"){
-		var b = document.createElement('b');
-		b.href     = 'data:attachment/csv,' + encodeURIComponent(tempPicArray);
-		b.target   = '_blank';
-		b.download = 'pm-picture.csv';
-		document.body.appendChild(b);
-		b.click();
+		var a = document.createElement('a');
+		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempPicArray);
+		a.target   = '_blank';
+		a.download = 'pm-picture.csv';
+		document.body.appendChild(a);
+		a.click();
 	}	
 	
 	if(tempBookArray != "ID\tTitle\tType\tDateIssued\tContributor(s)\tSnippet\tVersion\tScore\tRelevance\tURL\r\n"){
-		tempBookArray = encodeURIComponent(tempBookArray);
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempBookArray);
 		a.target   = '_blank';
@@ -2623,11 +2657,48 @@ function downloadCsv(){
 	}
 	
 	if(tempArticleArray != "ID\tTitle\tDateIssued\tPartOf\tHolding\tVersion\tScore\tRelevance\tType\tURL\r\n"){
-		tempArticleArray = encodeURIComponent(tempArticleArray);
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempArticleArray);
 		a.target   = '_blank';
 		a.download = 'pm-article.csv';
+		document.body.appendChild(a);
+		a.click();
+	}
+	
+	if(tempMusicArray != "ID\tTitle\tContributor\tDateIssued\tMediaType\tSnippet\tHolding\tRelevance\tVersion\tURL\r\n"){
+		alert("Music");
+		var a = document.createElement('a');
+		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempMusicArray);
+		a.target   = '_blank';
+		a.download = 'pm-music.csv';
+		document.body.appendChild(a);
+		a.click();
+	}
+	
+	if(tempMapsArray != "ID\tTitle\tMediaType\tHolding\tVersion\tScore\tRelevance\tURL\r\n"){
+		alert("Maps");
+		var a = document.createElement('a');
+		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempMapsArray);
+		a.target   = '_blank';
+		a.download = 'pm-maps.csv';
+		document.body.appendChild(a);
+		a.click();
+	}
+	
+	if(tempCollectionArray != "ID\tTitle\tMediaType\tDateIssued\tHolding\tVersion\tScore\tRelevance\tURL\r\n"){
+		var a = document.createElement('a');
+		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempCollectionArray);
+		a.target   = '_blank';
+		a.download = 'pm-collections.csv';
+		document.body.appendChild(a);
+		a.click();
+	}
+	
+	if(tempListArray != "ID\tTitle\tCreator\tDescription\tSnippet\tItems_in_list\tScore\tRelevance\tURL\r\n"){
+		var a = document.createElement('a');
+		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempListArray);
+		a.target   = '_blank';
+		a.download = 'pm-lists.csv';
 		document.body.appendChild(a);
 		a.click();
 	}
