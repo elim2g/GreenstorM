@@ -1,3 +1,2 @@
-<h3>Term Cloud</h3>
-
-<p><em>Under Construction</em></p>
+<h3>Tag Cloud</h3>
+<div id="year-cloud" class="tag-cloud"></div>

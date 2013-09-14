@@ -333,7 +333,7 @@ function init ()
 	  rememberedUser = true;
 	  doLogin('ok');
   }
-  
+   
   // pre-load some panes but don't display
   newQuery(false);
   saveQuery(false);
@@ -341,6 +341,7 @@ function init ()
   showRawResults(false);
   locnEdit(false);
   showHistogram(false);
+  showCloud(false);
 }
 
 /**
@@ -778,9 +779,29 @@ function showCloud (show)
   if ($(_selById(CLOUD_VIEW)).length === 0) {
     _createPane(CLOUD_VIEW, null, null);
   }
-  _showPane(_selById(CLOUD_VIEW));
+  
+  if (show) {
+	  _showPane(_selById(CLOUD_VIEW));	  
+	  _updateCloud(h_labels, h_data, 'div#year-cloud');
+  }
+
 }
 
+/**
+ * Creates a cloud for the current search criteria * 
+ */
+function _updateCloud(labelArray, weightArray, container, linkArray) {
+	var cloudArray = [];
+	$(container).empty();
+	
+  	for (var i = 0; i < labelArray.length; i++) {
+  		cloudArray[i] = { text: labelArray[i], weight: weightArray[i] };	                
+  	}
+  	
+    $(function() {
+      	$(container).jQCloud(cloudArray, { delayedMode: true });
+    });
+}
 
 /**
 * Raw results pane loaded on demand.
@@ -1391,6 +1412,7 @@ function _processData (data, pos, id)
       _updateMapDisplay(pos);
       _updateCurrQueryPane();
       _updateHistogram();
+      //_updateCloud();
 
       // swap view on first response unless user already chnged it
       if ((pos === 0) && (m_currentPaneSelector === _selById(NEW_QUERY_PANE))) {
