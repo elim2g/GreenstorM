@@ -4,6 +4,7 @@
 		$( "#tabs" ).tabs({
 			beforeActivate: function (event, ui) {
 				m_currentQueryFormPane = ui.newPanel.attr('id');
+				checkAdvanced(ui.newPanel.attr('id'));
 			}
 		});
 	});

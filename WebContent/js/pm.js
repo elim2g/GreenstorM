@@ -1153,7 +1153,7 @@ function _openQuery (idx)
 /**
 * Swaps different forms of query
 * @param id The one to make visible
-*/
+*//*
 function _showQueryForm (id){
 
 checkAdvanced(id);
@@ -1169,7 +1169,7 @@ $('div#' + m_currentQueryFormPane).toggle('fade','swing',100,
     });
   
 checkAdvanced(id);
-}
+}*/
 
 /**
 * Swaps different forms of query
@@ -2729,5 +2729,3 @@ function downloadCsv(){
 }
 
 // EOF
-
-
