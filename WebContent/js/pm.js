@@ -62,6 +62,7 @@ var FOOTER_BAR = 'footer-bar';
 var Q_SIMPLE = 'q-simple';
 var Q_ADVANCED = 'q-advanced';
 var Q_CUSTOM = 'q-custom';
+var Q_INDEX = 'q-index';
 var Q_SAVE = 'save-query';
 var Q_STORE = 'stored-queries';
 var Q_STORE_TABLE = 'qstore-table';
@@ -533,20 +534,23 @@ function doEditDetails ()
 */
 function resetQueryPane ()
 {
-  switch (m_currentQueryFormPane) {
-  case Q_SIMPLE :
-    $('input#q1').val('');
-    $('select#z1').val('newspaper');
-    break;
-  case Q_ADVANCED :
-$('input#q1').val('');
-$('select#z1').val('newspaper');
-    break;
-  case Q_CUSTOM :
-    // FIXME: todo
-    break;
-  }
-  _updateCurrQueryPane();
+	switch (m_currentQueryFormPane) {
+		case Q_SIMPLE :
+			$('input#q1').val('');
+			$('select#z1').val('newspaper');
+			break;
+		case Q_ADVANCED :
+			$('input#aq1').val('');
+			$('select#z1').val('newspaper');
+			break;
+		case Q_CUSTOM :
+			// FIXME: todo
+			break;
+		case Q_INDEX :
+			// FIXME: todo
+			break;
+	  }
+	  _updateCurrQueryPane();
 }
 
 
@@ -1188,32 +1192,34 @@ function _showStoredQueryForm (id){
 */
 function _createQueryString ()
 {
-  var str = '';
-  switch (m_currentQueryFormPane) {
-  case Q_SIMPLE :
-    m_currentZone = 'newspaper';
-    m_currentTerm = $('input#q1').val();
-    str = '&zone=' + m_currentZone +
-          '&q=' + encodeURIComponent(m_currentTerm);
-    break;
-  case Q_ADVANCED:
-	  m_currentZone = '';
-	  m_currentTerm = $('input#aq1').val();
-	  
-	  $('#q-advanced :checkbox').each(function(){
-		  if(m_currentZone == ''){
-			  m_currentZone += this.checked ? this.value : '';
-		  } else {
-			  m_currentZone += this.checked ? ',' + this.value : '';
-		  }
-	  });
-
-    str = '&zone=' + encodeURIComponent(m_currentZone) + '&q=' + encodeURIComponent(m_currentTerm);
-    break;
-  case Q_CUSTOM:
-    break;
-  }
-  return str;
+	var str = '';
+	switch (m_currentQueryFormPane) {
+		case Q_SIMPLE :
+			m_currentZone = 'newspaper';
+			m_currentTerm = $('input#q1').val();
+			str = '&zone=' + m_currentZone +
+	        	'&q=' + encodeURIComponent(m_currentTerm);
+			break;
+		case Q_ADVANCED:
+			m_currentZone = '';
+			m_currentTerm = $('input#aq1').val();
+		  
+			$('#advancedZones :checkbox').each(function(){
+				if(m_currentZone == ''){
+					m_currentZone += this.checked ? this.value : '';
+				} else {
+					m_currentZone += this.checked ? ',' + this.value : '';
+				}
+			});
+			
+			str = '&zone=' + encodeURIComponent(m_currentZone) + '&q=' + encodeURIComponent(m_currentTerm);
+			break;
+		case Q_CUSTOM:
+			break;
+	  	case Q_INDEX:
+	  		break;
+	}
+  	return str;
 }
 
 /**
