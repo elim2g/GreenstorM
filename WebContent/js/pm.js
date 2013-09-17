@@ -62,6 +62,7 @@ var FOOTER_BAR = 'footer-bar';
 var Q_SIMPLE = 'q-simple';
 var Q_ADVANCED = 'q-advanced';
 var Q_CUSTOM = 'q-custom';
+var Q_INDEX = 'q-index';
 var Q_SAVE = 'save-query';
 var Q_STORE = 'stored-queries';
 var Q_STORE_TABLE = 'qstore-table';
@@ -333,7 +334,7 @@ function init ()
 	  rememberedUser = true;
 	  doLogin('ok');
   }
-  
+   
   // pre-load some panes but don't display
   newQuery(false);
   saveQuery(false);
@@ -341,6 +342,7 @@ function init ()
   showRawResults(false);
   locnEdit(false);
   showHistogram(false);
+  showCloud(false);
 }
 
 /**
@@ -532,20 +534,23 @@ function doEditDetails ()
 */
 function resetQueryPane ()
 {
-  switch (m_currentQueryFormPane) {
-  case Q_SIMPLE :
-    $('input#q1').val('');
-    $('select#z1').val('newspaper');
-    break;
-  case Q_ADVANCED :
-$('input#q1').val('');
-$('select#z1').val('newspaper');
-    break;
-  case Q_CUSTOM :
-    // FIXME: todo
-    break;
-  }
-  _updateCurrQueryPane();
+	switch (m_currentQueryFormPane) {
+		case Q_SIMPLE :
+			$('input#q1').val('');
+			$('select#z1').val('newspaper');
+			break;
+		case Q_ADVANCED :
+			$('input#aq1').val('');
+			$('select#z1').val('newspaper');
+			break;
+		case Q_CUSTOM :
+			// FIXME: todo
+			break;
+		case Q_INDEX :
+			// FIXME: todo
+			break;
+	  }
+	  _updateCurrQueryPane();
 }
 
 
@@ -778,9 +783,29 @@ function showCloud (show)
   if ($(_selById(CLOUD_VIEW)).length === 0) {
     _createPane(CLOUD_VIEW, null, null);
   }
-  _showPane(_selById(CLOUD_VIEW));
+  
+  if (show) {
+	  _showPane(_selById(CLOUD_VIEW));	  
+	  _updateCloud(h_labels, h_data, 'div#year-cloud');
+  }
+
 }
 
+/**
+ * Creates a cloud for the current search criteria * 
+ */
+function _updateCloud(labelArray, weightArray, container, linkArray) {
+	var cloudArray = [];
+	$(container).empty();
+	
+  	for (var i = 0; i < labelArray.length; i++) {
+  		cloudArray[i] = { text: labelArray[i], weight: weightArray[i] };	                
+  	}
+  	
+    $(function() {
+      	$(container).jQCloud(cloudArray, { delayedMode: true });
+    });
+}
 
 /**
 * Raw results pane loaded on demand.
@@ -1128,7 +1153,7 @@ function _openQuery (idx)
 /**
 * Swaps different forms of query
 * @param id The one to make visible
-*/
+*//*
 function _showQueryForm (id){
 
 checkAdvanced(id);
@@ -1144,7 +1169,7 @@ $('div#' + m_currentQueryFormPane).toggle('fade','swing',100,
     });
   
 checkAdvanced(id);
-}
+}*/
 
 /**
 * Swaps different forms of query
@@ -1167,32 +1192,34 @@ function _showStoredQueryForm (id){
 */
 function _createQueryString ()
 {
-  var str = '';
-  switch (m_currentQueryFormPane) {
-  case Q_SIMPLE :
-    m_currentZone = 'newspaper';
-    m_currentTerm = $('input#q1').val();
-    str = '&zone=' + m_currentZone +
-          '&q=' + encodeURIComponent(m_currentTerm);
-    break;
-  case Q_ADVANCED:
-	  m_currentZone = '';
-	  m_currentTerm = $('input#aq1').val();
-	  
-	  $('#q-advanced :checkbox').each(function(){
-		  if(m_currentZone == ''){
-			  m_currentZone += this.checked ? this.value : '';
-		  } else {
-			  m_currentZone += this.checked ? ',' + this.value : '';
-		  }
-	  });
-
-    str = '&zone=' + encodeURIComponent(m_currentZone) + '&q=' + encodeURIComponent(m_currentTerm);
-    break;
-  case Q_CUSTOM:
-    break;
-  }
-  return str;
+	var str = '';
+	switch (m_currentQueryFormPane) {
+		case Q_SIMPLE :
+			m_currentZone = 'newspaper';
+			m_currentTerm = $('input#q1').val();
+			str = '&zone=' + m_currentZone +
+	        	'&q=' + encodeURIComponent(m_currentTerm);
+			break;
+		case Q_ADVANCED:
+			m_currentZone = '';
+			m_currentTerm = $('input#aq1').val();
+		  
+			$('#advancedZones :checkbox').each(function(){
+				if(m_currentZone == ''){
+					m_currentZone += this.checked ? this.value : '';
+				} else {
+					m_currentZone += this.checked ? ',' + this.value : '';
+				}
+			});
+			
+			str = '&zone=' + encodeURIComponent(m_currentZone) + '&q=' + encodeURIComponent(m_currentTerm);
+			break;
+		case Q_CUSTOM:
+			break;
+	  	case Q_INDEX:
+	  		break;
+	}
+  	return str;
 }
 
 /**
@@ -1391,6 +1418,7 @@ function _processData (data, pos, id)
       _updateMapDisplay(pos);
       _updateCurrQueryPane();
       _updateHistogram();
+      //_updateCloud();
 
       // swap view on first response unless user already chnged it
       if ((pos === 0) && (m_currentPaneSelector === _selById(NEW_QUERY_PANE))) {
@@ -2701,5 +2729,3 @@ function downloadCsv(){
 }
 
 // EOF
-
-
