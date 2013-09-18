@@ -98,6 +98,7 @@
 		<echo message=" WAR FILE NAME=${war-file-name}" />
 		<echo message=" WEBAPP-PREFIX=${webapp-prefix}" />
 
+		<!-- Build is for deploying to production/CI and will run Tests -->
 		<copy file="conf/build.xml.in" tofile="/tmp/build.xml" />
 		<replace file="/tmp/build.xml" token="@CATALINA_HOME_DIR@"
 			value="${catalina-home-dir}" />
@@ -108,6 +109,18 @@
 		<replace file="/tmp/build.xml" token="@INDEX_BASE@" value="${index-base}" />
 
 		<move file="/tmp/build.xml" tofile="build.xml" />
+		
+		<!-- Build-Dev is for deploying locally and will not run Tests -->
+		<copy file="conf/build-dev.xml.in" tofile="/tmp/build-dev.xml" />
+		<replace file="/tmp/build-dev.xml" token="@CATALINA_HOME_DIR@"
+			value="${catalina-home-dir}" />
+		<replace file="/tmp/build-dev.xml" token="@TOMCAT_LIB_DIR@" value="${tomcat-lib-dir}" />
+		<replace file="/tmp/build-dev.xml" token="@DEPLOY_HOST@" value="${server-name}" />
+		<replace file="/tmp/build-dev.xml" token="@URI_PREFIX@" value="${webapp-prefix}" />
+		<replace file="/tmp/build-dev.xml" token="@WAR_FILE@" value="${war-file-name}" />
+		<replace file="/tmp/build-dev.xml" token="@INDEX_BASE@" value="${index-base}" />
+
+		<move file="/tmp/build-dev.xml" tofile="build-dev.xml" />
 	</target>
 
 </project>
