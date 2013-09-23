@@ -1,18 +1,44 @@
 <!-- jQuery UI functions - JW -->
 <script>
+	_getNewspaperTitles('qld');
 	$(function() {
 		$( "#tabs" ).tabs({
 			beforeActivate: function (event, ui) {
 				m_currentQueryFormPane = ui.newPanel.attr('id');
-				checkAdvanced(ui.newPanel.attr('id'));
 			}
 		});
 	});
 	$(function() {
-    	$( "#accordion" ).accordion({
-    		heightStyle: "content"
+    	$( "#adv-accordion" ).accordion({
+    		heightStyle: "content",
+    		collapsible: true,
+    		active: false,
+    		activate: function () {
+            	m_currentZone = ($('.ui-accordion-header-active').attr('id')).replace("adv-","");
+        	}
     	});
     });
+    $(function() {
+    	$( "#cus-accordion" ).accordion({
+    		heightStyle: "content",
+    		collapsible: true,
+    		active: false,
+    		//need to set zones somehow
+    	});
+    });
+    for (var i = (MINYEAR/10); i <= (MAXYEAR/10); i++){
+    	$('#adv-newspaper-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#cus-newspaper-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    }
+    for (var i = MINYEAR; i <= MAXYEAR; i++){
+    	if (i%10 == 0) {
+    		$('#adv-newspaper-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#cus-newspaper-year').append('<option value="'+i+'">--'+i+'--</option>');
+    	} else {
+    		$('#adv-newspaper-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#cus-newspaper-year').append('<option value="'+i+'">'+i+'</option>');
+    	}
+    }
 </script>
 <h3>New Query</h3>
 <div id="tabs">
@@ -25,7 +51,7 @@
 	<div id="q-simple">
 		<table>
 			<tr>
-				<td colspan="3"><h3>Build Simple Search</h3></td>
+				<td colspan="3"><h3>Simple Search</h3></td>
 			</tr>
 			<tr>
 				<td class="td-name">Search Term:</td>
@@ -39,8 +65,8 @@
 			<tr>
 				<td colspan="3">
 					<div class="pm-button-bar">
-						<button id="nq-pb11" onClick="resetQueryPane()">Clear form</button>
-						<button id="nq-pb12" onClick="_doQuery(0)">Execute query</button>
+						<button id="nq-pb11" onClick="resetQueryPane()">Reset</button>
+						<button id="nq-pb12" onClick="_doQuery(0)">Search</button>
 					</div>
 				</td>
 			</tr>
@@ -56,24 +82,133 @@
 				<td colspan="2"><input id="aq1" type="text" /></td>
 			</tr>
 			<tr>
-				<td class="td-name">Zone:</td>
-				<td>
-					<div id="advancedZones">
-						<input type="checkbox" id="z1a" value="newspaper">Newspaper<br>
-						<input type="checkbox" id="z1b" value="book">Book<br>
-						<input type="checkbox" id="z1c" value="picture">Picture<br>
-						<input type="checkbox" id="z1d" value="article">Article<br>
-						<input type="checkbox" id="z1e" value="music">Music<br>
-						<input type="checkbox" id="z1f" value="map">Maps<br>
-						<input type="checkbox" id="z1g" value="collection">Collections<br>
-						<input type="checkbox" id="z1h" value="list">Lists<br>
-					</div>
-				</td>
+				<td class="td-name">NOT:</td>
+				<td colspan="2"><input id="aq2" type="text" /></td>
 			</tr>
 			<tr>
-				<td class="td-name" id="searchYear">Search By Year/s:</td>
-				<td><span class="" id="aqYrStart"> </span> 
-					<span class="" 		id="aqYrEnd"> </span></td>
+				<td class="td-name">Zone:</td>
+				<td colspan="2">
+					<div id="adv-accordion">
+						<h3 id="adv-article">Articles</h3>
+						<div class="adv-query">
+							<p>
+							Article Search
+							</p>
+						</div>
+						<h3 id="adv-book">Books</h3>
+						<div class="adv-query">
+							<p>
+							Books Search
+							</p>
+						</div>
+						<h3 id="adv-collection">Collections</h3>
+						<div class="adv-query">
+							<p>
+							Collections Search
+							</p>
+						</div>
+						<h3 id="adv-list">Lists</h3>
+						<div class="adv-query">
+							<p>
+							Lists Search
+							</p>
+						</div>
+						<h3 id="adv-map">Maps</h3>
+						<div class="adv-query">
+							<p>
+							Map Search
+							</p>
+						</div>
+						<h3 id="adv-music">Music</h3>
+						<div class="adv-query">
+							<p>
+							Music Search
+							</p>
+						</div>
+						<h3 id="adv-newspaper">Newspaper</h3>
+						<div class="adv-query">
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td>
+										<select id="adv-newspaper-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td>
+										<select id="adv-newspaper-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Month</label>
+									</td>
+									<td>
+										<select id="adv-newspaper-month">
+											<option value="" selected></option>
+											<option value="01">January</option>
+											<option value="02">February</option>
+											<option value="03">March</option>
+											<option value="04">April</option>
+											<option value="05">May</option>
+											<option value="06">June</option>
+											<option value="07">July</option>
+											<option value="08">August</option>
+											<option value="09">September</option>
+											<option value="10">October</option>
+											<option value="11">November</option>
+											<option value="12">December</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-newspaper-publication">
+										  <option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Category</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-newspaper-category">
+											<option value="" selected></option>
+											<option value="Article">Article</option>
+											<option value="Advertising">Advertising</option>
+											<option value="Literature">Literature</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Word Count</label>
+									</td>
+									<td colspan="2"><input id="adv-newspaper-wordcount" type="text" /></td>
+								</tr>
+							</table>
+						</div>
+						<h3 id="adv-picture">Pictures</h3>
+						<div class="adv-query">
+							<p>
+							Pictures Search
+							</p>
+						</div>
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -84,8 +219,8 @@
 				<td></td>
 				<td>
 					<div class="pm-button-bar">
-						<button id="nq-pb11" onClick="resetQueryPane()">Clear form</button>
-						<button id="nq-pb12" onClick="_doQuery(0)">Execute query</button>
+						<button id="nq-pb11" onClick="resetQueryPane()">Reset</button>
+						<button id="nq-pb12" onClick="_doQuery(0)">Search</button>
 					</div>
 				</td>
 			</tr>
@@ -96,7 +231,174 @@
 		</table>
 	</div>
 	<div id="q-custom">
-		<p>Work in Progress</p>
+		<p>Work in Progress - Not Yet Functioning - JW</p>
+		<table>
+			<tr>
+				<td colspan="3"><h3>Custom Search</h3></td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<p>
+						Custom Search allows you to search within multiple zones within Trove,
+						as well as choosing which data is returned.
+					</p>
+					<p>
+						To begin, enter your search terms and select a zone...
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td class="td-name">Search Term:</td>
+				<td colspan="2"><input id="aq1" type="text" /></td>
+			</tr>
+			<tr>
+				<td class="td-name">NOT:</td>
+				<td colspan="2"><input id="aq2" type="text" /></td>
+			</tr>
+			<tr>
+				<td class="td-name">Zone:</td>
+				<td colspan="2">
+					<div id="cus-accordion">
+						<h3 id="cus-article">Articles</h3>
+						<div class="cus-query">
+							<p>
+							Article Search
+							</p>
+						</div>
+						<h3 id="cus-book">Books</h3>
+						<div class="cus-query">
+							<p>
+							Books Search
+							</p>
+						</div>
+						<h3 id="cus-collection">Collections</h3>
+						<div class="cus-query">
+							<p>
+							Collections Search
+							</p>
+						</div>
+						<h3 id="cus-list">Lists</h3>
+						<div class="cus-query">
+							<p>
+							Lists Search
+							</p>
+						</div>
+						<h3 id="cus-map">Maps</h3>
+						<div class="cus-query">
+							<p>
+							Map Search
+							</p>
+						</div>
+						<h3 id="cus-music">Music</h3>
+						<div class="cus-query">
+							<p>
+							Music Search
+							</p>
+						</div>
+						<h3 id="cus-newspaper">Newspaper</h3>
+						<div class="cus-query">
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td>
+										<select id="cus-newspaper-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td>
+										<select id="cus-newspaper-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Month</label>
+									</td>
+									<td>
+										<select id="cus-newspaper-month">
+											<option value="" selected></option>
+											<option value="01">January</option>
+											<option value="02">February</option>
+											<option value="03">March</option>
+											<option value="04">April</option>
+											<option value="05">May</option>
+											<option value="06">June</option>
+											<option value="07">July</option>
+											<option value="08">August</option>
+											<option value="09">September</option>
+											<option value="10">October</option>
+											<option value="11">November</option>
+											<option value="12">December</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication</label>
+									</td>
+									<td colspan="2">
+										<select id="cus-newspaper-publication">
+										  <option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Category</label>
+									</td>
+									<td>
+										<select id="cus-newspaper-category">
+											<option value="" selected></option>
+											<option value="Article">Article</option>
+											<option value="cusertising">cusertising</option>
+											<option value="Literature">Literature</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Word Count</label>
+									</td>
+									<td colspan="2"><input id="cus-newspaper-wordcount" type="text" /></td>
+								</tr>
+							</table>
+						</div>
+						<h3 id="cus-picture">Pictures</h3>
+						<div class="cus-query">
+							<p>
+							Pictures Search
+							</p>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<hr class="pm-button-sep">
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<div class="pm-button-bar">
+						<button id="nq-pb11" onClick="resetQueryPane()">Reset</button>
+						<button id="nq-pb12" onClick="_doQuery(0)">Search</button>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">* Searching by article types other than
+					newspaper will not populate data on map view or graphs *</td>
+			</tr>
+		</table>
 	</div>
 	<div id="q-index">
 		<p>Work in Progress</p>

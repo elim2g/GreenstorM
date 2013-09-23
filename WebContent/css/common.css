@@ -541,11 +541,7 @@ td.sel-accept {
 	align: right;
 }
 
-input#q1 {
-	width: 462px;
-}
-
-input#aq1 {
+input#q1, input#aq1, input#aq2 {
 	width: 462px;
 }
 
@@ -607,4 +603,44 @@ li.help {
 
 ul.lev2 {
 	padding-left: 10px;
+}
+
+.adv-query table {
+	width: 100%;
+}
+
+.adv-query td {
+	width: 33%;
+}
+
+.adv-query select {
+	width: 100%;
+}
+
+.adv-query input[type="text"] {
+	width: 100%;
+}
+
+.cus-query table {
+	width: 100%;
+}
+
+.cus-query td {
+	width: 33%;
+}
+
+.cus-query select {
+	width: 100%;
+}
+
+.cus-query input[type="text"] {
+	width: 100%;
+}
+
+.cus-query#cus-newspaper-wordcount{
+	width: 100%;
+}
+
+.adv-query#adv-newspaper-wordcount{
+	width: 100%;
 }

@@ -22,6 +22,7 @@ var PM_URI = '@PM_PREFIX@';
 var TROVE_URL = 'http://api.trove.nla.gov.au/';
 var TROVE_QUERY_URL = TROVE_URL + 'result?key=';
 var GOOGLE_MAPS_URL = 'http://maps.googleapis.com/maps/api/geocode/json?address=';
+var TROVE_NEWS_TITLES = 'http://api.trove.nla.gov.au/newspaper/titles?key=';
 
 var ALERT = 'Alert';
 var INFO = 'Information';
@@ -69,7 +70,7 @@ var Q_STORE_TABLE = 'qstore-table';
 
 
 var MINYEAR	= '1800';
-var MAXYEAR	= '2000';
+var MAXYEAR	= new Date().getFullYear();
 // %age ranges and associated color for timeline and map pins
 var FREQ_DISTR = [
     [0,0.5, '#ffffff'], [0.5,1, '#ccccff'], [1,1.5, '#6666ff'],
@@ -258,11 +259,10 @@ $(document).ready(function (){
     }
 });
 
-function checkAdvanced(){
+/*function checkAdvanced(){
 	if(id = 'q-advanced'){
 
 		var yearOptionsStart = '<select id="aqYearStart">';
-		var yearOptionsEnd = '<select id="aqYearEnd">';
 		var yearOptions = '';
 		for (var i = MINYEAR; i <= MAXYEAR; i++){
 			yearOptions += '<option>' + i + '</option>';
@@ -293,22 +293,7 @@ function checkAdvanced(){
 		$('#aq1').val("");
 		$('#searchYear').show();
 	}
-}
-
-function hideYear(){
-	$('#z1').on('change', function(){
-		if($('select#z1 option:selected').val() != 'newspaper'){
-			$('#searchYear').hide();
-			$('#aqYearStart').hide();
-			$('#aqYearEnd').hide();
-		} else {
-			$('#searchYear').show();
-			$('#aqYearStart').show();
-			$('#aqYearEnd').show();
-		}
-	});
-}
-
+}*/
 
 /**
 * Invoked by index page onload trigger, does any required configuration.
@@ -319,7 +304,7 @@ function init ()
   script.type = "text/javascript";
   script.src = 'https://maps.googleapis.com/maps/api/js?sensor=false&reigon=AU&callback=_resetMap';
   document.body.appendChild(script);
-
+  
   m_pubCache = new Array();
   m_locationsCache = new Array();
 
@@ -343,6 +328,8 @@ function init ()
   locnEdit(false);
   showHistogram(false);
   showCloud(false);
+  
+  _getNewspaperTitles();
 }
 
 /**
@@ -1201,18 +1188,35 @@ function _createQueryString ()
 	        	'&q=' + encodeURIComponent(m_currentTerm);
 			break;
 		case Q_ADVANCED:
-			m_currentZone = '';
-			m_currentTerm = $('input#aq1').val();
-		  
-			$('#advancedZones :checkbox').each(function(){
-				if(m_currentZone == ''){
-					m_currentZone += this.checked ? this.value : '';
-				} else {
-					m_currentZone += this.checked ? ',' + this.value : '';
-				}
-			});
+			// Add Selected Zone
+			str += '&zone=' + encodeURIComponent(m_currentZone);
 			
-			str = '&zone=' + encodeURIComponent(m_currentZone) + '&q=' + encodeURIComponent(m_currentTerm);
+			// Add Query
+			m_currentTerm = $('input#aq1').val();
+			str += '&q=' + encodeURIComponent(m_currentTerm);
+			
+			// Add Refinements
+			switch (m_currentZone) {
+			case "newspaper":
+				if ($('#adv-newspaper-decade').val() != '') {
+					str += '&l-decade=' + encodeURIComponent($('#adv-newspaper-decade').val());
+				}
+				if ($('#adv-newspaper-year').val() != '') {
+					str += '&l-year=' + encodeURIComponent($('#adv-newspaper-year').val());
+				}
+				if ($('#adv-newspaper-publication').val() != '') {
+					str += '&l-title=' + encodeURIComponent($('#adv-newspaper-publication').val());
+				}
+				if ($('#adv-newspaper-category').val() != '') {
+					str += '&l-category=' + encodeURIComponent($('#adv-newspaper-category').val());
+				}
+				if ($('#adv-newspaper-wordcount').val() != '') {
+					str += '&l-wordcount=' + encodeURIComponent($('#adv-newspaper-wordcount').val());
+				}
+			default:
+				break;
+				alert("Please click a zone to continue...");
+			}
 			break;
 		case Q_CUSTOM:
 			break;
@@ -1228,7 +1232,7 @@ function _createQueryString ()
 function _resetState ()
 {
   _resetMap();
-
+  
   if (m_resultSet !== null) {
     for (var i = 0; i < m_resultSet.length; i++) {
       if (m_resultSet[i].marker !== null) {
@@ -2726,6 +2730,21 @@ function downloadCsv(){
 		document.body.appendChild(a);
 		a.click();
 	}
+}
+
+
+function _getNewspaperTitles() {
+	var queryStr = TROVE_NEWS_TITLES + 'fikbejeg3mvstr6r';
+	queryStr += '&encoding=json&callback=?';
+	$.getJSON(queryStr,function(result){
+		var output = result.response.records.newspaper;
+	    $.each(output, function (i, field){
+	    	$('#adv-newspaper-publication').append('<option value="'+ this.id +'">'+ this.title +'</option>');
+	    	$('#cus-newspaper-publication').append('<option value="'+ this.id +'">'+ this.title +'</option>');
+	    });
+    });
+	$("#adv-newspaper-publication").css("width", "100%");
+	$("#cus-newspaper-publication").css("width", "100%");
 }
 
 // EOF
