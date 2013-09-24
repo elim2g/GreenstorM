@@ -184,6 +184,7 @@
 									<td>
 										<label>Category</label>
 									</td>
+									<!-- Comment -->
 									<td colspan="2">
 										<select id="adv-newspaper-category">
 											<option value="" selected></option>
