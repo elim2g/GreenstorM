@@ -65,14 +65,19 @@
   <path id="build.classes">
     <pathelement location="classes" />
     <fileset dir="lib">
-      <!-- apache libraries -->
-      <include name="mail.jar"/>
-      <include name="log4j-1.2.17.jar"/>
-      <include name="commons-pool-1.6.jar"/>
-      <include name="commons-dbcp-1.4.jar"/>
-      <include name="json_simple-1.1.jar"/>
-      <!-- junit libraries  -->
-      <include name="junit.jar" />
+		<!-- apache libraries -->
+ 		<include name="mail.jar"/>
+		<include name="log4j-1.2.17.jar"/>
+		<include name="commons-pool-1.6.jar"/>
+		<include name="commons-dbcp-1.4.jar"/>
+		<include name="json_simple-1.1.jar"/>
+  
+		<!-- Selenium libraries  -->
+		<include name="selenium-java-2.35.0.jar"/>
+		<include name="guava-14.0.1.jar"/>
+		  
+		<!-- junit libraries  -->
+		<include name="junit.jar" />
     </fileset>
   </path>
 
@@ -153,12 +158,19 @@
  
     <copy todir="${war.image}/WEB-INF/lib">
       <fileset dir="lib">
-        <include name="mail.jar"/>
-        <include name="log4j-1.2.17.jar"/>
-        <include name="commons-pool-1.6.jar"/>
-        <include name="commons-dbcp-1.4.jar"/>
-        <include name="json_simple-1.1.jar"/>
-        <include name="mysql-connector-java-5.1.22-bin.jar"/>
+		<!-- apache libraries -->
+ 		<include name="mail.jar"/>
+		<include name="log4j-1.2.17.jar"/>
+		<include name="commons-pool-1.6.jar"/>
+		<include name="commons-dbcp-1.4.jar"/>
+		<include name="json_simple-1.1.jar"/>
+  
+		<!-- Selenium libraries  -->
+		<include name="selenium-java-2.35.0.jar"/>
+		<include name="guava-14.0.1.jar"/>
+		  
+		<!-- junit libraries  -->
+		<include name="junit.jar" />
       </fileset>
     </copy>
   
@@ -310,8 +322,7 @@
 
     <jar
       destfile="build/${war.file}"
-      excludes="WEB-INF/classes/au/org/paperminer/test/**,
-                WEB-INF/classes/au/org/paperminer/util/**"
+
       basedir="${war.image}">
     </jar>
   </target>
@@ -347,8 +358,63 @@
     </javadoc>
   </target>
 
-  <target name="test" depends="init">
-  </target>
+  <target name="compile-tests">
+		<mkdir dir="build/selenium" />
+		<path id="classpath">
+			<fileset dir="lib" includes="**/*.jar" />
+		</path>
+		<javac srcdir="src/tests" destdir="build/selenium"> 
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+	
+	<target name="test" depends="compile-tests">
+		<path id="classpath">
+			<fileset dir="lib" includes="**/*.jar" />
+			<pathelement location="build/selenium/" />
+		</path>
+			  	
+		<antcall target="start-server"></antcall>
+			<junit haltonfailure="yes">
+				<classpath>
+					<path refid="classpath" />
+				</classpath>
+			    <formatter type="plain" usefile="false" />
+			    <batchtest>
+			    	<fileset dir="build/selenium">
+			        	<include name="**/*Test.class" />
+			       </fileset>
+			    </batchtest>
+			</junit>
+			<echo message="Finished running tests." />	
+			  	
+			    <antcall target="stop-server"></antcall>
+	</target>
+	
+	
+	<target name="start-server">
+		<!-- this is a 'known location' for this -->
+		<java jar="lib/selenium-server-standalone-2.35.0.jar" fork="true" spawn="true">
+			<arg line="-proxyInjectionMode"/>
+		</java>
+	
+		<waitfor maxwait="30" maxwaitunit="second">
+			<and>
+				<socket server="localhost" port="4444"/>
+				<!-- this url will 403, so we say that it should start counting errors at 404 to skip -->
+				<http url="http://localhost:4444/selenium-server/core/index.html" errorsBeginAt="404"/>
+			</and>
+		</waitfor>
+	</target>
+	
+	<target name="stop-server">
+		<get taskname="selenium-shutdown" 
+			src="http://localhost:4444/selenium-server/driver/?cmd=shutDown" 
+			dest="result.txt" ignoreerrors="true" />
+		
+		<echo taskname="selenium-shutdown" 
+			message="DGF Errors during shutdown are expected" />
+	</target>
   
   <target name="deploy.local" depends="war">
     <antcall target="deploy.osx" />
