@@ -30,6 +30,7 @@
      <button id="cc-pb11" type="button" onClick="_processData(null, -2)">Pause query</button>
      <button id="cc-pb13" type="button" onClick="newQuery(true)">Revise query</button>
      <button id="cc-pb12" type="button" onClick="saveQuery(true, 'save-query-pane')">Save query</button>
+     <button id="cc-pb14" type="button" onClick="showRawResults(true)">View Results</button>
     </div>
    </td>
   </tr>
