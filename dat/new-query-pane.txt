@@ -32,19 +32,31 @@
     	$('#adv-newspaper-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
     	$('#cus-newspaper-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
     	$('#adv-article-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	//$('#cus-article-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#cus-article-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#adv-book-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#cus-book-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#adv-collection-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#cus-collection-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
     }
     for (var i = MINYEAR; i <= MAXYEAR; i++){
     	if (i%10 == 0) {
     		$('#adv-newspaper-year').append('<option value="'+i+'">--'+i+'--</option>');
     		$('#cus-newspaper-year').append('<option value="'+i+'">--'+i+'--</option>');
     		$('#adv-article-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		//$('#cus-article-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#cus-article-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#adv-book-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#cus-book-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#adv-collection-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#cus-collection-year').append('<option value="'+i+'">--'+i+'--</option>');
     	} else {
     		$('#adv-newspaper-year').append('<option value="'+i+'">'+i+'</option>');
     		$('#cus-newspaper-year').append('<option value="'+i+'">'+i+'</option>');
     		$('#adv-article-year').append('<option value="'+i+'">'+i+'</option>');
-    		//$('#cus-article-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#cus-article-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#adv-book-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#cus-book-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#adv-collection-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#cus-collection-year').append('<option value="'+i+'">'+i+'</option>');
     	}
     }
 </script>
@@ -150,7 +162,6 @@
 									<td>
 									</td>
 								</tr>
-								
 								<tr>
 									<td>
 										<label>Vendor Database Code</label>
@@ -191,15 +202,123 @@
 						</div>
 						<h3 id="adv-book">Books</h3>
 						<div class="adv-query">
-							<p>
-							Books Search
-							</p>
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-book-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-book-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Language</label>
+									</td>
+									<td colspan="2"><input id="adv-book-language" type="text" /></td>
+								</tr>
+								<tr>
+									<td>
+										<label>book Availability</label>
+									</td><td colspan="2">
+										<select id="adv-book-availability">
+											<option value="" selected></option>
+											<option value="y">Available Online</option>
+											<option value="y/f">Freely Available Online</option>
+											<option value="y/r">Payment, Subscription or Membership Required</option>
+											<option value="y/s">Subscription Required</option>
+											<option value="y/u">Possibly Available Online</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Australian?</label>
+									</td>
+									<td colspan="1">
+										<input type="checkbox" id="adv-book-australian" value="y">
+									</td>
+									<td>
+									</td>
+								</tr>
+							</table>
 						</div>
 						<h3 id="adv-collection">Collections</h3>
 						<div class="adv-query">
-							<p>
-							Collections Search
-							</p>
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-collection-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-collection-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Language</label>
+									</td>
+									<td colspan="2"><input id="adv-collection-language" type="text" /></td>
+								</tr>
+								<tr>
+									<td>
+										<label>Collection Availability</label>
+									</td><td colspan="2">
+										<select id="adv-collection-availability">
+											<option value="" selected></option>
+											<option value="y">Available Online</option>
+											<option value="y/f">Freely Available Online</option>
+											<option value="y/r">Payment, Subscription or Membership Required</option>
+											<option value="y/s">Subscription Required</option>
+											<option value="y/u">Possibly Available Online</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Australian?</label>
+									</td>
+									<td colspan="1">
+										<input type="checkbox" id="adv-collection-australian" value="y">
+									</td>
+									<td>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Occupation?</label>
+									</td>
+									<td colspan="2">
+										<input type="text" id="adv-collection-occupation">
+									</td>
+									<td>
+									</td>
+								</tr>
+							</table>
 						</div>
 						<h3 id="adv-list">Lists</h3>
 						<div class="adv-query">
@@ -446,15 +565,123 @@
 						</div>
 						<h3 id="cus-book">Books</h3>
 						<div class="cus-query">
-							<p>
-							Books Search
-							</p>
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td colspan="2">
+										<select id="cus-book-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td colspan="2">
+										<select id="cus-book-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Language</label>
+									</td>
+									<td colspan="2"><input id="cus-book-language" type="text" /></td>
+								</tr>
+								<tr>
+									<td>
+										<label>book Availability</label>
+									</td><td colspan="2">
+										<select id="cus-book-availability">
+											<option value="" selected></option>
+											<option value="y">Available Online</option>
+											<option value="y/f">Freely Available Online</option>
+											<option value="y/r">Payment, Subscription or Membership Required</option>
+											<option value="y/s">Subscription Required</option>
+											<option value="y/u">Possibly Available Online</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Australian?</label>
+									</td>
+									<td colspan="1">
+										<input type="checkbox" id="cus-book-australian" value="y">
+									</td>
+									<td>
+									</td>
+								</tr>
+							</table>
 						</div>
 						<h3 id="cus-collection">Collections</h3>
 						<div class="cus-query">
-							<p>
-							Collections Search
-							</p>
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td colspan="2">
+										<select id="cus-collection-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td colspan="2">
+										<select id="cus-collection-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Language</label>
+									</td>
+									<td colspan="2"><input id="cus-collection-language" type="text" /></td>
+								</tr>
+								<tr>
+									<td>
+										<label>Collection Availability</label>
+									</td><td colspan="2">
+										<select id="cus-collection-availability">
+											<option value="" selected></option>
+											<option value="y">Available Online</option>
+											<option value="y/f">Freely Available Online</option>
+											<option value="y/r">Payment, Subscription or Membership Required</option>
+											<option value="y/s">Subscription Required</option>
+											<option value="y/u">Possibly Available Online</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Australian?</label>
+									</td>
+									<td colspan="1">
+										<input type="checkbox" id="cus-collection-australian" value="y">
+									</td>
+									<td>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Occupation?</label>
+									</td>
+									<td colspan="2">
+										<input type="text" id="cus-collection-occupation">
+									</td>
+									<td>
+									</td>
+								</tr>
+							</table>
 						</div>
 						<h3 id="cus-list">Lists</h3>
 						<div class="cus-query">

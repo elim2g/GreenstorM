@@ -1239,6 +1239,41 @@ function _createQueryString ()
 				if ($('#adv-article-audience').val() != '') {
 					str += '&l-audience=' + encodeURIComponent($('#adv-article-audience').val());
 				}
+			case "book":
+				if ($('#adv-book-decade').val() != '') {
+					str += '&l-decade=' + encodeURIComponent($('#adv-book-decade').val());
+				}
+				if ($('#adv-book-year').val() != '') {
+					str += '&l-year=' + encodeURIComponent($('#adv-book-year').val());
+				}
+				if ($('#adv-book-language').val() != '') {
+					str += '&l-language=' + encodeURIComponent($('#adv-book-language').val());
+				}
+				if ($('#adv-book-availability').val() != '') {
+					str += '&l-availability=' + encodeURIComponent($('#adv-book-availability').val());
+				}
+				if ($('#adv-book-australian').is(":checked")) {
+					str += '&l-australian=' + encodeURIComponent($('#adv-book-australian').val());
+				}
+			case "collection":
+				if ($('#adv-collection-decade').val() != '') {
+					str += '&l-decade=' + encodeURIComponent($('#adv-collection-decade').val());
+				}
+				if ($('#adv-collection-year').val() != '') {
+					str += '&l-year=' + encodeURIComponent($('#adv-collection-year').val());
+				}
+				if ($('#adv-collection-language').val() != '') {
+					str += '&l-language=' + encodeURIComponent($('#adv-collection-language').val());
+				}
+				if ($('#adv-collection-availability').val() != '') {
+					str += '&l-availability=' + encodeURIComponent($('#adv-collection-availability').val());
+				}
+				if ($('#adv-collection-australian').is(":checked")) {
+					str += '&l-australian=' + encodeURIComponent($('#adv-collection-australian').val());
+				}
+				if ($('#adv-collection-occupation').val() != '') {
+					str += '&l-occupation=' + encodeURIComponent($('#adv-collection-occupation').val());
+				}
 			default:
 				break;
 				alert("Please click a zone to continue...");
