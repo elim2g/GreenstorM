@@ -11,9 +11,11 @@ function BarChartInit() {
 			]
 	};
 	
+	var barData = {animation : false };
+	
 	$('#dnut-legend').html('');
 	
-	var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Bar(barChartData);
+	var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Bar(barChartData, barOptions);
 }
 
 //Generate a Line Chart
@@ -33,7 +35,9 @@ function LineChartInit() {
 		
 	$('#dnut-legend').html('');
 	
-	var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
+	var lineOptions = { animation : false };
+	
+	var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, lineOptions);
 }
 
 //Generate a Doughnut Chart
