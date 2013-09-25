@@ -636,11 +636,3 @@ ul.lev2 {
 .cus-query input[type="text"] {
 	width: 100%;
 }
-
-.cus-query#cus-newspaper-wordcount{
-	width: 100%;
-}
-
-.adv-query#adv-newspaper-wordcount{
-	width: 100%;
-}

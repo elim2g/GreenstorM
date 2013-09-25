@@ -1201,6 +1201,9 @@ function _createQueryString ()
 				}
 				if ($('#adv-newspaper-year').val() != '') {
 					str += '&l-year=' + encodeURIComponent($('#adv-newspaper-year').val());
+					if ($('#adv-newspaper-month').val() != '') {
+						str += '&l-month=' + encodeURIComponent($('#adv-newspaper-month').val());
+					}
 				}
 				if ($('#adv-newspaper-publication').val() != '') {
 					str += '&l-title=' + encodeURIComponent($('#adv-newspaper-publication').val());
@@ -1211,10 +1214,36 @@ function _createQueryString ()
 				if ($('#adv-newspaper-wordcount').val() != '') {
 					str += '&l-wordcount=' + encodeURIComponent($('#adv-newspaper-wordcount').val());
 				}
+			case "article":
+				if ($('#adv-article-decade').val() != '') {
+					str += '&l-decade=' + encodeURIComponent($('#adv-article-decade').val());
+				}
+				if ($('#adv-article-year').val() != '') {
+					str += '&l-year=' + encodeURIComponent($('#adv-article-year').val());
+				}
+				if ($('#adv-article-language').val() != '') {
+					str += '&l-language=' + encodeURIComponent($('#adv-article-language').val());
+				}
+				if ($('#adv-article-availability').val() != '') {
+					str += '&l-availability=' + encodeURIComponent($('#adv-article-availability').val());
+				}
+				if ($('#adv-article-australian').is(":checked")) {
+					str += '&l-australian=' + encodeURIComponent($('#adv-article-australian').val());
+				}
+				if ($('#adv-article-vendordb').val() != '') {
+					str += '&l-vendordb=' + encodeURIComponent($('#adv-article-vendordb').val());
+				}
+				if ($('#adv-article-vendor').val() != '') {
+					str += '&l-vendor=' + encodeURIComponent($('#adv-article-vendor').val());
+				}
+				if ($('#adv-article-audience').val() != '') {
+					str += '&l-audience=' + encodeURIComponent($('#adv-article-audience').val());
+				}
 			default:
 				break;
 				alert("Please click a zone to continue...");
 			}
+			alert(str);
 			break;
 		case Q_CUSTOM:
 			break;
