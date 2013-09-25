@@ -65,19 +65,18 @@
   <path id="build.classes">
     <pathelement location="classes" />
     <fileset dir="lib">
-		<!-- apache libraries -->
- 		<include name="mail.jar"/>
-		<include name="log4j-1.2.17.jar"/>
-		<include name="commons-pool-1.6.jar"/>
-		<include name="commons-dbcp-1.4.jar"/>
-		<include name="json_simple-1.1.jar"/>
-  
-		<!-- Selenium libraries  -->
-		<include name="selenium-java-2.35.0.jar"/>
-		<include name="guava-14.0.1.jar"/>
-		  
-		<!-- junit libraries  -->
-		<include name="junit.jar" />
+      <!-- apache libraries -->
+      <include name="mail.jar"/>
+      <include name="log4j-1.2.17.jar"/>
+      <include name="commons-pool-1.6.jar"/>
+      <include name="commons-dbcp-1.4.jar"/>
+      <include name="json_simple-1.1.jar"/>
+      <include name="guava-14.O.1.jar" />
+      <include name="selenium-java-2.35.O.jar" />
+      <include name="selenium-server-standalone-2.35.0.jar" />
+      
+      <!-- junit libraries  -->
+      <include name="junit.jar" />
     </fileset>
   </path>
 
@@ -158,19 +157,12 @@
  
     <copy todir="${war.image}/WEB-INF/lib">
       <fileset dir="lib">
-		<!-- apache libraries -->
- 		<include name="mail.jar"/>
-		<include name="log4j-1.2.17.jar"/>
-		<include name="commons-pool-1.6.jar"/>
-		<include name="commons-dbcp-1.4.jar"/>
-		<include name="json_simple-1.1.jar"/>
-  
-		<!-- Selenium libraries  -->
-		<include name="selenium-java-2.35.0.jar"/>
-		<include name="guava-14.0.1.jar"/>
-		  
-		<!-- junit libraries  -->
-		<include name="junit.jar" />
+        <include name="mail.jar"/>
+        <include name="log4j-1.2.17.jar"/>
+        <include name="commons-pool-1.6.jar"/>
+        <include name="commons-dbcp-1.4.jar"/>
+        <include name="json_simple-1.1.jar"/>
+        <include name="mysql-connector-java-5.1.22-bin.jar"/>
       </fileset>
     </copy>
   
@@ -322,7 +314,8 @@
 
     <jar
       destfile="build/${war.file}"
-
+      excludes="WEB-INF/classes/au/org/paperminer/test/**,
+                WEB-INF/classes/au/org/paperminer/util/**"
       basedir="${war.image}">
     </jar>
   </target>

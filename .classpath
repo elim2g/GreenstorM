@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="classes" path="src" />
-	<classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC" />
-	<classpathentry kind="con" path="PaperMiner/classes" />
-	<classpathentry kind="lib"
-		path="/usr/share/tomcat7/lib/servlet-api.jar" />
-	<classpathentry kind="con"
-		path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4" />
-	<classpathentry kind="lib" path="lib/commons-dbcp-1.4-javadoc.jar" />
-	<classpathentry kind="lib" path="lib/commons-dbcp-1.4-sources.jar" />
-	<classpathentry kind="lib" path="lib/commons-dbcp-1.4.jar" />
-	<classpathentry kind="lib" path="lib/commons-pool-1.6-javadoc.jar" />
-	<classpathentry kind="lib" path="lib/commons-pool-1.6-sources.jar" />
-	<classpathentry kind="lib" path="lib/commons-pool-1.6.jar" />
-	<classpathentry kind="lib" path="lib/json_simple-1.1.jar" />
-	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar" />
-	<classpathentry kind="lib" path="lib/mail.jar" />
-	<classpathentry kind="lib"
-		path="lib/mysql-connector-java-5.1.22-bin.jar" />
-	<classpathentry kind="lib" path="lib/guava-14.0.1.jar" />
-	<classpathentry kind="lib" path="lib/selenium-java-2.35.0.jar" />
-	<classpathentry kind="output" path="bin" />
+	<classpathentry kind="src" output="classes" path="src"/>
+	<classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
+	<classpathentry kind="con" path="PaperMiner/classes"/>
+	<classpathentry kind="lib" path="/usr/share/tomcat7/lib/servlet-api.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/commons-dbcp-1.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/commons-dbcp-1.4-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-dbcp-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-pool-1.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/commons-pool-1.6-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-pool-1.6.jar"/>
+	<classpathentry kind="lib" path="lib/json_simple-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.22-bin.jar"/>
+	<classpathentry kind="lib" path="lib/guava-14.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-java-2.35.0.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-server-standalone-2.35.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
