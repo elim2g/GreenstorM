@@ -1274,6 +1274,22 @@ function _createQueryString ()
 				if ($('#adv-collection-occupation').val() != '') {
 					str += '&l-occupation=' + encodeURIComponent($('#adv-collection-occupation').val());
 				}
+			case "picture":
+				if ($('#adv-picture-decade').val() != '') {
+					str += '&l-decade=' + encodeURIComponent($('#adv-picture-decade').val());
+				}
+				if ($('#adv-picture-year').val() != '') {
+					str += '&l-year=' + encodeURIComponent($('#adv-picture-year').val());
+				}
+				if ($('#adv-picture-language').val() != '') {
+					str += '&l-language=' + encodeURIComponent($('#adv-picture-language').val());
+				}
+				if ($('#adv-picture-availability').val() != '') {
+					str += '&l-availability=' + encodeURIComponent($('#adv-picture-availability').val());
+				}
+				if ($('#adv-picture-australian').is(":checked")) {
+					str += '&l-australian=' + encodeURIComponent($('#adv-picture-australian').val());
+				}
 			default:
 				break;
 				alert("Please click a zone to continue...");
