@@ -11,27 +11,37 @@
 	<div id="chart-data">
 	<h2>Bar Graph</h2>
 	<h3 id="hd-bargraph-title"></h3>
-	<button id="exprt-bar" onClick="SaveBarGraph();">Save as image</button>
-	<canvas id="canvas" height="500" width="800"></canvas>
 	<script type="text/javascript">
+		var barGraph = 0; var lineGraph = 1; var dnutGraph = 2;
+		var graphType = 0;
+	</script>
+	
+	<button id="changeBar" onClick="ChangeGraph(barGraph);">Bar Graph</button>
+	<button id="changeLine" onClick="ChangeGraph(lineGraph);">Line Graph</button>
+	<button id="changeDnut" onClick="ChangeGraph(dnutGraph);">Doughnut Graph</button>
+	<p></p>
+	<button id="exprt-bar" onClick="SaveGraph();">Save as image</button>
+	
+	<canvas id="canvas" height="500" width="800"></canvas>
+	<script type="text/javascript">	
 		BarChartInit();
-		var myVar=setInterval(function(){RefreshHistogram()},8000);
-		function SaveBarGraph() {
+		
+		var myVar=setInterval(function(){RefreshHistogram(graphType)},8000);
+		
+		function SaveGraph() {
 			var savCanvas = document.getElementById("canvas");  
 			Canvas2Image.saveAsPNG(savCanvas);
 		}
-	</script>
-	<p></p>
-	<h2>Line Graph</h2>
-	<h3 id="hd-linegraph-title"></h3>
-	<button id="exprt-line" onClick="SaveLineGraph();">Save as image</button>
-	<canvas id="canvas2" height="500" width="800"></canvas>
-	<script>   	
-		LineChartInit();
-		function SaveLineGraph() {
-			var savCanvas = document.getElementById("canvas2");  
-			Canvas2Image.saveAsPNG(savCanvas);
+		
+		function ChangeGraph(graph) {
+			switch(graph) {
+				case barGraph: graphType = barGraph; BarChartInit(); break;
+				case lineGraph: graphType = lineGraph; LineChartInit(); break;
+				case dnutGraph: graphType = dnutGraph; DoughnutChartInit(); break;
+			}
 		}
 	</script>
+	<div id="dnut-legend"></div>
+	<h3 id="hd-linegraph-title"></h3>
 	</div>
 </body>
