@@ -328,8 +328,6 @@ function init ()
   locnEdit(false);
   showHistogram(false);
   showCloud(false);
-  
-  _getNewspaperTitles();
 }
 
 /**
@@ -2734,7 +2732,7 @@ function downloadCsv(){
 
 
 function _getNewspaperTitles() {
-	var queryStr = TROVE_NEWS_TITLES + 'fikbejeg3mvstr6r';
+	var queryStr = TROVE_NEWS_TITLES + m_user.key;
 	queryStr += '&encoding=json&callback=?';
 	$.getJSON(queryStr,function(result){
 		var output = result.response.records.newspaper;

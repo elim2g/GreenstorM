@@ -1,6 +1,5 @@
 <!-- jQuery UI functions - JW -->
 <script>
-	_getNewspaperTitles('qld');
 	$(function() {
 		$( "#tabs" ).tabs({
 			beforeActivate: function (event, ui) {
@@ -15,6 +14,9 @@
     		active: false,
     		activate: function () {
             	m_currentZone = ($('.ui-accordion-header-active').attr('id')).replace("adv-","");
+            	if(m_currentZone == "newspaper") {
+            		_getNewspaperTitles();
+            	}
         	}
     	});
     });
