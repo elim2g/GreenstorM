@@ -34,7 +34,7 @@ public class SeleniumTest {
 	    public void Logout() throws Exception {
 	        selenium.open("/PaperMiner");
 	        selenium.click("link=User");
-	        Thread.sleep(300);
+	        Thread.sleep(600);
 	        selenium.click("link=Login or Register");
 	        Thread.sleep(300);
 	        selenium.type("em", "dev@paperminer.com");
@@ -103,19 +103,17 @@ public class SeleniumTest {
 		selenium.type("q1", "celestials");
 		Thread.sleep(1000);
 		selenium.click("id=nq-pb12");
-		Thread.sleep(10000);
+		Thread.sleep(6000);
 		selenium.click("id=cc-pb11");
 		Thread.sleep(1000);
 		selenium.click("link=View");
 		Thread.sleep(1000);
 		selenium.click("link=Raw Results");
 		selenium.click("xpath=(//input[@name='raw-sort-rb'])[2]");
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 		assertTrue(selenium.isTextPresent("13."));
-		selenium.click("css=#raw-view > h3");
-		selenium.click("link=Query");
 		selenium.click("link=New");
-		selenium.click("xpath=(//input[@name='query-rb1'])[2]");
+		selenium.click("id=ui-id-2");
 		selenium.click("id=aq1");
 		Thread.sleep(1000);
 		selenium.type("aq1", "celestials");
@@ -185,7 +183,7 @@ public class SeleniumTest {
         Thread.sleep(500);
         selenium.click("link=New");
         Thread.sleep(500);
-        selenium.type("id=q1", (selenium.getValue("id=q1")));
+        selenium.type("id=q1", "celestials");
         selenium.click("id=nq-pb12");
         Thread.sleep(2000);
         selenium.click("id=cc-pb11");
@@ -213,14 +211,14 @@ public class SeleniumTest {
         
         Thread.sleep(2000);
         selenium.click("link=Query");
-        Thread.sleep(700);
+        Thread.sleep(1000);
         selenium.click("link=New");
         selenium.click("id=aq1");
         Thread.sleep(1000);
         selenium.type("q1", "celestials");
-        Thread.sleep(1000);
+        Thread.sleep(500);
         selenium.click("id=nq-pb12");
-        Thread.sleep(10000);
+        Thread.sleep(13000);
         selenium.click("id=cc-pb11");
         Thread.sleep(1000);
         selenium.click("link=View");
@@ -231,7 +229,8 @@ public class SeleniumTest {
         
         selenium.click("name=raw-sort-rb");
         Thread.sleep(4000);
-        assertTrue(selenium.isTextPresent("1853-03-15\n1855-04-28"));
+        assertTrue(selenium.isTextPresent("1853-03-15"));
+        assertFalse(selenium.isTextPresent("1907-03-19"));
     }
     
     @Test
@@ -268,9 +267,9 @@ public class SeleniumTest {
         Thread.sleep(4000);
         
         selenium.click("xpath=(//input[@name='raw-sort-rb'])[2]");
-        Thread.sleep(4000);
-        assertTrue(selenium.isTextPresent("13.756592\n8.742218 "));
-        
+        Thread.sleep(3000);
+        assertTrue(selenium.isTextPresent("13."));
+        assertFalse(selenium.isTextPresent("0."));
     }
     
     @Test
@@ -290,7 +289,7 @@ public class SeleniumTest {
         
         Thread.sleep(2000);
         selenium.click("link=Query");
-        Thread.sleep(700);
+        Thread.sleep(1000);
         selenium.click("link=New");
         selenium.click("id=aq1");
         Thread.sleep(1000);
@@ -308,8 +307,8 @@ public class SeleniumTest {
         
         selenium.click("xpath=(//input[@name='raw-sort-rb'])[3]");
         Thread.sleep(4000);
-        assertTrue(selenium.isTextPresent("000008\n000009"));
-        
+        assertTrue(selenium.isTextPresent("000008"));
+        assertFalse(selenium.isTextPresent("000275"));
     }
     
     @Test
@@ -347,8 +346,8 @@ public class SeleniumTest {
         
         selenium.click("xpath=(//input[@name='raw-sort-rb'])[4]");
         Thread.sleep(4000);
-        assertTrue(selenium.isTextPresent("1897-04-15\n1923-01-30"));
-        
+        assertTrue(selenium.isTextPresent("1897-04-15"));
+        assertFalse(selenium.isTextPresent("1904-06-11"));
     }
     
     @Test
