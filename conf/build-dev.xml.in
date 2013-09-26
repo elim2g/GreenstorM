@@ -39,7 +39,7 @@
   <property name="javadocs" value="docs/api" />
   <property name="war.image" value="build/war" />
   <property name="app.name" value="PaperMiner" />
-  <property name="war.file" value="@WAR_FILE@.war" />
+  <property name="war.file" value="PaperMiner.war" />
   <property name="war.props" value="${war.image}/WEB-INF/classes/conf/preferences.xml" />
 
   <!-- Library paths -->
@@ -48,8 +48,8 @@
   <property name="mysql.connector" value="${mysql-connector.lib.dir}/mysql-connector-java-5.1.22-bin.jar" />
 
   
-  <property name="tomcat-lib-dir" value="@TOMCAT_LIB_DIR@" />
-  <property name="deploy.target" value="@CATALINA_HOME_DIR@/webapps" />
+  <property name="tomcat-lib-dir" value="/usr/share/tomcat7/lib" />
+  <property name="deploy.target" value="/var/lib/tomcat7/webapps" />
 
   <property name="ppk" value="/Users/Ron/.ssh/id_dsa" />
   <property name="dev-scp-user" value="chernich" />
@@ -65,19 +65,18 @@
   <path id="build.classes">
     <pathelement location="classes" />
     <fileset dir="lib">
-    	<!-- apache libraries -->
- 		<include name="mail.jar"/>
-		<include name="log4j-1.2.17.jar"/>
-		<include name="commons-pool-1.6.jar"/>
-		<include name="commons-dbcp-1.4.jar"/>
-		<include name="json_simple-1.1.jar"/>
-  
-		<!-- Selenium libraries  -->
-		<include name="selenium-java-2.35.0.jar"/>
-		<include name="guava-14.0.1.jar"/>
-		  
-		<!-- junit libraries  -->
-		<include name="junit.jar" />
+      <!-- apache libraries -->
+      <include name="mail.jar"/>
+      <include name="log4j-1.2.17.jar"/>
+      <include name="commons-pool-1.6.jar"/>
+      <include name="commons-dbcp-1.4.jar"/>
+      <include name="json_simple-1.1.jar"/>
+      <include name="guava-14.O.1.jar" />
+      <include name="selenium-java-2.35.O.jar" />
+      <include name="selenium-server-standalone-2.35.0.jar" />
+      
+      <!-- junit libraries  -->
+      <include name="junit.jar" />
     </fileset>
   </path>
 
@@ -158,19 +157,12 @@
  
     <copy todir="${war.image}/WEB-INF/lib">
       <fileset dir="lib">
-        <!-- apache libraries -->
- 		<include name="mail.jar"/>
-		<include name="log4j-1.2.17.jar"/>
-		<include name="commons-pool-1.6.jar"/>
-		<include name="commons-dbcp-1.4.jar"/>
-		<include name="json_simple-1.1.jar"/>
-  
-		<!-- Selenium libraries  -->
-		<include name="selenium-java-2.35.0.jar"/>
-		<include name="guava-14.0.1.jar"/>
-		  
-		<!-- junit libraries  -->
-		<include name="junit.jar" />
+        <include name="mail.jar"/>
+        <include name="log4j-1.2.17.jar"/>
+        <include name="commons-pool-1.6.jar"/>
+        <include name="commons-dbcp-1.4.jar"/>
+        <include name="json_simple-1.1.jar"/>
+        <include name="mysql-connector-java-5.1.22-bin.jar"/>
       </fileset>
     </copy>
   
@@ -189,7 +181,7 @@
     </copy>
     
     <replace file="${war.image}/index.html"
-      token="@PM_BASE@" value="@INDEX_BASE@" />
+      token="@PM_BASE@" value="/PaperMiner/" />
     
 
     <!-- IMAGES -->
@@ -225,7 +217,7 @@
     
     <!-- webapp deploy path -->
     <replace file="${war.image}/js/pm.js"
-      token="@PM_PREFIX@" value="@URI_PREFIX@" />
+      token="@PM_PREFIX@" value="/PaperMiner" />
     
 
     <!-- XML CONF FILES -->
@@ -243,7 +235,7 @@
     <replace file="${war.image}/WEB-INF/web.xml"
       token="@DEBUG@" value="true" />
     <replace file="${war.image}/WEB-INF/web.xml"
-      token="@SERVER_NAME@" value="@DEPLOY_HOST@" />
+      token="@SERVER_NAME@" value="paperminer2.qern.qcif.edu.au" />
     
     <copy todir="${war.image}/META-INF">
       <fileset dir="${web.dir}/META-INF">
@@ -359,9 +351,6 @@
     </javadoc>
   </target>
 
-  <target name="test" depends="init">
-  </target>
-  
   <target name="deploy.local" depends="war">
     <antcall target="deploy.osx" />
     <antcall target="deploy.ubuntu" />
@@ -387,6 +376,6 @@
 
 
 
-  <target name="all" depends="app,test,war" />
+  <target name="all" depends="app,war" />
 
 </project>
