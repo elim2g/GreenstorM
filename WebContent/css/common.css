@@ -5,8 +5,6 @@
 */
 body {
 	background: white url(../images/paper11.gif);
-	width: 840px;
-	margin: 0;
 	padding: 0;
 }
 
@@ -15,7 +13,7 @@ div.content {
 	font-size: 16px;
 	color: black;
 	width: 840px;
-	margin-left: 20px;
+	margin: 0 auto;
 }
 
 div#header-bar {
@@ -228,11 +226,8 @@ li {
 }
 
 .spinner {
-	width: 60px;
-	height: 60px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	padding-right: 30px;
+	width: 50px;
+	height: 50px;
 }
 
 #nav-wrapper {
@@ -553,16 +548,20 @@ button#btn-pause {
 	padding: 0;
 	border: none;
 	background: none;
-	visibility: hidden;
 	cursor: pointer;
 }
 
-div#div-progress {
-	font-size: 100%;
-	color: #707070;
-	width: 200px;
+div#progress-container {
+	font-size: 110%;
+	width: 250px;
 	vertical-align: top;
 	text-align: right;
+	border: solid 1px #000000;
+	border-radius: 8px;
+	background-color: #eeeeee;
+	visibility: hidden;
+	margin-bottom: 8px;
+	margin-right: 100px;
 }
 
 span.sub-header {

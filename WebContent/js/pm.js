@@ -240,6 +240,7 @@ var m_currentTerm = null;
 var m_currentZone = null;
 var m_currentQuery = null;
 var m_locations = null;
+var testing = false;
 
 //Histogram global vars
 var H_STARTYEAR = 1800;
@@ -308,16 +309,18 @@ function init ()
   m_pubCache = new Array();
   m_locationsCache = new Array();
 
-  $('button#map-zero').button();
-  $('#radio-map').buttonset();
-  _initSlider();
-  _getUserPrefs();
-  getMenu();
-  
   // check for remember me cookie and log user in if found
   if ($.cookie('email') !== undefined && $.cookie('didLogout') !== 'true') {
 	  rememberedUser = true;
 	  doLogin('ok');
+  }
+
+  $('button#map-zero').button();
+  $('#radio-map').buttonset();
+  _initSlider();
+  _getUserPrefs();
+  if (testing == false) {
+	  getMenu(); 
   }
    
   // pre-load some panes but don't display
@@ -770,8 +773,18 @@ function showCloud (show)
   }
   
   if (show) {
-	  _showPane(_selById(CLOUD_VIEW));	  
-	  _updateCloud(h_labels, h_data, 'div#year-cloud');
+	  _showPane(_selById(CLOUD_VIEW));	
+	  h_handlers = [];
+	  labels = _histLabelArray();
+	  
+	  for (var i = 0; i < labels.length; i++) {
+		  h_handlers.push = { click: function() {
+						  		m_currentQuery += '&date=' + labels[i];
+						  		_processData(null, -2);
+						  		_doQuery(0);
+  	  						}};
+	  }
+	  _updateCloud(h_labels, h_data, 'div#year-cloud', h_handlers);
   }
 
 }
@@ -779,14 +792,18 @@ function showCloud (show)
 /**
  * Creates a cloud for the current search criteria * 
  */
-function _updateCloud(labelArray, weightArray, container, linkArray) {
+function _updateCloud(labelArray, weightArray, container, handlersArray) {
 	var cloudArray = [];
 	$(container).empty();
 	
   	for (var i = 0; i < labelArray.length; i++) {
-  		cloudArray[i] = { text: labelArray[i], weight: weightArray[i] };	                
-  	}
-  	
+  		cloudArray[i] = {
+  							text: labelArray[i], 
+  							weight: weightArray[i],
+  							handlers: handlersArray[i]
+  						}; 
+  	};	      
+	
     $(function() {
       	$(container).jQCloud(cloudArray, { delayedMode: true });
     });
@@ -1309,63 +1326,64 @@ function _createQueryString ()
 */
 function _resetState ()
 {
-  _resetMap();
-  
-  if (m_resultSet !== null) {
-    for (var i = 0; i < m_resultSet.length; i++) {
-      if (m_resultSet[i].marker !== null) {
-        m_resultSet[i].marker.setPosition(null);
-        m_resultSet[i].marker = null;
-      }
-    }
-  }
-  
-  if (m_locationsCache !== null) {
-    for (var lid in m_locationsCache) {
-      var locn = m_locationsCache[lid];
-      if (locn.listener != null) {
-        google.maps.event.removeListener(locn.listener);
-        locn.listener = null;
-      }
-      if (locn.popup != null) {
-        locn.popup.close();
-        locn.popup = null;
-      }
-      if (locn.marker !== null) {
-        locn.marker.setVisible(false);
-        locn.marker.setPosition(null);
-        locn.marker = null;
-      }
-    }
-  }
-  
-  m_queryId++;
-  m_run = true;
-  m_paused = false;
-  m_totalRecs = 0;
-  m_fetchSize = 4;
-  m_fetchStart = 0;
-  m_totalTime = 0;
-  m_rawRecordId = -1;
-  m_locationsSum = 0;
-  m_trefIndex = new Array();
-  m_resultSet = new Array();
-  m_yearCount = new Array();
-  m_locations = new Array();
-  m_rawDateIndex = new Array();
-  m_locationsCache = new Array();
-  m_currentQuery = _createQueryString();
-  $('div#raw-list-container').html('');
-  $('div#raw-record-container').html('');
-  $('#ctl-table button').button('disable');
-  $('#cc-pb11').button('option', 'label', 'Pause Query');
-  $('#cc-pb11').button('disable');
-  $('button#btn-pause').attr('src', 'images/button_grey_pause');
-  $('button#btn-pause').css('visibility', 'hidden');
-  var rbGroup = $('input[name="raw-sort-rb"]');
-  rbGroup.prop('checked', false);
-  rbGroup[3].checked = true;
-  $('div#y2k-timeline div').remove();
+	if (testing == false) {
+	  _resetMap();
+	  
+	  if (m_resultSet !== null) {
+	    for (var i = 0; i < m_resultSet.length; i++) {
+	      if (m_resultSet[i].marker !== null) {
+	        m_resultSet[i].marker.setPosition(null);
+	        m_resultSet[i].marker = null;
+	      }
+	    }
+	  }
+	  
+	  if (m_locationsCache !== null) {
+	    for (var lid in m_locationsCache) {
+	      var locn = m_locationsCache[lid];
+	      if (locn.listener != null) {
+	        google.maps.event.removeListener(locn.listener);
+	        locn.listener = null;
+	      }
+	      if (locn.popup != null) {
+	        locn.popup.close();
+	        locn.popup = null;
+	      }
+	      if (locn.marker !== null) {
+	        locn.marker.setVisible(false);
+	        locn.marker.setPosition(null);
+	        locn.marker = null;
+	      }
+	    }
+	  }
+	  
+	  m_queryId++;
+	  m_run = true;
+	  m_paused = false;
+	  m_totalRecs = 0;
+	  m_fetchSize = 4;
+	  m_fetchStart = 0;
+	  m_totalTime = 0;
+	  m_rawRecordId = -1;
+	  m_locationsSum = 0;
+	  m_trefIndex = new Array();
+	  m_resultSet = new Array();
+	  m_yearCount = new Array();
+	  m_locations = new Array();
+	  m_rawDateIndex = new Array();
+	  m_locationsCache = new Array();
+	  m_currentQuery = _createQueryString();
+	  $('div#raw-list-container').html('');
+	  $('div#raw-record-container').html('');
+	  $('#ctl-table button').button('disable');
+	  $('#cc-pb11').button('option', 'label', 'Pause Query');
+	  $('#cc-pb11').button('disable');
+	  $('img#img-pause').attr('src', 'images/button_grey_pause.png');
+	  var rbGroup = $('input[name="raw-sort-rb"]');
+	  rbGroup.prop('checked', false);
+	  rbGroup[3].checked = true;
+	  $('div#y2k-timeline div').remove();
+	}
 }
 
 function _updateTimeDisplay ()
@@ -1390,7 +1408,7 @@ function _doQuery (pos){
   if (pos === 0) {
     _resetState();
     $('#cc-pb11').button('enable');
-    $('button#btn-pause').css('visibility', 'visible');
+    $('div#progress-container').css('visibility', 'visible');
   }
   var queryId = m_queryId;
   if (m_fetchSize < MAX_FETCH_SIZE) {
@@ -1423,6 +1441,32 @@ function _doQuery (pos){
   $('#busy-box').activity();
   _updateCurrQueryPane();
 }
+
+(function($){
+    $.extend({
+        // Case insensative inArray
+        inArrayIn: function(elem, arr, i){
+            // not looking for a string anyways, use default method
+            if (typeof elem !== 'string'){
+                return $.inArray.apply(this, arguments);
+            }
+            // confirm array is populated
+            if (arr){
+                var len = arr.length;
+                    i = i ? (i < 0 ? Math.max(0, len + i) : i) : 0;
+                elem = elem.toLowerCase();
+                for (; i < len; i++){
+                    if (i in arr && arr[i].toLowerCase() == elem){
+                        return i;
+                    }
+                }
+            }
+            // stick with inArray/indexOf and return -1 on no match
+            return -1;
+        }
+    });
+})(jQuery);
+
 
 /**
 * Extracts records from a TROVE response placing them in global array.
@@ -1475,8 +1519,14 @@ function _processData (data, pos, id)
 						  m_resultSet[tempPos + k] = { zone: zoneInfo.id, data: zoneResult[k], marker:null };
 						  m_resultSet[tempPos + k].data.text = null;
 						  m_trefIndex[zoneResult[k]['id']] = tempPos + k;
+						  for (var m = 0; m < zoneInfo.tags.length; m++) {
+							  var value = m_resultSet[tempPos + k].data;
+							  if (jQuery.inArrayIn(zoneInfo.tags[m].title, value) == -1) {
+								  //alert(zoneInfo.tags[m].title);
+							  }
+						  }
 					  }
-				  }
+				  }	 
 			  }
 		  }
 	  }
@@ -1492,7 +1542,7 @@ function _processData (data, pos, id)
       else {
         $('#busy-box').activity(false);
         $('#cc-pb11').button('disable');
-        $('button#btn-pause').css('visibility', 'hidden');
+        $('div#progress-container').css('visibility', 'hidden');
         m_run = false;
         ++m_queryId;
       }
@@ -2074,7 +2124,7 @@ function _updateSearchProgressFields() {
     $('td#z11').html(m_currentZone);
     $('td#n11').html(m_totalRecs);
     $('td#n12').html(m_resultSet == null ? 0 : m_resultSet.length);
-    $('div#div-progress').html(m_resultSet == null ? "" : m_resultSet.length + " / " + m_totalRecs + "<br>records retrieved</br>");
+    $('span#progress').html(m_resultSet == null ? "" : m_resultSet.length + " / " + m_totalRecs + "<br>retrieved</br>");
 }
 
 /**
@@ -2808,6 +2858,15 @@ function downloadCsv(){
 		document.body.appendChild(a);
 		a.click();
 	}
+	
+	
+	// --------------- TEST FUNCTION   -------------------- //
+	function test() {
+		_getUserPrefs();
+		_doQuery(0);
+	}
+	
+
 }
 
 
