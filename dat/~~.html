@@ -39,6 +39,12 @@
     	$('#cus-collection-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
     	$('#adv-picture-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
     	$('#cus-picture-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#adv-list-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#cus-list-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#adv-map-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#cus-map-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#adv-music-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
+    	$('#cus-music-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
     }
     for (var i = MINYEAR; i <= MAXYEAR; i++){
     	if (i%10 == 0) {
@@ -52,6 +58,12 @@
     		$('#cus-collection-year').append('<option value="'+i+'">--'+i+'--</option>');
     		$('#adv-picture-year').append('<option value="'+i+'">--'+i+'--</option>');
     		$('#cus-picture-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#adv-list-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#cus-list-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#adv-map-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#cus-map-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#adv-music-year').append('<option value="'+i+'">--'+i+'--</option>');
+    		$('#cus-music-year').append('<option value="'+i+'">--'+i+'--</option>');
     	} else {
     		$('#adv-newspaper-year').append('<option value="'+i+'">'+i+'</option>');
     		$('#cus-newspaper-year').append('<option value="'+i+'">'+i+'</option>');
@@ -63,6 +75,12 @@
     		$('#cus-collection-year').append('<option value="'+i+'">'+i+'</option>');
     		$('#adv-picture-year').append('<option value="'+i+'">'+i+'</option>');
     		$('#cus-picture-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#adv-list-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#cus-list-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#adv-map-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#cus-map-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#adv-music-year').append('<option value="'+i+'">'+i+'</option>');
+    		$('#cus-music-year').append('<option value="'+i+'">'+i+'</option>');
     	}
     }
 </script>
@@ -328,21 +346,158 @@
 						</div>
 						<h3 id="adv-list">Lists</h3>
 						<div class="adv-query">
-							<p>
-							Lists Search
-							</p>
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-list-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-list-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>List Availability</label>
+									</td><td colspan="2">
+										<select id="adv-list-availability">
+											<option value="" selected></option>
+											<option value="y">Available Online</option>
+											<option value="y/f">Freely Available Online</option>
+											<option value="y/r">Payment, Subscription or Membership Required</option>
+											<option value="y/s">Subscription Required</option>
+											<option value="y/u">Possibly Available Online</option>
+										</select>
+									</td>
+								</tr>
+							</table>
 						</div>
 						<h3 id="adv-map">Maps</h3>
 						<div class="adv-query">
-							<p>
-							Map Search
-							</p>
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-map-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-map-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Language</label>
+									</td>
+									<td colspan="2"><input id="adv-map-language" type="text" /></td>
+								</tr>
+								<tr>
+									<td>
+										<label>Map Availability</label>
+									</td><td colspan="2">
+										<select id="adv-map-availability">
+											<option value="" selected></option>
+											<option value="y">Available Online</option>
+											<option value="y/f">Freely Available Online</option>
+											<option value="y/r">Payment, Subscription or Membership Required</option>
+											<option value="y/s">Subscription Required</option>
+											<option value="y/u">Possibly Available Online</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Australian?</label>
+									</td>
+									<td colspan="1">
+										<input type="checkbox" id="adv-map-australian" value="y">
+									</td>
+									<td>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Map Zoom</label>
+									</td>
+									<td colspan="2"><input id="adv-map-zoom" type="text" /></td>
+								</tr>
+							</table>
 						</div>
 						<h3 id="adv-music">Music</h3>
 						<div class="adv-query">
-							<p>
-							Music Search
-							</p>
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-music-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td colspan="2">
+										<select id="adv-music-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Language</label>
+									</td>
+									<td colspan="2"><input id="adv-music-language" type="text" /></td>
+								</tr>
+								<tr>
+									<td>
+										<label>music Availability</label>
+									</td><td colspan="2">
+										<select id="adv-music-availability">
+											<option value="" selected></option>
+											<option value="y">Available Online</option>
+											<option value="y/f">Freely Available Online</option>
+											<option value="y/r">Payment, Subscription or Membership Required</option>
+											<option value="y/s">Subscription Required</option>
+											<option value="y/u">Possibly Available Online</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Australian?</label>
+									</td>
+									<td colspan="1">
+										<input type="checkbox" id="adv-music-australian" value="y">
+									</td>
+									<td>
+									</td>
+								</tr>
+							</table>
 						</div>
 						<h3 id="adv-newspaper">Newspaper</h3>
 						<div class="adv-query">
@@ -740,21 +895,158 @@
 						</div>
 						<h3 id="cus-list">Lists</h3>
 						<div class="cus-query">
-							<p>
-							Lists Search
-							</p>
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td colspan="2">
+										<select id="cus-list-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td colspan="2">
+										<select id="cus-list-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>List Availability</label>
+									</td><td colspan="2">
+										<select id="cus-list-availability">
+											<option value="" selected></option>
+											<option value="y">Available Online</option>
+											<option value="y/f">Freely Available Online</option>
+											<option value="y/r">Payment, Subscription or Membership Required</option>
+											<option value="y/s">Subscription Required</option>
+											<option value="y/u">Possibly Available Online</option>
+										</select>
+									</td>
+								</tr>
+							</table>
 						</div>
 						<h3 id="cus-map">Maps</h3>
 						<div class="cus-query">
-							<p>
-							Map Search
-							</p>
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td colspan="2">
+										<select id="cus-map-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td colspan="2">
+										<select id="cus-map-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Language</label>
+									</td>
+									<td colspan="2"><input id="cus-map-language" type="text" /></td>
+								</tr>
+								<tr>
+									<td>
+										<label>Map Availability</label>
+									</td><td colspan="2">
+										<select id="cus-map-availability">
+											<option value="" selected></option>
+											<option value="y">Available Online</option>
+											<option value="y/f">Freely Available Online</option>
+											<option value="y/r">Payment, Subscription or Membership Required</option>
+											<option value="y/s">Subscription Required</option>
+											<option value="y/u">Possibly Available Online</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Australian?</label>
+									</td>
+									<td colspan="1">
+										<input type="checkbox" id="cus-map-australian" value="y">
+									</td>
+									<td>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Map Zoom</label>
+									</td>
+									<td colspan="2"><input id="cus-map-zoom" type="text" /></td>
+								</tr>
+							</table>
 						</div>
 						<h3 id="cus-music">Music</h3>
 						<div class="cus-query">
-							<p>
-							Music Search
-							</p>
+							<table>
+								<tr>
+									<td>
+										<label>Publication Decade</label>
+									</td>
+									<td colspan="2">
+										<select id="cus-music-decade">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Publication Year</label>
+									</td>
+									<td colspan="2">
+										<select id="cus-music-year">
+											<option value="" selected></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Language</label>
+									</td>
+									<td colspan="2"><input id="cus-music-language" type="text" /></td>
+								</tr>
+								<tr>
+									<td>
+										<label>music Availability</label>
+									</td><td colspan="2">
+										<select id="cus-music-availability">
+											<option value="" selected></option>
+											<option value="y">Available Online</option>
+											<option value="y/f">Freely Available Online</option>
+											<option value="y/r">Payment, Subscription or Membership Required</option>
+											<option value="y/s">Subscription Required</option>
+											<option value="y/u">Possibly Available Online</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Australian?</label>
+									</td>
+									<td colspan="1">
+										<input type="checkbox" id="cus-music-australian" value="y">
+									</td>
+									<td>
+									</td>
+								</tr>
+							</table>
 						</div>
 						<h3 id="cus-newspaper">Newspaper</h3>
 						<div class="cus-query">
