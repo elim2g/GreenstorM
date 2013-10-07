@@ -15,16 +15,20 @@ public class SeleniumTest {
     	selenium.start();
     }
     
+    public void LoginFunc() throws Exception {
+        selenium.open("/PaperMiner");
+        Thread.sleep(2000);
+        selenium.click("link=User");
+        Thread.sleep(300);
+        selenium.click("link=Login or Register");
+        Thread.sleep(300);
+        selenium.type("em", "dev@paperminer.com");
+        selenium.click("xpath=(//button[@type='button'])[6]");
+    }
+    
     @Test
     public void Login() throws Exception {
-    	selenium.open("/PaperMiner");
-    	Thread.sleep(12000);
-    	selenium.click("link=User");
-    	Thread.sleep(300);
-    	selenium.click("link=Login or Register");
-    	Thread.sleep(300);
-    	selenium.type("em", "dev@paperminer.com");
-    	selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
     	Thread.sleep(300);
     	selenium.click("link=Query");
     	Thread.sleep(3000);
@@ -33,14 +37,7 @@ public class SeleniumTest {
 	
     @Test
     public void Logout() throws Exception {
-        selenium.open("/PaperMiner");
-        Thread.sleep(2000);
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(300);
-        selenium.type("em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         selenium.click("link=Logout");
         Thread.sleep(3000);
@@ -49,14 +46,7 @@ public class SeleniumTest {
 	
 	@Test
 	public void MenusOpen() throws Exception {
-		selenium.open("/PaperMiner");
-		Thread.sleep(2000);
-		selenium.click("link=User");
-		Thread.sleep(300);
-		selenium.click("link=Login or Register");
-		Thread.sleep(300);
-		selenium.type("em", "dev@paperminer.com");
-		selenium.click("xpath=(//button[@type='button'])[6]");
+	    LoginFunc();
 		Thread.sleep(300);
 		selenium.open("/PaperMiner");
 		selenium.click("link=Home");
@@ -84,15 +74,7 @@ public class SeleniumTest {
 	
 	@Test
 	public void AdvancedSearch() throws Exception {
-		
-	    selenium.open("/PaperMiner/");
-	    Thread.sleep(2000);
-		selenium.click("link=User");
-		Thread.sleep(600);
-		selenium.click("link=Login or Register");
-		Thread.sleep(600);
-		selenium.type("id=em", "dev@paperminer.com");
-		selenium.click("xpath=(//button[@type='button'])[6]");
+	    LoginFunc();
 		Thread.sleep(300);
 		
 		selenium.click("link=Home");
@@ -133,14 +115,7 @@ public class SeleniumTest {
 	
 	@Test
     public void Histograms() throws Exception {
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        selenium.click("css=html");
-        selenium.click("link=Home");
-        selenium.waitForPageToLoad("30000");
-        selenium.click("link=Login or Register");
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+	    LoginFunc();
         Thread.sleep(1000);
         selenium.click("link=New");
         selenium.type("id=q1", "celestials");
@@ -152,12 +127,7 @@ public class SeleniumTest {
     }
     @Test
     public void AdvancedDate() throws Exception {
-        selenium.open("/PaperMiner/#");
-        Thread.sleep(2000);
-	    selenium.click("link=Login or Register");
-	    Thread.sleep(600);
-	    selenium.type("id=em", "dev@paperminer.com");
-	    selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
 	    Thread.sleep(600);
 	    selenium.click("link=New");
 	    selenium.click("xpath=(//input[@name='query-rb1'])[2]");
@@ -179,12 +149,7 @@ public class SeleniumTest {
 	
     @Test
     public void SaveQuery() throws Exception {
-        selenium.open("/PaperMiner/#");
-        Thread.sleep(2000);
-        selenium.click("link=Login or Register");
-        Thread.sleep(500);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(500);
         selenium.click("link=New");
         Thread.sleep(500);
@@ -201,15 +166,7 @@ public class SeleniumTest {
     
     @Test
     public void SortByDate() throws Exception {
-        
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         
         selenium.click("link=Home");
@@ -240,15 +197,7 @@ public class SeleniumTest {
     
     @Test
     public void SortByRelevance() throws Exception {
-        
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         
         selenium.click("link=Home");
@@ -279,15 +228,7 @@ public class SeleniumTest {
     
     @Test
     public void SortBySource() throws Exception {
-        
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         
         selenium.click("link=Home");
@@ -318,15 +259,7 @@ public class SeleniumTest {
     
     @Test
     public void SortByRetrieveOrder() throws Exception {
-        
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         
         selenium.click("link=Home");
@@ -357,15 +290,7 @@ public class SeleniumTest {
     
     @Test
     public void CustomSearchNewspapers() throws Exception {
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         
         selenium.click("link=New");
@@ -384,15 +309,7 @@ public class SeleniumTest {
     
     @Test
     public void CustomSearchBooks() throws Exception {
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         
         selenium.click("link=New");
@@ -411,15 +328,7 @@ public class SeleniumTest {
     
     @Test
     public void CustomSearchPictures() throws Exception {
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         
         selenium.click("link=New");
@@ -438,15 +347,7 @@ public class SeleniumTest {
     
     @Test
     public void CustomSearchArticle() throws Exception {
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         
         selenium.click("link=New");
@@ -465,15 +366,7 @@ public class SeleniumTest {
     
     @Test
     public void CustomSearchMusic() throws Exception {
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         
         selenium.click("link=New");
@@ -492,15 +385,7 @@ public class SeleniumTest {
     
     @Test
     public void CustomSearchMaps() throws Exception {
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         
         selenium.click("link=New");
@@ -519,15 +404,7 @@ public class SeleniumTest {
     
     @Test
     public void CustomSearchLists() throws Exception {
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(300);
         
         selenium.click("link=New");
@@ -546,15 +423,7 @@ public class SeleniumTest {
    
     @Test
     public void MultipleZones() throws Exception {
-        
-        selenium.open("/PaperMiner/");
-        Thread.sleep(2000);
-        selenium.click("link=User");
-        Thread.sleep(600);
-        selenium.click("link=Login or Register");
-        Thread.sleep(600);
-        selenium.type("id=em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
+        LoginFunc();
         Thread.sleep(600);
         
         selenium.click("link=Home");
@@ -571,10 +440,36 @@ public class SeleniumTest {
         selenium.click("link=Raw Results");
         Thread.sleep(3000);
         assertTrue(selenium.isTextPresent("1897-04-15"));
-        assertTrue(selenium.isTextPresent("2004-2009"));
-      
+        assertTrue(selenium.isTextPresent("2004-2009"));      
     }
     
+    @Test
+    public void YearCloudWithResults() throws Exception {
+        LoginFunc();
+        Thread.sleep(500);
+        selenium.click("link=New");
+        Thread.sleep(500);
+        selenium.type("id=q1", "celestials");
+        selenium.click("id=nq-pb12");
+        Thread.sleep(2000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(500);
+        selenium.click("link=Term Cloud");
+        Thread.sleep(500);
+        assertTrue(selenium.isVisible("id=year-cloud"));
+    }
+    
+    @Test
+    public void YearCloudNoResults() throws Exception {
+        LoginFunc();
+        Thread.sleep(500);
+        selenium.click("link=New");
+        Thread.sleep(500);
+        selenium.click("link=Term Cloud");
+        Thread.sleep(1500);
+        assertFalse(selenium.isVisible("id=year-cloud"));
+    }
+        
 	@After
 	public void tearDown() throws Exception {
 		selenium.stop();

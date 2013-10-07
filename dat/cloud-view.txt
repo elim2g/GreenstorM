@@ -1,2 +1,2 @@
 <h3>Tag Cloud</h3>
-<div id="year-cloud" class="tag-cloud"></div>
+<div id="year-cloud" class="tag-cloud" style="display: none"></div>

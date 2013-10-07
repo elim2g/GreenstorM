@@ -773,18 +773,25 @@ function showCloud (show)
   }
   
   if (show) {
-	  _showPane(_selById(CLOUD_VIEW));	
-	  h_handlers = [];
-	  labels = _histLabelArray();
+	  _showPane(_selById(CLOUD_VIEW));
 	  
-	  for (var i = 0; i < labels.length; i++) {
-		  h_handlers.push = { click: function() {
-						  		m_currentQuery += '&date=' + labels[i];
-						  		_processData(null, -2);
-						  		_doQuery(0);
-  	  						}};
+	  if (m_resultSet.length > 0) {
+		  h_handlers = [];
+		  labels = _histLabelArray();
+		  
+		  for (var i = 0; i < labels.length; i++) {
+			  h_handlers.push = { click: function() {
+							  		m_currentQuery += '&date=' + labels[i];
+							  		_processData(null, -2);
+							  		_doQuery(0);
+	  	  						}};
+		  }
+		  _updateCloud(h_labels, h_data, 'div#year-cloud', h_handlers);
+		  $('div#year-cloud').css('display', 'inline-block');
+	  } else {
+		  $('div#year-cloud').css('display', 'none'); 
 	  }
-	  _updateCloud(h_labels, h_data, 'div#year-cloud', h_handlers);
+
   }
 
 }
