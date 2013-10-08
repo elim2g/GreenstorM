@@ -20,8 +20,7 @@
 	$(function() {
     	$( "#adv-accordion" ).accordion({
     		heightStyle: "content",
-    		collapsible: true,
-    		active: false,
+    		collapsible: false,
     		activate: function () {
             	m_currentZone = ($('.ui-accordion-header-active').attr('id')).replace("adv-","");
             	if(m_currentZone == "newspaper") {
