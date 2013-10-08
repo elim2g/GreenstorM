@@ -831,7 +831,7 @@ function showRawResults (show)
   }
   
   if (show) {
-    _sortRaw(4);
+    _sortRaw(2);
     _showPane(_selById(RAW_VIEW));
   }
 }
@@ -1445,7 +1445,7 @@ function _resetState ()
 	  $('img#img-pause').attr('src', 'images/button_grey_pause.png');
 	  var rbGroup = $('input[name="raw-sort-rb"]');
 	  rbGroup.prop('checked', false);
-	  rbGroup[3].checked = true;
+	  rbGroup[1].checked = true;
 	  $('div#y2k-timeline div').remove();
 	}
 }
