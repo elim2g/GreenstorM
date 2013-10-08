@@ -2933,7 +2933,9 @@ function downloadCsv(){
 
 }
 
-
+/** 
+ * Gets a list of newspaper titles from trove and populates the appropriate select box
+ */
 function _getNewspaperTitles() {
 	var queryStr = TROVE_NEWS_TITLES + m_user.key;
 	queryStr += '&encoding=json&callback=?';
@@ -2947,5 +2949,21 @@ function _getNewspaperTitles() {
 	$("#adv-newspaper-publication").css("width", "100%");
 	$("#cus-newspaper-publication").css("width", "100%");
 }
+
+/** 
+ * Gets a list of newspaper titles from trove and populates the appropriate select box
+ */
+function _getTroveContributors() {
+	var queryStr = "http://api.trove.nla.gov.au/contributor?encoding=json&callback=?&key=" + m_user.key;
+	$.getJSON(queryStr,function(result){
+		var output = result.response.contributor;
+	    $.each(output, function (i, field){
+	    	$('#ind-nuc').append('<option value="'+ this.id +'">'+ this.name +'</option>');
+	    	$('#ind-nuc-not').append('<option value="'+ this.id +'">'+ this.name +'</option>');
+	    });
+    });
+}
+
+
 
 // EOF
