@@ -6,12 +6,12 @@ function BarChartInit() {
 				{
 					fillColor : "rgba(151,187,205,0.5)",
 					strokeColor : "rgba(151,187,205,1)",
-					data : _histDataArray(),
+					data : _histDataArray()
 				}
 			]
 	};
 	
-	var barData = {animation : false };
+	var barOptions = {animation : false };
 	
 	$('#dnut-legend').html('');
 	
@@ -28,7 +28,7 @@ function LineChartInit() {
 					strokeColor : "rgba(151,187,205,1)",
 					pointColor : "rgba(151,187,205,1)",
 					pointStrokeColor : "#fff",
-					data : _histDataArray(),
+					data : _histDataArray()
 				}
 			]	
 	};
@@ -44,7 +44,6 @@ function LineChartInit() {
 function DoughnutChartInit() {
 	var tempData = _histDataArray();
 	var dnData = [];
-	//var dnColours = GenClrs(tempData);
 	
 	for(var i = 0; i < tempData.length; i++) {
 		var newChartObject =
@@ -59,15 +58,25 @@ function DoughnutChartInit() {
 	var dnOptions = { animation : false };
 	var myDoughnut = new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(dnData, dnOptions);
 	
+	//Add legend to page
 	$('#dnut-legend').html('');
+	labelsArray = _histLabelArray();
+	var legend = '<table border="1"><tr><th>Colour</th><th>Label</th></tr>';
 	for(var i = 0; i < _histLabelArray().length; i++) {
-		var e = $('<div>mad</div>');
-		$('#dnut-legend').append(e);
+		hexString = GenClr(i);
+		legend = legend + '<tr><td bgcolor="' + hexString + '"></td>';
+		legend = legend + '<td>' + labelsArray[i] + '</td>';
 	}
+	legend = legend + '</table>';
+	
+	//Tack it on the page
+	var e = $(legend);
+	$('#dnut-legend').append(e);
 }
 
 //If the query is not paused (so it is running), refresh the graph
 function RefreshHistogram(graphType) {
+	_updateHistogram();
 	if(!m_paused){
 		switch(graphType) {
 		case 0: BarChartInit(); break;
@@ -79,14 +88,11 @@ function RefreshHistogram(graphType) {
 
 //Generate random hex colour string
 function GenClr(index) {
+	var numSlice = Math.round((256*256*256) / _histLabelArray().length);
+	var intColour = numSlice * index;
+	var strColour = intColour.toString(16);
 	var hexString = "#";
-	var red = (index * 5) % 99;
-	var green = Math.round((index * 12) % 99);
-	var blue = Math.round((index * 16) % 99);
-	
-	hexString += red.toString();
-	hexString += green.toString();
-	hexString += blue.toString();
+	var hexString = hexString + strColour;
 	
 	return hexString;
 }

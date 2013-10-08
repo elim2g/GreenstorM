@@ -249,6 +249,7 @@ var h_labels	= new Array();
 h_labels[0] = " ";
 var h_data = new Array();
 h_data[0]	= 0;
+h_bookmark = 0;
 
 //User global variables
 var rememberedUser = false;
@@ -696,15 +697,16 @@ function showHistogram (show)
 function _updateHistogram()
 {
 	//Update Histogram data
-	
 	h_labels.length = 0;
 	h_data.length = 0;
-	for(var i = 0; i < 250; i++) {
-		h_hashArray[i] = null;
+	if(h_bookmark == 0) {
+		for(var i = 0; i < 250; i++) {
+			h_hashArray[i] = null;
+		}
 	}
 	
 	// Grab dates from results in the global array
-	for (var i = 0; i < m_resultSet.length; i++) {
+	for (var i = h_bookmark; i < m_resultSet.length; i++) {
 		var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
 			if (zoneInfo.dtag.length > 0) {
 				var date = m_resultSet[i].data[zoneInfo.dtag];
@@ -723,6 +725,8 @@ function _updateHistogram()
 				}
 			}
 	}
+	
+	h_bookmark = m_resultSet.length;
 	
 	// Group results into 8 year segments to be graphed easily
 	for(var i = 0; i < 25; i++) {
@@ -1430,6 +1434,7 @@ function _resetState ()
 	  m_totalTime = 0;
 	  m_rawRecordId = -1;
 	  m_locationsSum = 0;
+	  h_bookmark = 0;
 	  m_trefIndex = new Array();
 	  m_resultSet = new Array();
 	  m_yearCount = new Array();
