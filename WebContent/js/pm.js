@@ -770,34 +770,79 @@ function _histDataArray()
 	return h_data;
 }
 
-function showCloud (show)
-{
-  if ($(_selById(CLOUD_VIEW)).length === 0) {
-    _createPane(CLOUD_VIEW, null, null);
-  }
-  
-  if (show) {
-	  _showPane(_selById(CLOUD_VIEW));
-	  
-	  if (m_resultSet.length > 0) {
-		  h_handlers = [];
-		  labels = _histLabelArray();
-		  
-		  for (var i = 0; i < labels.length; i++) {
-			  h_handlers.push = { click: function() {
-							  		m_currentQuery += '&date=' + labels[i];
-							  		_processData(null, -2);
-							  		_doQuery(0);
-	  	  						}};
-		  }
-		  _updateCloud(h_labels, h_data, 'div#year-cloud', h_handlers);
-		  $('div#year-cloud').css('display', 'inline-block');
-	  } else {
-		  $('div#year-cloud').css('display', 'none'); 
-	  }
+function showCloud(show) {
+	if ($(_selById(CLOUD_VIEW)).length === 0) {
+		_createPane(CLOUD_VIEW, null, null);
+	}
 
-  }
+	if (show) {
+		_showPane(_selById(CLOUD_VIEW));
 
+		if (m_resultSet.length > 0) {
+			h_handlers = [];
+			labels = _histLabelArray();
+
+			for ( var i = 0; i < labels.length; i++) {
+
+				h_handlers
+						.push({
+							click : (function(j) {
+								var range = labels[j].split("-");
+								var startYear = range[0];
+								var endYear = range[1];
+								return function() {
+									var filteredArray = _filterYears(startYear,
+											endYear);
+									showRawResults(show);
+									_resetRawRecordList(filteredArray);
+								};
+							}(i))
+						});
+			}
+
+			_updateCloud(h_labels, h_data, 'div#year-cloud', h_handlers);
+			$('div#year-cloud').css('display', 'inline-block');
+		} else {
+			$('div#year-cloud').css('display', 'none');
+		}
+	}
+}
+
+/**
+ * Returns array of entries from m_resultSet that only fall between specified
+ * date range
+ */
+function _filterYears(startYear, endYear) {
+	var sortedArray = _sortRaw(1);
+	var filteredArray = [];
+	var firstIndex = 0;
+	var lastIndex = 0;
+
+	for ( var i = 0; i < sortedArray.length; i++) {
+		var date = sortedArray[i].val;
+		var year = _extractYearFromDate(date);
+
+		if (year == startYear) {
+			firstIndex = sortedArray.indexOf(sortedArray[i]);
+			break;
+		}
+	}
+
+	for ( var j = firstIndex; j < sortedArray.length; j++) {
+		var date = sortedArray[j].val;
+		var year = _extractYearFromDate(date);
+
+		if (year > endYear) {
+			lastIndex = sortedArray.indexOf(sortedArray[j]);
+			break;
+		}
+	}
+
+	for ( var k = firstIndex; k < lastIndex; k++) {
+		filteredArray.push(sortedArray[k]);
+	}
+
+	return filteredArray;
 }
 
 /**
@@ -2497,6 +2542,7 @@ function _sortRaw (sortType)
      $("select#page-options").prop('selectedIndex', 0);
     }
     _resetRawRecordList (tmp);
+    return tmp;
   }
 }
 
@@ -2967,6 +3013,16 @@ function _getTroveContributors() {
 	    	$('#ind-nuc-not').append('<option value="'+ this.id +'">'+ this.name +'</option>');
 	    });
     });
+}
+
+function _extractYearFromDate(date) {
+	var isoDate = /(\d\d\d\d)/;
+	var mat = date.match(isoDate);
+
+	if (mat != null) {
+		year = parseInt(mat[1]);
+		return year;
+	}
 }
 
 

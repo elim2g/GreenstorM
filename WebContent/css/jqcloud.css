@@ -46,4 +46,5 @@ div.jqcloud {
   position: relative;
 }
 
-div.jqcloud span { padding: 0; }
+div.jqcloud span { padding: 0; cursor: pointer; }
+div.jqcloud span:hover { background-color: #e0e0e0; }
