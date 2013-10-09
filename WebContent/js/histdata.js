@@ -88,7 +88,9 @@ function RefreshHistogram(graphType) {
 
 //Generate random hex colour string
 function GenClr(index) {
-	var numSlice = Math.round((256*256*256) / _histLabelArray().length);
+	if(index < 0) throw new Error('Negative index');
+	if(index > _histLabelArray().length) throw new Error('Index too large');
+	var numSlice = Math.floor((256*256*256) / _histLabelArray().length);
 	var intColour = numSlice * index;
 	var strColour = intColour.toString(16);
 	var hexString = "#";
