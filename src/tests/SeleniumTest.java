@@ -469,6 +469,215 @@ public class SeleniumTest {
         Thread.sleep(1500);
         assertFalse(selenium.isVisible("id=year-cloud"));
     }
+    
+    @Test
+    public void testViewResultsButton() throws Exception {
+        LoginFunc();
+        Thread.sleep(600);
+        
+        selenium.click("link=New");
+        Thread.sleep(600);
+        selenium.type("id=q1", "Mungbean");
+        Thread.sleep(600);
+        selenium.click("id=nq-pb12");
+        Thread.sleep(3000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(800);
+        assertTrue(selenium.isTextPresent("1992-03-06"));
+        assertTrue(selenium.isTextPresent("1977-05-04"));
+    }
+    
+    @Test
+    public void testExportPic() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-picture");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "Floods");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(2000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("id=export-csv");
+        Thread.sleep(1000);
+        selenium.click("css=body > a");
+    }
+    
+    @Test
+    public void testExportNewspaper() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-newspaper");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "Floods");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(2000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("id=export-csv");
+        Thread.sleep(1000);
+        selenium.click("css=body > a");
+    }
+    
+    @Test
+    public void testExportArticle() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-article");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "Floods");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(2000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("id=export-csv");
+        Thread.sleep(1000);
+        selenium.click("css=body > a");
+    }
+    
+    @Test
+    public void testExportBook() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-book");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "Floods");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(2000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("id=export-csv");
+        Thread.sleep(1000);
+        selenium.click("css=body > a");
+    }
+    
+    @Test
+    public void testExportCollection() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-collection");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "Floods");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(2000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("id=export-csv");
+        Thread.sleep(1000);
+        selenium.click("css=body > a");
+    }
+    
+    @Test
+    public void testExportList() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-list");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "Floods");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(2000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("id=export-csv");
+        Thread.sleep(1000);
+        selenium.click("css=body > a");
+    }
+    
+    @Test
+    public void testExportMap() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-map");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "Floods");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(2000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("id=export-csv");
+        Thread.sleep(1000);
+        selenium.click("css=body > a");
+    }
+    
+    @Test
+    public void testExportMusic() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-music");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "Floods");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(2000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("id=export-csv");
+        Thread.sleep(1000);
+        selenium.click("css=body > a");
+    }
         
 	@After
 	public void tearDown() throws Exception {
