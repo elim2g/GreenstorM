@@ -326,8 +326,10 @@ public class SeleniumTest {
         selenium.click("id=ui-id-2");
         selenium.click("id=adv-book");
         selenium.type("id=aq1", "Celestials");
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");       
         Thread.sleep(7000);
         selenium.click("id=btn-pause");
+        assertEquals("&zone=book&q=", selenium.getAlert());
         selenium.click("link=View");
         Thread.sleep(700);
         selenium.click("link=Raw Results");

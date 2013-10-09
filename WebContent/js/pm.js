@@ -1379,7 +1379,7 @@ function _createQueryString ()
 				alert("Please click a zone to continue...");
 				break;
 			}
-			alert(str);
+			
 			break;
 		case Q_CUSTOM:
 			break;
@@ -2863,7 +2863,7 @@ function downloadCsv(){
 		a.click();
 	}
 	
-	if(tempPicArray != "ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tThumbnail\tURL\r\n"){
+	if(tempPicArray != "ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tURL\r\n"){
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempPicArray);
 		a.target   = '_blank';
@@ -2891,7 +2891,7 @@ function downloadCsv(){
 	}
 	
 	if(tempMusicArray != "ID\tTitle\tContributor\tDateIssued\tMediaType\tSnippet\tHolding\tRelevance\tVersion\tURL\r\n"){
-		alert("Music");
+;
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempMusicArray);
 		a.target   = '_blank';
@@ -2901,7 +2901,7 @@ function downloadCsv(){
 	}
 	
 	if(tempMapsArray != "ID\tTitle\tMediaType\tHolding\tVersion\tScore\tRelevance\tURL\r\n"){
-		alert("Maps");
+;
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempMapsArray);
 		a.target   = '_blank';
