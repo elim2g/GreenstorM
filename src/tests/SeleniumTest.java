@@ -679,6 +679,7 @@ public class SeleniumTest {
         selenium.click("css=body > a");
     }
         
+    
 	@After
 	public void tearDown() throws Exception {
 		selenium.stop();
