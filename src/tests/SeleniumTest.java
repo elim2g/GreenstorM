@@ -71,47 +71,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("link=Home");
     }
-    
-    @Test
-    public void AdvancedSearch() throws Exception {
-        LoginFunc();
-        Thread.sleep(300);
-        
-        selenium.click("link=Home");
-        
-        Thread.sleep(2000);
-        selenium.click("link=Query");
-        Thread.sleep(700);
-        selenium.click("link=New");
-        selenium.click("id=aq1");
-        Thread.sleep(1000);
-        selenium.type("q1", "celestials");
-        Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(6000);
-        selenium.click("id=cc-pb11");
-        Thread.sleep(1000);
-        selenium.click("link=View");
-        Thread.sleep(1000);
-        selenium.click("link=Raw Results");
-        selenium.click("xpath=(//input[@name='raw-sort-rb'])[2]");
-        Thread.sleep(6000);
-        assertTrue(selenium.isTextPresent("13."));
-        selenium.click("link=New");
-        selenium.click("id=ui-id-2");
-        selenium.click("id=aq1");
-        Thread.sleep(1000);
-        selenium.type("aq1", "celestials");
-        selenium.click("z1b");
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(10000);
-        selenium.click("id=btn-pause");
-        selenium.click("link=View");
-        selenium.click("link=Raw Results");
-        selenium.click("xpath=(//input[@name='raw-sort-rb'])[2]");
-        Thread.sleep(3000);
-        assertTrue(selenium.isTextPresent("9.3"));
-    }
+   
     
     @Test
     public void Histograms() throws Exception {
@@ -123,7 +83,6 @@ public class SeleniumTest {
         Thread.sleep(7000);
         selenium.click("id=btn-pause");
         selenium.click("link=Histogram");
-        
     }
     @Test
     public void AdvancedDate() throws Exception {

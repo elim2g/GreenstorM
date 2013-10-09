@@ -2937,7 +2937,6 @@ function downloadCsv(){
 	}
 	
 	if(tempMusicArray != "ID\tTitle\tContributor\tDateIssued\tMediaType\tSnippet\tHolding\tRelevance\tVersion\tURL\r\n"){
-;
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempMusicArray);
 		a.target   = '_blank';
@@ -2947,7 +2946,6 @@ function downloadCsv(){
 	}
 	
 	if(tempMapsArray != "ID\tTitle\tMediaType\tHolding\tVersion\tScore\tRelevance\tURL\r\n"){
-;
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempMapsArray);
 		a.target   = '_blank';
@@ -2973,15 +2971,12 @@ function downloadCsv(){
 		document.body.appendChild(a);
 		a.click();
 	}
-	
-	
-	// --------------- TEST FUNCTION   -------------------- //
-	function test() {
-		_getUserPrefs();
-		_doQuery(0);
-	}
-	
+}
 
+//--------------- TEST FUNCTION   -------------------- //
+function test() {
+	_getUserPrefs();
+	_doQuery(0);
 }
 
 /** 
