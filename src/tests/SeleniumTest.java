@@ -675,9 +675,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.type("id=q1", "celestials");
         Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
+        startSearchAndPause();
         Thread.sleep(1000);
         selenium.click("link=Term Cloud");
         Thread.sleep(1000);
@@ -705,9 +703,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.type("id=q1", "celestials");
         Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
+        startSearchAndPause();
         Thread.sleep(1000);
         selenium.click("link=Term Cloud");
         Thread.sleep(1000);
@@ -737,9 +733,7 @@ public class SeleniumTest {
         Thread.sleep(2000);        
         advancedSearchArticle("Celestials");
         Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
+        startSearchAndPause();
         Thread.sleep(1000);
         selenium.click("link=Term Cloud");
         Thread.sleep(1000);
@@ -765,8 +759,7 @@ public class SeleniumTest {
         Thread.sleep(2000);        
         advancedSearchArticle("Celestials");
         Thread.sleep(1000);
-        selenium.click("link=Term Cloud");
-        Thread.sleep(1000);
+        startSearchAndPause();
         Thread.sleep(1000);
         selenium.click("id=year-cloud_word_0");
         Thread.sleep(1000);       
@@ -793,9 +786,7 @@ public class SeleniumTest {
         Thread.sleep(2000);        
         advancedSearchBook("Celestials");
         Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
+        startSearchAndPause();
         Thread.sleep(1000);
         selenium.click("link=Term Cloud");
         Thread.sleep(1000);
@@ -820,6 +811,8 @@ public class SeleniumTest {
         LoginFunc();
         Thread.sleep(2000);        
         advancedSearchBook("Celestials");
+        Thread.sleep(1000);
+        startSearchAndPause();
         Thread.sleep(1000);
         selenium.click("link=Term Cloud");
         Thread.sleep(1000);
@@ -920,6 +913,12 @@ public class SeleniumTest {
         selenium.click("id=adv-picture");
         Thread.sleep(1000);
         selenium.type("id=aq1", searchTerm);
+    }
+    
+    private void startSearchAndPause() throws Exception {
+        selenium.click("id=nq-pb12");
+        Thread.sleep(5000);
+        selenium.click("id=btn-pause");
     }
     
     @Test
