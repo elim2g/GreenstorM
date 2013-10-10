@@ -684,7 +684,7 @@
 			</tr>
 			<tr>
 				<td class="td-name">NOT:</td>
-				<td colspan="2"><input id="aq2" type="text" /></td>
+				<td colspan="2"><input id="cus-query-not" type="text" /></td>
 			</tr>
 			<tr>
 				<td class="td-name">Zone:</td>

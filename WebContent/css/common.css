@@ -536,7 +536,7 @@ td.sel-accept {
 	align: right;
 }
 
-input#q1, input#aq1, input#aq2 {
+input#q1, input#aq1, input#adv-query-not, input#cus-query-not {
 	width: 462px;
 }
 

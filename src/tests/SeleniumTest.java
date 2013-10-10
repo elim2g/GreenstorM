@@ -1,13 +1,20 @@
 package tests;
 
+import java.util.ArrayList;
+
 import com.thoughtworks.selenium.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class SeleniumTest {
     private Selenium selenium;
+    public static final int START_YEAR = 1800;
+    public static final int END_YEAR = 2000;
+    
     
     @Before
     public void setUp() throws Exception {
@@ -31,7 +38,7 @@ public class SeleniumTest {
         LoginFunc();
         Thread.sleep(300);
         selenium.click("link=Query");
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         selenium.click("link=New");
     }
     
@@ -652,6 +659,145 @@ public class SeleniumTest {
         selenium.click("id=export-csv");
         Thread.sleep(1000);
         selenium.click("css=body > a");
+    }
+    
+    @Test
+    public void testYearCloudClickOutsideBoundarySimpleQuery() throws Exception {
+        final int lowBoundary = 1903;
+        final int highBoundary = 1912;
+        ArrayList<String> years = new ArrayList();
+        years = addYearsToList(years, START_YEAR, lowBoundary);
+        years = addYearsToList(years, highBoundary, END_YEAR); 
+        
+        LoginFunc();
+        Thread.sleep(1000);        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.type("id=q1", "celestials");
+        Thread.sleep(1000);
+        selenium.click("id=nq-pb12");
+        Thread.sleep(5000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("link=Term Cloud");
+        Thread.sleep(1000);
+        Thread.sleep(1000);
+        selenium.click("id=year-cloud_word_0");
+        Thread.sleep(1000);       
+        assertTrue(selenium.isVisible("id=raw-list-container"));
+        for (String year : years) { 
+            assertFalse(selenium.isTextPresent(year));
+        }
+        Thread.sleep(1000);
+    }
+    
+    @Test
+    public void testYearCloudClickInsideBoundarySimpleQuery() throws Exception {
+        final int lowBoundary = 1904;
+        final int highBoundary = 1911;
+        boolean oneYearExists = false;
+        ArrayList<String> years = new ArrayList();
+        years = addYearsToList(years, lowBoundary, highBoundary);      
+        
+        LoginFunc();
+        Thread.sleep(2000);        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.type("id=q1", "celestials");
+        Thread.sleep(1000);
+        selenium.click("id=nq-pb12");
+        Thread.sleep(5000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("link=Term Cloud");
+        Thread.sleep(1000);
+        Thread.sleep(1000);
+        selenium.click("id=year-cloud_word_0");
+        Thread.sleep(1000);       
+        assertTrue(selenium.isVisible("id=raw-list-container"));
+        for (String year : years) { 
+            if (selenium.isTextPresent(year)) {
+                oneYearExists = true;
+                break;
+            }            
+        }
+        assertTrue(oneYearExists);
+        Thread.sleep(1000);
+    }
+    
+    @Test
+    public void testYearCloudClickOutsideBoundaryAdvancedQueryArticle() throws Exception {
+        final int lowBoundary = 1903;
+        final int highBoundary = 1912;
+        ArrayList<String> years = new ArrayList();
+        years = addYearsToList(years, START_YEAR, lowBoundary);
+        years = addYearsToList(years, highBoundary, END_YEAR); 
+        
+        LoginFunc();
+        Thread.sleep(2000);        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "celestials");
+        Thread.sleep(1000);
+        selenium.click("id=nq-pb12");
+        Thread.sleep(5000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("link=Term Cloud");
+        Thread.sleep(1000);
+        Thread.sleep(1000);
+        selenium.click("id=year-cloud_word_0");
+        Thread.sleep(1000);       
+        assertTrue(selenium.isVisible("id=raw-list-container"));
+        for (String year : years) { 
+            assertFalse(selenium.isTextPresent(year));
+        }
+        Thread.sleep(1000);
+    }
+    
+    @Test
+    public void testYearCloudClickInsideBoundaryAdvancedQueryArtcile() throws Exception {
+        final int lowBoundary = 1904;
+        final int highBoundary = 1911;
+        boolean oneYearExists = false;
+        ArrayList<String> years = new ArrayList();
+        years = addYearsToList(years, lowBoundary, highBoundary);      
+        
+        LoginFunc();
+        Thread.sleep(2000);        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "celestials");
+        Thread.sleep(1000);
+        selenium.click("id=nq-pb12");
+        Thread.sleep(5000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("link=Term Cloud");
+        Thread.sleep(1000);
+        Thread.sleep(1000);
+        selenium.click("id=year-cloud_word_0");
+        Thread.sleep(1000);       
+        assertTrue(selenium.isVisible("id=raw-list-container"));
+        for (String year : years) { 
+            if (selenium.isTextPresent(year)) {
+                oneYearExists = true;
+                break;
+            }            
+        }
+        assertTrue(oneYearExists);
+        Thread.sleep(1000);
+    }
+    
+    private ArrayList<String> addYearsToList(ArrayList list, int firstYear, int endYear) {
+        for (int i = firstYear; i <= endYear; i++) {
+            list.add(String.valueOf(i));
+        }
+        return list;
     }
         
     
