@@ -781,6 +781,62 @@ public class SeleniumTest {
         Thread.sleep(1000);
     }
     
+    @Test
+    public void testYearCloudClickOutsideBoundaryAdvancedQueryBook() throws Exception {
+        final int lowBoundary = 1967;
+        final int highBoundary = 1976;
+        ArrayList<String> years = new ArrayList();
+        years = addYearsToList(years, START_YEAR, lowBoundary);
+        years = addYearsToList(years, highBoundary, END_YEAR); 
+        
+        LoginFunc();
+        Thread.sleep(2000);        
+        advancedSearchBook("Celestials");
+        Thread.sleep(1000);
+        selenium.click("id=nq-pb12");
+        Thread.sleep(5000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("link=Term Cloud");
+        Thread.sleep(1000);
+        Thread.sleep(1000);
+        selenium.click("id=year-cloud_word_0");
+        Thread.sleep(1000);       
+        assertTrue(selenium.isVisible("id=raw-list-container"));
+        for (String year : years) { 
+            assertFalse(selenium.isTextPresent(year));
+        }
+        Thread.sleep(1000);
+    }
+    
+    @Test
+    public void testYearCloudClickInsideBoundaryAdvancedQueryBook() throws Exception {
+        final int lowBoundary = 1968;
+        final int highBoundary = 1975;
+        boolean oneYearExists = false;
+        ArrayList<String> years = new ArrayList();
+        years = addYearsToList(years, lowBoundary, highBoundary);      
+        
+        LoginFunc();
+        Thread.sleep(2000);        
+        advancedSearchBook("Celestials");
+        Thread.sleep(1000);
+        selenium.click("link=Term Cloud");
+        Thread.sleep(1000);
+        Thread.sleep(1000);
+        selenium.click("id=year-cloud_word_0");
+        Thread.sleep(1000);       
+        assertTrue(selenium.isVisible("id=raw-list-container"));
+        for (String year : years) { 
+            if (selenium.isTextPresent(year)) {
+                oneYearExists = true;
+                break;
+            }            
+        }
+        assertTrue(oneYearExists);
+        Thread.sleep(1000);
+    }
+    
     private ArrayList<String> addYearsToList(ArrayList list, int firstYear, int endYear) {
         for (int i = firstYear; i <= endYear; i++) {
             list.add(String.valueOf(i));
@@ -794,10 +850,6 @@ public class SeleniumTest {
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
         selenium.type("id=aq1", searchTerm);
-        Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
     }
     
     private void advancedSearchBook(String searchTerm) throws Exception {
@@ -808,10 +860,6 @@ public class SeleniumTest {
         selenium.click("id=adv-book");
         Thread.sleep(1000);
         selenium.type("id=aq1", searchTerm);
-        Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
     }
     
     private void advancedSearchCollection(String searchTerm) throws Exception {
@@ -822,10 +870,6 @@ public class SeleniumTest {
         selenium.click("id=adv-collection");
         Thread.sleep(1000);
         selenium.type("id=aq1", searchTerm);
-        Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
     }
     
     private void advancedSearchList(String searchTerm) throws Exception {
@@ -836,10 +880,6 @@ public class SeleniumTest {
         selenium.click("id=adv-list");
         Thread.sleep(1000);
         selenium.type("id=aq1", searchTerm);
-        Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
     }
     
     private void advancedSearchMap(String searchTerm) throws Exception {
@@ -850,10 +890,6 @@ public class SeleniumTest {
         selenium.click("id=adv-map");
         Thread.sleep(1000);
         selenium.type("id=aq1", searchTerm);
-        Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
     }
     
     private void advancedSearchMusic(String searchTerm) throws Exception {
@@ -864,10 +900,6 @@ public class SeleniumTest {
         selenium.click("id=adv-music");
         Thread.sleep(1000);
         selenium.type("id=aq1", searchTerm);
-        Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
     }
     
     private void advancedSearchNewspaper(String searchTerm) throws Exception {
@@ -878,10 +910,6 @@ public class SeleniumTest {
         selenium.click("id=adv-newspaper");
         Thread.sleep(1000);
         selenium.type("id=aq1", searchTerm);
-        Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
     }
     
     private void advancedSearchPicture(String searchTerm) throws Exception {
@@ -892,10 +920,6 @@ public class SeleniumTest {
         selenium.click("id=adv-picture");
         Thread.sleep(1000);
         selenium.type("id=aq1", searchTerm);
-        Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
     }
     
     @Test
