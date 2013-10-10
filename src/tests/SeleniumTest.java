@@ -799,6 +799,113 @@ public class SeleniumTest {
         }
         return list;
     }
+    
+    @Test
+    public void testAdvancedPicDecade() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "floods");
+        Thread.sleep(1000);
+        selenium.click("id=adv-picture");
+        Thread.sleep(1000);
+        selenium.select("id=adv-picture-decade", "label=1840's");
+        Thread.sleep(1000);
+        selenium.click("css=#adv-picture-decade > option[value=\"184\"]");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("1845-1924"));
+        assertTrue(selenium.isTextPresent("1841-1900"));
+    }
+    
+    @Test
+    public void testAdvancedPicPubYear() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "floods");
+        Thread.sleep(1000);
+        selenium.click("id=adv-picture");
+        Thread.sleep(1000);
+        selenium.select("id=adv-picture-year", "label=1841");
+        Thread.sleep(1000);
+        selenium.click("css=#adv-picture-year > option[value=\"1841\"]");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("1840-1860"));
+        assertTrue(selenium.isTextPresent("1841-1900"));
+    }
+    
+    
+    @Test
+    public void testAdvancedPicLanguage() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "floods");
+        Thread.sleep(1000);
+        selenium.click("id=adv-picture");
+        Thread.sleep(1000);
+        selenium.type("id=adv-picture-language", "Japanese");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("1885"));
+        assertTrue(selenium.isTextPresent("1890"));
+    }
+    
+    @Test
+    public void testAdvancedPicAustralian() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "floods");
+        Thread.sleep(1000);
+        selenium.click("id=adv-picture");
+        Thread.sleep(1000);
+        selenium.click("id=adv-picture-australian");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(2000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("1923"));
+        assertTrue(selenium.isTextPresent("1941"));
+    }
         
     
     @After
