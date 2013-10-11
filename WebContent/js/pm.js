@@ -63,7 +63,6 @@ var FOOTER_BAR = 'footer-bar';
 var Q_SIMPLE = 'q-simple';
 var Q_ADVANCED = 'q-advanced';
 var Q_CUSTOM = 'q-custom';
-var Q_INDEX = 'q-index';
 var Q_SAVE = 'save-query';
 var Q_STORE = 'stored-queries';
 var Q_STORE_TABLE = 'qstore-table';
