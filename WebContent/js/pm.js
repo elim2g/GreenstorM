@@ -2259,7 +2259,7 @@ function _resetRawRecordList (list)
     var prefix = '';
     var len = list.length;
     var remainder = len % MAX_FETCH_SIZE;
-    var pageCount = (len - remainder) / MAX_FETCH_SIZE;
+    var pageCount = ((len - remainder) / MAX_FETCH_SIZE) + 1;
     var currentPage = 0;
     var lastPage = pageCount - 1;
     var pgStart = 0;
