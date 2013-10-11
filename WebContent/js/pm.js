@@ -260,42 +260,6 @@ $(document).ready(function (){
     }
 });
 
-/*function checkAdvanced(){
-	if(id = 'q-advanced'){
-
-		var yearOptionsStart = '<select id="aqYearStart">';
-		var yearOptions = '';
-		for (var i = MINYEAR; i <= MAXYEAR; i++){
-			yearOptions += '<option>' + i + '</option>';
-		}
-		  
-		yearOptionsStart += yearOptions + '</select>';
-		yearOptionsEnd += yearOptions + '</select>';
-		  
-		$('span#aqYrStart').html(yearOptionsStart);
-		$('span#aqYrEnd').html(yearOptionsEnd);
-
-		$('#aqYearEnd').prop('selectedIndex', 200);
-		  
-		$('#aqYrStart').on('change', function(){
-			yearOptionsEnd = '<select id="aqYearEnd">';
-			yearOptions = '';
-			var newStartYear = $('select#aqYearStart option:selected').val();
-			for (var i = newStartYear; i <= MAXYEAR; i++){
-				yearOptions += '<option>' + i + '</option>';
-			}
-			yearOptionsEnd += yearOptions + '</select>';
-			$('span#aqYrEnd').html(yearOptionsEnd);
-		});
-		  
-		hideYear();
-		
-		$('#z1a').prop('selectedIndex', 0);
-		$('#aq1').val("");
-		$('#searchYear').show();
-	}
-}*/
-
 /**
 * Invoked by index page onload trigger, does any required configuration.
 */
@@ -1215,27 +1179,6 @@ function _openQuery (idx)
 /**
 * Swaps different forms of query
 * @param id The one to make visible
-*//*
-function _showQueryForm (id){
-
-checkAdvanced(id);
-
-$('div#' + m_currentQueryFormPane).toggle('fade','swing',100,
-    function () {
-     if ($('div#' + id).hasClass('hidden')) {
-     $('div#' + id).toggle();
-     $('div#' + id).removeClass('hidden');
-     }
-     $('div#' + id).toggle('fade','swing',100);
-     m_currentQueryFormPane = id;
-    });
-  
-checkAdvanced(id);
-}*/
-
-/**
-* Swaps different forms of query
-* @param id The one to make visible
 */
 function _showStoredQueryForm (id){
   $('div#' + m_currentSaveFormPane).toggle('fade','swing',100,
@@ -1265,7 +1208,6 @@ function _createQueryString ()
 		case Q_ADVANCED:
 			// Add Selected Zone
 			if (!m_currentZone) {m_currentZone = "article";}
-			//alert(m_currentZone);
 			str += '&zone=' + encodeURIComponent(m_currentZone);
 			
 			// Add Query
@@ -1274,6 +1216,10 @@ function _createQueryString ()
 			if ($('#adv-query-not').val() != '') {
 				str += encodeURIComponent(' NOT ' + $('#adv-query-not').val());
 			}
+			
+			///////////////////////////////////////////////////////////////////////////////
+			// Don't Touch the logic before you've actually read how the trove api works //
+			///////////////////////////////////////////////////////////////////////////////
 			
 			switch (m_currentZone) {
 				case "article":
@@ -1635,10 +1581,11 @@ function _processData (data, pos, id)
 						  m_resultSet[tempPos + k] = { zone: zoneInfo.id, data: zoneResult[k], marker:null };
 						  m_resultSet[tempPos + k].data.text = null;
 						  m_trefIndex[zoneResult[k]['id']] = tempPos + k;
+						  // TODO: check this for loop, pretty sure its redundant now?? JW
 						  for (var m = 0; m < zoneInfo.tags.length; m++) {
 							  var value = m_resultSet[tempPos + k].data;
 							  if (jQuery.inArrayIn(zoneInfo.tags[m].title, value) == -1) {
-								  //alert(zoneInfo.tags[m].title);
+								  //alert(zoneInfo.tags[m].title); 
 							  }
 						  }
 					  }
