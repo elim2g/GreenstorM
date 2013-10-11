@@ -830,6 +830,62 @@ public class SeleniumTest {
         Thread.sleep(1000);
     }
     
+    @Test
+    public void testYearCloudClickOutsideBoundaryAdvancedQueryCollection() throws Exception {
+        final int lowBoundary = 1967;
+        final int highBoundary = 1976;
+        ArrayList<String> years = new ArrayList();
+        years = addYearsToList(years, START_YEAR, lowBoundary);
+        years = addYearsToList(years, highBoundary, END_YEAR); 
+        
+        LoginFunc();
+        Thread.sleep(2000);        
+        advancedSearchCollection("Celestials");
+        Thread.sleep(1000);
+        startSearchAndPause();
+        Thread.sleep(1000);
+        selenium.click("link=Term Cloud");
+        Thread.sleep(1000);
+        Thread.sleep(1000);
+        selenium.click("id=year-cloud_word_0");
+        Thread.sleep(1000);       
+        assertTrue(selenium.isVisible("id=raw-list-container"));
+        for (String year : years) { 
+            assertFalse(selenium.isTextPresent(year));
+        }
+        Thread.sleep(1000);
+    }
+    
+    @Test
+    public void testYearCloudClickInsideBoundaryAdvancedQueryCollection() throws Exception {
+        final int lowBoundary = 1968;
+        final int highBoundary = 1975;
+        boolean oneYearExists = false;
+        ArrayList<String> years = new ArrayList();
+        years = addYearsToList(years, lowBoundary, highBoundary);      
+        
+        LoginFunc();
+        Thread.sleep(2000);        
+        advancedSearchCollection("Celestials");
+        Thread.sleep(1000);
+        startSearchAndPause();
+        Thread.sleep(1000);
+        selenium.click("link=Term Cloud");
+        Thread.sleep(1000);
+        Thread.sleep(1000);
+        selenium.click("id=year-cloud_word_0");
+        Thread.sleep(1000);       
+        assertTrue(selenium.isVisible("id=raw-list-container"));
+        for (String year : years) { 
+            if (selenium.isTextPresent(year)) {
+                oneYearExists = true;
+                break;
+            }            
+        }
+        assertTrue(oneYearExists);
+        Thread.sleep(1000);
+    }
+    
     private ArrayList<String> addYearsToList(ArrayList list, int firstYear, int endYear) {
         for (int i = firstYear; i <= endYear; i++) {
             list.add(String.valueOf(i));
