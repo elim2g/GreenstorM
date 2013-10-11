@@ -1,105 +1,10 @@
-<!-- jQuery UI functions - JW -->
-<script>
-	$(function() {
-		$("cus-article-check").button();
-		$("cus-book-check").button();
-		$("cus-collection-check").button();
-		$("cus-list-check").button();
-		$("cus-map-check").button();
-		$("cus-music-check").button();
-		$("cus-newspaper-check").button();
-		$("cus-picture-check").button();
-	});
-	$(function() {
-		$( "#tabs" ).tabs({
-			beforeActivate: function (event, ui) {
-				m_currentQueryFormPane = ui.newPanel.attr('id');
-			}
-		});
-	});
-	$(function() {
-    	$( "#adv-accordion" ).accordion({
-    		heightStyle: "content",
-    		collapsible: false,
-    		activate: function () {
-            	m_currentZone = ($('.ui-accordion-header-active').attr('id')).replace("adv-","");
-            	if(m_currentZone == "newspaper") {
-            		_getNewspaperTitles();
-            	}
-        	}
-    	});
-    });
-    $(function() {
-    	$( "#cus-accordion" ).accordion({
-    		heightStyle: "content",
-    		collapsible: true,
-    		active: false,
-    		//need to set zones somehow
-    	});
-    });
-    for (var i = (MINYEAR/10); i <= (MAXYEAR/10); i++){
-    	$('#adv-newspaper-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#cus-newspaper-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#adv-article-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#cus-article-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#adv-book-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#cus-book-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#adv-collection-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#cus-collection-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#adv-picture-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#cus-picture-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#adv-list-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#cus-list-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#adv-map-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#cus-map-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#adv-music-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    	$('#cus-music-decade').append('<option value="'+i+'">'+i+'0&apos;s</option>');
-    }
-    for (var i = MINYEAR; i <= MAXYEAR; i++){
-    	if (i%10 == 0) {
-    		$('#adv-newspaper-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#cus-newspaper-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#adv-article-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#cus-article-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#adv-book-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#cus-book-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#adv-collection-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#cus-collection-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#adv-picture-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#cus-picture-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#adv-list-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#cus-list-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#adv-map-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#cus-map-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#adv-music-year').append('<option value="'+i+'">--'+i+'--</option>');
-    		$('#cus-music-year').append('<option value="'+i+'">--'+i+'--</option>');
-    	} else {
-    		$('#adv-newspaper-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#cus-newspaper-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#adv-article-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#cus-article-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#adv-book-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#cus-book-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#adv-collection-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#cus-collection-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#adv-picture-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#cus-picture-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#adv-list-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#cus-list-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#adv-map-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#cus-map-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#adv-music-year').append('<option value="'+i+'">'+i+'</option>');
-    		$('#cus-music-year').append('<option value="'+i+'">'+i+'</option>');
-    	}
-    }
-</script>
+<script type="text/javascript" src="js/pm-NewQueryPane-loader.js"></script>
 <h3>New Query</h3>
 <div id="tabs">
 	<ul>
 		<li><a href="#q-simple">Simple Search</a></li>
 		<li><a href="#q-advanced">Advanced Search</a></li>
 		<li><a href="#q-custom">Custom Search</a></li>
-		<li><a href="#q-index">Index Search</a></li>
 	</ul>
 	<div id="q-simple">
 		<table>
@@ -521,7 +426,7 @@
 										</select>
 									</td>
 								</tr>
-								<tr>
+								<tr id="adv-newspaper-year-row">
 									<td>
 										<label>Publication Year</label>
 									</td>
@@ -531,7 +436,7 @@
 										</select>
 									</td>
 								</tr>
-								<tr>
+								<tr id="adv-newspaper-month-row">
 									<td>
 										<label>Publication Month</label>
 									</td>
@@ -684,7 +589,7 @@
 			</tr>
 			<tr>
 				<td class="td-name">NOT:</td>
-				<td colspan="2"><input id="aq2" type="text" /></td>
+				<td colspan="2"><input id="cus-query-not" type="text" /></td>
 			</tr>
 			<tr>
 				<td class="td-name">Zone:</td>
@@ -1070,7 +975,7 @@
 										</select>
 									</td>
 								</tr>
-								<tr>
+								<tr id="cus-newspaper-year-row">
 									<td>
 										<label>Publication Year</label>
 									</td>
@@ -1080,7 +985,7 @@
 										</select>
 									</td>
 								</tr>
-								<tr>
+								<tr id="cus-newspaper-month-row">
 									<td>
 										<label>Publication Month</label>
 									</td>
@@ -1210,8 +1115,5 @@
 					newspaper will not populate data on map view or graphs *</td>
 			</tr>
 		</table>
-	</div>
-	<div id="q-index">
-		<p>Work in Progress</p>
 	</div>
 </div>

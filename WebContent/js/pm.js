@@ -63,7 +63,6 @@ var FOOTER_BAR = 'footer-bar';
 var Q_SIMPLE = 'q-simple';
 var Q_ADVANCED = 'q-advanced';
 var Q_CUSTOM = 'q-custom';
-var Q_INDEX = 'q-index';
 var Q_SAVE = 'save-query';
 var Q_STORE = 'stored-queries';
 var Q_STORE_TABLE = 'qstore-table';
@@ -249,6 +248,7 @@ var h_labels	= new Array();
 h_labels[0] = " ";
 var h_data = new Array();
 h_data[0]	= 0;
+h_bookmark = 0;
 
 //User global variables
 var rememberedUser = false;
@@ -534,9 +534,6 @@ function resetQueryPane ()
 		case Q_CUSTOM :
 			// FIXME: todo
 			break;
-		case Q_INDEX :
-			// FIXME: todo
-			break;
 	  }
 	  _updateCurrQueryPane();
 }
@@ -696,15 +693,16 @@ function showHistogram (show)
 function _updateHistogram()
 {
 	//Update Histogram data
-	
 	h_labels.length = 0;
 	h_data.length = 0;
-	for(var i = 0; i < 250; i++) {
-		h_hashArray[i] = null;
+	if(h_bookmark == 0) {
+		for(var i = 0; i < 250; i++) {
+			h_hashArray[i] = null;
+		}
 	}
 	
 	// Grab dates from results in the global array
-	for (var i = 0; i < m_resultSet.length; i++) {
+	for (var i = h_bookmark; i < m_resultSet.length; i++) {
 		var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
 			if (zoneInfo.dtag.length > 0) {
 				var date = m_resultSet[i].data[zoneInfo.dtag];
@@ -723,6 +721,8 @@ function _updateHistogram()
 				}
 			}
 	}
+	
+	h_bookmark = m_resultSet.length;
 	
 	// Group results into 8 year segments to be graphed easily
 	for(var i = 0; i < 25; i++) {
@@ -766,34 +766,79 @@ function _histDataArray()
 	return h_data;
 }
 
-function showCloud (show)
-{
-  if ($(_selById(CLOUD_VIEW)).length === 0) {
-    _createPane(CLOUD_VIEW, null, null);
-  }
-  
-  if (show) {
-	  _showPane(_selById(CLOUD_VIEW));
-	  
-	  if (m_resultSet.length > 0) {
-		  h_handlers = [];
-		  labels = _histLabelArray();
-		  
-		  for (var i = 0; i < labels.length; i++) {
-			  h_handlers.push = { click: function() {
-							  		m_currentQuery += '&date=' + labels[i];
-							  		_processData(null, -2);
-							  		_doQuery(0);
-	  	  						}};
-		  }
-		  _updateCloud(h_labels, h_data, 'div#year-cloud', h_handlers);
-		  $('div#year-cloud').css('display', 'inline-block');
-	  } else {
-		  $('div#year-cloud').css('display', 'none'); 
-	  }
+function showCloud(show) {
+	if ($(_selById(CLOUD_VIEW)).length === 0) {
+		_createPane(CLOUD_VIEW, null, null);
+	}
 
-  }
+	if (show) {
+		_showPane(_selById(CLOUD_VIEW));
 
+		if (m_resultSet.length > 0) {
+			h_handlers = [];
+			labels = _histLabelArray();
+
+			for ( var i = 0; i < labels.length; i++) {
+
+				h_handlers
+						.push({
+							click : (function(j) {
+								var range = labels[j].split("-");
+								var startYear = range[0];
+								var endYear = range[1];
+								return function() {
+									var filteredArray = _filterYears(startYear,
+											endYear);
+									showRawResults(show);
+									_resetRawRecordList(filteredArray);
+								};
+							}(i))
+						});
+			}
+
+			_updateCloud(h_labels, h_data, 'div#year-cloud', h_handlers);
+			$('div#year-cloud').css('display', 'inline-block');
+		} else {
+			$('div#year-cloud').css('display', 'none');
+		}
+	}
+}
+
+/**
+ * Returns array of entries from m_resultSet that only fall between specified
+ * date range
+ */
+function _filterYears(startYear, endYear) {
+	var sortedArray = _sortRaw(1);
+	var filteredArray = [];
+	var firstIndex = 0;
+	var lastIndex = 0;
+
+	for ( var i = 0; i < sortedArray.length; i++) {
+		var date = sortedArray[i].val;
+		var year = _extractYearFromDate(date);
+
+		if (year == startYear) {
+			firstIndex = sortedArray.indexOf(sortedArray[i]);
+			break;
+		}
+	}
+
+	for ( var j = firstIndex; j < sortedArray.length; j++) {
+		var date = sortedArray[j].val;
+		var year = _extractYearFromDate(date);
+
+		if (year > endYear) {
+			lastIndex = sortedArray.indexOf(sortedArray[j]);
+			break;
+		}
+	}
+
+	for ( var k = firstIndex; k < lastIndex; k++) {
+		filteredArray.push(sortedArray[k]);
+	}
+
+	return filteredArray;
 }
 
 /**
@@ -1211,6 +1256,8 @@ function _createQueryString ()
 			break;
 		case Q_ADVANCED:
 			// Add Selected Zone
+			if (!m_currentZone) {m_currentZone = "article";}
+			alert(m_currentZone);
 			str += '&zone=' + encodeURIComponent(m_currentZone);
 			
 			// Add Query
@@ -1220,167 +1267,167 @@ function _createQueryString ()
 				str += encodeURIComponent(' NOT ' + $('#adv-query-not').val());
 			}
 			
-			// Add Refinements
-			switch (m_currentZone) {
+			///////////////////////////////////////////////////////////////////////////////
+			// Don't Touch the logic before you've actually read how the trove api works //
+			///////////////////////////////////////////////////////////////////////////////
 			
-			case "article":
-				if ($('#adv-article-decade').val() != '') {
-					str += '&l-decade=' + encodeURIComponent($('#adv-article-decade').val());
-				}
-				if ($('#adv-article-year').val() != '') {
-					str += '&l-year=' + encodeURIComponent($('#adv-article-year').val());
-				}
-				if ($('#adv-article-language').val() != '') {
-					str += '&l-language=' + encodeURIComponent($('#adv-article-language').val());
-				}
-				if ($('#adv-article-availability').val() != '') {
-					str += '&l-availability=' + encodeURIComponent($('#adv-article-availability').val());
-				}
-				if ($('#adv-article-australian').is(":checked")) {
-					str += '&l-australian=' + encodeURIComponent($('#adv-article-australian').val());
-				}
-				if ($('#adv-article-vendordb').val() != '') {
-					str += '&l-vendordb=' + encodeURIComponent($('#adv-article-vendordb').val());
-				}
-				if ($('#adv-article-vendor').val() != '') {
-					str += '&l-vendor=' + encodeURIComponent($('#adv-article-vendor').val());
-				}
-				if ($('#adv-article-audience').val() != '') {
-					str += '&l-audience=' + encodeURIComponent($('#adv-article-audience').val());
-				}
-				break;
-			case "book":
-				if ($('#adv-book-decade').val() != '') {
-					str += '&l-decade=' + encodeURIComponent($('#adv-book-decade').val());
-				}
-				if ($('#adv-book-year').val() != '') {
-					str += '&l-year=' + encodeURIComponent($('#adv-book-year').val());
-				}
-				if ($('#adv-book-language').val() != '') {
-					str += '&l-language=' + encodeURIComponent($('#adv-book-language').val());
-				}
-				if ($('#adv-book-availability').val() != '') {
-					str += '&l-availability=' + encodeURIComponent($('#adv-book-availability').val());
-				}
-				if ($('#adv-book-australian').is(":checked")) {
-					str += '&l-australian=' + encodeURIComponent($('#adv-book-australian').val());
-				}
-				break;
-			case "collection":
-				if ($('#adv-collection-decade').val() != '') {
-					str += '&l-decade=' + encodeURIComponent($('#adv-collection-decade').val());
-				}
-				if ($('#adv-collection-year').val() != '') {
-					str += '&l-year=' + encodeURIComponent($('#adv-collection-year').val());
-				}
-				if ($('#adv-collection-language').val() != '') {
-					str += '&l-language=' + encodeURIComponent($('#adv-collection-language').val());
-				}
-				if ($('#adv-collection-availability').val() != '') {
-					str += '&l-availability=' + encodeURIComponent($('#adv-collection-availability').val());
-				}
-				if ($('#adv-collection-australian').is(":checked")) {
-					str += '&l-australian=' + encodeURIComponent($('#adv-collection-australian').val());
-				}
-				if ($('#adv-collection-occupation').val() != '') {
-					str += '&l-occupation=' + encodeURIComponent($('#adv-collection-occupation').val());
-				}
-				break;
-			case "list":
-				if ($('#adv-list-decade').val() != '') {
-					str += '&l-decade=' + encodeURIComponent($('#adv-list-decade').val());
-				}
-				if ($('#adv-list-year').val() != '') {
-					str += '&l-year=' + encodeURIComponent($('#adv-list-year').val());
-				}
-				if ($('#adv-list-availability').val() != '') {
-					str += '&l-availability=' + encodeURIComponent($('#adv-list-availability').val());
-				}
-				break;
-			case "map":
-				if ($('#adv-map-decade').val() != '') {
-					str += '&l-decade=' + encodeURIComponent($('#adv-map-decade').val());
-				}
-				if ($('#adv-map-year').val() != '') {
-					str += '&l-year=' + encodeURIComponent($('#adv-map-year').val());
-				}
-				if ($('#adv-map-language').val() != '') {
-					str += '&l-language=' + encodeURIComponent($('#adv-map-language').val());
-				}
-				if ($('#adv-map-availability').val() != '') {
-					str += '&l-availability=' + encodeURIComponent($('#adv-map-availability').val());
-				}
-				if ($('#adv-map-australian').is(":checked")) {
-					str += '&l-australian=' + encodeURIComponent($('#adv-map-australian').val());
-				}
-				if ($('#adv-map-zoom').val() != '') {
-					str += '&l-zoom=' + encodeURIComponent($('#adv-map-zoom').val());
-				}
-				break;
-			case "music":
-				if ($('#adv-music-decade').val() != '') {
-					str += '&l-decade=' + encodeURIComponent($('#adv-music-decade').val());
-				}
-				if ($('#adv-music-year').val() != '') {
-					str += '&l-year=' + encodeURIComponent($('#adv-music-year').val());
-				}
-				if ($('#adv-music-language').val() != '') {
-					str += '&l-language=' + encodeURIComponent($('#adv-music-language').val());
-				}
-				if ($('#adv-music-availability').val() != '') {
-					str += '&l-availability=' + encodeURIComponent($('#adv-music-availability').val());
-				}
-				if ($('#adv-music-australian').is(":checked")) {
-					str += '&l-australian=' + encodeURIComponent($('#adv-music-australian').val());
-				}
-				break;
-			case "newspaper":
-				if ($('#adv-newspaper-decade').val() != '') {
-					str += '&l-decade=' + encodeURIComponent($('#adv-newspaper-decade').val());
-				}
-				if ($('#adv-newspaper-year').val() != '') {
-					str += '&l-year=' + encodeURIComponent($('#adv-newspaper-year').val());
-					if ($('#adv-newspaper-month').val() != '') {
-						str += '&l-month=' + encodeURIComponent($('#adv-newspaper-month').val());
+			switch (m_currentZone) {
+				case "article":
+					if ($('#adv-article-decade').val() != '') {
+						str += '&l-decade=' + encodeURIComponent($('#adv-article-decade').val());
 					}
+					if ($('#adv-article-year').val() != '') {
+						str += '&l-year=' + encodeURIComponent($('#adv-article-year').val());
+					}
+					if ($('#adv-article-language').val() != '') {
+						str += '&l-language=' + encodeURIComponent($('#adv-article-language').val());
+					}
+					if ($('#adv-article-availability').val() != '') {
+						str += '&l-availability=' + encodeURIComponent($('#adv-article-availability').val());
+					}
+					if ($('#adv-article-australian').is(":checked")) {
+						str += '&l-australian=' + encodeURIComponent($('#adv-article-australian').val());
+					}
+					if ($('#adv-article-vendordb').val() != '') {
+						str += '&l-vendordb=' + encodeURIComponent($('#adv-article-vendordb').val());
+					}
+					if ($('#adv-article-vendor').val() != '') {
+						str += '&l-vendor=' + encodeURIComponent($('#adv-article-vendor').val());
+					}
+					if ($('#adv-article-audience').val() != '') {
+						str += '&l-audience=' + encodeURIComponent($('#adv-article-audience').val());
+					}
+					break;
+				case "book":
+					if ($('#adv-book-decade').val() != '') {
+						str += '&l-decade=' + encodeURIComponent($('#adv-book-decade').val());
+					}
+					if ($('#adv-book-year').val() != '') {
+						str += '&l-year=' + encodeURIComponent($('#adv-book-year').val());
+					}
+					if ($('#adv-book-language').val() != '') {
+						str += '&l-language=' + encodeURIComponent($('#adv-book-language').val());
+					}
+					if ($('#adv-book-availability').val() != '') {
+						str += '&l-availability=' + encodeURIComponent($('#adv-book-availability').val());
+					}
+					if ($('#adv-book-australian').is(":checked")) {
+						str += '&l-australian=' + encodeURIComponent($('#adv-book-australian').val());
+					}
+					break;
+				case "collection":
+					if ($('#adv-collection-decade').val() != '') {
+						str += '&l-decade=' + encodeURIComponent($('#adv-collection-decade').val());
+					}
+					if ($('#adv-collection-year').val() != '') {
+						str += '&l-year=' + encodeURIComponent($('#adv-collection-year').val());
+					}
+					if ($('#adv-collection-language').val() != '') {
+						str += '&l-language=' + encodeURIComponent($('#adv-collection-language').val());
+					}
+					if ($('#adv-collection-availability').val() != '') {
+						str += '&l-availability=' + encodeURIComponent($('#adv-collection-availability').val());
+					}
+					if ($('#adv-collection-australian').is(":checked")) {
+						str += '&l-australian=' + encodeURIComponent($('#adv-collection-australian').val());
+					}
+					if ($('#adv-collection-occupation').val() != '') {
+						str += '&l-occupation=' + encodeURIComponent($('#adv-collection-occupation').val());
+					}
+					break;
+				case "list":
+					if ($('#adv-list-decade').val() != '') {
+						str += '&l-decade=' + encodeURIComponent($('#adv-list-decade').val());
+					}
+					if ($('#adv-list-year').val() != '') {
+						str += '&l-year=' + encodeURIComponent($('#adv-list-year').val());
+					}
+					if ($('#adv-list-availability').val() != '') {
+						str += '&l-availability=' + encodeURIComponent($('#adv-list-availability').val());
+					}
+					break;
+				case "map":
+					if ($('#adv-map-decade').val() != '') {
+						str += '&l-decade=' + encodeURIComponent($('#adv-map-decade').val());
+					}
+					if ($('#adv-map-year').val() != '') {
+						str += '&l-year=' + encodeURIComponent($('#adv-map-year').val());
+					}
+					if ($('#adv-map-language').val() != '') {
+						str += '&l-language=' + encodeURIComponent($('#adv-map-language').val());
+					}
+					if ($('#adv-map-availability').val() != '') {
+						str += '&l-availability=' + encodeURIComponent($('#adv-map-availability').val());
+					}
+					if ($('#adv-map-australian').is(":checked")) {
+						str += '&l-australian=' + encodeURIComponent($('#adv-map-australian').val());
+					}
+					if ($('#adv-map-zoom').val() != '') {
+						str += '&l-zoom=' + encodeURIComponent($('#adv-map-zoom').val());
+					}
+					break;
+				case "music":
+					if ($('#adv-music-decade').val() != '') {
+						str += '&l-decade=' + encodeURIComponent($('#adv-music-decade').val());
+					}
+					if ($('#adv-music-year').val() != '') {
+						str += '&l-year=' + encodeURIComponent($('#adv-music-year').val());
+					}
+					if ($('#adv-music-language').val() != '') {
+						str += '&l-language=' + encodeURIComponent($('#adv-music-language').val());
+					}
+					if ($('#adv-music-availability').val() != '') {
+						str += '&l-availability=' + encodeURIComponent($('#adv-music-availability').val());
+					}
+					if ($('#adv-music-australian').is(":checked")) {
+						str += '&l-australian=' + encodeURIComponent($('#adv-music-australian').val());
+					}
+					break;
+				case "newspaper":
+					if ($('#adv-newspaper-decade').val() != '') {
+						str += '&l-decade=' + encodeURIComponent($('#adv-newspaper-decade').val());
+						if ($('#adv-newspaper-year').val() != '') {
+							str += '&l-year=' + encodeURIComponent($('#adv-newspaper-year').val());
+							if ($('#adv-newspaper-month').val() != '') {
+								str += '&l-month=' + encodeURIComponent($('#adv-newspaper-month').val());
+							}
+						}
+					}
+					if ($('#adv-newspaper-publication').val() != '') {
+						str += '&l-title=' + encodeURIComponent($('#adv-newspaper-publication').val());
+					}
+					if ($('#adv-newspaper-category').val() != '') {
+						str += '&l-category=' + encodeURIComponent($('#adv-newspaper-category').val());
+					}
+					if ($('#adv-newspaper-wordcount').val() != '') {
+						str += '&l-wordcount=' + encodeURIComponent($('#adv-newspaper-wordcount').val());
+					}
+					break;
+				case "picture":
+					if ($('#adv-picture-decade').val() != '') {
+						str += '&l-decade=' + encodeURIComponent($('#adv-picture-decade').val());
+					}
+					if ($('#adv-picture-year').val() != '') {
+						str += '&l-year=' + encodeURIComponent($('#adv-picture-year').val());
+					}
+					if ($('#adv-picture-language').val() != '') {
+						str += '&l-language=' + encodeURIComponent($('#adv-picture-language').val());
+					}
+					if ($('#adv-picture-availability').val() != '') {
+						str += '&l-availability=' + encodeURIComponent($('#adv-picture-availability').val());
+					}
+					if ($('#adv-picture-australian').is(":checked")) {
+						str += '&l-australian=' + encodeURIComponent($('#adv-picture-australian').val());
+					}
+					break;
+				default:
+					alert("Please click a zone to continue...");
+					break;
 				}
-				if ($('#adv-newspaper-publication').val() != '') {
-					str += '&l-title=' + encodeURIComponent($('#adv-newspaper-publication').val());
-				}
-				if ($('#adv-newspaper-category').val() != '') {
-					str += '&l-category=' + encodeURIComponent($('#adv-newspaper-category').val());
-				}
-				if ($('#adv-newspaper-wordcount').val() != '') {
-					str += '&l-wordcount=' + encodeURIComponent($('#adv-newspaper-wordcount').val());
-				}
-				break;
-			case "picture":
-				if ($('#adv-picture-decade').val() != '') {
-					str += '&l-decade=' + encodeURIComponent($('#adv-picture-decade').val());
-				}
-				if ($('#adv-picture-year').val() != '') {
-					str += '&l-year=' + encodeURIComponent($('#adv-picture-year').val());
-				}
-				if ($('#adv-picture-language').val() != '') {
-					str += '&l-language=' + encodeURIComponent($('#adv-picture-language').val());
-				}
-				if ($('#adv-picture-availability').val() != '') {
-					str += '&l-availability=' + encodeURIComponent($('#adv-picture-availability').val());
-				}
-				if ($('#adv-picture-australian').is(":checked")) {
-					str += '&l-australian=' + encodeURIComponent($('#adv-picture-australian').val());
-				}
-				break;
-			default:
-				alert("Please click a zone to continue...");
-				break;
-			}
-			alert(str);
+			// END SWITCH - Zone Type
 			break;
 		case Q_CUSTOM:
 			break;
-	  	case Q_INDEX:
-	  		break;
 	}
   	return str;
 }
@@ -1430,6 +1477,7 @@ function _resetState ()
 	  m_totalTime = 0;
 	  m_rawRecordId = -1;
 	  m_locationsSum = 0;
+	  h_bookmark = 0;
 	  m_trefIndex = new Array();
 	  m_resultSet = new Array();
 	  m_yearCount = new Array();
@@ -2492,6 +2540,7 @@ function _sortRaw (sortType)
      $("select#page-options").prop('selectedIndex', 0);
     }
     _resetRawRecordList (tmp);
+    return tmp;
   }
 }
 
@@ -2858,7 +2907,7 @@ function downloadCsv(){
 		a.click();
 	}
 	
-	if(tempPicArray != "ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tThumbnail\tURL\r\n"){
+	if(tempPicArray != "ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tURL\r\n"){
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempPicArray);
 		a.target   = '_blank';
@@ -2886,7 +2935,6 @@ function downloadCsv(){
 	}
 	
 	if(tempMusicArray != "ID\tTitle\tContributor\tDateIssued\tMediaType\tSnippet\tHolding\tRelevance\tVersion\tURL\r\n"){
-		alert("Music");
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempMusicArray);
 		a.target   = '_blank';
@@ -2896,7 +2944,6 @@ function downloadCsv(){
 	}
 	
 	if(tempMapsArray != "ID\tTitle\tMediaType\tHolding\tVersion\tScore\tRelevance\tURL\r\n"){
-		alert("Maps");
 		var a = document.createElement('a');
 		a.href     = 'data:attachment/csv,' + encodeURIComponent(tempMapsArray);
 		a.target   = '_blank';
@@ -2922,15 +2969,12 @@ function downloadCsv(){
 		document.body.appendChild(a);
 		a.click();
 	}
-	
-	
-	// --------------- TEST FUNCTION   -------------------- //
-	function test() {
-		_getUserPrefs();
-		_doQuery(0);
-	}
-	
+}
 
+//--------------- TEST FUNCTION   -------------------- //
+function test() {
+	_getUserPrefs();
+	_doQuery(0);
 }
 
 /** 
@@ -2962,6 +3006,16 @@ function _getTroveContributors() {
 	    	$('#ind-nuc-not').append('<option value="'+ this.id +'">'+ this.name +'</option>');
 	    });
     });
+}
+
+function _extractYearFromDate(date) {
+	var isoDate = /(\d\d\d\d)/;
+	var mat = date.match(isoDate);
+
+	if (mat != null) {
+		year = parseInt(mat[1]);
+		return year;
+	}
 }
 
 
