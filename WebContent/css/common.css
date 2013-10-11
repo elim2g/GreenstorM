@@ -579,6 +579,10 @@ span.menu-text {
 	font-family: "Lucida Console", Monaco, monospace;
 }
 
+span#page-count-message {
+	font-size: 80%;
+}
+
 input#add-locn-name {
 	width: 200px;
 }
