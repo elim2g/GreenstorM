@@ -1265,7 +1265,7 @@ function _createQueryString ()
 		case Q_ADVANCED:
 			// Add Selected Zone
 			if (!m_currentZone) {m_currentZone = "article";}
-			alert(m_currentZone);
+			//alert(m_currentZone);
 			str += '&zone=' + encodeURIComponent(m_currentZone);
 			
 			// Add Query
