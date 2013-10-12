@@ -895,6 +895,12 @@ public class SeleniumTest {
         return list;
     }
     
+    private void simpleSearch(String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.type("id=q1", searchTerm);
+    }
+    
     private void advancedSearchArticle(String searchTerm) throws Exception {
         selenium.click("link=New");
         Thread.sleep(1000);
@@ -976,6 +982,12 @@ public class SeleniumTest {
     private void startSearchAndPause() throws Exception {
         selenium.click("id=nq-pb12");
         Thread.sleep(5000);
+        selenium.click("id=btn-pause");
+    }
+    
+    private void startSearchAndPause(int waitTime) throws Exception {
+        selenium.click("id=nq-pb12");
+        Thread.sleep(waitTime);
         selenium.click("id=btn-pause");
     }
     
@@ -1347,7 +1359,30 @@ public class SeleniumTest {
         Thread.sleep(500);
         assertTrue(selenium.isTextPresent("ScreenSound Australia"));
     }
-        
+       
+    @Test
+    public void TestPaginateResultsLessThan100() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        simpleSearch("Celestials");
+        Thread.sleep(1000);
+        startSearchAndPause(1000);
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        assertFalse(selenium.isElementPresent("id=page-options"));
+    }
+    
+    @Test
+    public void TestPaginateResultsMoreThan100() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        simpleSearch("Celestials");
+        Thread.sleep(1000);
+        startSearchAndPause(10000);
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        assertTrue(selenium.isElementPresent("id=page-options"));
+    }
     
     @After
     public void tearDown() throws Exception {
