@@ -259,46 +259,28 @@ public class SeleniumTest {
     @Test
     public void AdvancedSearchNewspapers() throws Exception {
         LoginFunc();
-        Thread.sleep(300);
-        
-        selenium.click("link=New");
-        Thread.sleep(700);
-        selenium.click("id=ui-id-2");
-        selenium.click("id=adv-newspaper");
-        selenium.type("id=aq1", "Celestials");
-        
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        selenium.click("id=ui-id-2");
-        Thread.sleep(4000);
-        selenium.click("id=btn-pause");
-        selenium.click("link=View");
-        Thread.sleep(700);
+        Thread.sleep(1000);
+        advancedSearchNewspaper("Celestials");
+        startSearchAndPauseAfter(20);        
+        Thread.sleep(1000);
         selenium.click("link=Raw Results");
-        Thread.sleep(500);
+        Thread.sleep(1000);
         selenium.click("name=raw-sort-rb");
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("1897-04-15"));
     }
     
     @Test
     public void AdvancedSearchBooks() throws Exception {
         LoginFunc();
-        Thread.sleep(600);
-        
-        selenium.click("link=New");
-        Thread.sleep(700);
-        selenium.click("id=ui-id-2");
-        selenium.click("id=adv-book");
-        selenium.type("id=aq1", "Celestials");
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");       
-        Thread.sleep(7000);
-        selenium.click("id=btn-pause");
-        selenium.click("link=View");
-        Thread.sleep(700);
+        Thread.sleep(1000);
+        advancedSearchBook("Celestials");
+        startSearchAndPauseAfter(20);        
+        Thread.sleep(1000);
         selenium.click("link=Raw Results");
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         selenium.click("name=raw-sort-rb");
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("2004-2009"));
     }
     
@@ -319,19 +301,12 @@ public class SeleniumTest {
     @Test
     public void AdvancedSearchArticle() throws Exception {
         LoginFunc();
-        Thread.sleep(300);
-        
-        selenium.click("link=New");
-        Thread.sleep(700);
-        selenium.click("id=ui-id-2");
-        selenium.click("id=adv-article");
-        selenium.type("id=aq1", "Celestials");
-        
-        Thread.sleep(4000);
-        selenium.click("id=btn-pause");
-        selenium.click("link=View");
-        Thread.sleep(700);
+        Thread.sleep(1000);
+        advancedSearchArticle("Celestials");
+        startSearchAndPauseAfter(20);        
+        Thread.sleep(1000);
         selenium.click("link=Raw Results");
+        Thread.sleep(1000);
         selenium.click("name=raw-sort-rb");
         Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("2010"));
@@ -340,21 +315,12 @@ public class SeleniumTest {
     @Test
     public void AdvancedSearchMusic() throws Exception {
         LoginFunc();
-        Thread.sleep(600);
-        
-        selenium.click("link=New");
-        Thread.sleep(700);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(700);
-        selenium.click("id=adv-music");
-        Thread.sleep(700);
-        selenium.type("id=aq1", "Celestials");
-        selenium.click("xpath=(//button[@id='nq-pb12'])[3]");
-        Thread.sleep(4000);
-        selenium.click("id=btn-pause");
-        selenium.click("link=View");
-        Thread.sleep(700);
+        Thread.sleep(1000);
+        advancedSearchMusic("Celestials");
+        startSearchAndPauseAfter(20);        
+        Thread.sleep(1000);
         selenium.click("link=Raw Results");
+        Thread.sleep(1000);
         selenium.click("name=raw-sort-rb");
         Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("19"));
@@ -363,24 +329,15 @@ public class SeleniumTest {
     @Test
     public void AdvancedSearchMaps() throws Exception {
         LoginFunc();
-        Thread.sleep(300);
-        
-        selenium.click("link=New");
-        Thread.sleep(700);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(700);
-        selenium.click("id=adv-map");
-        Thread.sleep(700);
-        selenium.type("id=aq1", "Celestials");
-        selenium.click("xpath=(//button[@id='nq-pb12'])[3]");
-        Thread.sleep(4000);
-        selenium.click("id=btn-pause");
-        selenium.click("link=View");
-        Thread.sleep(700);
+        Thread.sleep(1000);
+        advancedSearchMap("Celestials");
+        startSearchAndPauseAfter(20);        
+        Thread.sleep(1000);
         selenium.click("link=Raw Results");
+        Thread.sleep(1000);
         selenium.click("name=raw-sort-rb");
         Thread.sleep(1000);
-        assertTrue(selenium.isTextPresent("19"));
+        assertTrue(selenium.isTextPresent("0.1297275"));
     }
     
     @Test
