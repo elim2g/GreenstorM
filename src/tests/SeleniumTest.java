@@ -1,5 +1,6 @@
 package tests;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.thoughtworks.selenium.*;
@@ -88,9 +89,9 @@ public class SeleniumTest {
         selenium.click("id=nq-pb12");
         Thread.sleep(7000);
         selenium.click("id=btn-pause");
-        selenium.click("link=Histogram");
-        
+        selenium.click("link=Histogram");        
     }
+    
     @Test
     public void AdvancedDate() throws Exception {
         LoginFunc();
@@ -991,6 +992,45 @@ public class SeleniumTest {
         selenium.click("id=btn-pause");
     }
     
+    private void startSearchAndPauseAfter(int results) throws Exception {
+        selenium.click("id=nq-pb12");
+        int count = 0;
+        String split[];
+        String text = "";
+        
+        while (count < results) {
+            text = selenium.getText("id=progress");
+            split = text.split(" / ");
+            count = Integer.parseInt(split[0]);
+            Thread.sleep(50);
+        }
+    }
+    
+    private void startSearchAndPause(String element, String contains) throws Exception {
+        selenium.click("id=nq-pb12");
+        String text = selenium.getText(element);
+        while (!text.contains(contains)) {
+            text = selenium.getText(element);
+            Thread.sleep(50);
+        }
+    }
+    
+    @Test
+    public void testStartSearchAndPauseAfter() throws Exception {        
+        
+        LoginFunc();
+        final int testNumber = 120;
+        Thread.sleep(1000);
+        simpleSearch("Celestials");
+        startSearchAndPauseAfter(testNumber);
+
+        String text = selenium.getText("id=progress");
+        String split[] = text.split(" / ");
+        int count = Integer.parseInt(split[0]);
+        
+        assertTrue(count >= testNumber);
+    }
+    
     @Test
     public void testAdvancedPicDecade() throws Exception {
         LoginFunc();
@@ -1383,7 +1423,7 @@ public class SeleniumTest {
         selenium.click("id=cc-pb14");
         assertTrue(selenium.isElementPresent("id=page-options"));
     }
-    
+       
     @After
     public void tearDown() throws Exception {
         selenium.stop();
