@@ -1168,6 +1168,7 @@ function _openQuery (idx)
     newQuery(true);
     break;
   case 'a':
+    $('select#z1').val(m_currentZone);
     break;
   case 'c':
     break;
