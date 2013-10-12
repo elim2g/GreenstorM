@@ -107,6 +107,7 @@ public class SeleniumTest {
         Thread.sleep(5000);
         selenium.click("id=cc-pb11");
         selenium.click("link=Raw Results");
+        selenium.click("name=raw-sort-rb");
         Thread.sleep(2000);
         assertTrue(selenium.isTextPresent("1900"));
         assertTrue(selenium.isTextPresent("1920"));
@@ -304,19 +305,14 @@ public class SeleniumTest {
     @Test
     public void AdvancedSearchPictures() throws Exception {
         LoginFunc();
-        Thread.sleep(300);
-        
-        selenium.click("link=New");
-        Thread.sleep(700);
-        selenium.click("id=ui-id-2");
-        selenium.click("id=adv-picture");
-        selenium.type("id=aq1", "Celestials");
-        
-        Thread.sleep(4000);
-        selenium.click("id=btn-pause");
-        selenium.click("link=View");
-        Thread.sleep(700);
+        Thread.sleep(1000);
+        advancedSearchPicture("Celestials");
+        startSearchAndPauseAfter(20);        
+        Thread.sleep(1000);
         selenium.click("link=Raw Results");
+        Thread.sleep(1000);
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("1855"));
     }
     
@@ -336,6 +332,8 @@ public class SeleniumTest {
         selenium.click("link=View");
         Thread.sleep(700);
         selenium.click("link=Raw Results");
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("2010"));
     }
     
@@ -357,6 +355,8 @@ public class SeleniumTest {
         selenium.click("link=View");
         Thread.sleep(700);
         selenium.click("link=Raw Results");
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("19"));
     }
     
@@ -378,6 +378,8 @@ public class SeleniumTest {
         selenium.click("link=View");
         Thread.sleep(700);
         selenium.click("link=Raw Results");
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("19"));
     }
     
@@ -399,6 +401,7 @@ public class SeleniumTest {
         selenium.click("link=View");
         Thread.sleep(700);
         selenium.click("link=Raw Results");
+        selenium.click("name=raw-sort-rb");
         Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("19"));
     }
@@ -420,6 +423,7 @@ public class SeleniumTest {
         Thread.sleep(5000);
         selenium.click("id=cc-pb11");
         selenium.click("link=Raw Results");
+        selenium.click("name=raw-sort-rb");
         Thread.sleep(3000);
         assertTrue(selenium.isTextPresent("1897-04-15"));
         assertTrue(selenium.isTextPresent("2004-2009"));      
@@ -1010,6 +1014,7 @@ public class SeleniumTest {
             count = Integer.parseInt(split[0]);
             Thread.sleep(50);
         }
+        selenium.click("id=btn-pause");
     }
     
     private void startSearchAndPause(String element, String contains) throws Exception {
@@ -1019,6 +1024,7 @@ public class SeleniumTest {
             text = selenium.getText(element);
             Thread.sleep(50);
         }
+        selenium.click("id=btn-pause");
     }
     
     @Test
