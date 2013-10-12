@@ -1412,7 +1412,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         simpleSearch("Celestials");
         Thread.sleep(1000);
-        startSearchAndPause(1000);
+        startSearchAndPauseAfter(8);
         Thread.sleep(1000);
         selenium.click("id=cc-pb14");
         assertFalse(selenium.isElementPresent("id=page-options"));
@@ -1424,7 +1424,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         simpleSearch("Celestials");
         Thread.sleep(1000);
-        startSearchAndPause(10000);
+        startSearchAndPauseAfter(101);
         Thread.sleep(1000);
         selenium.click("id=cc-pb14");
         assertTrue(selenium.isElementPresent("id=page-options"));
