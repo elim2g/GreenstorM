@@ -992,6 +992,12 @@ public class SeleniumTest {
         selenium.click("id=btn-pause");
     }
     
+    /**
+     * Starts a search and pauses immediately after greater than or equal to 
+     * the parameter "results" have been processed
+     * @param results
+     * @throws Exception
+     */
     private void startSearchAndPauseAfter(int results) throws Exception {
         selenium.click("id=nq-pb12");
         int count = 0;
@@ -1016,7 +1022,7 @@ public class SeleniumTest {
     }
     
     @Test
-    public void testStartSearchAndPauseAfter() throws Exception {        
+    public void testStartSearchAndPauseAfter() throws Exception {      
         
         LoginFunc();
         final int testNumber = 120;
