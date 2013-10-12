@@ -723,8 +723,8 @@ public class SeleniumTest {
     
     @Test
     public void testYearCloudClickOutsideBoundaryAdvancedQueryArticle() throws Exception {
-        final int lowBoundary = 1903;
-        final int highBoundary = 1912;
+        final int lowBoundary = 1983;
+        final int highBoundary = 1992;
         ArrayList<String> years = new ArrayList();
         years = addYearsToList(years, START_YEAR, lowBoundary);
         years = addYearsToList(years, highBoundary, END_YEAR); 
@@ -749,8 +749,8 @@ public class SeleniumTest {
     
     @Test
     public void testYearCloudClickInsideBoundaryAdvancedQueryArtcile() throws Exception {
-        final int lowBoundary = 1904;
-        final int highBoundary = 1911;
+        final int lowBoundary = 1984;
+        final int highBoundary = 1991;
         boolean oneYearExists = false;
         ArrayList<String> years = new ArrayList();
         years = addYearsToList(years, lowBoundary, highBoundary);      
@@ -760,6 +760,8 @@ public class SeleniumTest {
         advancedSearchArticle("Celestials");
         Thread.sleep(1000);
         startSearchAndPause();
+        Thread.sleep(1000);
+        selenium.click("link=Term Cloud");
         Thread.sleep(1000);
         selenium.click("id=year-cloud_word_0");
         Thread.sleep(1000);       
@@ -832,8 +834,8 @@ public class SeleniumTest {
     
     @Test
     public void testYearCloudClickOutsideBoundaryAdvancedQueryCollection() throws Exception {
-        final int lowBoundary = 1967;
-        final int highBoundary = 1976;
+        final int lowBoundary = 1943;
+        final int highBoundary = 1952;
         ArrayList<String> years = new ArrayList();
         years = addYearsToList(years, START_YEAR, lowBoundary);
         years = addYearsToList(years, highBoundary, END_YEAR); 
@@ -858,8 +860,8 @@ public class SeleniumTest {
     
     @Test
     public void testYearCloudClickInsideBoundaryAdvancedQueryCollection() throws Exception {
-        final int lowBoundary = 1968;
-        final int highBoundary = 1975;
+        final int lowBoundary = 1944;
+        final int highBoundary = 1951;
         boolean oneYearExists = false;
         ArrayList<String> years = new ArrayList();
         years = addYearsToList(years, lowBoundary, highBoundary);      
