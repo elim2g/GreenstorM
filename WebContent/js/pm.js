@@ -609,11 +609,12 @@ function saveQuery (show, opt)
       var query = encodeURIComponent(m_currentQuery);
       var qType = (m_currentQueryFormPane === Q_SIMPLE) ? 's' :
                   (m_currentQueryFormPane === Q_ADVANCED) ? 'a' : 'c';
+      var zones = m_currentZone;
       if (descr.length === 0) {
         _popupDialog(ALERT, 'You must provide a description for your query.');
       }
       else {
-        $.get(PM_URI + '/pm/qsave?d=' + descr + '&q=' + query + '&t=' + qType + '&n=' + m_totalRecs, function(data) {
+        $.get(PM_URI + '/pm/qsave?d=' + descr + '&q=' + query + '&t=' + qType + '&n=' + m_totalRecs + '&z=' + zones, function(data) {
           if (data != 'ok') {
             _popupDialog(ALERT, data);
           }
@@ -1103,12 +1104,23 @@ function _updateStoreQueriesPane ()
     }
     else {
       $(_selById(Q_STORE_TABLE)).html('<tr><td>You have ' + m_qStore.length + ' Stored queries</td></tr>');
-      var str = '<tr><th class="pm-hdr" colspan="2">Query Description</th><th class="pm-hdr">Last Run</th><th class="pm-hdr">Result count</th></tr>\n';
+      var str = '';
+      str = '<tr>';
+      str += '<th class="pm-hdr" colspan="2">Query Description</th>';
+      str += '<th class="pm-hdr">Type</th>';
+      str += '<th class="pm-hdr">Zone(s)</th>';
+      str += '<th class="pm-hdr">Last Run</th>';
+      str += '<th class="pm-hdr">Result count</th>';
+      str += '</tr>\n';
       for (var i = 0; i < m_qStore.length; i++) {
         var clz = (i % 2) ? 'tr-odd' : 'tr-evn';
+        var type = m_qStore[i].query_type == 's' ? 'Simple' : 'a' ? 'Advanced' : 'c' ? 'Custom' : ''; 
+        
         var descr = m_qStore[i].descr;
         str += '<tr class="' + clz + '">\n<td class="cb-col"><input type="checkbox" id="dqcb' + i +'"></td>\n';
         str += '<td><a href="#" onClick="_openQuery(' + i + ')">' + descr + '</td>\n';
+        str += '<td class="table-text" id="type' + i + '">' + "" + type + '</td>\n';
+        str += '<td class="table-text" id="zone' + i + '">' + "" + m_qStore[i].zones + '</td>\n';
         str += '<td class="table-text">' + m_qStore[i].date_last_run + '</td>\n';
         str += '<td class="table-text td-num">' + m_qStore[i].total_last_run + '</td>\n';
         str += '</tr>\n';

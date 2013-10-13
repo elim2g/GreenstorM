@@ -427,6 +427,7 @@ public class UserFilter implements Filter
 	            String qType = req.getParameter("t");
 	            String check = req.getParameter("c");
 	            String total = req.getParameter("n");
+	            String zones = req.getParameter("z");
 	            if (check != null) {
 	            	m_logger.debug("Checking quota for " + helper.get(UserHelper.ID) );
 	            	if (! helper.canSaveQuery()) {
@@ -437,9 +438,9 @@ public class UserFilter implements Filter
 	            	}
 	            }
 	            else {
-	            	m_logger.debug("Saving descr='" + descr + "' query='" + query + "' type='" + qType + " total=" + total + "' for user " + helper.get(UserHelper.ID));
+	            	m_logger.debug("Saving descr='" + descr + "' query='" + query + "' type='" + qType + " total=" + total + " zones=" + zones + "' for user " + helper.get(UserHelper.ID));
 	            	int tot = Integer.parseInt(total);
-	            	if (! helper.saveQuery(descr, query, qType, tot)) {
+	            	if (! helper.saveQuery(descr, query, qType, tot, zones)) {
 	                    req.setAttribute(PaperMinerConstants.ERROR_PAGE, "e114");
 	            	}
 	            }

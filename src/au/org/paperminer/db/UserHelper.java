@@ -50,6 +50,7 @@ public class UserHelper
     public static final String QUERY_TYPE = "query_type";
     public static final String COUNT = "total_last_run";
     public static final String RUN_DATE = "date_last_run";
+    public static final String ZONES = "zones";
     
     private HashMap<String, String> m_data = null;
     private Logger m_logger;
@@ -344,7 +345,7 @@ public class UserHelper
      * @return True on success
      * @throws PaperMinerException
      */
-    public boolean saveQuery (String descr, String query, String qType, int total) throws PaperMinerException
+    public boolean saveQuery (String descr, String query, String qType, int total, String zones) throws PaperMinerException
     {
     	int res = 0;
         Connection con = null;
@@ -353,8 +354,8 @@ public class UserHelper
         
         try {
 	        String sql = "INSERT INTO " + QUERY_TABLE + 
-	        		     " (" + USER_ID + "," + DESCR + "," + QUERY + "," + QUERY_TYPE + "," + COUNT + "," + RUN_DATE + ") VALUES" +
-	        		     " (" + m_data.get(ID) + ",'" + descr + "','" + query + "','" + qType + "'," + total + ",NOW())";
+	        		     " (" + USER_ID + "," + DESCR + "," + QUERY + "," + QUERY_TYPE + "," + COUNT + "," + RUN_DATE + "," + ZONES + ") VALUES" +
+	        		     " (" + m_data.get(ID) + ",'" + descr + "','" + query + "','" + qType + "','" + total + "',NOW(),'" + zones + "')";
 	        m_logger.debug(sql);
             con = DriverManager.getConnection("jdbc:apache:commons:dbcp:" + PaperMinerConstants.POOL_NAME);
             ps = con.prepareStatement(sql);
@@ -410,6 +411,7 @@ public class UserHelper
 			    	map.put(COUNT, Integer.toString(rs.getInt(COUNT)));
 			    	map.put(CDATE, rs.getString(CDATE));
 			    	map.put(RUN_DATE, rs.getString(RUN_DATE));
+			    	map.put(ZONES, rs.getString(ZONES));
 			    	list.add(map);
 		        }
 	        }

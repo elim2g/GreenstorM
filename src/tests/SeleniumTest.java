@@ -130,11 +130,18 @@ public class SeleniumTest {
         assertTrue(selenium.isElementPresent("id=qd1"));
         Thread.sleep(1000);
         assertTrue(selenium.getValue("id=qd1").contains("Celestials"));
+        deleteSavedQuery("all");
+        selenium.keyPressNative("10"); // Press Enter
+        Thread.sleep(1000);
         selenium.type("qd1", "TestSave");
         Thread.sleep(1000);
         selenium.click("id=sq-pb15");
         Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("Query saved"));
+        Thread.sleep(1000);
+        assertTrue(selenium.getText("id=type0").contains("Simple"));
+        Thread.sleep(1000);
+        assertTrue(selenium.getText("id=zone0").contains("newspaper"));
     }
     
     @Test
@@ -162,12 +169,36 @@ public class SeleniumTest {
         Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("Stored Queries"));
         Thread.sleep(1000);
-        selenium.click("id=dqcb0");
+        deleteSavedQuery(0);
         Thread.sleep(1000);
-        selenium.click("id=dq-pb1");
-        Thread.sleep(1000);
-        assertTrue(selenium.isTextPresent("Queries deleted Ok"));
-        
+        assertTrue(selenium.isTextPresent("Queries deleted Ok"));        
+    }
+    
+    
+    // Deletes saved query at specified index
+    private void deleteSavedQuery(int number) throws Exception {
+        String element = "id=dqcb" + number;
+        if (selenium.isElementPresent("id=dqcb" + number)) {
+            selenium.click(element);
+            Thread.sleep(1000);
+            selenium.click("id=dq-pb1");
+        }
+    }
+    
+    // Deletes all saved queries if "all" is passed
+    private void deleteSavedQuery(String command) throws Exception {
+        if (command == "all") {
+            int number = 0;
+            String element = "id=dqcb" + number;
+            while (selenium.isElementPresent(element)) {
+                selenium.click(element);
+                number++;
+                element = "id=dqcb" + number;
+                Thread.sleep(300);
+            }
+            Thread.sleep(1000);
+            selenium.click("id=dq-pb1");
+        }
     }
     
     @Test
