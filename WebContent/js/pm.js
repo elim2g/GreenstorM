@@ -609,7 +609,7 @@ function saveQuery (show, opt)
       var query = encodeURIComponent(m_currentQuery);
       var qType = (m_currentQueryFormPane === Q_SIMPLE) ? 's' :
                   (m_currentQueryFormPane === Q_ADVANCED) ? 'a' : 'c';
-      var zones = m_currentZone;
+      var zones = encodeURIComponent(m_currentZone);
       if (descr.length === 0) {
         _popupDialog(ALERT, 'You must provide a description for your query.');
       }
