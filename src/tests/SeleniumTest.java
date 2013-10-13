@@ -117,7 +117,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         assertTrue(selenium.getValue("id=qd1").contains("Celestials"));
         deleteSavedQuery("all");
-        selenium.keyPressNative("10"); // Press Enter
+        selenium.keyPressNative("10"); // Press Enter to remove popup
         Thread.sleep(1000);
         selenium.type("qd1", "TestSave");
         Thread.sleep(1000);
@@ -128,6 +128,33 @@ public class SeleniumTest {
         assertTrue(selenium.getText("id=type0").contains("Simple"));
         Thread.sleep(1000);
         assertTrue(selenium.getText("id=zone0").contains("newspaper"));
+    }
+    
+    @Test
+    public void SaveQueryAdvancedSearchBook() throws Exception {
+        LoginFunc();
+        Thread.sleep(500);
+        advancedSearchBook("Celestials");
+        Thread.sleep(500);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(500);
+        selenium.click("id=cc-pb12");
+        Thread.sleep(500);
+        assertTrue(selenium.isElementPresent("id=qd1"));
+        Thread.sleep(1000);
+        //assertTrue(selenium.getValue("id=qd1").contains("Celestials"));
+        deleteSavedQuery("all");
+        selenium.keyPressNative("10"); // Press Enter to remove popup
+        Thread.sleep(1000);
+        selenium.type("qd1", "TestSave");
+        Thread.sleep(1000);
+        selenium.click("id=sq-pb15");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("Query saved"));
+        Thread.sleep(1000);
+        assertTrue(selenium.getText("id=type0").contains("Advanced"));
+        Thread.sleep(1000);
+        assertTrue(selenium.getText("id=zone0").contains("book"));
     }
     
     @Test
