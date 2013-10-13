@@ -433,7 +433,7 @@ public class UserFilter implements Filter
 	            	if (! helper.canSaveQuery()) {
 	                    req.setAttribute(PaperMinerConstants.ERROR_PAGE, "e113");
 	            	}
-	            	else if (helper.savedQueryExists(descr, query, qType)) {
+	            	else if (helper.savedQueryExists(descr, query, qType, zones)) {
 	                    req.setAttribute(PaperMinerConstants.ERROR_PAGE, "e112");
 	            	}
 	            }
