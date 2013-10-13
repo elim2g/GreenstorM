@@ -292,7 +292,7 @@ public class UserHelper
      * @return True if query is a duplicate
      * @throws PaperMinerException
      */
-    public boolean savedQueryExists (String descr, String query, String qType) throws PaperMinerException
+    public boolean savedQueryExists (String descr, String query, String qType, String zones) throws PaperMinerException
     {
     	int count = 0;
         Connection con = null;
@@ -305,7 +305,8 @@ public class UserHelper
 	   		     " WHERE " + USER_ID + "='" + id + "'" +
 			     "   AND " + DESCR + "='" + descr + "'" +
 			     "   AND " + QUERY + "='" + query + "'" +
-			     "   AND " + QUERY_TYPE + "='" + qType + "'";
+			     "   AND " + QUERY_TYPE + "='" + qType + "'" +
+	             "   AND " + ZONES + "='" + zones + "'";
 	        con = DriverManager.getConnection("jdbc:apache:commons:dbcp:" + PaperMinerConstants.POOL_NAME);
 	        ps = con.prepareStatement(sql);
 	        rs = ps.executeQuery();
