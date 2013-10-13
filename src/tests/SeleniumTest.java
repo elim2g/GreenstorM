@@ -1,9 +1,6 @@
 package tests;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
 
 import com.thoughtworks.selenium.*;
 
@@ -24,7 +21,7 @@ public class SeleniumTest {
         selenium = new DefaultSelenium("localhost", 4444, "*firefox", "http://localhost:8080/PaperMiner/");
         selenium.start();
     }
-    
+          
     @Test
     public void Login() throws Exception {
         LoginFunc();
@@ -162,34 +159,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("Queries deleted Ok"));        
     }
-    
-    
-    // Deletes saved query at specified index
-    private void deleteSavedQuery(int number) throws Exception {
-        String element = "id=dqcb" + number;
-        if (selenium.isElementPresent("id=dqcb" + number)) {
-            selenium.click(element);
-            Thread.sleep(1000);
-            selenium.click("id=dq-pb1");
-        }
-    }
-    
-    // Deletes all saved queries if "all" is passed
-    private void deleteSavedQuery(String command) throws Exception {
-        if (command == "all") {
-            int number = 0;
-            String element = "id=dqcb" + number;
-            while (selenium.isElementPresent(element)) {
-                selenium.click(element);
-                number++;
-                element = "id=dqcb" + number;
-                Thread.sleep(300);
-            }
-            Thread.sleep(1000);
-            selenium.click("id=dq-pb1");
-        }
-    }
-    
+        
     @Test
     public void SortByDate() throws Exception {
         LoginFunc();
@@ -1462,6 +1432,33 @@ public class SeleniumTest {
             Thread.sleep(50);
         }
         selenium.click("id=btn-pause");
+    }
+    
+    
+    // Deletes saved query at specified index
+    private void deleteSavedQuery(int number) throws Exception {
+        String element = "id=dqcb" + number;
+        if (selenium.isElementPresent("id=dqcb" + number)) {
+            selenium.click(element);
+            Thread.sleep(1000);
+            selenium.click("id=dq-pb1");
+        }
+    }
+    
+    // Deletes all saved queries if "all" is passed
+    private void deleteSavedQuery(String command) throws Exception {
+        if (command == "all") {
+            int number = 0;
+            String element = "id=dqcb" + number;
+            while (selenium.isElementPresent(element)) {
+                selenium.click(element);
+                number++;
+                element = "id=dqcb" + number;
+                Thread.sleep(300);
+            }
+            Thread.sleep(1000);
+            selenium.click("id=dq-pb1");
+        }
     }
        
     @After
