@@ -138,6 +138,39 @@ public class SeleniumTest {
     }
     
     @Test
+    public void DeleteSavedQuery() throws Exception {
+        LoginFunc();
+        Thread.sleep(500);
+        simpleSearch("Celestials");
+        Thread.sleep(500);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(500);
+        selenium.click("id=cc-pb12");
+        Thread.sleep(500);
+        assertTrue(selenium.isElementPresent("id=qd1"));
+        Thread.sleep(1000);
+        assertTrue(selenium.getValue("id=qd1").contains("Celestials"));
+        selenium.type("qd1", "TestSave");
+        Thread.sleep(1000);
+        selenium.click("id=sq-pb15");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("Query saved"));
+        Thread.sleep(1000);
+        selenium.click("link=Home");
+        Thread.sleep(3000);
+        selenium.click("link=Saved");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("Stored Queries"));
+        Thread.sleep(1000);
+        selenium.click("id=dqcb0");
+        Thread.sleep(1000);
+        selenium.click("id=dq-pb1");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("Queries deleted Ok"));
+        
+    }
+    
+    @Test
     public void SortByDate() throws Exception {
         LoginFunc();
         Thread.sleep(300);
