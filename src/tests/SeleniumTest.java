@@ -117,6 +117,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         assertTrue(selenium.getValue("id=qd1").contains("Celestials"));
         deleteSavedQuery("all");
+        Thread.sleep(1000);
         selenium.keyPressNative("10"); // Press Enter to remove popup
         Thread.sleep(1000);
         selenium.type("qd1", "TestSave");
@@ -144,6 +145,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         //assertTrue(selenium.getValue("id=qd1").contains("Celestials"));
         deleteSavedQuery("all");
+        Thread.sleep(1000);
         selenium.keyPressNative("10"); // Press Enter to remove popup
         Thread.sleep(1000);
         selenium.type("qd1", "TestSave");
