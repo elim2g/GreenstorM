@@ -3,6 +3,8 @@ package tests;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import com.thoughtworks.selenium.*;
 
 import org.junit.After;
@@ -116,20 +118,23 @@ public class SeleniumTest {
         }
     
     @Test
-    public void SaveQuery() throws Exception {
+    public void SaveQuerySimpleSearch() throws Exception {
         LoginFunc();
         Thread.sleep(500);
-        selenium.click("link=New");
+        simpleSearch("Celestials");
         Thread.sleep(500);
-        selenium.type("id=q1", "celestials");
-        selenium.click("id=nq-pb12");
-        Thread.sleep(2000);
-        selenium.click("id=cc-pb11");
+        startSearchAndPauseAfter(20);
+        Thread.sleep(500);
+        selenium.click("id=cc-pb12");
+        Thread.sleep(500);
+        assertTrue(selenium.isElementPresent("id=qd1"));
         Thread.sleep(1000);
-        selenium.click("id=cc-pb13");
+        assertTrue(selenium.getValue("id=qd1").contains("Celestials"));
+        selenium.type("qd1", "TestSave");
         Thread.sleep(1000);
-        assertTrue((selenium.getText("id=q1")) == "celestials");
-        
+        selenium.click("id=sq-pb15");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("Query saved"));
     }
     
     @Test

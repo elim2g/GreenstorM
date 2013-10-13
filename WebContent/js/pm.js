@@ -273,18 +273,18 @@ function init ()
   m_pubCache = new Array();
   m_locationsCache = new Array();
 
-  // check for remember me cookie and log user in if found
-  if ($.cookie('email') !== undefined && $.cookie('didLogout') !== 'true') {
-	  rememberedUser = true;
-	  doLogin('ok');
-  }
-
   $('button#map-zero').button();
   $('#radio-map').buttonset();
   _initSlider();
   _getUserPrefs();
   if (testing == false) {
 	  getMenu(); 
+  }
+  
+  // check for remember me cookie and log user in if found
+  if ($.cookie('email') !== undefined && $.cookie('didLogout') !== 'true') {
+	  rememberedUser = true;
+	  doLogin('ok');
   }
    
   // pre-load some panes but don't display
