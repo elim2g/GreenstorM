@@ -25,17 +25,6 @@ public class SeleniumTest {
         selenium.start();
     }
     
-    public void LoginFunc() throws Exception {
-        selenium.open("/PaperMiner");
-        Thread.sleep(2000);
-        selenium.click("link=User");
-        Thread.sleep(300);
-        selenium.click("link=Login or Register");
-        Thread.sleep(300);
-        selenium.type("em", "dev@paperminer.com");
-        selenium.click("xpath=(//button[@type='button'])[6]");
-    }
-    
     @Test
     public void Login() throws Exception {
         LoginFunc();
@@ -919,139 +908,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
     }
     
-    private ArrayList<String> addYearsToList(ArrayList list, int firstYear, int endYear) {
-        for (int i = firstYear; i <= endYear; i++) {
-            list.add(String.valueOf(i));
-        }
-        return list;
-    }
     
-    private void simpleSearch(String searchTerm) throws Exception {
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.type("id=q1", searchTerm);
-    }
-    
-    private void advancedSearchArticle(String searchTerm) throws Exception {
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
-    }
-    
-    private void advancedSearchBook(String searchTerm) throws Exception {
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-book");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
-    }
-    
-    private void advancedSearchCollection(String searchTerm) throws Exception {
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-collection");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
-    }
-    
-    private void advancedSearchList(String searchTerm) throws Exception {
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-list");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
-    }
-    
-    private void advancedSearchMap(String searchTerm) throws Exception {
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-map");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
-    }
-    
-    private void advancedSearchMusic(String searchTerm) throws Exception {
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-music");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
-    }
-    
-    private void advancedSearchNewspaper(String searchTerm) throws Exception {
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-newspaper");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
-    }
-    
-    private void advancedSearchPicture(String searchTerm) throws Exception {
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-picture");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
-    }
-    
-    private void startSearchAndPause() throws Exception {
-        selenium.click("id=nq-pb12");
-        Thread.sleep(5000);
-        selenium.click("id=btn-pause");
-    }
-    
-    private void startSearchAndPause(int waitTime) throws Exception {
-        selenium.click("id=nq-pb12");
-        Thread.sleep(waitTime);
-        selenium.click("id=btn-pause");
-    }
-    
-    /**
-     * Starts a search and pauses immediately after greater than or equal to 
-     * the parameter "results" have been processed
-     * @param results
-     * @throws Exception
-     */
-    private void startSearchAndPauseAfter(int results) throws Exception {
-        selenium.click("id=nq-pb12");
-        int count = 0;
-        String split[];
-        String text = "";
-        
-        while (count < results) {
-            text = selenium.getText("id=progress");
-            split = text.split(" / ");
-            count = Integer.parseInt(split[0]);
-            Thread.sleep(50);
-        }
-        selenium.click("id=btn-pause");
-    }
-    
-    private void startSearchAndPause(String element, String contains) throws Exception {
-        selenium.click("id=nq-pb12");
-        String text = selenium.getText(element);
-        while (!text.contains(contains)) {
-            text = selenium.getText(element);
-            Thread.sleep(50);
-        }
-        selenium.click("id=btn-pause");
-    }
     
     @Test
     public void testStartSearchAndPauseAfter() throws Exception {      
@@ -1460,6 +1317,151 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=cc-pb14");
         assertTrue(selenium.isElementPresent("id=page-options"));
+    }
+    
+    private void LoginFunc() throws Exception {
+        selenium.open("/PaperMiner");
+        Thread.sleep(2000);
+        selenium.click("link=User");
+        Thread.sleep(300);
+        selenium.click("link=Login or Register");
+        Thread.sleep(300);
+        selenium.type("em", "dev@paperminer.com");
+        selenium.click("xpath=(//button[@type='button'])[6]");
+    }
+    
+    private ArrayList<String> addYearsToList(ArrayList list, int firstYear, int endYear) {
+        for (int i = firstYear; i <= endYear; i++) {
+            list.add(String.valueOf(i));
+        }
+        return list;
+    }
+    
+    private void simpleSearch(String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.type("id=q1", searchTerm);
+    }
+    
+    private void advancedSearchArticle(String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", searchTerm);
+    }
+    
+    private void advancedSearchBook(String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-book");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", searchTerm);
+    }
+    
+    private void advancedSearchCollection(String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-collection");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", searchTerm);
+    }
+    
+    private void advancedSearchList(String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-list");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", searchTerm);
+    }
+    
+    private void advancedSearchMap(String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-map");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", searchTerm);
+    }
+    
+    private void advancedSearchMusic(String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-music");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", searchTerm);
+    }
+    
+    private void advancedSearchNewspaper(String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-newspaper");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", searchTerm);
+    }
+    
+    private void advancedSearchPicture(String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.click("id=adv-picture");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", searchTerm);
+    }
+    
+    private void startSearchAndPause() throws Exception {
+        selenium.click("id=nq-pb12");
+        Thread.sleep(5000);
+        selenium.click("id=btn-pause");
+    }
+    
+    private void startSearchAndPause(int waitTime) throws Exception {
+        selenium.click("id=nq-pb12");
+        Thread.sleep(waitTime);
+        selenium.click("id=btn-pause");
+    }
+    
+    /**
+     * Starts a search and pauses immediately after greater than or equal to 
+     * the parameter "results" have been processed
+     * @param results
+     * @throws Exception
+     */
+    private void startSearchAndPauseAfter(int results) throws Exception {
+        selenium.click("id=nq-pb12");
+        int count = 0;
+        String split[];
+        String text = "";
+        
+        while (count < results) {
+            text = selenium.getText("id=progress");
+            split = text.split(" / ");
+            count = Integer.parseInt(split[0]);
+            Thread.sleep(50);
+        }
+        selenium.click("id=btn-pause");
+    }
+    
+    private void startSearchAndPause(String element, String contains) throws Exception {
+        selenium.click("id=nq-pb12");
+        String text = selenium.getText(element);
+        while (!text.contains(contains)) {
+            text = selenium.getText(element);
+            Thread.sleep(50);
+        }
+        selenium.click("id=btn-pause");
     }
        
     @After
