@@ -1,0 +1,4 @@
+<div id="recent-queries">
+	WIP
+	<table id="qrecent-table"></table>
+</div>

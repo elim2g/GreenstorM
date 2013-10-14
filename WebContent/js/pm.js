@@ -1403,6 +1403,7 @@ function _createQueryString ()
 			// END SWITCH - Zone Type
 			break;
 		case Q_CUSTOM:
+			m_currentZone = null;
 			temp2.forEach(function(zone){
 				if (m_currentZone) {
 					m_currentZone += ',' + zone;
