@@ -37,7 +37,7 @@
 			</tr>
 			<tr>
 				<td class="td-name">Search Term:</td>
-				<td colspan="2"><input id="aq1" type="text" /></td>
+				<td colspan="2"><input id="adv-query" type="text" /></td>
 			</tr>
 			<tr>
 				<td class="td-name">NOT:</td>
@@ -572,7 +572,7 @@
 			</tr>
 			<tr>
 				<td class="td-name"><b>Search Term</b></td>
-				<td colspan="2"><input id="aq1" type="text" /></td>
+				<td colspan="2"><input id="cus-query" type="text" /></td>
 			</tr>
 			<tr>
 				<td class="td-name"><b>NOT</b></td>

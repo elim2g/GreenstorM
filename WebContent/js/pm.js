@@ -17,6 +17,8 @@
 */
 
 // The webapp base URI is set by ANT build task
+var temp2 = new Array();
+
 var PM_URI = '@PM_PREFIX@';
 
 var TROVE_URL = 'http://api.trove.nla.gov.au/';
@@ -48,6 +50,7 @@ var MAP_CANVAS = 'map-canvas';
 var NEW_QUERY_PANE = 'new-query-pane';
 var CURR_QUERY_PANE = 'current-query-pane';
 var SAVE_QUERY_PANE = 'save-query-pane';
+var RECENT_QUERY_PANE = 'recent-query-pane';
 var PARTNERS_PANE = 'partners-pane';
 var CONTACTS_PANE = 'contact-pane';
 var LOCN_EDIT_PANE = 'locn-edit-pane';
@@ -559,6 +562,21 @@ function showStoredQueries (show)
   if (show) {
     _showPane(_selById(SAVE_QUERY_PANE));
     _showStoredQueryForm(Q_STORE);
+  }
+}
+
+/**
+* Displays a list of the user's recent queries (from this session)
+* @param show
+*/
+function showRecentQueries (show)
+{
+  if ($(_selById(RECENT_QUERY_PANE)).length === 0) {
+    _createPane(RECENT_QUERY_PANE, null, null);
+  }
+  
+  if (show) {
+    _showPane(_selById(RECENT_QUERY_PANE));
   }
 }
 
@@ -1180,7 +1198,6 @@ function _openQuery (idx)
     newQuery(true);
     break;
   case 'a':
-    $('select#z1').val(m_currentZone);
     break;
   case 'c':
     break;
@@ -1223,7 +1240,7 @@ function _createQueryString ()
 			str += '&zone=' + encodeURIComponent(m_currentZone);
 			
 			// Add Query
-			m_currentTerm = $('input#aq1').val();
+			m_currentTerm = $('#adv-query').val();
 			str += '&q=' + encodeURIComponent(m_currentTerm);
 			if ($('#adv-query-not').val() != '') {
 				str += encodeURIComponent(' NOT ' + $('#adv-query-not').val());
@@ -1382,13 +1399,25 @@ function _createQueryString ()
 						str += '&l-australian=' + encodeURIComponent($('#adv-picture-australian').val());
 					}
 					break;
-				default:
-					alert("Please click a zone to continue...");
-					break;
 				}
 			// END SWITCH - Zone Type
 			break;
 		case Q_CUSTOM:
+			temp2.forEach(function(zone){
+				if (m_currentZone) {
+					m_currentZone += ',' + zone;
+				} else {
+					m_currentZone = zone;
+				}
+			});
+			str += '&zone=' + encodeURIComponent(m_currentZone);
+			
+			// Add Query
+			m_currentTerm = $('#cus-query').val();
+			str += '&q=' + encodeURIComponent(m_currentTerm);
+			if ($('#cus-query-not').val() != '') {
+				str += encodeURIComponent(' NOT ' + $('#cus-query-not').val());
+			}
 			break;
 	}
   	return str;
@@ -1495,7 +1524,7 @@ function _doQuery (pos){
   $.getJSON(uri, function (data, status, jqXHR) {
       try {
         if (status == "success") {
-          _updateTimeDisplay();
+        	_updateTimeDisplay();
           _processData(data, pos, queryId);
         }
         else {
@@ -1581,7 +1610,6 @@ function _processData (data, pos, id)
 	  var zoneResults = data.response.zone;
 	  var zoneResult = null;
 	  var zoneInfo = null;
-	  
 	  for (var i = 0; i < _currentZones.length; i++){
 		  zoneInfo = _getZoneInfo(_currentZones[i]);
 		  for (var j = 0; j < _currentZones.length; j++){
@@ -1593,13 +1621,6 @@ function _processData (data, pos, id)
 						  m_resultSet[tempPos + k] = { zone: zoneInfo.id, data: zoneResult[k], marker:null };
 						  m_resultSet[tempPos + k].data.text = null;
 						  m_trefIndex[zoneResult[k]['id']] = tempPos + k;
-						  // TODO: check this for loop, pretty sure its redundant now?? JW
-						  for (var m = 0; m < zoneInfo.tags.length; m++) {
-							  var value = m_resultSet[tempPos + k].data;
-							  if (jQuery.inArrayIn(zoneInfo.tags[m].title, value) == -1) {
-								  //alert(zoneInfo.tags[m].title); 
-							  }
-						  }
 					  }
 				  }	 
 			  }
@@ -2172,19 +2193,20 @@ function _setCurrentQueryButtonState ()
 */
 function _updateCurrQueryPane ()
 {
-  if ($(_selById(CURR_QUERY_PANE)).length > 0) {
-    switch (m_currentQueryFormPane) {
-    case Q_SIMPLE :
-      _updateSearchProgressFields();
-      _setCurrentQueryButtonState();
-      break;
-    case Q_ADVANCED :
-     _updateSearchProgressFields();
-        _setCurrentQueryButtonState();
-      break;
-    case Q_CUSTOM :
-      // FIXME: todo
-      break;
+	if ($(_selById(CURR_QUERY_PANE)).length > 0) {
+		switch (m_currentQueryFormPane) {
+		case Q_SIMPLE :
+			_updateSearchProgressFields();
+			_setCurrentQueryButtonState();
+			break;
+		case Q_ADVANCED :
+			_updateSearchProgressFields();
+			_setCurrentQueryButtonState();
+			break;
+		case Q_CUSTOM :
+			_updateSearchProgressFields();
+			_setCurrentQueryButtonState();
+			break;
     }
   }
 }
@@ -2805,7 +2827,6 @@ function downloadCsv(){
 	var zoneInfo;
 	for(var e = 0; e < m_resultSet.length; e++){
 		zoneInfo = _getZoneInfo(m_resultSet[e].zone);
-		//alert(JSON.stringify(zoneInfo.tags));
 		
 		switch(zoneInfo.id){
 			case 'newspaper':
@@ -2969,6 +2990,15 @@ function _getTroveContributors() {
 	    	$('#ind-nuc-not').append('<option value="'+ this.id +'">'+ this.name +'</option>');
 	    });
     });
+}
+
+
+function _customZones(zone, add) {
+	if (add){
+		temp2.push(zone);
+	} else {
+		temp2.splice(temp2.indexOf(zone),1);
+	}
 }
 
 function _extractYearFromDate(date) {
