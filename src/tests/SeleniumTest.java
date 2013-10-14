@@ -160,6 +160,19 @@ public class SeleniumTest {
     }
     
     @Test
+    public void TestRecentSearchSimple() throws Exception {
+        LoginFunc();
+        Thread.sleep(500);
+        simpleSearch("Celestials");
+        Thread.sleep(500);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(500);
+        selenium.click("link=Recent");
+        Thread.sleep(500);
+        assertTrue(selenium.isTextPresent("WIP"));
+    }
+    
+    @Test
     public void DeleteSavedQuery() throws Exception {
         LoginFunc();
         Thread.sleep(500);

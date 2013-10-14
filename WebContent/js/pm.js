@@ -564,6 +564,21 @@ function showStoredQueries (show)
 }
 
 /**
+* Displays a list of the user's recent queries (from this session)
+* @param show
+*/
+function showRecentQueries (show)
+{
+  if ($(_selById(RECENT_QUERY_PANE)).length === 0) {
+    _createPane(RECENT_QUERY_PANE, null, null);
+  }
+  
+  if (show) {
+    _showPane(_selById(RECENT_QUERY_PANE));
+  }
+}
+
+/**
 * Display the normally hidden option to save the current query
 * @param show
 * @param opt

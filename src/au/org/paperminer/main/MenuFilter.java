@@ -51,6 +51,7 @@ public class MenuFilter implements Filter
              "<li class=\"%s\">%sNew%s</li>" +
              "<li class=\"%s\">%sCurrent%s</li>" +
              "<li class=\"%s\">%sSaved%s</li>" +
+             "<li class=\"%s\">%sRecent%s</li>" +
            "</ul>" +
            "</li>";
     
@@ -161,6 +162,7 @@ public class MenuFilter implements Filter
 
         formatter.format(QUERY_SUBMENU, "greyed", "", "", 
 						        		"greyed", "", "", 
+						        		"greyed", "", "",
 						        		"greyed", "", "");
         formatter.format(VIEW_SUBMENU,  "greyed", "", "", 
 						        	    "greyed", "", "", 
@@ -187,6 +189,7 @@ public class MenuFilter implements Filter
 
         formatter.format(QUERY_SUBMENU, "active", "<a onClick=\"newQuery(true), resetQueryPane()\">", "</a>", 
 						        		"active", "<a onCLick=\"currentQuery(true)\">", "</a>",  
+						        		"greyed", "", "",
 						        		"greyed", "", "");
         formatter.format(VIEW_SUBMENU,  "active", "<a onCLick=\"showMap(true)\">", "</a>",
 						        		"active", "<a onClick=\"showHistogram(true)\">", "</a>",
@@ -212,7 +215,8 @@ public class MenuFilter implements Filter
 
         formatter.format(QUERY_SUBMENU, "active", "<a onClick=\"newQuery(true), resetQueryPane()\">", "</a>",
         		                        "active", "<a onCLick=\"currentQuery(true)\">", "</a>",
-        		                        "active", "<a onCLick=\"showStoredQueries(true)\">", "</a>");
+        		                        "active", "<a onCLick=\"showStoredQueries(true)\">", "</a>",
+        		                        "active", "<a onCLick=\"showRecentQueries(true)\">", "</a>");
         formatter.format(VIEW_SUBMENU,  "active", "<a onCLick=\"showMap(true)\">", "</a>",
 						                "active", "<a onClick=\"showHistogram(true)\">", "</a>",
 						                "active", "<a onClick=\"showCloud(true)\">", "</a>",
