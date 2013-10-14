@@ -51,7 +51,6 @@ public class MenuFilter implements Filter
              "<li class=\"%s\">%sNew%s</li>" +
              "<li class=\"%s\">%sCurrent%s</li>" +
              "<li class=\"%s\">%sSaved%s</li>" +
-             "<li class=\"%s\">%sRecent%s</li>" +
            "</ul>" +
            "</li>";
     
