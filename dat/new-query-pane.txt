@@ -44,8 +44,7 @@
 				<td colspan="2"><input id="adv-query-not" type="text" /></td>
 			</tr>
 			<tr>
-				<td class="td-name">Zone:</td>
-				<td colspan="2">
+				<td colspan="3">
 					<div id="adv-accordion">
 						<h3 id="adv-article">Articles</h3>
 						<div class="adv-query">
@@ -567,35 +566,49 @@
 		</table>
 	</div>
 	<div id="q-custom">
-		<p>Work in Progress - Not Yet Functioning - JW</p>
 		<table>
 			<tr>
 				<td colspan="3"><h3>Custom Search</h3></td>
 			</tr>
 			<tr>
-				<td colspan="3">
-					<p>
-						Custom Search allows you to search within multiple zones within Trove,
-						as well as choosing which data is returned.
-					</p>
-					<p>
-						To begin, enter your search terms and select a zone...
-					</p>
-				</td>
-			</tr>
-			<tr>
-				<td class="td-name">Search Term:</td>
+				<td class="td-name"><b>Search Term</b></td>
 				<td colspan="2"><input id="aq1" type="text" /></td>
 			</tr>
 			<tr>
-				<td class="td-name">NOT:</td>
+				<td class="td-name"><b>NOT</b></td>
 				<td colspan="2"><input id="cus-query-not" type="text" /></td>
 			</tr>
 			<tr>
-				<td class="td-name">Zone:</td>
-				<td colspan="2">
+				<td><b>Search Zones</b></td>
+				<td colspan="2" style="float:right;"><span><i>Select a zone to see more options</i></span></td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<table style="width:100%">
+						<tr>
+							<td style="width:25%"><input type="checkbox" id="cus-article-zone" value="article" /><label>Articles</label></td>
+							<td style="width:25%"><input type="checkbox" id="cus-book-zone" value="book" /><label>Books</label></td>
+							<td style="width:25%"><input type="checkbox" id="cus-collection-zone" value="collection" /><label>Collections</label></td>
+							<td style="width:25%"><input type="checkbox" id="cus-list-zone" value="list" /><label>Lists</label></td>
+						</tr>
+						<tr>
+							<td style="width:25%"><input type="checkbox" id="cus-map-zone" value="map" /><label>Maps</label></td>
+							<td style="width:25%"><input type="checkbox" id="cus-music-zone" value="music" /><label>Music</label></td>
+							<td style="width:25%"><input type="checkbox" id="cus-newspaper-zone" value="newspaper" /><label>Newspaper</label></td>
+							<td style="width:25%"><input type="checkbox" id="cus-picture-zone" value="picture" /><label>Pictures</label></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
 					<div id="cus-accordion">
-						<h3 id="cus-article">Articles<input type="checkbox" id="cus-article-check" /><label for="cus-article-check">Include</label></h3>
+						<h3 id="cus-article">
+							Articles
+							<span id="cus-article-span" style="float: right;">
+								Zone Included
+							</span>
+						</h3>
 						<div class="cus-query">
 							<table>
 								<tr>
@@ -687,7 +700,12 @@
 								</tr>
 							</table>
 						</div>
-						<h3 id="cus-book">Books<input type="checkbox" id="cus-book-check" /><label for="cus-book-check">Include</label></h3>
+						<h3 id="cus-book">
+							Books
+							<span id="cus-book-span" style="float: right;">
+								Zone Included
+							</span>
+						</h3>
 						<div class="cus-query">
 							<table>
 								<tr>
@@ -742,7 +760,12 @@
 								</tr>
 							</table>
 						</div>
-						<h3 id="cus-collection">Collections<input type="checkbox" id="cus-collection-check" /><label for="cus-collection-check">Include</label></h3>
+						<h3 id="cus-collection">
+							Collections
+							<span id="cus-collection-span" style="float: right;">
+								Zone Included
+							</span>
+						</h3>
 						<div class="cus-query">
 							<table>
 								<tr>
@@ -807,7 +830,12 @@
 								</tr>
 							</table>
 						</div>
-						<h3 id="cus-list">Lists<input type="checkbox" id="cus-list-check" /><label for="cus-list-check">Include</label></h3>
+						<h3 id="cus-list">
+							Lists
+							<span id="cus-list-span" style="float: right;">
+								Zone Included
+							</span>
+						</h3>
 						<div class="cus-query">
 							<table>
 								<tr>
@@ -846,7 +874,12 @@
 								</tr>
 							</table>
 						</div>
-						<h3 id="cus-map">Maps<input type="checkbox" id="cus-map-check" /><label for="cus-map-check">Include</label></h3>
+						<h3 id="cus-map">
+							Maps
+							<span id="cus-map-span" style="float: right;">
+								Zone Included
+							</span>
+						</h3>
 						<div class="cus-query">
 							<table>
 								<tr>
@@ -907,7 +940,12 @@
 								</tr>
 							</table>
 						</div>
-						<h3 id="cus-music">Music<input type="checkbox" id="cus-music-check" /><label for="cus-music-check">Include</label></h3>
+						<h3 id="cus-music">
+							Music
+							<span id="cus-music-span" style="float: right;">
+								Zone Included
+							</span>
+						</h3>
 						<div class="cus-query">
 							<table>
 								<tr>
@@ -962,7 +1000,12 @@
 								</tr>
 							</table>
 						</div>
-						<h3 id="cus-newspaper">Newspaper<input type="checkbox" id="cus-newspaper-check" /><label for="cus-newspaper-check">Include</label></h3>
+						<h3 id="cus-newspaper">
+							Newspaper
+							<span id="cus-newspaper-span" style="float: right;">
+								Zone Included
+							</span>
+						</h3>
 						<div class="cus-query">
 							<table>
 								<tr>
@@ -1038,7 +1081,12 @@
 								</tr>
 							</table>
 						</div>
-						<h3 id="cus-picture">Pictures<input type="checkbox" id="cus-picture-check" /><label for="cus-picture-check">Include</label></h3>
+						<h3 id="cus-picture">
+							Pictures
+							<span id="cus-picture-span" style="float: right;">
+								Zone Included
+							</span>
+						</h3>
 						<div class="cus-query">
 							<table>
 								<tr>

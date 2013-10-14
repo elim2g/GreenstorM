@@ -3,16 +3,112 @@
  * Loads particular functions/features predominately for Advanced/Custom search
  */
 
-$(function() {
-	$("cus-article-check").button();
-	$("cus-book-check").button();
-	$("cus-collection-check").button();
-	$("cus-list-check").button();
-	$("cus-map-check").button();
-	$("cus-music-check").button();
-	$("cus-newspaper-check").button();
-	$("cus-picture-check").button();
-});
+$('#cus-article-span').hide();
+$('#cus-book-span').hide();
+$('#cus-collection-span').hide();
+$('#cus-list-span').hide();
+$('#cus-map-span').hide();
+$('#cus-music-span').hide();
+$('#cus-newspaper-span').hide();
+$('#cus-picture-span').hide();
+$('#cus-article').hide();
+$('#cus-book').hide();
+$('#cus-collection').hide();
+$('#cus-list').hide();
+$('#cus-map').hide();
+$('#cus-music').hide();
+$('#cus-newspaper').hide();
+$('#cus-picture').hide();
+
+$('#cus-article-zone').change(
+	function(){
+		if($('#cus-article-zone').prop('checked')){
+			$('#cus-article-span').show();
+			$('#cus-article').show();
+		} else {
+			$('#cus-article-span').hide();
+			$('#cus-article').hide();
+		}
+	}
+);
+$('#cus-book-zone').change(
+	function(){
+		if($('#cus-book-zone').prop('checked')){
+			$('#cus-book-span').show();
+			$('#cus-book').show();
+		} else {
+			$('#cus-book-span').hide();
+			$('#cus-book').hide();
+		}
+	}
+);
+$('#cus-collection-zone').change(
+	function(){
+		if($('#cus-collection-zone').prop('checked')){
+			$('#cus-collection-span').show();
+			$('#cus-collection').show();
+		} else {
+			$('#cus-collection-span').hide();
+			$('#cus-collection').hide();
+		}
+	}
+);
+$('#cus-list-zone').change(
+	function(){
+		if($('#cus-list-zone').prop('checked')){
+			$('#cus-list-span').show();
+			$('#cus-list').show();
+		} else {
+			$('#cus-list-span').hide();
+			$('#cus-list').hide();
+		}
+	}
+);
+$('#cus-map-zone').change(
+	function(){
+		if($('#cus-map-zone').prop('checked')){
+			$('#cus-map-span').show();
+			$('#cus-map').show();
+		} else {
+			$('#cus-map-span').hide();
+			$('#cus-map').hide();
+		}
+	}
+);
+$('#cus-music-zone').change(
+	function(){
+		if($('#cus-music-zone').prop('checked')){
+			$('#cus-music-span').show();
+			$('#cus-music').show();
+		} else {
+			$('#cus-music-span').hide();
+			$('#cus-music').hide();
+		}
+	}
+);
+$('#cus-newspaper-zone').change(
+	function(){
+		if($('#cus-newspaper-zone').prop('checked')){
+			$('#cus-newspaper-span').show();
+			$('#cus-newspaper').show();
+		} else {
+			$('#cus-newspaper-span').hide();
+			$('#cus-newspaper').hide();
+		}
+	}
+);
+$('#cus-picture-zone').change(
+	function(){
+		if($('#cus-picture-zone').prop('checked')){
+			$('#cus-picture-span').show();
+			$('#cus-picture').show();
+		} else {
+			$('#cus-picture-span').hide();
+			$('#cus-picture').hide();
+		}
+	}
+);
+
 $(function() {
 	$( "#tabs" ).tabs({
 		beforeActivate: function (event, ui) {
