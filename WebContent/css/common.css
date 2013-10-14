@@ -454,7 +454,7 @@ table#query-form {
 	background-color: #feeedb;
 }
 
-table#qstore-table {
+table#qstore-table, table#qrecent-table {
 	width: 600px;
 	border-radius: 8px;
 	border: 1px solid black;
@@ -463,15 +463,15 @@ table#qstore-table {
 	background-color: #feeedb;
 }
 
-table#qstore-table td.cb-col {
+table#qstore-table td.cb-col, table#qrecent-table td.cb-col {
 	width: 24px;
 }
 
-table#qstore-table tr.tr-odd {
+table#qstore-table tr.tr-odd, table#qrecent-table tr.tr-odd {
 	background-color: #eeeeee;
 }
 
-table#qstore-table tr.tr-evn {
+table#qstore-table tr.tr-evn, table#qrecent-table tr.tr-evn {
 	background-color: #dbffdb;
 }
 

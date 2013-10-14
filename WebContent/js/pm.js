@@ -48,6 +48,7 @@ var MAP_CANVAS = 'map-canvas';
 var NEW_QUERY_PANE = 'new-query-pane';
 var CURR_QUERY_PANE = 'current-query-pane';
 var SAVE_QUERY_PANE = 'save-query-pane';
+var RECENT_QUERY_PANE = 'recent-query-pane';
 var PARTNERS_PANE = 'partners-pane';
 var CONTACTS_PANE = 'contact-pane';
 var LOCN_EDIT_PANE = 'locn-edit-pane';
