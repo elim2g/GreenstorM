@@ -1,4 +1,5 @@
+ <h3>Recent Queries</h3>
+
 <div id="recent-queries">
-	WIP
 	<table id="qrecent-table"></table>
 </div>

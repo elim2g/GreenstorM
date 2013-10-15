@@ -69,6 +69,8 @@ var Q_CUSTOM = 'q-custom';
 var Q_SAVE = 'save-query';
 var Q_STORE = 'stored-queries';
 var Q_STORE_TABLE = 'qstore-table';
+var Q_RECENT = 'recent-queries';
+var Q_RECENT_TABLE = 'qrecent-table';
 
 
 var MINYEAR	= '1800';
@@ -228,6 +230,7 @@ var m_currentSaveFormPane = Q_SAVE;
 var m_currentQueryFormPane = Q_SIMPLE;
 var m_currentPaneSelector = _selById(MAP_VIEW);
 var m_defaultViewSelector = _selById(MAP_VIEW);
+var m_qRecent;
 
 // FIXME: would be nice if this was an associative array
 var m_totalRecs = 0;
@@ -298,6 +301,8 @@ function init ()
   locnEdit(false);
   showHistogram(false);
   showCloud(false);
+  showRecentQueries(false);
+  showStoredQueries(false);
 }
 
 /**
@@ -495,7 +500,7 @@ function resetQueryPane ()
 			$('select#z1').val('newspaper');
 			break;
 		case Q_ADVANCED :
-			$('input#aq1').val('');
+			$('input#adv-query').val('');
 			$('select#z1').val('newspaper');
 			break;
 		case Q_CUSTOM :
@@ -576,21 +581,7 @@ function showRecentQueries (show)
   }
   
   if (show) {
-    _showPane(_selById(RECENT_QUERY_PANE));
-  }
-}
-
-/**
-* Displays a list of the user's recent queries (from this session)
-* @param show
-*/
-function showRecentQueries (show)
-{
-  if ($(_selById(RECENT_QUERY_PANE)).length === 0) {
-    _createPane(RECENT_QUERY_PANE, null, null);
-  }
-  
-  if (show) {
+    _updateRecentQueriesPane();
     _showPane(_selById(RECENT_QUERY_PANE));
   }
 }
@@ -1167,6 +1158,51 @@ function _updateStoreQueriesPane ()
 }
 
 /**
+* User has saved or deleted a query, so adjust the display accordingly.
+*/
+function _updateRecentQueriesPane ()
+{
+  if ($.cookie('recent') !== undefined) {
+	m_qRecent = $.parseJSON($.cookie('recent'));
+  } else {
+	m_qRecent = new Array();
+  }
+  if ($(_selById(Q_RECENT)).length > 0) {
+    $(_selById(Q_RECENT_TABLE)).empty();
+    if (m_qRecent.length === 0) {
+      $(_selById(Q_RECENT_TABLE)).html('<tr><td>You have no Recent queries</td></tr>');
+    }
+    else {
+      $(_selById(Q_RECENT_TABLE)).html('<tr><td>You have ' + m_qRecent.length + ' Recent queries</td></tr>');
+      var str = '';
+      str = '<tr>';
+      str += '<th class="pm-hdr" colspan="2">Query Description</th>';
+      str += '<th class="pm-hdr">Type</th>';
+      str += '<th class="pm-hdr">Zone(s)</th>';
+      str += '<th class="pm-hdr">Last Run</th>';
+      str += '<th class="pm-hdr">Result count</th>';
+      str += '</tr>\n';
+      for (var i = 0; i < m_qRecent.length; i++) {
+        var clz = (i % 2) ? 'tr-odd' : 'tr-evn';
+        var type = m_qRecent[i].query_type == 's' ? 'Simple' : 'a' ? 'Advanced' : 'c' ? 'Custom' : ''; 
+        
+        var descr = m_qRecent[i].descr;
+        str += '<tr class="' + clz + '">\n<td class="cb-col"><input type="checkbox" id="dqcb' + i +'"></td>\n';
+        str += '<td><a href="#" onClick="_openQuery(' + i + ')">' + descr + '</td>\n';
+        str += '<td class="table-text" id="type' + i + '">' + "" + type + '</td>\n';
+        str += '<td class="table-text" id="zone' + i + '">' + "" + m_qRecent[i].zones + '</td>\n';
+        str += '<td class="table-text">' + m_qRecent[i].date_last_run + '</td>\n';
+        str += '<td class="table-text td-num">' + m_qRecent[i].total_last_run + '</td>\n';
+        str += '</tr>\n';
+      }
+      str += '<tr><td colspan="4"><hr class="pm-button-sep"></td></tr>\n';
+      str += '<tr><td></td><td colspan="3"><div class="pm-button-bar"><button id="dq-pb1" onClick="alert()">Delete Selected</button></div></td></tr>';
+      $(_selById(Q_RECENT_TABLE)).html(str);
+    }
+  }
+}
+
+/**
 * Deletes the selected (checked) stored queries from the server
 */
 function _deleteSelectedQueries ()
@@ -1540,8 +1576,11 @@ function _doQuery (pos){
   $.getJSON(uri, function (data, status, jqXHR) {
       try {
         if (status == "success") {
-        	_updateTimeDisplay();
+          _updateTimeDisplay();
           _processData(data, pos, queryId);
+          if (pos === 0) {
+              _createRecentCookie();  
+          }
         }
         else {
           alert('getJSON Error: ' + JSON.stringify(jqXHR));
@@ -1586,6 +1625,31 @@ function _doQuery (pos){
     });
 })(jQuery);
 
+function _createRecentCookie() {
+	if ($.cookie('recent') !== undefined) {
+		m_qRecent = $.parseJSON($.cookie('recent'));
+	} else {
+		m_qRecent = new Array();
+	}
+
+	var date = new Date();
+	var time = date.getHours() + ':' + date.getMinutes();
+    var descr = m_currentTerm;
+    var query = encodeURIComponent(m_currentQuery);
+    var query_type = (m_currentQueryFormPane === Q_SIMPLE) ? 's' :
+                (m_currentQueryFormPane === Q_ADVANCED) ? 'a' : 'c';
+    var zones = m_currentZone;
+    var total_last_run = m_totalRecs;
+    
+    m_qRecent.push( { descr: descr,
+			  		  query: query,
+			  		  query_type: query_type,
+    				  zones: zones,
+    				  date_last_run: time,
+    				  total_last_run: total_last_run
+    				} );
+    $.cookie('recent', JSON.stringify(m_qRecent));
+}
 
 /**
 * Extracts records from a TROVE response placing them in global array.
