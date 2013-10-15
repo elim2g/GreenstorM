@@ -215,24 +215,22 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("link=New");
         Thread.sleep(1000);
-        selenium.click("id=adv-advanced");
+        selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.type("q1", "celestials");
-        Thread.sleep(500);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(13000);
+        selenium.type("id=adv-query", "celestials");
+        Thread.sleep(1000);
+        selenium.click("id=adv-newspaper");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(4000);
         selenium.click("id=cc-pb11");
         Thread.sleep(1000);
-        selenium.click("link=View");
+        selenium.click("id=cc-pb14");
         Thread.sleep(1000);
-        selenium.click("link=Raw Results");
-        selenium.click("xpath=(//input[@name='raw-sort-rb'])[2]");
-        Thread.sleep(4000);
-        
         selenium.click("name=raw-sort-rb");
-        Thread.sleep(6000);
-        assertTrue(selenium.isTextPresent("1853-03-15"));
-        assertFalse(selenium.isTextPresent("1907-03-19"));
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("1887-09-17"));
+        assertFalse(selenium.isTextPresent("1887-09-15"));
     }
     
     @Test
@@ -244,24 +242,23 @@ public class SeleniumTest {
         
         Thread.sleep(2000);
         selenium.click("link=Query");
-        Thread.sleep(700);
+        Thread.sleep(1000);
         selenium.click("link=New");
-        selenium.click("id=aq1");
         Thread.sleep(1000);
-        selenium.type("q1", "celestials");
+        selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(10000);
+        selenium.type("id=adv-query", "celestials");
+        Thread.sleep(1000);
+        selenium.click("id=adv-newspaper");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(4000);
         selenium.click("id=cc-pb11");
         Thread.sleep(1000);
-        selenium.click("link=View");
+        selenium.click("id=cc-pb14");
         Thread.sleep(1000);
-        selenium.click("link=Raw Results");
         selenium.click("xpath=(//input[@name='raw-sort-rb'])[2]");
-        Thread.sleep(4000);
-        
-        selenium.click("xpath=(//input[@name='raw-sort-rb'])[2]");
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("13."));
         assertFalse(selenium.isTextPresent("0."));
     }
@@ -277,24 +274,23 @@ public class SeleniumTest {
         selenium.click("link=Query");
         Thread.sleep(1000);
         selenium.click("link=New");
-        selenium.click("id=aq1");
         Thread.sleep(1000);
-        selenium.type("q1", "celestials");
+        selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(10000);
+        selenium.type("id=adv-query", "celestials");
+        Thread.sleep(1000);
+        selenium.click("id=adv-newspaper");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(4000);
         selenium.click("id=cc-pb11");
         Thread.sleep(1000);
-        selenium.click("link=View");
+        selenium.click("id=cc-pb14");
         Thread.sleep(1000);
-        selenium.click("link=Raw Results");
-        selenium.click("xpath=(//input[@name='raw-sort-rb'])[2]");
-        Thread.sleep(4000);
-        
         selenium.click("xpath=(//input[@name='raw-sort-rb'])[3]");
-        Thread.sleep(4000);
-        assertTrue(selenium.isTextPresent("000008"));
-        assertFalse(selenium.isTextPresent("000275"));
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("000009"));
+        assertFalse(selenium.isTextPresent("000010"));
     }
     
     @Test
@@ -306,24 +302,23 @@ public class SeleniumTest {
         
         Thread.sleep(2000);
         selenium.click("link=Query");
-        Thread.sleep(700);
+        Thread.sleep(1000);
         selenium.click("link=New");
-        selenium.click("id=aq1");
         Thread.sleep(1000);
-        selenium.type("q1", "celestials");
+        selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.click("id=nq-pb12");
-        Thread.sleep(10000);
+        selenium.type("id=adv-query", "celestials");
+        Thread.sleep(1000);
+        selenium.click("id=adv-newspaper");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(4000);
         selenium.click("id=cc-pb11");
         Thread.sleep(1000);
-        selenium.click("link=View");
+        selenium.click("id=cc-pb14");
         Thread.sleep(1000);
-        selenium.click("link=Raw Results");
-        selenium.click("xpath=(//input[@name='raw-sort-rb'])[2]");
-        Thread.sleep(4000);
-        
         selenium.click("xpath=(//input[@name='raw-sort-rb'])[4]");
-        Thread.sleep(4000);
+        Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("1897-04-15"));
         assertFalse(selenium.isTextPresent("1904-06-11"));
     }
