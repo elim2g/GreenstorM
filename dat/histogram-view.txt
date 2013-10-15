@@ -20,8 +20,9 @@
 </style>
 <body>
 	<div id="chart-data">
-	<h2>Bar Graph</h2>
-	<h3 id="hd-bargraph-title"></h3>
+		<div id="graph-name">
+			<h2>Bar Graph</h2>
+		</div>
 	<script type="text/javascript">
 		var barGraph = 0; var lineGraph = 1; var dnutGraph = 2;
 		var graphType = 0;
@@ -34,7 +35,7 @@
 	<button id="exprt-bar" onClick="SaveGraph();">Save as image</button>
 	<div id="wrapper">
 		<div id="canv-div">
-			<canvas id="canvas" height="500" width="700"></canvas>
+			<canvas id="canvas" height="600" width="800"></canvas>
 		</div>
 		<div id="dnut-legend"></div>
 	</div>
@@ -42,21 +43,6 @@
 		BarChartInit();
 		
 		var myVar=setInterval(function(){RefreshHistogram(graphType)},5000);
-		
-		function SaveGraph() {
-			var savCanvas = document.getElementById("canvas");  
-			Canvas2Image.saveAsPNG(savCanvas);
-		}
-		
-		function ChangeGraph(graph) {
-			switch(graph) {
-				case barGraph: graphType = barGraph; BarChartInit(); break;
-				case lineGraph: graphType = lineGraph; LineChartInit(); break;
-				case dnutGraph: graphType = dnutGraph; DoughnutChartInit(); break;
-			}
-		}
 	</script>
-	
-	<h3 id="hd-linegraph-title"></h3>
 	</div>
 </body>

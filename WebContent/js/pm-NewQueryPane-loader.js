@@ -25,9 +25,11 @@ $('#cus-article-zone').change(
 		if($('#cus-article-zone').prop('checked')){
 			$('#cus-article-span').show();
 			$('#cus-article').show();
+			_customZones('article', true);
 		} else {
 			$('#cus-article-span').hide();
 			$('#cus-article').hide();
+			_customZones('article', false);
 		}
 	}
 );
@@ -36,9 +38,11 @@ $('#cus-book-zone').change(
 		if($('#cus-book-zone').prop('checked')){
 			$('#cus-book-span').show();
 			$('#cus-book').show();
+			_customZones('book', true);
 		} else {
 			$('#cus-book-span').hide();
 			$('#cus-book').hide();
+			_customZones('book', false);
 		}
 	}
 );
@@ -47,9 +51,11 @@ $('#cus-collection-zone').change(
 		if($('#cus-collection-zone').prop('checked')){
 			$('#cus-collection-span').show();
 			$('#cus-collection').show();
+			_customZones('collection', true);
 		} else {
 			$('#cus-collection-span').hide();
 			$('#cus-collection').hide();
+			_customZones('collection', false);
 		}
 	}
 );
@@ -58,9 +64,11 @@ $('#cus-list-zone').change(
 		if($('#cus-list-zone').prop('checked')){
 			$('#cus-list-span').show();
 			$('#cus-list').show();
+			_customZones('list', true);
 		} else {
 			$('#cus-list-span').hide();
 			$('#cus-list').hide();
+			_customZones('list', false);
 		}
 	}
 );
@@ -69,9 +77,11 @@ $('#cus-map-zone').change(
 		if($('#cus-map-zone').prop('checked')){
 			$('#cus-map-span').show();
 			$('#cus-map').show();
+			_customZones('map', true);
 		} else {
 			$('#cus-map-span').hide();
 			$('#cus-map').hide();
+			_customZones('map', false);
 		}
 	}
 );
@@ -80,9 +90,11 @@ $('#cus-music-zone').change(
 		if($('#cus-music-zone').prop('checked')){
 			$('#cus-music-span').show();
 			$('#cus-music').show();
+			_customZones('music', true);
 		} else {
 			$('#cus-music-span').hide();
 			$('#cus-music').hide();
+			_customZones('music', false);
 		}
 	}
 );
@@ -91,9 +103,11 @@ $('#cus-newspaper-zone').change(
 		if($('#cus-newspaper-zone').prop('checked')){
 			$('#cus-newspaper-span').show();
 			$('#cus-newspaper').show();
+			_customZones('newspaper', true);
 		} else {
 			$('#cus-newspaper-span').hide();
 			$('#cus-newspaper').hide();
+			_customZones('newspaper', false);
 		}
 	}
 );
@@ -102,9 +116,11 @@ $('#cus-picture-zone').change(
 		if($('#cus-picture-zone').prop('checked')){
 			$('#cus-picture-span').show();
 			$('#cus-picture').show();
+			_customZones('picture', true);
 		} else {
 			$('#cus-picture-span').hide();
 			$('#cus-picture').hide();
+			_customZones('picture', false);
 		}
 	}
 );
