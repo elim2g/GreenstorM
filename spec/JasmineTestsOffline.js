@@ -1,7 +1,14 @@
 /**
  * Jasmine Tests
  */
+//Graph Constants
+const TEST_SUCCESS = true;
+const TEST_FAIL = false;
+const barGraph 	= 0;
+const lineGraph = 1;
+const dnutGraph = 2;
 
+//Query Constants
 const EXPECTED_RESULT_COUNT = 11;
 const USER_KEY = "n303osp9n70vv5tb";
 const QUERY_STRING = "&zone=newspaper&q=mungbean";
@@ -91,5 +98,85 @@ describe("Basic Search Test Suite", function() {
 	it("Test that GenClr throws a hissy fit when passed an index too large", function() {
 		var ind = 30;
 		expect( function() { GenClr(ind);}).toThrow(new Error('Index too large'));
+	});
+	
+	it("Test that RefreshHistogram will pass with BarChart type", function() {
+		var success = RefreshHistogram(barGraph);
+		expect(success).toEqual(TEST_SUCCESS);
+	});
+	
+	it("Test that RefreshHistogram will pass with LineChart type", function() {
+		var success = RefreshHistogram(lineGraph);
+		expect(success).toEqual(TEST_SUCCESS);
+	});
+	
+	it("Test that RefreshHistogram will pass with Doughnut Chart type", function() {
+		var success = RefreshHistogram(dnutGraph);
+		expect(success).toEqual(TEST_SUCCESS);
+	});
+	
+	it("Test that RefreshHistogram will fail by passing a negative number", function() {
+		var aNumber = -1;
+		expect( function() { RefreshHistogram(aNumber);}).toThrow(new Error('Not a graph type'));
+	});
+	
+	it("Test that RefreshHistogram will fail by passing an index too large", function() {
+		var aNumber = 3;
+		expect( function() { RefreshHistogram(aNumber);}).toThrow(new Error('Not a graph type'));
+	});
+	
+	it("Test that BarChartInit() returns failure due to lack of a canvas", function() {
+		var fail = BarChartInit();
+		expect(fail).toEqual(TEST_FAIL);
+	});
+	
+	it("Test that LineChartInit() returns failure due to lack of a canvas", function() {
+		var fail = LineChartInit();
+		expect(fail).toEqual(TEST_FAIL);
+	});
+	
+	it("Test that DoughnutChartInit() returns failure due to lack of a canvas", function() {
+		var fail = DoughnutChartInit();
+		expect(fail).toEqual(TEST_FAIL);
+	});
+	
+	it("Test that SaveGraph() returns failure due to lack of a canvas", function() {
+		var fail = SaveGraph();
+		expect(fail).toEqual(TEST_FAIL);
+	});
+	
+	it("Test that ClearLegend() just returns true (doesn't crash js)", function() {
+		var result = ClearLegend();
+		expect(result).toEqual(TEST_SUCCESS);
+	});
+	
+	it("Test that ClearCanvas() just returns true (doesn't crash js)", function() {
+		var result = ClearCanvas();
+		expect(result).toEqual(TEST_SUCCESS);
+	});
+	
+	it("Test that ChangeGraph will pass with BarChart type", function() {
+		var success = ChangeGraph(barGraph);
+		expect(success).toEqual(TEST_SUCCESS);
+	});
+	
+	it("Test that ChangeGraph will pass with LineChart type", function() {
+		var success = ChangeGraph(lineGraph);
+		expect(success).toEqual(TEST_SUCCESS);
+	});
+	
+	it("Test that ChangeGraph will pass with Doughnut Chart type", function() {
+		var success = ChangeGraph(dnutGraph);
+		expect(success).toEqual(TEST_SUCCESS);
+	});
+	
+	it("Test that ChangeGraph will fail by passing a negative number", function() {
+		var aNumber = -1;
+		expect( function() { ChangeGraph(aNumber);}).toThrow(new Error('Not a graph type'));
+	});
+	
+	it("Test that ChangeGraph will fail by passing an index too large", function() {
+		var aNumber = 3;
+		expect( function() { ChangeGraph(aNumber);}).toThrow(new Error('Not a graph type'));
 	});
 });
