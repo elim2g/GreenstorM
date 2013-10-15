@@ -492,9 +492,8 @@ public class SeleniumTest {
         selenium.click("id=nq-pb12");
         Thread.sleep(3000);
         selenium.click("id=cc-pb14");
-        Thread.sleep(800);
-        assertTrue(selenium.isTextPresent("1992-03-06"));
-        assertTrue(selenium.isTextPresent("1977-05-04"));
+        Thread.sleep(1500);
+        assertTrue(selenium.isTextPresent("Raw Data View"));
     }
     
     @Test
