@@ -1306,6 +1306,128 @@ public class SeleniumTest {
         Thread.sleep(500);
         assertTrue(selenium.isTextPresent("ScreenSound Australia"));
     }
+    
+    @Test
+    public void testAdvMapDecade() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "floods");
+        Thread.sleep(1000);
+        selenium.click("id=adv-map");
+        Thread.sleep(1000);
+        selenium.select("id=adv-map-decade", "label=1900's");
+        Thread.sleep(1000);
+        selenium.click("css=#adv-map-decade > option[value=\"190\"]");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("link=0.16337785");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("map"));
+    }
+    
+    
+    @Test
+    public void testAdvMapYear() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "floods");
+        Thread.sleep(1000);
+        selenium.click("id=adv-map");
+        Thread.sleep(1000);
+        selenium.select("id=adv-map-decade", "label=1900's");
+        Thread.sleep(1000);
+        selenium.click("css=#adv-map-decade > option[value=\"190\"]");
+        Thread.sleep(1000);
+        selenium.select("id=adv-map-year", "label=1901");
+        Thread.sleep(1000);                                                                                                                                                                                                                                                                                                                                                                                                                         
+        selenium.click("css=#adv-map-year > option[value=\"1901\"]");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("link=0.16337785");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("map"));
+    }
+    
+    
+    @Test
+    public void testAdvMapLanguage() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "floods");
+        Thread.sleep(1000);
+        selenium.click("id=adv-map");
+        Thread.sleep(1000);
+        selenium.type("id=adv-map-language", "Chinese");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("link=0.16871272");
+        Thread.sleep(500);
+        assertTrue(selenium.isTextPresent("Shanghai"));
+    }
+    
+    
+    @Test
+    public void testAdvMapAustralian() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-2");
+        Thread.sleep(1000);
+        selenium.type("id=aq1", "floods");
+        Thread.sleep(1000);
+        selenium.click("id=adv-map");
+        Thread.sleep(1000);
+        selenium.click("id=adv-map-australian");
+        Thread.sleep(1000);
+        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
+        Thread.sleep(2000);
+        selenium.click("id=btn-pause");
+        Thread.sleep(1000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(1000);
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
+        selenium.click("link=1.0648098");
+        assertTrue(selenium.isTextPresent("Brisbane floods"));
+    }
+    
+    
+    @Test
+    public void testAdvMapZoom() throws Exception {
+        LoginFunc();
+        Thread.sleep(1000);
+        fail("Not sure what value to input to get it to return a result");
+    }
+    
+    
+    
+    
        
     @Test
     public void TestPaginateResultsLessThan100() throws Exception {
