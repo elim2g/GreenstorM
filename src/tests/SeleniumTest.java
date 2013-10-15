@@ -524,18 +524,8 @@ public class SeleniumTest {
     public void testExportNewspaper() throws Exception {
         LoginFunc();
         Thread.sleep(1000);
-        
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-newspaper");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", "Floods");
-        Thread.sleep(1000);
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(2000);
-        selenium.click("id=btn-pause");
+        advancedSearchNewspaper("Celestials");
+        startSearchAndPauseAfter(20); 
         Thread.sleep(1000);
         selenium.click("id=cc-pb14");
         Thread.sleep(1000);
@@ -548,19 +538,8 @@ public class SeleniumTest {
     public void testExportArticle() throws Exception {
         LoginFunc();
         Thread.sleep(1000);
-        
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-book");
-        selenium.click("id=adv-article");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", "Floods");
-        Thread.sleep(1000);
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(2000);
-        selenium.click("id=btn-pause");
+        advancedSearchArticle("Celestials");
+        startSearchAndPauseAfter(20); 
         Thread.sleep(1000);
         selenium.click("id=cc-pb14");
         Thread.sleep(1000);
@@ -573,18 +552,8 @@ public class SeleniumTest {
     public void testExportBook() throws Exception {
         LoginFunc();
         Thread.sleep(1000);
-        
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-book");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", "Floods");
-        Thread.sleep(1000);
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(3000);
-        selenium.click("id=btn-pause");
+        advancedSearchBook("Celestials");
+        startSearchAndPauseAfter(20); 
         Thread.sleep(1000);
         selenium.click("id=cc-pb14");
         Thread.sleep(1000);
@@ -597,18 +566,8 @@ public class SeleniumTest {
     public void testExportCollection() throws Exception {
         LoginFunc();
         Thread.sleep(1000);
-        
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-collection");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", "Floods");
-        Thread.sleep(1000);
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(2000);
-        selenium.click("id=btn-pause");
+        advancedSearchCollection("Celestials");
+        startSearchAndPauseAfter(20); 
         Thread.sleep(1000);
         selenium.click("id=cc-pb14");
         Thread.sleep(1000);
@@ -621,18 +580,8 @@ public class SeleniumTest {
     public void testExportList() throws Exception {
         LoginFunc();
         Thread.sleep(1000);
-        
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-list");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", "Floods");
-        Thread.sleep(1000);
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(2000);
-        selenium.click("id=btn-pause");
+        advancedSearchList("Celestials");
+        startSearchAndPauseAfter(20); 
         Thread.sleep(1000);
         selenium.click("id=cc-pb14");
         Thread.sleep(1000);
@@ -645,18 +594,8 @@ public class SeleniumTest {
     public void testExportMap() throws Exception {
         LoginFunc();
         Thread.sleep(1000);
-        
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-map");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", "Floods");
-        Thread.sleep(1000);
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(2000);
-        selenium.click("id=btn-pause");
+        advancedSearchMap("Celestials");
+        startSearchAndPauseAfter(20); 
         Thread.sleep(1000);
         selenium.click("id=cc-pb14");
         Thread.sleep(1000);
@@ -669,18 +608,8 @@ public class SeleniumTest {
     public void testExportMusic() throws Exception {
         LoginFunc();
         Thread.sleep(1000);
-        
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-music");
-        Thread.sleep(1000);
-        selenium.type("id=aq1", "Floods");
-        Thread.sleep(1000);
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(2000);
-        selenium.click("id=btn-pause");
+        advancedSearchMusic("Celestials");
+        startSearchAndPauseAfter(20); 
         Thread.sleep(1000);
         selenium.click("id=cc-pb14");
         Thread.sleep(1000);
