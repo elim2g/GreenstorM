@@ -85,6 +85,7 @@ public class SeleniumTest {
         LoginFunc();
         Thread.sleep(600);
         selenium.click("link=New");
+        Thread.sleep(1000);
         selenium.click("xpath=(//input[@name='query-rb1'])[2]");
         Thread.sleep(600);
         selenium.type("id=aq1", "celestials");
@@ -213,7 +214,8 @@ public class SeleniumTest {
         selenium.click("link=Query");
         Thread.sleep(1000);
         selenium.click("link=New");
-        selenium.click("id=aq1");
+        Thread.sleep(1000);
+        selenium.click("id=adv-advanced");
         Thread.sleep(1000);
         selenium.type("q1", "celestials");
         Thread.sleep(500);
@@ -401,13 +403,13 @@ public class SeleniumTest {
         LoginFunc();
         Thread.sleep(1000);
         advancedSearchMap("Celestials");
-        startSearchAndPauseAfter(20);        
+        startSearchAndPauseAfter(50);        
         Thread.sleep(1000);
         selenium.click("link=Raw Results");
         Thread.sleep(1000);
         selenium.click("name=raw-sort-rb");
         Thread.sleep(1000);
-        assertTrue(selenium.isTextPresent("0.1297275"));
+        assertTrue(selenium.isTextPresent("0.11262148"));
     }
     
     @Test
@@ -1482,7 +1484,10 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
+        selenium.type("id=adv-query", searchTerm);
+        Thread.sleep(1000);
+        selenium.click("id=adv-article");
+        Thread.sleep(1000);
     }
     
     private void advancedSearchBook(String searchTerm) throws Exception {
@@ -1490,9 +1495,10 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
+        selenium.type("id=adv-query", searchTerm);
+        Thread.sleep(1000);
         selenium.click("id=adv-book");
         Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
     }
     
     private void advancedSearchCollection(String searchTerm) throws Exception {
@@ -1500,9 +1506,10 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
+        selenium.type("id=adv-query", searchTerm);
+        Thread.sleep(1000);
         selenium.click("id=adv-collection");
         Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
     }
     
     private void advancedSearchList(String searchTerm) throws Exception {
@@ -1510,9 +1517,10 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
+        selenium.type("id=adv-query", searchTerm);
+        Thread.sleep(1000);
         selenium.click("id=adv-list");
         Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
     }
     
     private void advancedSearchMap(String searchTerm) throws Exception {
@@ -1520,9 +1528,10 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
+        selenium.type("id=adv-query", searchTerm);
+        Thread.sleep(1000);
         selenium.click("id=adv-map");
         Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
     }
     
     private void advancedSearchMusic(String searchTerm) throws Exception {
@@ -1530,9 +1539,10 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
+        selenium.type("id=adv-query", searchTerm);
+        Thread.sleep(1000);
         selenium.click("id=adv-music");
         Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
     }
     
     private void advancedSearchNewspaper(String searchTerm) throws Exception {
@@ -1540,9 +1550,10 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
+        selenium.type("id=adv-query", searchTerm);
+        Thread.sleep(1000);
         selenium.click("id=adv-newspaper");
         Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
     }
     
     private void advancedSearchPicture(String searchTerm) throws Exception {
@@ -1550,9 +1561,10 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
+        selenium.type("id=adv-query", searchTerm);
+        Thread.sleep(1000);
         selenium.click("id=adv-picture");
         Thread.sleep(1000);
-        selenium.type("id=aq1", searchTerm);
     }
     
     private void startSearchAndPause() throws Exception {
