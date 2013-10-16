@@ -1588,8 +1588,7 @@ function _updateStoreQueriesPane ()
       str += '</tr>\n';
       for (var i = 0; i < m_qStore.length; i++) {
         var clz = (i % 2) ? 'tr-odd' : 'tr-evn';
-        var type = m_qStore[i].query_type == 's' ? 'Simple' : 'a' ? 'Advanced' : 'c' ? 'Custom' : ''; 
-        
+        var type = _getQueryType(m_qStore[i].query_type);        
         var descr = m_qStore[i].descr;
         str += '<tr class="' + clz + '">\n<td class="cb-col"><input type="checkbox" id="dqcb' + i +'"></td>\n';
         str += '<td><a href="#" onClick="_openQuery(' + i + ')">' + descr + '</td>\n';
@@ -1608,7 +1607,7 @@ function _updateStoreQueriesPane ()
 }
 
 /**
-* User has saved or deleted a query, so adjust the display accordingly.
+* Processes recent queries cookie and builds a table of recent queries from it
 */
 function _updateRecentQueriesPane ()
 {
@@ -1634,8 +1633,7 @@ function _updateRecentQueriesPane ()
       str += '</tr>\n';
       for (var i = 0; i < m_qRecent.length; i++) {
         var clz = (i % 2) ? 'tr-odd' : 'tr-evn';
-        var type = m_qRecent[i].query_type == 's' ? 'Simple' : 'a' ? 'Advanced' : 'c' ? 'Custom' : ''; 
-        
+        var type = _getQueryType(m_qRecent[i].query_type);
         var descr = m_qRecent[i].descr;
         str += '<tr class="' + clz + '">\n<td class="cb-col"><input type="checkbox" id="dqcb' + i +'"></td>\n';
         str += '<td><a href="#" onClick="_openQuery(' + i + ', \'recent\')">' + descr + '</td>\n';
@@ -1645,11 +1643,22 @@ function _updateRecentQueriesPane ()
         str += '<td class="table-text td-num">' + m_qRecent[i].total_last_run + '</td>\n';
         str += '</tr>\n';
       }
-      str += '<tr><td colspan="4"><hr class="pm-button-sep"></td></tr>\n';
-      str += '<tr><td></td><td colspan="3"><div class="pm-button-bar"><button id="dq-pb1" onClick="alert()">Delete Selected</button></div></td></tr>';
       $(_selById(Q_RECENT_TABLE)).html(str);
     }
   }
+}
+
+function _getQueryType(typeChar) {
+	switch (typeChar) {
+		case 's':
+			return "Simple";
+		case 'a':
+			return "Advanced";
+		case 'c':
+			return "Custom";
+		default:
+			return "";
+	}
 }
 
 /**
@@ -1686,36 +1695,21 @@ function _deleteSelectedQueries ()
 */
 function _openQuery (idx, type)
 {
-  var qType = "";
   if (type == "recent") {
 	  m_currentQueryFormPane = "recent";
 	  m_currentQuery = m_qRecent[idx].query;
-	  qType = m_qRecent[idx].query_type;
   } else {
 	  m_currentQueryFormPane = "save";
 	  m_currentQuery = m_qStore[idx].query;
-	  qType = m_qStore[idx].query_type;
   }
-  
-  switch (qType) {
-  case 's':
-    var pat = /&zone=(.+)\&q=(.+)/;
-    var params = pat.exec(m_currentQuery);
-    m_currentZone = params[1];
-    m_currentTerm = params[2];
-    _doQuery(0);
-    break;
-  case 'a':
-    var pat = /&zone=(.+)\&q=(.+)/;
-    var params = pat.exec(m_currentQuery);
-    m_currentZone = params[1];
-    m_currentTerm = params[2];
-    _doQuery(0);
-    break;
-  case 'c':
-    break;
-  }
-  
+
+  // remove &s from current term -- can use this later to build up list of parameters
+  var pat = /&zone=(.+)\&q=(.+)/;
+  var params = pat.exec(m_currentQuery);
+  var tempTerm = params[2].split('&');
+  m_currentZone = decodeURIComponent(params[1]);
+  m_currentTerm = tempTerm[0];
+  _doQuery(0);
 }
 
 /**
@@ -2252,8 +2246,8 @@ function _processData (data, pos, id) {
       _updateCurrQueryPane();
       _updateHistogram();
 
-      // swap view on first response unless user already chnged it
-      if ((pos === 0) && (m_currentPaneSelector === _selById(NEW_QUERY_PANE))) {
+      // swap view on first response
+      if ((pos === 0)) {
         currentQuery(true);
       }
     }

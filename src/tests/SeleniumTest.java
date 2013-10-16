@@ -191,6 +191,42 @@ public class SeleniumTest {
     }
     
     @Test
+    public void TestRecentSearchCustomSingle() throws Exception {
+        LoginFunc();
+        Thread.sleep(500);
+        customSearch("book", "Celestials");
+        Thread.sleep(500);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(500);
+        selenium.click("link=Recent");
+        Thread.sleep(500);
+        assertTrue(selenium.isTextPresent("Celestials"));
+        assertTrue(selenium.isTextPresent("Custom"));
+        assertTrue(selenium.isTextPresent("book"));
+    }
+    
+    @Test
+    public void TestRecentSearchCustomMultiple() throws Exception {
+        ArrayList<String> zones = new ArrayList();
+        zones.add("book");
+        zones.add("newspaper");
+        
+        LoginFunc();
+        Thread.sleep(500);
+        customSearch(zones, "Celestials");
+        Thread.sleep(500);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(500);
+        selenium.click("link=Recent");
+        Thread.sleep(500);
+        assertTrue(selenium.isTextPresent("Celestials"));
+        assertTrue(selenium.isTextPresent("Custom"));
+        for (int j = 0; j < zones.size(); j++) {
+            assertTrue(selenium.isTextPresent(zones.get(j)));
+        }
+    }
+    
+    @Test
     public void DeleteSavedQuery() throws Exception {
         LoginFunc();
         Thread.sleep(500);
@@ -1623,6 +1659,15 @@ public class SeleniumTest {
             list.add(String.valueOf(i));
         }
         return list;
+    }
+    
+    private void customSearch(String zone, String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-3");
+        selenium.click("id=custom-zone-" + zone);            
+        Thread.sleep(1000);
+        selenium.type("id=cus-query", searchTerm);
     }
     
     private void customSearch(ArrayList zones, String searchTerm) throws Exception {
