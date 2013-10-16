@@ -1,20 +1,20 @@
 /*
-* Copyright (c) 2013 The University of Queensland. This software is being developed
-* for the UQ School of History, Philosophy, Religion and Classics (HPRC).
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Copyright (c) 2013 The University of Queensland. This software is being developed
+ * for the UQ School of History, Philosophy, Religion and Classics (HPRC).
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 // The webapp base URI is set by ANT build task
 var temp2 = new Array();
@@ -71,6 +71,471 @@ var Q_STORE = 'stored-queries';
 var Q_STORE_TABLE = 'qstore-table';
 var Q_RECENT = 'recent-queries';
 var Q_RECENT_TABLE = 'qrecent-table';
+
+/*
+ * Search Criteria Mapping based off Trove API
+ */
+var ShowAll = {
+	"index-anbdid" : true,
+	"facet-audience" : true,
+	"facet-australian" : true,
+	"facet-availability" : true,
+	"facet-category" : true,
+	"index-commentlastupdated" : true,
+	"index-creator" : true,
+	"index-date" : true,
+	"index-ddc" : true,
+	"facet-decade" : true,
+	"index-decade" : true,
+	"index-exact_creator" : true,
+	"facet-format" : true,
+	"index-format" : true,
+	"index-fulltext" : true,
+	"index-has" : true,
+	"index-id" : true,
+	"index-identifier" : true,
+	"facet-illtype" : true,
+	"facet-illustrated" : true,
+	"index-isbn" : true,
+	"index-issn" : true,
+	"facet-language" : true,
+	"index-language" : true,
+	"index-lastupdated" : true,
+	"facet-month" : true,
+	"index-nuc" : true,
+	"facet-occupation" : true,
+	"index-publictag" : true,
+	"index-s_creator" : true,
+	"index-s_subject" : true,
+	"index-s_title" : true,
+	"index-subject" : true,
+	"index-taglastupdated" : true,
+	"index-text" : true,
+	"index-title" : true,
+	"facet-title" : true,
+	"facet-vendor" : true,
+	"facet-vendordb" : true,
+	"facet-word" : true,
+	"facet-year" : true,
+	"facet-year_newspaper" : true,
+	"facet-zoom" : true
+};
+
+var ShowNone = {
+	"index-anbdid" : false,
+	"facet-audience" : false,
+	"facet-australian" : false,
+	"facet-availability" : false,
+	"facet-category" : false,
+	"index-commentlastupdated" : false,
+	"index-creator" : false,
+	"index-date" : false,
+	"index-ddc" : false,
+	"facet-decade" : false,
+	"index-decade" : false,
+	"index-exact_creator" : false,
+	"facet-format" : false,
+	"index-format" : false,
+	"index-fulltext" : false,
+	"index-has" : false,
+	"index-id" : false,
+	"index-identifier" : false,
+	"facet-illtype" : false,
+	"facet-illustrated" : false,
+	"index-isbn" : false,
+	"index-issn" : false,
+	"facet-language" : false,
+	"index-language" : false,
+	"index-lastupdated" : false,
+	"facet-month" : false,
+	"index-nuc" : false,
+	"facet-occupation" : false,
+	"index-publictag" : false,
+	"index-s_creator" : false,
+	"index-s_subject" : false,
+	"index-s_title" : false,
+	"index-subject" : false,
+	"index-taglastupdated" : false,
+	"index-text" : false,
+	"index-title" : false,
+	"facet-title" : false,
+	"facet-vendor" : false,
+	"facet-vendordb" : false,
+	"facet-word" : false,
+	"facet-year" : false,
+	"facet-year_newspaper" : false,
+	"facet-zoom" : false
+};
+
+var Article = {
+	"index-anbdid" : true,
+	"facet-audience" : true,
+	"facet-australian" : true,
+	"facet-availability" : true,
+	"facet-category" : false,
+	"index-commentlastupdated" : true,
+	"index-creator" : true,
+	"index-date" : true,
+	"index-ddc" : true,
+	"facet-decade" : true,
+	"index-decade" : true,
+	"index-exact_creator" : false,
+	"facet-format" : true,
+	"index-format" : true,
+	"index-fulltext" : false,
+	"index-has" : true,
+	"index-id" : true,
+	"index-identifier" : true,
+	"facet-illtype" : false,
+	"facet-illustrated" : false,
+	"index-isbn" : true,
+	"index-issn" : true,
+	"facet-language" : true,
+	"index-language" : true,
+	"index-lastupdated" : true,
+	"facet-month" : false,
+	"index-nuc" : true,
+	"facet-occupation" : false,
+	"index-publictag" : true,
+	"index-s_creator" : true,
+	"index-s_subject" : true,
+	"index-s_title" : true,
+	"index-subject" : true,
+	"index-taglastupdated" : true,
+	"index-text" : true,
+	"index-title" : true,
+	"facet-title" : false,
+	"facet-vendor" : true,
+	"facet-vendordb" : true,
+	"facet-word" : false,
+	"facet-year" : true,
+	"facet-year_newspaper" : false,
+	"facet-zoom" : false
+};
+var Book = {
+	"index-anbdid" : true,
+	"facet-audience" : false,
+	"facet-australian" : true,
+	"facet-availability" : true,
+	"facet-category" : false,
+	"index-commentlastupdated" : true,
+	"index-creator" : true,
+	"index-date" : true,
+	"index-ddc" : true,
+	"facet-decade" : true,
+	"index-decade" : true,
+	"index-exact_creator" : false,
+	"facet-format" : true,
+	"index-format" : true,
+	"index-fulltext" : false,
+	"index-has" : true,
+	"index-id" : true,
+	"index-identifier" : true,
+	"facet-illtype" : false,
+	"facet-illustrated" : false,
+	"index-isbn" : true,
+	"index-issn" : true,
+	"facet-language" : true,
+	"index-language" : true,
+	"index-lastupdated" : true,
+	"facet-month" : false,
+	"index-nuc" : true,
+	"facet-occupation" : false,
+	"index-publictag" : true,
+	"index-s_creator" : true,
+	"index-s_subject" : true,
+	"index-s_title" : true,
+	"index-subject" : true,
+	"index-taglastupdated" : true,
+	"index-text" : true,
+	"index-title" : true,
+	"facet-title" : false,
+	"facet-vendor" : false,
+	"facet-vendordb" : false,
+	"facet-word" : false,
+	"facet-year" : true,
+	"facet-year_newspaper" : false,
+	"facet-zoom" : false
+};
+var Collection = {
+	"index-anbdid" : true,
+	"facet-audience" : false,
+	"facet-australian" : true,
+	"facet-availability" : true,
+	"facet-category" : false,
+	"index-commentlastupdated" : true,
+	"index-creator" : true,
+	"index-date" : true,
+	"index-ddc" : true,
+	"facet-decade" : true,
+	"index-decade" : true,
+	"index-exact_creator" : false,
+	"facet-format" : true,
+	"index-format" : true,
+	"index-fulltext" : false,
+	"index-has" : true,
+	"index-id" : true,
+	"index-identifier" : true,
+	"facet-illtype" : false,
+	"facet-illustrated" : false,
+	"index-isbn" : true,
+	"index-issn" : true,
+	"facet-language" : true,
+	"index-language" : true,
+	"index-lastupdated" : true,
+	"facet-month" : false,
+	"index-nuc" : true,
+	"facet-occupation" : true,
+	"index-publictag" : true,
+	"index-s_creator" : true,
+	"index-s_subject" : true,
+	"index-s_title" : true,
+	"index-subject" : true,
+	"index-taglastupdated" : true,
+	"index-text" : true,
+	"index-title" : true,
+	"facet-title" : false,
+	"facet-vendor" : false,
+	"facet-vendordb" : false,
+	"facet-word" : false,
+	"facet-year" : true,
+	"facet-year_newspaper" : false,
+	"facet-zoom" : false
+};
+var List = {
+	"index-anbdid" : false,
+	"facet-audience" : false,
+	"facet-australian" : false,
+	"facet-availability" : true,
+	"facet-category" : false,
+	"index-commentlastupdated" : true,
+	"index-creator" : true,
+	"index-date" : false,
+	"index-ddc" : false,
+	"facet-decade" : true,
+	"index-decade" : false,
+	"index-exact_creator" : true,
+	"facet-format" : false,
+	"index-format" : false,
+	"index-fulltext" : false,
+	"index-has" : true,
+	"index-id" : false,
+	"index-identifier" : false,
+	"facet-illtype" : false,
+	"facet-illustrated" : false,
+	"index-isbn" : false,
+	"index-issn" : false,
+	"facet-language" : false,
+	"index-language" : false,
+	"index-lastupdated" : true,
+	"facet-month" : false,
+	"index-nuc" : false,
+	"facet-occupation" : false,
+	"index-publictag" : false,
+	"index-s_creator" : false,
+	"index-s_subject" : false,
+	"index-s_title" : false,
+	"index-subject" : false,
+	"index-taglastupdated" : true,
+	"index-text" : false,
+	"index-title" : false,
+	"facet-title" : false,
+	"facet-vendor" : false,
+	"facet-vendordb" : false,
+	"facet-word" : false,
+	"facet-year" : true,
+	"facet-year_newspaper" : false,
+	"facet-zoom" : false
+};
+var Map = {
+	"index-anbdid" : true,
+	"facet-audience" : false,
+	"facet-australian" : true,
+	"facet-availability" : true,
+	"facet-category" : false,
+	"index-commentlastupdated" : true,
+	"index-creator" : true,
+	"index-date" : true,
+	"index-ddc" : true,
+	"facet-decade" : true,
+	"index-decade" : true,
+	"index-exact_creator" : false,
+	"facet-format" : true,
+	"index-format" : true,
+	"index-fulltext" : false,
+	"index-has" : true,
+	"index-id" : true,
+	"index-identifier" : true,
+	"facet-illtype" : false,
+	"facet-illustrated" : false,
+	"index-isbn" : true,
+	"index-issn" : true,
+	"facet-language" : true,
+	"index-language" : true,
+	"index-lastupdated" : true,
+	"facet-month" : false,
+	"index-nuc" : true,
+	"facet-occupation" : false,
+	"index-s_creator" : true,
+	"index-s_subject" : true,
+	"index-s_title" : true,
+	"index-subject" : true,
+	"index-taglastupdated" : true,
+	"index-text" : true,
+	"index-title" : true,
+	"facet-title" : false,
+	"facet-vendor" : false,
+	"facet-vendordb" : false,
+	"facet-word" : false,
+	"facet-year" : true,
+	"facet-year_newspaper" : false,
+	"facet-zoom" : true
+};
+var Music = {
+	"index-anbdid" : true,
+	"facet-audience" : false,
+	"facet-australian" : true,
+	"facet-availability" : true,
+	"facet-category" : false,
+	"index-commentlastupdated" : true,
+	"index-creator" : true,
+	"index-date" : true,
+	"index-ddc" : true,
+	"facet-decade" : true,
+	"index-decade" : true,
+	"index-exact_creator" : false,
+	"facet-format" : true,
+	"index-format" : true,
+	"index-fulltext" : false,
+	"index-has" : true,
+	"index-id" : true,
+	"index-identifier" : true,
+	"facet-illtype" : false,
+	"facet-illustrated" : false,
+	"index-isbn" : true,
+	"index-issn" : true,
+	"facet-language" : true,
+	"index-language" : true,
+	"index-lastupdated" : true,
+	"facet-month" : false,
+	"index-nuc" : true,
+	"facet-occupation" : false,
+	"index-publictag" : true,
+	"index-s_creator" : true,
+	"index-s_subject" : true,
+	"index-s_title" : true,
+	"index-subject" : true,
+	"index-taglastupdated" : true,
+	"index-text" : true,
+	"index-title" : true,
+	"facet-title" : false,
+	"facet-vendor" : false,
+	"facet-vendordb" : false,
+	"facet-word" : false,
+	"facet-year" : true,
+	"facet-year_newspaper" : false,
+	"facet-zoom" : false
+};
+var Newspaper = {
+	"index-anbdid" : false,
+	"facet-audience" : false,
+	"facet-australian" : false,
+	"facet-availability" : false,
+	"facet-category" : true,
+	"index-commentlastupdated" : true,
+	"index-creator" : false,
+	"index-date" : true,
+	"index-ddc" : false,
+	"facet-decade" : true,
+	"index-decade" : false,
+	"index-exact_creator" : false,
+	"facet-format" : false,
+	"index-format" : false,
+	"index-fulltext" : true,
+	"index-has" : true,
+	"index-id" : false,
+	"index-identifier" : false,
+	"facet-illtype" : true,
+	"facet-illustrated" : true,
+	"index-isbn" : false,
+	"index-issn" : false,
+	"facet-language" : false,
+	"index-language" : false,
+	"index-lastupdated" : true,
+	"facet-month" : true,
+	"index-nuc" : false,
+	"facet-occupation" : false,
+	"index-publictag" : true,
+	"index-s_creator" : false,
+	"index-s_subject" : false,
+	"index-s_title" : false,
+	"index-subject" : false,
+	"index-taglastupdated" : true,
+	"index-text" : false,
+	"index-title" : false,
+	"facet-title" : true,
+	"facet-vendor" : false,
+	"facet-vendordb" : false,
+	"facet-word" : true,
+	"facet-year" : false,
+	"facet-year_newspaper" : true,
+	"facet-zoom" : false
+};
+var Picture = {
+	"index-anbdid" : true,
+	"facet-audience" : false,
+	"facet-australian" : true,
+	"facet-availability" : true,
+	"facet-category" : false,
+	"index-commentlastupdated" : true,
+	"index-creator" : true,
+	"index-date" : true,
+	"index-ddc" : true,
+	"facet-decade" : true,
+	"index-decade" : true,
+	"index-exact_creator" : false,
+	"facet-format" : true,
+	"index-format" : true,
+	"index-fulltext" : false,
+	"index-has" : true,
+	"index-id" : true,
+	"index-identifier" : true,
+	"facet-illtype" : false,
+	"facet-illustrated" : false,
+	"index-isbn" : true,
+	"index-issn" : true,
+	"facet-language" : true,
+	"index-language" : true,
+	"index-lastupdated" : true,
+	"facet-month" : false,
+	"index-nuc" : true,
+	"facet-occupation" : false,
+	"index-publictag" : true,
+	"index-s_creator" : true,
+	"index-s_subject" : true,
+	"index-s_title" : true,
+	"index-subject" : true,
+	"index-taglastupdated" : true,
+	"index-text" : true,
+	"index-title" : true,
+	"facet-title" : false,
+	"facet-vendor" : false,
+	"facet-vendordb" : false,
+	"facet-word" : false,
+	"facet-year" : true,
+	"facet-year_newspaper" : false,
+	"facet-zoom" : false
+};
+var zoneMappings = {
+	"article" : Article,
+	"book" : Book,
+	"collection" : Collection,
+	"list" : List,
+	"map" : Map,
+	"music" : Music,
+	"newspaper" : Newspaper,
+	"picture" : Picture
+};
 
 
 var MINYEAR	= '1800';
@@ -258,13 +723,6 @@ h_bookmark = 0;
 
 //User global variables
 var rememberedUser = false;
-
-$(document).ready(function (){ 
-	//FIXME: checkbox needs to auto check if user has chosen to be remembered	
-    if ($.cookie('email') !== undefined) {
-	    $('#usr-info input[id=cb-remember]').attr('checked', 'checked');
-    }
-});
 
 /**
 * Invoked by index page onload trigger, does any required configuration.
@@ -501,7 +959,6 @@ function resetQueryPane ()
 			break;
 		case Q_ADVANCED :
 			$('input#adv-query').val('');
-			$('select#z1').val('newspaper');
 			break;
 		case Q_CUSTOM :
 			// FIXME: todo
@@ -888,13 +1345,11 @@ function showHelp (section)
     $.get(PM_URI + '/pm?pg=' + HELP_ABOUT, function(data) {
       _popupDialog(INFO, data, 400);
       }, 'html').error(function() { alert("ajax error help"); });
-  }
-  else {
+  } else {
     var __loadHelp = function (pane) {
       if ($(_selById(pane)).length > 0) {
         _showPane(_selById(pane));
-      }
-      else {
+      } else {
         var cb1 = function () {
           _showPane(_selById(pane));
         };
@@ -940,15 +1395,13 @@ function preventDefaultAction (evt)
 {
   if (evt.preventDefault) {
     evt.preventDefault();
-  }
-  else {
+  } else {
     evt.returnValue = false;
   }
 
   if (evt.stopPropagation) {
     evt.stopPropagation();
-  }
-  else {
+  } else {
     evt.cancelBubble = true;
   }
 };
@@ -987,8 +1440,7 @@ function refreshRecord ()
           if (record) {
             if (typeof record.articleText === UNDEF) {
               m_resultSet[m_rawRecordId].data.text = '&lt;nil&gt;';
-            }
-            else {
+            } else {
               var text = record.articleText.toString();
               text = text.replace(/<p>/g, '');
               text = text.replace(/<\/p>/g, '');
@@ -999,8 +1451,7 @@ function refreshRecord ()
         }
         $('input#pb-r2').attr('disabled','true');
       });
-    }
-    catch (err) {
+    } catch (err) {
       alert(err);
     }
   }
@@ -1029,8 +1480,7 @@ function locnAdd ()
   var text = "";
   if (window.getSelection) {
     text = "" + window.getSelection();
-  }
-  else if ((sel = document.selection) && (sel.type == "Text")) {
+  } else if ((sel = document.selection) && (sel.type == "Text")) {
     text = sel.createRange().text;
   }
   
@@ -1188,7 +1638,7 @@ function _updateRecentQueriesPane ()
         
         var descr = m_qRecent[i].descr;
         str += '<tr class="' + clz + '">\n<td class="cb-col"><input type="checkbox" id="dqcb' + i +'"></td>\n';
-        str += '<td><a href="#" onClick="_openQuery(' + i + ')">' + descr + '</td>\n';
+        str += '<td><a href="#" onClick="_openQuery(' + i + ', \'recent\')">' + descr + '</td>\n';
         str += '<td class="table-text" id="type' + i + '">' + "" + type + '</td>\n';
         str += '<td class="table-text" id="zone' + i + '">' + "" + m_qRecent[i].zones + '</td>\n';
         str += '<td class="table-text">' + m_qRecent[i].date_last_run + '</td>\n';
@@ -1218,13 +1668,11 @@ function _deleteSelectedQueries ()
   }
   if (str.length === 0) {
     _popupDialog(ALERT, 'No queries selected!');
-  }
-  else {
+  } else {
     $.get(PM_URI + '/pm/qdel?ids=' + str, function (res) {
       if (res != 'ok') {
         _popupDialog(ALERT, res);
-      }
-      else {
+      } else {
         _getStoredQueries();
         _popupDialog(INFO, 'Queries deleted Ok.');
       }
@@ -1236,19 +1684,33 @@ function _deleteSelectedQueries ()
 * Makes the clicked query the "current" query, ready for execution or modification
 * @param idx
 */
-function _openQuery (idx)
+function _openQuery (idx, type)
 {
-  m_currentQuery = m_qStore[idx].query;
-  switch (m_qStore[idx].query_type) {
+  var qType = "";
+  if (type == "recent") {
+	  m_currentQueryFormPane = "recent";
+	  m_currentQuery = m_qRecent[idx].query;
+	  qType = m_qRecent[idx].query_type;
+  } else {
+	  m_currentQueryFormPane = "save";
+	  m_currentQuery = m_qStore[idx].query;
+	  qType = m_qStore[idx].query_type;
+  }
+  
+  switch (qType) {
   case 's':
     var pat = /&zone=(.+)\&q=(.+)/;
     var params = pat.exec(m_currentQuery);
     m_currentZone = params[1];
     m_currentTerm = params[2];
-    $('input#q1').val(decodeURIComponent(m_currentTerm));
-    newQuery(true);
+    _doQuery(0);
     break;
   case 'a':
+    var pat = /&zone=(.+)\&q=(.+)/;
+    var params = pat.exec(m_currentQuery);
+    m_currentZone = params[1];
+    m_currentTerm = params[2];
+    _doQuery(0);
     break;
   case 'c':
     break;
@@ -1275,8 +1737,7 @@ function _showStoredQueryForm (id){
 /**
 * Builds the TROVE query string from user input.
 */
-function _createQueryString ()
-{
+function _createQueryString () {
 	var str = '';
 	switch (m_currentQueryFormPane) {
 		case Q_SIMPLE :
@@ -1455,22 +1916,76 @@ function _createQueryString ()
 			break;
 		case Q_CUSTOM:
 			m_currentZone = null;
-			temp2.forEach(function(zone){
-				if (m_currentZone) {
-					m_currentZone += ',' + zone;
-				} else {
-					m_currentZone = zone;
-				}
-			});
-			str += '&zone=' + encodeURIComponent(m_currentZone);
-			
-			// Add Query
-			m_currentTerm = $('#cus-query').val();
-			str += '&q=' + encodeURIComponent(m_currentTerm);
-			if ($('#cus-query-not').val() != '') {
-				str += encodeURIComponent(' NOT ' + $('#cus-query-not').val());
+		temp2.forEach(function(zone) {
+			if (m_currentZone) {
+				m_currentZone += ',' + zone;
+			} else {
+				m_currentZone = zone;
 			}
-			break;
+		});
+		str += '&zone=' + encodeURIComponent(m_currentZone);
+
+		// Add Query
+		m_currentTerm = $('#cus-query').val();
+		str += '&q=' + encodeURIComponent(m_currentTerm);
+		if ($('#cus-query-not').val() != '') {
+			str += encodeURIComponent(' NOT ' + $('#cus-query-not').val());
+		}
+		
+		//<<< Custom Search Fields >>>\\
+		// Includes
+		var includes = null;
+		if($('#custom-include-all').is(":checked")){
+			if(!includes){include=$('#custom-include-all').val();} 
+			else {include += ',' + $('#custom-include-all').val();}
+		} else {
+			if($('#custom-include-articletext').is("checked")){
+				if(!includes){include=$('#custom-include-articletext').val();} 
+				else {include += ',' + $('#custom-include-articletext').val();}
+			}
+			if($('#custom-include-comments').is("checked")){
+				if(!includes){include=$('#custom-include-comments').val();} 
+				else {include += ',' + $('#custom-include-comments').val();}
+			}
+			if($('#custom-include-holdings').is("checked")){
+				if(!includes){include=$('#custom-include-holdings').val();} 
+				else {include += ',' + $('#custom-include-holdings').val();}
+			}
+			if($('#custom-include-links').is("checked")){
+				if(!includes){include=$('#custom-include-links').val();} 
+				else {include += ',' + $('#custom-include-links').val();}
+			}
+			if($('#custom-include-listitems').is("checked")){
+				if(!includes){include=$('#custom-include-listitems').val();} 
+				else {include += ',' + $('#custom-include-listitems').val();}
+			}
+			if($('#custom-include-lists').is("checked")){
+				if(!includes){include=$('#custom-include-lists').val();} 
+				else {include += ',' + $('#custom-include-lists').val();}
+			}
+			if($('#custom-include-subscribinglibs').is("checked")){
+				if(!includes){include=$('#custom-include-subscribinglibs').val();} 
+				else {include += ',' + $('#custom-include-subscribinglibs').val();}
+			}
+			if($('#custom-include-tags').is("checked")){
+				if(!includes){include=$('#custom-include-tags').val();} 
+				else {include += ',' + $('#custom-include-tags').val();}
+			}
+			if($('#custom-include-workversions').is("checked")){
+				if(!includes){include=$('#custom-include-workversions').val();} 
+				else {include += ',' + $('#custom-include-workversions').val();}
+			}
+			str += urlEncode(includes);
+		}
+		
+		//facets
+		
+		
+		//<<< Custom Search Fields >>>\\
+
+		break;
+		default:
+			return m_currentQuery;
 	}
   	return str;
 }
@@ -1478,8 +1993,7 @@ function _createQueryString ()
 /**
 * Reset all state vars to initial values for execution of a new query.
 */
-function _resetState ()
-{
+function _resetState () {
 	if (testing == false) {
 	  _resetMap();
 	  
@@ -1569,24 +2083,25 @@ function _doQuery (pos){
   if (m_fetchSize < MAX_FETCH_SIZE) {
     m_fetchSize = Math.min(MAX_FETCH_SIZE, m_fetchSize * 2);
   }
+  
   var uri = TROVE_QUERY_URL + m_user.key + m_currentQuery +
             '&s=' + pos + '&n=' + m_fetchSize +
             '&encoding=json' +
             '&callback=?';
+
   $.getJSON(uri, function (data, status, jqXHR) {
       try {
         if (status == "success") {
           _updateTimeDisplay();
           _processData(data, pos, queryId);
-          if (pos === 0) {
+          if (pos === 0 && m_currentQueryFormPane !== "recent"
+        	  && m_currentQueryFormPane !== "save") {
               _createRecentCookie();  
           }
-        }
-        else {
+        } else {
           alert('getJSON Error: ' + JSON.stringify(jqXHR));
         }
-      }
-      catch (ex) {
+      } catch (ex) {
         alert(ex);
       }
     }).error(function(jqXHR, textStatus, errorThrown) {
@@ -1635,7 +2150,7 @@ function _createRecentCookie() {
 	var date = new Date();
 	var time = date.getHours() + ':' + date.getMinutes();
     var descr = m_currentTerm;
-    var query = encodeURIComponent(m_currentQuery);
+    var query = m_currentQuery;
     var query_type = (m_currentQueryFormPane === Q_SIMPLE) ? 's' :
                 (m_currentQueryFormPane === Q_ADVANCED) ? 'a' : 'c';
     var zones = m_currentZone;
@@ -1658,8 +2173,7 @@ function _createRecentCookie() {
 * @param data TROVE JSON response
 * @param pos start location in overall set for this group; or negative to stop the madness
 */
-function _processData (data, pos, id)
-{
+function _processData (data, pos, id) {
   if (pos === PAUSE_QUERY) {
     if (m_paused) {
       m_paused = false;
@@ -1668,8 +2182,7 @@ function _processData (data, pos, id)
       $('#cc-pb11').button('option', 'label', 'Pause Query');
       $('img#img-pause').attr('src', 'images/button_grey_pause.png');
       _doQuery(m_resultSet.length);
-    }
-    else {
+    } else {
       m_run = false;
       m_paused = true;
       $('#busy-box').activity(false);
@@ -1677,8 +2190,7 @@ function _processData (data, pos, id)
       $('img#img-pause').attr('src', 'images/button_grey_play.png');
     }
     _updateCurrQueryPane();
-  }
-  else if (m_run && (id === m_queryId)) {
+  } else if (m_run && (id === m_queryId)) {
 
 	  /**
 	   * Upgraded to handle multiple zones
@@ -1714,8 +2226,7 @@ function _processData (data, pos, id)
 	  // get next chunk underway before doing local housekeeping
       if (m_resultSet.length < m_totalRecs) {
         _doQuery(m_resultSet.length);
-      }
-      else {
+      } else {
         $('#busy-box').activity(false);
         $('#cc-pb11').button('disable');
         $('div#progress-container').css('visibility', 'hidden');
@@ -1726,7 +2237,6 @@ function _processData (data, pos, id)
       _updateMapDisplay(pos);
       _updateCurrQueryPane();
       _updateHistogram();
-      //_updateCloud();
 
       // swap view on first response unless user already chnged it
       if ((pos === 0) && (m_currentPaneSelector === _selById(NEW_QUERY_PANE))) {
@@ -1741,8 +2251,7 @@ function _processData (data, pos, id)
 * Flips the currently visible pane
 * @param id Selector for pane to display
 */
-function _showPane (id)
-{
+function _showPane (id) {
   if ((id != m_currentPaneSelector) && ($(id).length > 0)) {
     $(m_currentPaneSelector).toggle('fade', 'swing', FADE_TD2, function () {
       $(id).toggle('fade', 'swing', FADE_TD2);
@@ -1810,15 +2319,13 @@ function _createPane (id, callback, cssName)
 * @param idx Index of record
 * @returns {Boolean} true if in range
 */
-function _isInTimelineRange(idx)
-{
+function _isInTimelineRange(idx) {
   var inRange = false;
   var span = $(_selById(Y2K_SLIDER)).slider('value').split(';');
   var ystart = parseInt(span[0]);
   var yend = parseInt(span[1]);
   var zoneInfo = _getZoneInfo(m_resultSet[idx].zone);
   if (zoneInfo.dtag.length > 0) {
-    //var date = eval('m_resultSet[idx].data.' + zoneInfo.dtag);
     var date = m_resultSet[idx].data[zoneInfo.dtag];
     var year = date;
     if (year.length > 4) {
@@ -1856,8 +2363,7 @@ function _initSlider ()
 * @param idx Index of record
 * @param data
 */
-function _insertPublisherMapMarker (idx, data)
-{
+function _insertPublisherMapMarker (idx, data) {
   var pos = new google.maps.LatLng(data.latitude, data.longitude);
   var pin = new google.maps.Marker( { position: pos, map: m_map, } );
   var isViz = (_getCheckedMapButton() === PUBLISHER_MARKER);
@@ -1870,8 +2376,7 @@ function _insertPublisherMapMarker (idx, data)
 /**
 * returns currently checked map marker button.
 */
-function _getCheckedMapButton ()
-{
+function _getCheckedMapButton () {
   return parseInt($('#map-options input[name=radio-map]:checked').val());
 }
 
@@ -1888,12 +2393,10 @@ function _updateMapDisplay (pos)
   {
     // FIXME: only newspaper will have this
     var pubId = eval(m_resultSet[idx].data.title.id);
-    //var pubId = m_resultSet[idx].data.title.id;
     var info = m_pubCache[pubId];
     if (typeof info !== UNDEF) {
       _insertPublisherMapMarker(idx, info);
-    }
-    else {
+    } else {
       var uri = PM_URI + '/pub/info?id=' + pubId;
       $.getJSON(uri, function (data, status, jqXHR) {
         if (status == "success") {
@@ -1911,14 +2414,12 @@ function _updateMapDisplay (pos)
     if (typeof year != 'undefined') {
       if (typeof year == 'number') {
         year = year.toString();
-      }
-      else {
+      } else {
         var isoDate = /(\d\d\d\d)-\d\d-\d\d/;
         var mat = year.match(isoDate);
         if (mat != null) {
           year = mat[1];
-        }
-        else {
+        } else {
           continue;
         }
       }
@@ -1970,9 +2471,6 @@ function _updateTimelineMarkerColors ()
       else {
         var px = ((yearVal - 1800) * YEAR_PX) + YEAR_OFFSET;
         __innerCreate(key, yearVal, px, color);
-        //$(_selById(Y2K_TIMELINE_BAR)).append($('<div class="year-marker info" id="y' + key + '">' +
-            //'<span>' + yearVal + '</div>'));
-        //$(id).css({ 'background-color': color, 'left': px, 'top': $(_selById(Y2K_TIMELINE_BAR)).offsetTop });
       }
     }
   }
@@ -1987,8 +2485,6 @@ function _updateLocationRefs (pos)
 {
   var arg = '';
   for (var i = pos; i < m_resultSet.length; i++) {
-    //var zoneInfo = _getZoneInfo(m_resultSet[i].zone);
-    //var troveId = eval('m_resultSet[i].data.id' + zoneInfo.tags[0].tag);
     var troveId = m_resultSet[i].data.id;
     arg += ',' + troveId;
     m_locations[troveId] = { pos: i, list: new Array() };
@@ -2020,8 +2516,7 @@ function _updateLocationRefs (pos)
                   yMax: parseInt(m_resultSet[m_trefIndex[troveRef]].data.date.substring(0,4))
               };
               m_locationsSum += m_locationsCache[locnId].total;
-            }
-            else {
+            } else {
               var obj = m_locationsCache[locnId];
               obj.total += parseInt(m_locations[troveRef].list[i][1]);
               obj.tids = obj.tids.concat(troveRef);
@@ -2131,8 +2626,7 @@ function _strikeOutLocations (locnList, troveId)
     
     if (cnt !== locnList.length) {
       _popupDialog(ALERT, "delete failed");
-    }
-    else {
+    } else {
       var locnSet = new Array();
       for (var i = 0; i < locnList.length; i++) {
         locnSet[locnList[i]] = null;
@@ -2143,8 +2637,7 @@ function _strikeOutLocations (locnList, troveId)
         var lid = locnEntry.list[i][0];
         if (! (lid in locnSet)) {
           stack.push(locnEntry.list[i]);
-        }
-        else {
+        } else {
           m_locationsSum -= locnEntry.list[i][1];
           m_locationsCache[lid].total -= locnEntry.list[i][1];
           for (var k = 0; k < m_locationsCache[lid].tids.length; k++) {
@@ -2175,8 +2668,7 @@ function _resetLocationMaxMinYear (locnId)
   if (m_locationsCache[locnId].tids.length === 0) {
     m_locationsCache[locnId].yMin = 0;
     m_locationsCache[locnId].yMax = 0;
-  }
-  else {
+  } else {
     for (var i = 0; i < m_locationsCache[locnId].tids.length; i++) {
       var troveId = m_locationsCache[locnId].tids[i];
       var idx = m_locations[troveId].pos;
@@ -2263,7 +2755,6 @@ function _isRangeOverlap (ymin, ymax)
 
 function _setCurrentQueryButtonState ()
 {
-  //$('button#cc-pb11').button((m_run ? 'enable' : 'disable')); // || (m_resultSet == null) || (m_totalRecs > 0 && m_resultSet.length >= m_totalRecs)));
   $('button#cc-pb12').button((m_currentQuery == null ? 'disable' : 'enable'));
   $('button#cc-pb13').button((m_currentQuery == null ? 'disable' : 'enable'));
 }
@@ -2287,6 +2778,9 @@ function _updateCurrQueryPane ()
 			_updateSearchProgressFields();
 			_setCurrentQueryButtonState();
 			break;
+		default:
+			_updateSearchProgressFields();
+			_setCurrentQueryButtonState();
     }
   }
 }
@@ -2355,8 +2849,7 @@ function _resetRawRecordList (list)
     $('input#pb-r2').attr('disabled','true');
     if (list.length === 1) {
       _displayRawDataItem(list[0].idx);
-    }
-    else {
+    } else {
       $('div#raw-record-container').html('');
       $('button#rdv-pb3').button('disable');
     }
@@ -2476,8 +2969,7 @@ function _getFullTextForLocation ()
         if (record) {
           if (typeof record.articleText === UNDEF) {
             m_resultSet[m_rawRecordId].data.text = '&lt;nil&gt;';
-          }
-          else {
+          } else {
             var text = record.articleText.toString();
             text = text.replace(/<p>/g, '');
             text = text.replace(/<\/p>/g, '');
@@ -2582,6 +3074,7 @@ function _sortRaw (sortType)
           tmp[j++] = { idx: i, val: srcid.substring(srcid.length - 6, srcid.length), hover: lab };
         }
       }
+      break;
     }
   }
   catch (err) {
@@ -2884,8 +3377,7 @@ function locnDel ()
   
   if (tmp.length === 0) {
     _popupDialog(ALERT, "No locations marked for removal!");
-  }
-  else {
+  } else {
     _strikeOutLocations(tmp, m_resultSet[m_rawRecordId].data.id);
   }
 }
@@ -2896,7 +3388,6 @@ function locnDel ()
  */
 function downloadCsv(){
 	var tempNewsArray = 'ID\tDate\tSource\tCategory\tHeading\tScore\tRelevance\tPage\tSnippet\tFullText\tURL\r\n';
-	//var tempPicArray = 'ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tThumbnail\tURL\r\n';
 	var tempPicArray = 'ID\tTitle\tMediaType\tDateIssued\tSnippet\tHolding\tVersion\tScore\tRelevance\tURL\r\n';
 	var tempBookArray = 'ID\tTitle\tType\tDateIssued\tContributor(s)\tSnippet\tVersion\tScore\tRelevance\tURL\r\n';
 	var tempArticleArray = 'ID\tTitle\tDateIssued\tPartOf\tHolding\tVersion\tScore\tRelevance\tType\tURL\r\n';
@@ -3047,38 +3538,44 @@ function test() {
 function _getNewspaperTitles() {
 	var queryStr = TROVE_NEWS_TITLES + m_user.key;
 	queryStr += '&encoding=json&callback=?';
-	$.getJSON(queryStr,function(result){
+	$.getJSON(queryStr, function(result) {
 		var output = result.response.records.newspaper;
-	    $.each(output, function (i, field){
-	    	$('#adv-newspaper-publication').append('<option value="'+ this.id +'">'+ this.title +'</option>');
-	    	$('#cus-newspaper-publication').append('<option value="'+ this.id +'">'+ this.title +'</option>');
-	    });
-    });
-	$("#adv-newspaper-publication").css("width", "100%");
-	$("#cus-newspaper-publication").css("width", "100%");
+		$.each(output, function(i, field) {
+			$('#adv-newspaper-publication').append(
+					'<option value="' + this.id + '">' + this.title
+							+ '</option>');
+			$('#cus-newspaper-publication').append(
+					'<option value="' + this.id + '">' + this.title
+							+ '</option>');
+		});
+	});
 }
 
-/** 
- * Gets a list of newspaper titles from trove and populates the appropriate select box
+/**
+ * Gets a list of newspaper titles from trove and populates the appropriate
+ * select box
  */
-function _getTroveContributors() {
-	var queryStr = "http://api.trove.nla.gov.au/contributor?encoding=json&callback=?&key=" + m_user.key;
-	$.getJSON(queryStr,function(result){
+function _getTroveContributors(id) {
+	var queryStr = "http://api.trove.nla.gov.au/contributor?encoding=json&callback=?&key="
+			+ m_user.key;
+	$.getJSON(queryStr, function(result) {
 		var output = result.response.contributor;
-	    $.each(output, function (i, field){
-	    	$('#ind-nuc').append('<option value="'+ this.id +'">'+ this.name +'</option>');
-	    	$('#ind-nuc-not').append('<option value="'+ this.id +'">'+ this.name +'</option>');
-	    });
-    });
+		$.each(output, function(i, field) {
+			$(id).append(
+					'<option value="' + this.id + '">' + this.name
+							+ '</option>');
+		});
+	});
 }
 
 
-function _customZones(zone, add) {
-	if (add){
+function _zoneChange(zone, add) {
+	if (add) {
 		temp2.push(zone);
 	} else {
-		temp2.splice(temp2.indexOf(zone),1);
+		temp2.splice(temp2.indexOf(zone), 1);
 	}
+	_changeCriteria();
 }
 
 function _extractYearFromDate(date) {
@@ -3095,6 +3592,71 @@ function _extractYearFromDate(date) {
 	}
 }
 
+function _customHideCriteria(criteria) {
+	for ( var key in criteria) {
+		if (!criteria[key]) {
+			$('#custom-' + key).hide();
+		} else {
+			$('#custom-' + key).show();
+		}
+	}
+	;
+}
 
+function _changeCriteria() {
+	var tempStore = new Array();
+	var displayUpdate = null;
+	for ( var i = 0; i < temp2.length; i++) {
+		tempStore.push(zoneMappings[temp2[i]]);
+	}
+	;
+	if (tempStore.length == 0) {
+		displayUpdate = JSON.parse(JSON.stringify(ShowNone));
+	} else {
+		displayUpdate = JSON.parse(JSON.stringify(ShowAll));
+		tempStore.forEach(function(mapping) {
+			for ( var key in mapping) {
+				if (mapping[key] === false) {
+					displayUpdate[key] = false;
+				}
+				;
+			}
+			;
+		});
+	}
+	_customHideCriteria(displayUpdate);
+}
+
+function _zoneCheck(id) {
+	var zone = id.replace("#custom-zone-", "");
+	if ($(id).prop('checked')) {
+		_zoneChange(zone, true);
+	} else {
+		_zoneChange(zone, false);
+	}
+	;
+};
+
+function _addDecades(id) {
+	for ( var i = (MINYEAR / 10); i <= (MAXYEAR / 10); i++) {
+		$(id).append('<option value="' + i + '">' + i + '0&apos;s</option>');
+	}
+}
+
+function _addYears(id) {
+	for ( var i = MINYEAR; i <= MAXYEAR; i++) {
+		if (i % 10 == 0) {
+			$(id).append('<option value="' + i + '">--' + i + '--</option>');
+		} else {
+			$(id).append('<option value="' + i + '">' + i + '</option>');
+		}
+	}
+}
+
+function _datePicker(id) {
+	$(id).datepicker();
+	$(id).datepicker('option', 'dateFormat', 'yy-mm-ddT00:00:00Z');
+	$(id).datepicker('option', 'showAnim', 'drop');
+}
 
 // EOF

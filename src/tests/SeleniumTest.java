@@ -1032,7 +1032,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=adv-newspaper");
         Thread.sleep(1000);
-        selenium.select("id=adv-newspaper-decade", "label=1970's");
+        selenium.select("id=adv-newspaper-decade", "197");
         Thread.sleep(1000);
         selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
         Thread.sleep(5000);

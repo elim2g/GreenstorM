@@ -536,7 +536,7 @@ td.sel-accept {
 	align: right;
 }
 
-input#q1, input#adv-query, input#adv-query-not, input#cus-query, input#cus-query-not {
+input#q1, input#adv-query, input#adv-query-not{
 	width: 462px;
 }
 
@@ -624,18 +624,38 @@ ul.lev2 {
 	width: 100%;
 }
 
-.cus-query table {
-	width: 100%;
+.custom-query input[type="text"] {
+	width: 99%;
+	float:left;
 }
 
-.cus-query td {
-	width: 33%;
+.custom-query label {
+	display:inline-block;
+	float:left;
 }
 
-.cus-query select {
-	width: 100%;
+.custom-query table {
+	width:100%;
 }
 
-.cus-query input[type="text"] {
-	width: 100%;
+.custom-query tr {
+	width:100%;
+}
+
+.custom-query td {
+	width:25%;
+}
+
+.custom-query input[type="checkbox"]{
+	float:left;
+}
+
+.custom-query select{
+	float:left;
+	width:100%;
+}
+
+.custom-query div {
+	display:inline-block;
+	width:100%;
 }

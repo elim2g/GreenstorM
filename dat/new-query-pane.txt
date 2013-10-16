@@ -565,603 +565,447 @@
 			</tr>
 		</table>
 	</div>
-	<div id="q-custom">
-		<table>
-			<tr>
-				<td colspan="3"><h3>Custom Search</h3></td>
-			</tr>
-			<tr>
-				<td class="td-name"><b>Search Term</b></td>
-				<td colspan="2"><input id="cus-query" type="text" /></td>
-			</tr>
-			<tr>
-				<td class="td-name"><b>NOT</b></td>
-				<td colspan="2"><input id="cus-query-not" type="text" /></td>
-			</tr>
-			<tr>
-				<td><b>Search Zones</b></td>
-				<td colspan="2" style="float:right;"><span><i>Select a zone to see more options</i></span></td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<table style="width:100%">
-						<tr>
-							<td style="width:25%"><input type="checkbox" id="cus-article-zone" value="article" /><label>Articles</label></td>
-							<td style="width:25%"><input type="checkbox" id="cus-book-zone" value="book" /><label>Books</label></td>
-							<td style="width:25%"><input type="checkbox" id="cus-collection-zone" value="collection" /><label>Collections</label></td>
-							<td style="width:25%"><input type="checkbox" id="cus-list-zone" value="list" /><label>Lists</label></td>
-						</tr>
-						<tr>
-							<td style="width:25%"><input type="checkbox" id="cus-map-zone" value="map" /><label>Maps</label></td>
-							<td style="width:25%"><input type="checkbox" id="cus-music-zone" value="music" /><label>Music</label></td>
-							<td style="width:25%"><input type="checkbox" id="cus-newspaper-zone" value="newspaper" /><label>Newspaper</label></td>
-							<td style="width:25%"><input type="checkbox" id="cus-picture-zone" value="picture" /><label>Pictures</label></td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<div id="cus-accordion">
-						<h3 id="cus-article">
-							Articles
-							<span id="cus-article-span" style="float: right;">
-								Zone Included
-							</span>
-						</h3>
-						<div class="cus-query">
-							<table>
-								<tr>
-									<td>
-										<label>Publication Decade</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-article-decade">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Publication Year</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-article-year">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Language</label>
-									</td>
-									<td colspan="2"><input id="cus-article-language" type="text" /></td>
-								</tr>
-								<tr>
-									<td>
-										<label>Article Availability</label>
-									</td><td colspan="2">
-										<select id="cus-article-availability">
-											<option value="" selected></option>
-											<option value="y">Available Online</option>
-											<option value="y/f">Freely Available Online</option>
-											<option value="y/r">Payment, Subscription or Membership Required</option>
-											<option value="y/s">Subscription Required</option>
-											<option value="y/u">Possibly Available Online</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Australian?</label>
-									</td>
-									<td colspan="1">
-										<input type="checkbox" id="cus-article-australian" value="y">
-									</td>
-									<td>
-									</td>
-								</tr>
-								
-								<tr>
-									<td>
-										<label>Vendor Database Code</label>
-									</td><td colspan="2">
-										<input type="text" id="cus-article-vendordb">
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Vendor</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-article-vendor">
-										  <option value="" selected></option>
-										  <option value="GALE">GALE</option>
-										  <option value="Informit">Informit</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Audience</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-article-audience">
-										  <option value="" selected></option>
-										  <option value="Trade">Trade</option>
-										  <option value="General">General</option>
-										  <option value="Academic">Academic</option>
-										  <option value="Professional">Professional</option>
-										  <option value="Children’s">Children&#39;s</option>
-										  <option value="Children’s — Upper elementry">Children&#39;s &#45; Upper elementry</option>
-										  <option value="Children’s — Lower elementry">Children&#39;s &#45; Lower elementry</option>
-										</select>
-									</td>
-								</tr>
-							</table>
-						</div>
-						<h3 id="cus-book">
-							Books
-							<span id="cus-book-span" style="float: right;">
-								Zone Included
-							</span>
-						</h3>
-						<div class="cus-query">
-							<table>
-								<tr>
-									<td>
-										<label>Publication Decade</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-book-decade">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Publication Year</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-book-year">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Language</label>
-									</td>
-									<td colspan="2"><input id="cus-book-language" type="text" /></td>
-								</tr>
-								<tr>
-									<td>
-										<label>Book Availability</label>
-									</td><td colspan="2">
-										<select id="cus-book-availability">
-											<option value="" selected></option>
-											<option value="y">Available Online</option>
-											<option value="y/f">Freely Available Online</option>
-											<option value="y/r">Payment, Subscription or Membership Required</option>
-											<option value="y/s">Subscription Required</option>
-											<option value="y/u">Possibly Available Online</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Australian?</label>
-									</td>
-									<td colspan="1">
-										<input type="checkbox" id="cus-book-australian" value="y">
-									</td>
-									<td>
-									</td>
-								</tr>
-							</table>
-						</div>
-						<h3 id="cus-collection">
-							Collections
-							<span id="cus-collection-span" style="float: right;">
-								Zone Included
-							</span>
-						</h3>
-						<div class="cus-query">
-							<table>
-								<tr>
-									<td>
-										<label>Publication Decade</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-collection-decade">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Publication Year</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-collection-year">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Language</label>
-									</td>
-									<td colspan="2"><input id="cus-collection-language" type="text" /></td>
-								</tr>
-								<tr>
-									<td>
-										<label>Collection Availability</label>
-									</td><td colspan="2">
-										<select id="cus-collection-availability">
-											<option value="" selected></option>
-											<option value="y">Available Online</option>
-											<option value="y/f">Freely Available Online</option>
-											<option value="y/r">Payment, Subscription or Membership Required</option>
-											<option value="y/s">Subscription Required</option>
-											<option value="y/u">Possibly Available Online</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Australian?</label>
-									</td>
-									<td colspan="1">
-										<input type="checkbox" id="cus-collection-australian" value="y">
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Occupation?</label>
-									</td>
-									<td colspan="2">
-										<input type="text" id="cus-collection-occupation">
-									</td>
-									<td>
-									</td>
-								</tr>
-							</table>
-						</div>
-						<h3 id="cus-list">
-							Lists
-							<span id="cus-list-span" style="float: right;">
-								Zone Included
-							</span>
-						</h3>
-						<div class="cus-query">
-							<table>
-								<tr>
-									<td>
-										<label>Publication Decade</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-list-decade">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Publication Year</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-list-year">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>List Availability</label>
-									</td><td colspan="2">
-										<select id="cus-list-availability">
-											<option value="" selected></option>
-											<option value="y">Available Online</option>
-											<option value="y/f">Freely Available Online</option>
-											<option value="y/r">Payment, Subscription or Membership Required</option>
-											<option value="y/s">Subscription Required</option>
-											<option value="y/u">Possibly Available Online</option>
-										</select>
-									</td>
-								</tr>
-							</table>
-						</div>
-						<h3 id="cus-map">
-							Maps
-							<span id="cus-map-span" style="float: right;">
-								Zone Included
-							</span>
-						</h3>
-						<div class="cus-query">
-							<table>
-								<tr>
-									<td>
-										<label>Publication Decade</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-map-decade">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Publication Year</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-map-year">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Language</label>
-									</td>
-									<td colspan="2"><input id="cus-map-language" type="text" /></td>
-								</tr>
-								<tr>
-									<td>
-										<label>Map Availability</label>
-									</td><td colspan="2">
-										<select id="cus-map-availability">
-											<option value="" selected></option>
-											<option value="y">Available Online</option>
-											<option value="y/f">Freely Available Online</option>
-											<option value="y/r">Payment, Subscription or Membership Required</option>
-											<option value="y/s">Subscription Required</option>
-											<option value="y/u">Possibly Available Online</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Australian?</label>
-									</td>
-									<td colspan="1">
-										<input type="checkbox" id="cus-map-australian" value="y">
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Map Zoom</label>
-									</td>
-									<td colspan="2"><input id="cus-map-zoom" type="text" /></td>
-								</tr>
-							</table>
-						</div>
-						<h3 id="cus-music">
-							Music
-							<span id="cus-music-span" style="float: right;">
-								Zone Included
-							</span>
-						</h3>
-						<div class="cus-query">
-							<table>
-								<tr>
-									<td>
-										<label>Publication Decade</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-music-decade">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Publication Year</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-music-year">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Language</label>
-									</td>
-									<td colspan="2"><input id="cus-music-language" type="text" /></td>
-								</tr>
-								<tr>
-									<td>
-										<label>Music Availability</label>
-									</td><td colspan="2">
-										<select id="cus-music-availability">
-											<option value="" selected></option>
-											<option value="y">Available Online</option>
-											<option value="y/f">Freely Available Online</option>
-											<option value="y/r">Payment, Subscription or Membership Required</option>
-											<option value="y/s">Subscription Required</option>
-											<option value="y/u">Possibly Available Online</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Australian?</label>
-									</td>
-									<td colspan="1">
-										<input type="checkbox" id="cus-music-australian" value="y">
-									</td>
-									<td>
-									</td>
-								</tr>
-							</table>
-						</div>
-						<h3 id="cus-newspaper">
-							Newspaper
-							<span id="cus-newspaper-span" style="float: right;">
-								Zone Included
-							</span>
-						</h3>
-						<div class="cus-query">
-							<table>
-								<tr>
-									<td>
-										<label>Publication Decade</label>
-									</td>
-									<td>
-										<select id="cus-newspaper-decade">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr id="cus-newspaper-year-row">
-									<td>
-										<label>Publication Year</label>
-									</td>
-									<td>
-										<select id="cus-newspaper-year">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr id="cus-newspaper-month-row">
-									<td>
-										<label>Publication Month</label>
-									</td>
-									<td>
-										<select id="cus-newspaper-month">
-											<option value="" selected></option>
-											<option value="01">January</option>
-											<option value="02">February</option>
-											<option value="03">March</option>
-											<option value="04">April</option>
-											<option value="05">May</option>
-											<option value="06">June</option>
-											<option value="07">July</option>
-											<option value="08">August</option>
-											<option value="09">September</option>
-											<option value="10">October</option>
-											<option value="11">November</option>
-											<option value="12">December</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Publication</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-newspaper-publication">
-										  <option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Category</label>
-									</td>
-									<td>
-										<select id="cus-newspaper-category">
-											<option value="" selected></option>
-											<option value="Article">Article</option>
-											<option value="cusertising">cusertising</option>
-											<option value="Literature">Literature</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Word Count</label>
-									</td>
-									<td colspan="2"><input id="cus-newspaper-wordcount" type="text" /></td>
-								</tr>
-							</table>
-						</div>
-						<h3 id="cus-picture">
-							Pictures
-							<span id="cus-picture-span" style="float: right;">
-								Zone Included
-							</span>
-						</h3>
-						<div class="cus-query">
-							<table>
-								<tr>
-									<td>
-										<label>Publication Decade</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-picture-decade">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Publication Year</label>
-									</td>
-									<td colspan="2">
-										<select id="cus-picture-year">
-											<option value="" selected></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Language</label>
-									</td>
-									<td colspan="2"><input id="cus-picture-language" type="text" /></td>
-								</tr>
-								<tr>
-									<td>
-										<label>Picture Availability</label>
-									</td><td colspan="2">
-										<select id="cus-picture-availability">
-											<option value="" selected></option>
-											<option value="y">Available Online</option>
-											<option value="y/f">Freely Available Online</option>
-											<option value="y/r">Payment, Subscription or Membership Required</option>
-											<option value="y/s">Subscription Required</option>
-											<option value="y/u">Possibly Available Online</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Australian?</label>
-									</td>
-									<td colspan="1">
-										<input type="checkbox" id="l-picture-australian" value="y">
-									</td>
-									<td>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<hr class="pm-button-sep">
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<div class="pm-button-bar">
-						<button id="nq-pb11" onClick="resetQueryPane()">Reset</button>
-						<button id="nq-pb12" onClick="_doQuery(0)">Search</button>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">* Searching by article types other than
-					newspaper will not populate data on map view or graphs *</td>
-			</tr>
-		</table>
+	<div id="q-custom" class="custom-query" >
+		<h2>Custom Search</h2>
+		<fieldset id="custom-search_terms">
+			<legend><b>Search Terms</b></legend>
+			<label for="cus-query">Search For</label>
+			<input id="cus-query" type="text" />
+			<br/>
+			<label for="cus-query-not">But Not</label>
+			<input id="cus-query-not" type="text" />
+		</fieldset>
+		<fieldset id="custom-search_zones">
+			<legend><b>Search Zones</b></legend>
+			<table>
+				<tr>
+					<td><input id="custom-zone-article" type="checkbox" value="article"/><label for="custom-zone-article">Articles</label></td>
+					<td><input id="custom-zone-book" type="checkbox" value="book"/><label for="custom-zone-book">Books</label></td>
+					<td><input id="custom-zone-collection" type="checkbox" value="collection"/><label for="custom-zone-collection">Collections</label></td>
+					<td><input id="custom-zone-list" type="checkbox" value="list"/><label for="custom-zone-list">Lists</label></td>
+				</tr>
+				<tr>
+					<td><input id="custom-zone-map" type="checkbox" value="map"/><label for="custom-zone-map">Maps</label></td>
+					<td><input id="custom-zone-music" type="checkbox" value="music"/><label for="custom-zone-music">Music</label></td>
+					<td><input id="custom-zone-newspaper" type="checkbox" value="newspaper"/><label for="custom-zone-newspaper">Newspapers</label></td>
+					<td><input id="custom-zone-picture" type="checkbox" value="picture"/><label for="custom-zone-picture">Pictures</label></td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset id="custom-include">
+			<legend><b>Data Selection</b></legend>
+			<table>
+				<tr>
+					<td><input type="checkbox" value="all" id="custom-include-all" checked/><label for="custom-include-all">All</label></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" value="articletext" id="custom-include-articletext"/><label for="custom-include-articletext">Article Text</label></td>
+					<td><input type="checkbox" value="comments" id="custom-include-comments"/><label for="custom-include-comments">Comments</label></td>
+					<td><input type="checkbox" value="holdings" id="custom-include-holdings"/><label for="custom-include-holdings">Holdings</label></td>
+					<td><input type="checkbox" value="links" id="custom-include-links"/><label for="custom-include-links">Links</label></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" value="listitems" id="custom-include-listitems"/><label for="custom-include-listitems">List Items</label></td>
+					<td><input type="checkbox" value="lists" id="custom-include-lists"/><label for="custom-include-lists">Lists</label></td>
+					<td><input type="checkbox" value="subscribinglibs" id="custom-include-subscribinglibs"/><label for="custom-include-subscribinglibs">Subscribing Libraries</label></td>
+					<td><input type="checkbox" value="tags" id="custom-include-tags"/><label for="custom-include-tags">Tags</label></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" value="workversions" id="custom-include-workversions"/><label for="custom-include-workversions">WorkVersions</label></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset id="custom-search">
+			<legend><b>Search Criteria</b></legend>
+			<div id="custom-index-anbdid">
+				<label for="custom-index-anbdid-search">Libraries Australia Record Identifier <i> - Example: 46285585</i></label>
+				<input type="text" id="custom-index-anbdid-search"/>
+			</div>
+			<div id="custom-facet-audience">
+				<label for="custom-facet-audience-search">Audience</label>
+				<select id="custom-facet-audience-search">
+					<option value="" selected></option>
+				  	<option value="Trade">Trade</option>
+				  	<option value="General">General</option>
+				  	<option value="Academic">Academic</option>
+				  	<option value="Professional">Professional</option>
+				  	<option value="Children’s">Children&#39;s</option>
+				  	<option value="Children’s — Upper elementry">Children&#39;s &#45; Upper elementry</option>
+				  	<option value="Children’s — Lower elementry">Children&#39;s &#45; Lower elementry</option>
+				</select>
+			</div>
+			<div id="custom-facet-australian">
+				<table>
+					<tr>
+						<td colspan="4"><label >Australian <i> - Is a work identified as published primarily in Australia, or written by Australians?</i></label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="checkbox" id="custom-facet-australian-search" value="y" /><label for="custom-facet-australian-search">Australian?</label></td>
+						<td colspan="2"></td>
+					</tr>
+				</table>
+			</div>
+			<div id="custom-facet-availability">
+				<label for="custom-facet-availability-search">Book Availability</label>
+				<select id="custom-facet-availability-search">
+					<option value="" selected></option>
+					<option value="y">Available Online</option>
+					<option value="y/f">Freely Available Online</option>
+					<option value="y/r">Payment, Subscription or Membership Required</option>
+					<option value="y/s">Subscription Required</option>
+					<option value="y/u">Possibly Available Online</option>
+				</select>
+			</div>
+			<div id="custom-facet-category">
+				<label for="custom-facet-category-search">Category</label>
+				<select id="custom-facet-category-search">
+					<option value="" selected></option>
+					<option value="Article">Article</option>
+					<option value="Advertising">Advertising</option>
+					<option value="Literature">Literature</option>
+				</select>
+			</div>
+			<div id="custom-index-commentlastupdated">
+				<table>
+					<tr>
+						<td colspan="4"><label>Comments Last Updated <i> - * is wildcard. Finds everything that has been commented on in Trove. Only available from March 2012</i></label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><label for="custom-index-commentlastupdated-search_start">Start</label></td>
+						<td colspan="2"><label for="custom-index-commentlastupdated-search_finish">Finish</label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="text" id="custom-index-commentlastupdated-search_start"/></td>
+						<td colspan="2"><input type="text" id="custom-index-commentlastupdated-search_finish"/></td>
+					</tr>
+				</table>
+			</div>
+			<div id="custom-index-creator">
+				<label for="custom-index-creator-search">Creator</label>
+				<input type="text" id="custom-index-creator-search"/>
+			</div>
+			<div id="custom-index-date">
+				<table>
+					<tr>
+						<td colspan="4"><label>Date of Publication <i> - * is wildcard</i></label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><label for="custom-index-date-search_start">Start</label></td>
+						<td colspan="2"><label for="custom-index-date-search_finish">Finish</label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="text" id="custom-index-date-search_start"/></td>
+						<td colspan="2"><input type="text" id="custom-index-date-search_finish"/></td>
+					</tr>
+				</table>
+			</div>
+			<div id="custom-index-ddc">
+				<label for="custom-index-ddc-search">Dewey Decimal Classification number <i> - Example: 791.4372</i></label>
+				<input type="text" id="custom-index-ddc-search"/>
+			</div>
+			<div id="custom-facet-decade">
+				<label for="custom-facet-decade-search">Publication Decade (Facet)</label>
+				<select id="custom-facet-decade-search">
+					<option value="" selected></option>
+				</select>
+			</div>
+			<div id="custom-index-decade">
+				<label for="custom-index-decade-search">Publication Decade (Index)</label>
+				<select id="custom-index-decade-search">
+					<option value="" selected></option>
+				</select>
+			</div>
+			<div id="custom-index-exact_creator">
+				<label for="custom-index-exact_creator-search">Creator</label>
+				<input type="text" id="custom-index-exact_creator-search"/>
+			</div>
+			<div id="custom-facet-format">
+				<label for="custom-facet-format-search">Format (Facet)</label>
+				<select id="custom-facet-format-search">
+					<option value="" selected></option>
+					<option value="Archived website">Archived Website</option>
+					<option value="Art work">Art Work</option>
+					<option value="Article">Article</option>
+					<option value="Article/Abstract">&#8594;Abstract</option>
+					<option value="Article/Book chapter">&#8594;Book Chapter</option>
+					<option value="Article/Conference paper">&#8594;Conference Paper</option>
+					<option value="Article/Journal or magazine article">&#8594;Journal or Magazine Article</option>
+					<option value="Article/Other article">&#8594;Other Article</option>
+					<option value="Article/Report">&#8594;Report</option>
+					<option value="Article/Review">&#8594;Review</option>
+					<option value="Article/Working paper">&#8594;Working Paper</option>
+					<option value="Audio book">Audio Book</option>
+					<option value="Book">Book</option>
+					<option value="Book/Braille">&#8594;Braille</option>
+					<option value="Book/Illustrated">&#8594;Illustrated</option>
+					<option value="Book/Large print">&#8594;Large Print</option>
+					<option value="Conference Proceedings">Conference Proceedings</option>
+					<option value="Data set">Data Set</option>
+					<option value="Map">Map</option>
+					<option value="Map/Aerial photograph">&#8594;Aerial Photograph</option>
+					<option value="Map/Atlas">&#8594;Atlas</option>
+					<option value="Map/Braille">&#8594;Braille</option>
+					<option value="Map/Electronic">&#8594;Electronic</option>
+					<option value="Map/Globe or object">&#8594;Globe or Object</option>
+					<option value="Map/Large print">&#8594;Large Print</option>
+					<option value="Map/Map series">&#8594;Map Series</option>
+					<option value="Map/Microform">&#8594;Microform</option>
+					<option value="Map/Single map">&#8594;Single Map</option>
+					<option value="Object">Object</option>
+					<option value="Periodical">Object</option>
+					<option value="Periodical/Journal, magazine, other">&#8594;Journal, Magazine or Other</option>
+					<option value="Periodical/Newspaper">&#8594;Newspaper</option>
+					<option value="Photograph">Photograph</option>
+					<option value="Poster, chart, other">Poster, Chart or Other</option>
+					<option value="Published">Published</option>
+					<option value="Sheet music">Sheet Music</option>
+					<option value="Sound">Object</option>
+					<option value="Sound/Interview, lecture, talk">&#8594;Interview, Lecture or Talk</option>
+					<option value="Sound/Other sound">&#8594;Other Sound</option>
+					<option value="Sound/Recorded music">&#8594;Recorded Music</option>
+					<option value="Thesis">Thesis</option>
+					<option value="Unpublished">Unpublished</option>
+					<option value="Video">Video</option>
+					<option value="Video/Captioned">&#8594;Captioned</option>
+				</select>
+			</div>
+			<div id="custom-index-format">
+				<label for="custom-index-format-search">Format (Index)</label>
+				<select id="custom-index-format-search">
+					<option value="" selected></option>
+					<option value="Archived website">Archived Website</option>
+					<option value="Art work">Art Work</option>
+					<option value="Article">Article</option>
+					<option value="Article/Abstract">&#8594;Abstract</option>
+					<option value="Article/Book chapter">&#8594;Book Chapter</option>
+					<option value="Article/Conference paper">&#8594;Conference Paper</option>
+					<option value="Article/Journal or magazine article">&#8594;Journal or Magazine Article</option>
+					<option value="Article/Other article">&#8594;Other Article</option>
+					<option value="Article/Report">&#8594;Report</option>
+					<option value="Article/Review">&#8594;Review</option>
+					<option value="Article/Working paper">&#8594;Working Paper</option>
+					<option value="Audio book">Audio Book</option>
+					<option value="Book">Book</option>
+					<option value="Book/Braille">&#8594;Braille</option>
+					<option value="Book/Illustrated">&#8594;Illustrated</option>
+					<option value="Book/Large print">&#8594;Large Print</option>
+					<option value="Conference Proceedings">Conference Proceedings</option>
+					<option value="Data set">Data Set</option>
+					<option value="Map">Map</option>
+					<option value="Map/Aerial photograph">&#8594;Aerial Photograph</option>
+					<option value="Map/Atlas">&#8594;Atlas</option>
+					<option value="Map/Braille">&#8594;Braille</option>
+					<option value="Map/Electronic">&#8594;Electronic</option>
+					<option value="Map/Globe or object">&#8594;Globe or Object</option>
+					<option value="Map/Large print">&#8594;Large Print</option>
+					<option value="Map/Map series">&#8594;Map Series</option>
+					<option value="Map/Microform">&#8594;Microform</option>
+					<option value="Map/Single map">&#8594;Single Map</option>
+					<option value="Object">Object</option>
+					<option value="Periodical">Object</option>
+					<option value="Periodical/Journal, magazine, other">&#8594;Journal, Magazine or Other</option>
+					<option value="Periodical/Newspaper">&#8594;Newspaper</option>
+					<option value="Photograph">Photograph</option>
+					<option value="Poster, chart, other">Poster, Chart or Other</option>
+					<option value="Published">Published</option>
+					<option value="Sheet music">Sheet Music</option>
+					<option value="Sound">Object</option>
+					<option value="Sound/Interview, lecture, talk">&#8594;Interview, Lecture or Talk</option>
+					<option value="Sound/Other sound">&#8594;Other Sound</option>
+					<option value="Sound/Recorded music">&#8594;Recorded Music</option>
+					<option value="Thesis">Thesis</option>
+					<option value="Unpublished">Unpublished</option>
+					<option value="Video">Video</option>
+					<option value="Video/Captioned">&#8594;Captioned</option>
+				</select>
+			</div>
+			<div id="custom-index-fulltext">
+				<label for="custom-index-fulltext-search">Full Text <i> - Finds items containing the exact word. Example: &apos;Jackes&apos; (not &apos;Jack&apos; or &apos;Jacke&apos;)</i></label>
+				<input type="text" id="custom-index-fulltext-search"/>
+			</div>
+			<div id="custom-index-has">
+				<table>
+					<tr>
+						<td colspan="4"><label >Record Has..?<i> - Does this item have any tags or comments?</i></label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="checkbox" id="custom-index-has-search_tags" value="has:tags"/><label for="custom-index-has-search_tags">Tags?</label></td>
+						<td colspan="2"><input type="checkbox" id="custom-index-has-search_comments" value="has:comments"/><label for="custom-index-has-search_comments">Comments?</label></td>
+					</tr>
+				</table>
+			</div>
+			<div id="custom-index-id">
+				<label for="custom-index-id-search">Trove ID <i> - Work Number</i></label>
+				<input type="text" id="custom-index-id-search"/>
+			</div>
+			<div id="custom-index-identifier">
+				<label for="custom-index-identifier-search">Identifier <i> - Any identifiers included with the work but not including local identifiers. Example: ISBN, ISSN, ISMN</i></label>
+				<input type="text" id="custom-index-identifier-search"/>
+			</div>
+			<div id="custom-facet-illtype">
+				<!-- Trove isn't very clear as to what this requires/does - JW -->
+			</div>
+			<div id="custom-facet-illustrated">
+				<table>
+					<tr>
+						<td colspan="4"><label >Illustrated <i> - Is a newspaper article illustrated?</i></label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="checkbox" id="custom-facet-illustrated-search" value="y"/><label for="custom-facet-illustrated-search">Illustrated</label></td>
+						<td colspan="2"></td>
+					</tr>
+				</table>
+			</div>
+			<div id="custom-index-isbn">
+				<label for="custom-index-isbn-search">International Standard Book Number (ISBN) <i> - Example: 0333337352</i></label>
+				<input type="text" id="custom-index-isbn-search"/>
+			</div>
+			<div id="custom-index-issn">
+				<label for="custom-index-issn-search">International Standard Serial Number (ISSN) <i> - Example: 15386597</i></label>
+				<input type="text" id="custom-index-issn-search"/>
+			</div>
+			<div id="custom-facet-language">
+				<label for="custom-facet-language-search">Language (Facet)</label>
+				<input id="custom-facet-language-search" type="text" />
+			</div>
+			<div id="custom-index-language">
+				<label for="custom-index-language-search">Language (Index)</label>
+				<input id="custom-index-language-search" type="text" />
+			</div>
+			<div id="custom-index-lastupdated">
+				<table>
+					<tr>
+						<td colspan="4"><label>Last Updated <i> - * is wildcard. Finds everything that has been added/updated in Trove. Only available from April 2012</i></label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><label for="custom-index-lastupdated-search_start">Start</label></td>
+						<td colspan="2"><label for="custom-index-lastupdated-search_finish">Finish</label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="text" id="custom-index-lastupdated-search_start"/></td>
+						<td colspan="2"><input type="text" id="custom-index-lastupdated-search_finish"/></td>
+					</tr>
+				</table>
+			</div>
+			<div id="custom-facet-month">
+				<label for="custom-facet-month-search">Publication Month</label>
+				<select id="custom-facet-month-search">
+					<option value="" selected></option>
+					<option value="01">January</option>
+					<option value="02">February</option>
+					<option value="03">March</option>
+					<option value="04">April</option>
+					<option value="05">May</option>
+					<option value="06">June</option>
+					<option value="07">July</option>
+					<option value="08">August</option>
+					<option value="09">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+			</div>
+			<div id="custom-index-nuc">
+				<label for="custom-index-nuc-search">NUC <i> - NUC (id) of an organisation who has a copy of the work</i></label>
+				<select id="custom-index-nuc-search">
+					<option value="" selected></option>
+				</select>
+			</div>
+			<div id="custom-facet-occupation">
+				<label for="custom-facet-occupation-search">Occupation?</label>
+				<input type="text" id="custom-facet-occupation-search">
+			</div>
+			<div id="custom-index-publictag">
+				<label for="custom-index-publictag-search">Public Tag <i> - This is an EXACT search; Example: &apos;Sydney&apos; does not return &apos;Sydney Harbour&apos;</i></label>
+				<input type="text" id="custom-index-publictag-search"/>
+			</div>
+			<div id="custom-index-s_creator">
+				<label for="custom-index-s_creator-search">Creator - Stemmed</label>
+				<input type="text" id="custom-index-s_creator-search"/>
+			</div>
+			<div id="custom-index-s_subject">
+				<label for="custom-index-s_subject-search">Subject - Stemmed</label>
+				<input type="text" id="custom-index-s_subject-search"/>
+			</div>
+			<div id="custom-index-s_title">
+				<label for="custom-index-s_title-search">Title - Stemmed</label>
+				<input type="text" id="custom-index-s_title-Search"/>
+			</div>
+			<div id="custom-index-subject">
+				<label for="custom-index-subject-search">Subject</label>
+				<input type="text" id="custom-index-subject-search"/>
+			</div>
+			<div id="custom-index-taglastupdated">
+				<table>
+					<tr>
+						<td colspan="4"><label>Tag Last Updated <i> - * is wildcard. Finds tags that have been updated/added in Trove. Only available from March 2012</i></label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><label for="custom-index-taglastupdated-search_start">Start</label></td>
+						<td colspan="2"><label for="custom-index-taglastupdated-search_finish">Finish</label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="text" id="custom-index-taglastupdated-search_start"/></td>
+						<td colspan="2"><input type="text" id="custom-index-taglastupdated-search_finish"/></td>
+					</tr>
+				</table>
+			</div>
+			<div id="custom-index-text">
+				<label for="custom-index-text-search">Text <i> - Finds items containing the exact word. Example: &apos;Jackes&apos; (not &apos;Jack&apos; or &apos;Jacke&apos;)</i></label>
+				<input type="text" id="custom-index-text-search"/>
+			</div>
+			<div id="custom-index-title">
+				<label for="custom-index-title-search">Title (Index)</label>
+				<input type="text" id="custom-index-title-search"/>
+			</div>
+			<div id="custom-facet-title">
+				<label for="custom-facet-title-search">Title (Facet)</label>
+				<input type="text" id="custom-facet-title-search"/>
+			</div>
+			<div id="custom-facet-vendor">
+				<label for="custom-facet-vendor-search">Vendor</label>
+				<select id="custom-facet-vendor-search">
+				  <option value="" selected></option>
+				  <option value="GALE">GALE</option>
+				  <option value="Informit">Informit</option>
+				</select>
+			</div>
+			<div id="custom-facet-vendordb">
+				<label for="custom-facet-vendordb-search">Vendor Database Code</label>
+				<input type="text" id="custom-facet-vendordb-search">
+			</div>
+			<div id="custom-facet-word">	
+				<label for="custom-facet-word-search">Article Word Count</label>
+				<input type="text" id="custom-facet-word-search">
+			</div>
+			<div id="custom-facet-year">
+				<label for="custom-facet-year-search">Publication Year</label>
+				<select id="custom-facet-year-search">
+					<option value="" selected></option>
+				</select>
+			</div>
+			<div id="custom-facet-year_newspaper">
+				<label for="custom-facet-year_newspaper">Publication Year</label>
+				<select id="custom-facet-year_newspaper">
+					<option value="" selected></option>
+				</select>
+			</div>
+			<div id="custom-facet-zoom">
+				<label for="custom-facet-zoom-search">Map Zoom</label>
+				<input id="custom-facet-zoom-search" type="text" />
+			</div>
+		</fieldset>
+		<fieldset>
+			<div class="pm-button-bar" style="float:right;">
+				<button id="nq-pb11" onClick="resetQueryPane()">Reset</button>
+				<button id="nq-pb12" onClick="_doQuery(0)">Search</button>
+			</div>
+		</fieldset>
 	</div>
 </div>
