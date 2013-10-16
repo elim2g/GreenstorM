@@ -2,6 +2,7 @@ package tests;
 
 import java.util.ArrayList;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 import com.thoughtworks.selenium.*;
 
 import org.junit.After;
@@ -1550,11 +1551,89 @@ public class SeleniumTest {
         selenium.click("xpath=(//button[@type='button'])[6]");
     }
     
+    @Test
+    public void CustomSearchNewspapers() throws Exception {
+        ArrayList<String> zones = new ArrayList();
+        zones.add("newspaper");
+        
+        LoginFunc();
+        Thread.sleep(1000);
+        customSearch(zones, "Celestials");
+        Thread.sleep(1000);
+        startSearchAndPauseAfter(20);        
+        Thread.sleep(1000);
+        selenium.click("link=Raw Results");
+        Thread.sleep(1000);
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("1897-04-15"));
+    }
+    
+    @Test
+    public void CustomSearchNewspapersBooks() throws Exception {
+        ArrayList<String> zones = new ArrayList();
+        zones.add("newspaper");
+        zones.add("book");
+        
+        LoginFunc();
+        Thread.sleep(1000);
+        customSearch(zones, "Celestials");
+        Thread.sleep(1000);
+        startSearchAndPauseAfter(20);        
+        Thread.sleep(1000);
+        assertTrue(selenium.isTextPresent("newspaper"));
+        assertTrue(selenium.isTextPresent("book"));
+        Thread.sleep(1000);
+        selenium.click("link=Raw Results");
+        Thread.sleep(1000);
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
+    }
+    
+    @Test
+    public void CustomSearchAllZones() throws Exception {
+        ArrayList<String> zones = new ArrayList();
+        zones.add("newspaper");
+        zones.add("article");
+        zones.add("book");
+        zones.add("picture");
+        zones.add("music");
+        zones.add("collection");
+        zones.add("list");
+        zones.add("map");
+        
+        LoginFunc();
+        Thread.sleep(1000);
+        customSearch(zones, "Celestials");
+        Thread.sleep(1000);
+        startSearchAndPauseAfter(20);        
+        Thread.sleep(1000);
+        for (int j = 0; j < zones.size(); j++) {
+            assertTrue(selenium.isTextPresent(zones.get(j)));
+        }
+        Thread.sleep(1000);
+        selenium.click("link=Raw Results");
+        Thread.sleep(1000);
+        selenium.click("name=raw-sort-rb");
+        Thread.sleep(1000);
+    }
+    
     private ArrayList<String> addYearsToList(ArrayList list, int firstYear, int endYear) {
         for (int i = firstYear; i <= endYear; i++) {
             list.add(String.valueOf(i));
         }
         return list;
+    }
+    
+    private void customSearch(ArrayList zones, String searchTerm) throws Exception {
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-3");
+        for (int i = 0; i < zones.size(); i++) {
+            selenium.click("id=custom-zone-" + zones.get(i));            
+        }
+        Thread.sleep(1000);
+        selenium.type("id=cus-query", searchTerm);
     }
     
     private void simpleSearch(String searchTerm) throws Exception {
@@ -1712,6 +1791,8 @@ public class SeleniumTest {
             }
         }
     }
+
+    
        
     @After
     public void tearDown() throws Exception {
