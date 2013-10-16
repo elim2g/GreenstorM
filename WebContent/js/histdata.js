@@ -3,18 +3,27 @@ const FAIL = false;
 
 //Generate a Bar Chart
 function BarChartInit() {
+	var fill 	= HexToRGBA('#FF2626', 0.5); 	// fill colour
+	var stroke	= HexToRGBA('#BF0000', 1); 		// stroke colour
+	var scale	= HexToRGBA('#000000', 0.75);	// scale line colour
+	var grid	= HexToRGBA('#000000', 0.15);	// grid line colour
+				
 	var barChartData = {
 			labels : _histLabelArray(),
 			datasets : [
 				{
-					fillColor : "rgba(151,187,205,0.5)",
-					strokeColor : "rgba(151,187,205,1)",
-					data : _histDataArray()
+					fillColor 	: 	fill,
+					strokeColor : 	stroke,
+					data 		: _histDataArray()
 				}
 			]
 	};
 	
-	var barOptions = {animation : false };
+	var barOptions = {
+			animation 		: false,
+			scaleLineColor 	: scale,
+			scaleGridLineColor	: grid
+	};
 	
 	ClearLegend();
 	
@@ -22,27 +31,38 @@ function BarChartInit() {
 	if(target == null) return FAIL;
 	var myBar = new Chart(target.getContext("2d")).Bar(barChartData, barOptions);
 	if(myBar == null) return FAIL;
+	
 	return SUCCESS;
 }
 
 //Generate a Line Chart
 function LineChartInit() {
+	var fill 	= HexToRGBA('#FF2626', 0.5); 	// fill colour
+	var stroke	= HexToRGBA('#BF0000', 1); 		// stroke colour
+	var point	= HexToRGBA('#D14141', 1);		// point colour
+	var scale	= HexToRGBA('#000000', 0.75);	// scale line colour
+	var grid	= HexToRGBA('#000000', 0.15);	// grid line colour
+	
 	var lineChartData = {
 			labels : _histLabelArray(),
 			datasets : [
 				{
-					fillColor : "rgba(151,187,205,0.5)",
-					strokeColor : "rgba(151,187,205,1)",
-					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "#fff",
-					data : _histDataArray()
+					fillColor 		: fill,
+					strokeColor 	: stroke,
+					pointColor 		: point,
+					pointStrokeColor: "#fff",
+					data 			: _histDataArray()
 				}
 			]	
 	};
 		
 	ClearLegend();
 	
-	var lineOptions = { animation : false };
+	var lineOptions = {
+			animation 		: false,
+			scaleLineColor 	: scale,
+			scaleGridLineColor	: grid
+	};
 	
 	var target = document.getElementById("canvas");
 	if(target == null) return FAIL;
@@ -66,7 +86,6 @@ function DoughnutChartInit() {
 		dnData.push(newChartObject);
 	}
 	
-	
 	var dnOptions = { animation : false };
 	var target = document.getElementById("canvas");
 	if(target == null) return FAIL;
@@ -76,11 +95,11 @@ function DoughnutChartInit() {
 	//Add legend to page
 	ClearLegend();
 	labelsArray = _histLabelArray();
-	var legend = '<table border="1"><tr><th>Colour</th><th>Label</th></tr>';
+	var legend = '<table border="1"><tr><th bgcolor="#FBFBFB">Colour</th><th bgcolor="#FBFBFB">Label</th></tr>';
 	for(var i = 0; i < _histLabelArray().length; i++) {
 		hexString = GenClr(i);
 		legend = legend + '<tr><td bgcolor="' + hexString + '"></td>';
-		legend = legend + '<td>' + labelsArray[i] + '</td>';
+		legend = legend + '<td bgcolor="#FEFEFE">' + labelsArray[i] + '</td>';
 	}
 	legend = legend + '</table>';
 	
@@ -148,34 +167,28 @@ function ChangeGraph(graph) {
 	switch(graph) {
 		case barGraph:
 			graphType = barGraph;
-			nameStr = nameStr + "Bar Graph" + '</h2>';
-			var newName = $(nameStr);
-			$('#graph-name').html(newName);
+			RenameGraphTitle('Bar Graph');
 			ResizeCanvas(600, 800);
 			BarChartInit(); 
 			break;
 			
 		case lineGraph: 
 			graphType = lineGraph;
-			nameStr = nameStr + "Line Graph" + '</h2>';
-			var newName = $(nameStr);
-			$('#graph-name').html(newName);
+			RenameGraphTitle('Line Graph');
 			ResizeCanvas(600, 800);
 			LineChartInit(); 
 			break;
 			
 		case dnutGraph:
 			graphType = dnutGraph;
-			nameStr = nameStr + "Doughnut Graph" + '</h2>';
-			var newName = $(nameStr);
-			$('#graph-name').html(newName);
+			RenameGraphTitle('Doughnut Graph');
 			ResizeCanvas(500, 700);
 			DoughnutChartInit();
 			break;
 			
 		default:
 			throw new Error('Not a graph type');
-			return FAIL;
+			return FAIL; //Not needed, but a failsafe because Javascript
 			break;
 	}
 	
@@ -190,4 +203,57 @@ function SaveGraph() {
 	Canvas2Image.saveAsPNG(savCanvas);
 	
 	return SUCCESS;
+}
+
+//Renames the title of the graph page. Returns the string used if successful
+function RenameGraphTitle(titleStr) {
+	if(typeof titleStr == 'string' || titleStr instanceof String) {
+		var newName = '<h2>';
+		newName = newName + titleStr + '</h2>';
+		var newTitle = $(newName);
+		$('#graph-name').html(newTitle);
+	}
+	else {
+		throw new Error('Parameter not a string');
+	}
+	
+	return newName;
+}
+
+//Returns an object containing RGB colour components from Hex
+function HexToRGB(hexValue) {
+	if(typeof hexValue == 'string' || hexValue instanceof String) {
+		//Test for invalid hex
+		if(hexValue[0] != '#') throw new Error('Missing # tag');
+		var isValidHex  = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(hexValue);
+		if(isValidHex != true) throw new Error('Invalid characters');
+		
+		//Generate object
+		rgbObject = {
+				red 	: hexToR(hexValue),
+				green 	: hexToG(hexValue),
+				blue 	: hexToB(hexValue)
+		};
+	}
+	else {
+		throw new Error('Parameter not a string');
+	}
+	
+	return rgbObject;
+}
+
+//Sub functions. If HexToRGB passes tests these are considered fine
+function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16);} // Red
+function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16);} // Green
+function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16);} // Blue
+function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h;}
+
+//Convert Hex to RGBA string usable for JavaScript
+function HexToRGBA(hexString, alpha) {
+	fc = HexToRGB(hexString);
+	fcString = 'rgba(' 	+ fc.red.toString()
+						+ ',' + fc.green.toString()
+						+ ',' + fc.blue.toString()
+						+ ',' + alpha.toString() + ')';
+	return fcString;
 }

@@ -90,12 +90,12 @@ describe("Basic Search Test Suite", function() {
 		expect(testString).toEqual("#7ae140");
 	});
 	
-	it("Test that GenClr throws a hissy fit when passed a negative number", function() {
+	it("Test that GenClr throws an error when passed a negative number", function() {
 		var ind = -5;
 		expect( function() { GenClr(ind);}).toThrow(new Error('Negative index'));
 	});
 	
-	it("Test that GenClr throws a hissy fit when passed an index too large", function() {
+	it("Test that GenClr throws an error when passed an index too large", function() {
 		var ind = 30;
 		expect( function() { GenClr(ind);}).toThrow(new Error('Index too large'));
 	});
@@ -178,5 +178,69 @@ describe("Basic Search Test Suite", function() {
 	it("Test that ChangeGraph will fail by passing an index too large", function() {
 		var aNumber = 3;
 		expect( function() { ChangeGraph(aNumber);}).toThrow(new Error('Not a graph type'));
+	});
+	
+	it("Test that RenameGraphTitle returns the appropriate html when passed Bar Graph", function() {
+		var testString = '<h2>Bar Graph</h2>';
+		var returnString = RenameGraphTitle('Bar Graph');
+		expect(returnString).toEqual(testString);
+	});
+	
+	it("Test that RenameGraphTitle returns the appropriate html when passed blank string", function() {
+		var testString = '<h2></h2>';
+		var returnString = RenameGraphTitle('');
+		expect(returnString).toEqual(testString);
+	});
+	
+	it("Test that RenameGraphTitle throws an error when passed a non-string", function() {
+		expect( function() { RenameGraphTitle(69); }).toThrow(new Error('Parameter not a string'));
+	});
+	
+	it("Test that HexToRGB throws an error when passed a non-string", function() {
+		expect( function() { HexToRGB(69); }).toThrow(new Error('Parameter not a string'));
+	});
+	
+	it("Test that HexToRGB throws an error when passed a string without #", function() {
+		expect( function() { HexToRGB('umad'); }).toThrow(new Error('Missing # tag'));
+	});
+	
+	it("Test that HexToRGB throws an error when passed a non-hex-string", function() {
+		expect( function() { HexToRGB('#FFFFFZ'); }).toThrow(new Error('Invalid characters'));
+	});
+	
+	it("Test that HexToRGB returns 0 for Red value when passed #000000", function() {
+		var testObject 	= HexToRGB('#000000');
+		var expectedVal = 0;
+		expect(testObject.red).toEqual(expectedVal);
+	});
+	
+	it("Test that HexToRGB returns 0 for Blue value when passed #000000", function() {
+		var testObject 	= HexToRGB('#000000');
+		var expectedVal = 0;
+		expect(testObject.blue).toEqual(expectedVal);
+	});
+	
+	it("Test that HexToRGB returns 0 for Green value when passed #000000", function() {
+		var testObject 	= HexToRGB('#000000');
+		var expectedVal = 0;
+		expect(testObject.green).toEqual(expectedVal);
+	});
+	
+	it("Test that HexToRGB returns 255 for Red value when passed #FFFFFF", function() {
+		var testObject 	= HexToRGB('#FFFFFF');
+		var expectedVal = 255;
+		expect(testObject.red).toEqual(expectedVal);
+	});
+	
+	it("Test that HexToRGB returns 255 for Blue value when passed #FFFFFF", function() {
+		var testObject 	= HexToRGB('#FFFFFF');
+		var expectedVal = 255;
+		expect(testObject.blue).toEqual(expectedVal);
+	});
+	
+	it("Test that HexToRGB returns 255 for Green value when passed #FFFFFF", function() {
+		var testObject 	= HexToRGB('#FFFFFF');
+		var expectedVal = 255;
+		expect(testObject.green).toEqual(expectedVal);
 	});
 });
