@@ -1916,74 +1916,88 @@ function _createQueryString () {
 			break;
 		case Q_CUSTOM:
 			m_currentZone = null;
-		temp2.forEach(function(zone) {
-			if (m_currentZone) {
-				m_currentZone += ',' + zone;
+			temp2.forEach(function(zone) {
+				if (m_currentZone) {
+					m_currentZone += ',' + zone;
+				} else {
+					m_currentZone = zone;
+				}
+			});
+			str += '&zone=' + encodeURIComponent(m_currentZone);
+	
+			// Add Query
+			m_currentTerm = $('#cus-query').val();
+			str += '&q=' + encodeURIComponent(m_currentTerm);
+			if ($('#cus-query-not').val() != '') {
+				str += encodeURIComponent(' NOT ' + $('#cus-query-not').val());
+			}
+			
+			//<<< Custom Search Fields >>>\\
+			// Includes
+			var include = null;
+			if($('#custom-include-all').is(":checked")){
+				if(!include){include=$('#custom-include-all').val();} 
+				else {include += ',' + $('#custom-include-all').val();}
 			} else {
-				m_currentZone = zone;
+				if($('#custom-include-articletext').is("checked")){
+					if(!include){include=$('#custom-include-articletext').val();} 
+					else {include += ',' + $('#custom-include-articletext').val();}
+				}
+				if($('#custom-include-comments').is("checked")){
+					if(!include){include=$('#custom-include-comments').val();} 
+					else {include += ',' + $('#custom-include-comments').val();}
+				}
+				if($('#custom-include-holdings').is("checked")){
+					if(!include){include=$('#custom-include-holdings').val();} 
+					else {include += ',' + $('#custom-include-holdings').val();}
+				}
+				if($('#custom-include-links').is("checked")){
+					if(!include){include=$('#custom-include-links').val();} 
+					else {include += ',' + $('#custom-include-links').val();}
+				}
+				if($('#custom-include-listitems').is("checked")){
+					if(!include){include=$('#custom-include-listitems').val();} 
+					else {include += ',' + $('#custom-include-listitems').val();}
+				}
+				if($('#custom-include-lists').is("checked")){
+					if(!include){include=$('#custom-include-lists').val();} 
+					else {include += ',' + $('#custom-include-lists').val();}
+				}
+				if($('#custom-include-subscribinglibs').is("checked")){
+					if(!include){include=$('#custom-include-subscribinglibs').val();} 
+					else {include += ',' + $('#custom-include-subscribinglibs').val();}
+				}
+				if($('#custom-include-tags').is("checked")){
+					if(!include){include=$('#custom-include-tags').val();} 
+					else {include += ',' + $('#custom-include-tags').val();}
+				}
+				if($('#custom-include-workversions').is("checked")){
+					if(!include){include=$('#custom-include-workversions').val();} 
+					else {include += ',' + $('#custom-include-workversions').val();}
+				}
+				str += '&include=' + encodeURI(include);
 			}
-		});
-		str += '&zone=' + encodeURIComponent(m_currentZone);
-
-		// Add Query
-		m_currentTerm = $('#cus-query').val();
-		str += '&q=' + encodeURIComponent(m_currentTerm);
-		if ($('#cus-query-not').val() != '') {
-			str += encodeURIComponent(' NOT ' + $('#cus-query-not').val());
-		}
-		
-		//<<< Custom Search Fields >>>\\
-		// Includes
-		var includes = null;
-		if($('#custom-include-all').is(":checked")){
-			if(!includes){include=$('#custom-include-all').val();} 
-			else {include += ',' + $('#custom-include-all').val();}
-		} else {
-			if($('#custom-include-articletext').is("checked")){
-				if(!includes){include=$('#custom-include-articletext').val();} 
-				else {include += ',' + $('#custom-include-articletext').val();}
-			}
-			if($('#custom-include-comments').is("checked")){
-				if(!includes){include=$('#custom-include-comments').val();} 
-				else {include += ',' + $('#custom-include-comments').val();}
-			}
-			if($('#custom-include-holdings').is("checked")){
-				if(!includes){include=$('#custom-include-holdings').val();} 
-				else {include += ',' + $('#custom-include-holdings').val();}
-			}
-			if($('#custom-include-links').is("checked")){
-				if(!includes){include=$('#custom-include-links').val();} 
-				else {include += ',' + $('#custom-include-links').val();}
-			}
-			if($('#custom-include-listitems').is("checked")){
-				if(!includes){include=$('#custom-include-listitems').val();} 
-				else {include += ',' + $('#custom-include-listitems').val();}
-			}
-			if($('#custom-include-lists').is("checked")){
-				if(!includes){include=$('#custom-include-lists').val();} 
-				else {include += ',' + $('#custom-include-lists').val();}
-			}
-			if($('#custom-include-subscribinglibs').is("checked")){
-				if(!includes){include=$('#custom-include-subscribinglibs').val();} 
-				else {include += ',' + $('#custom-include-subscribinglibs').val();}
-			}
-			if($('#custom-include-tags').is("checked")){
-				if(!includes){include=$('#custom-include-tags').val();} 
-				else {include += ',' + $('#custom-include-tags').val();}
-			}
-			if($('#custom-include-workversions').is("checked")){
-				if(!includes){include=$('#custom-include-workversions').val();} 
-				else {include += ',' + $('#custom-include-workversions').val();}
-			}
-			str += urlEncode(includes);
-		}
-		
-		//facets
-		
-		
-		//<<< Custom Search Fields >>>\\
-
-		break;
+			
+			//facets
+			if(!$('#custom-facet-format-search').val()) { str += "&l-format="; str += encodeURI($('#custom-facet-format-search').val()); }
+			if(!$('#custom-facet-decade-search').val()) { str += "&l-decade="; str += encodeURI($('#custom-facet-decade-search').val()); }
+			if(!$('#custom-facet-year-search').val()) { str += "&l-year="; str += encodeURI($('#custom-facet-year-search').val()); }
+			if(!$('#custom-facet-month-search').val()) { str += "&l-month="; str += encodeURI($('#custom-facet-month-search').val()); }
+			if(!$('#custom-facet-language-search').val()) { str += "&l-language="; str += encodeURI($('#custom-facet-language-search').val()); }
+			if(!$('#custom-facet-availability-search').val()) { str += "&l-availability="; str += encodeURI($('#custom-facet-availability-search').val()); }
+			if(!$('#custom-facet-australian-search').val()) { str += "&l-australian="; str += encodeURI($('#custom-facet-australian-search').val()); }
+			if(!$('#custom-facet-occupation-search').val()) { str += "&l-occupation="; str += encodeURI($('#custom-facet-occupation-search').val()); }
+			if(!$('#custom-facet-zoom-search').val()) { str += "&l-zoom="; str += encodeURI($('#custom-facet-zoom-search').val()); }
+			if(!$('#custom-facet-vendordb-search').val()) { str += "&l-vendordb="; str += encodeURI($('#custom-facet-zoom-search').val()); }
+			if(!$('#custom-facet-vendor-search').val()) { str += "&l-vendor="; str += encodeURI($('#custom-facet-vendor-search').val()); }
+			if(!$('#custom-facet-audience-search').val()) { str += "&l-audience="; str += encodeURI($('#custom-facet-audience-search').val()); }
+			if(!$('#custom-facet-title-search').val()) { str += "&l-title="; str += encodeURI($('#custom-facet-title-search').val()); }
+			if(!$('#custom-facet-category-search').val()) { str += "&l-category="; str += encodeURI($('#custom-facet-category-search').val()); }
+			if(!$('#custom-facet-illustrated-search').val()) { str += "&l-illustrated="; str += encodeURI($('#custom-facet-illustrated-search').val()); }
+			if(!$('#custom-facet-word-search').val()) { str += "&l-word="; str += encodeURI($('#custom-facet-word-search').val()); }
+			//<<< Custom Search Fields >>>\\
+	
+			break;
 		default:
 			return m_currentQuery;
 	}
@@ -2094,8 +2108,8 @@ function _doQuery (pos){
         if (status == "success") {
           _updateTimeDisplay();
           _processData(data, pos, queryId);
-          if (pos === 0 && m_currentQueryFormPane !== "recent"
-        	  && m_currentQueryFormPane !== "save") {
+          if (pos === 0 && m_currentQueryFormPane != "recent"
+        	  && m_currentQueryFormPane != "save") {
               _createRecentCookie();  
           }
         } else {
