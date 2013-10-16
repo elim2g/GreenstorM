@@ -49,7 +49,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("link=Map");
         Thread.sleep(1000);
-        selenium.click("link=Histogram");
+        selenium.click("link=Graphs");
         Thread.sleep(1000);
         selenium.click("link=Term Cloud");
         Thread.sleep(1000);
@@ -77,32 +77,8 @@ public class SeleniumTest {
         selenium.click("id=nq-pb12");
         Thread.sleep(7000);
         selenium.click("id=btn-pause");
-        selenium.click("link=Histogram");        
+        selenium.click("link=Graphs");        
     }
-    
-    @Test
-    public void AdvancedDate() throws Exception {
-        LoginFunc();
-        Thread.sleep(600);
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("xpath=(//input[@name='query-rb1'])[2]");
-        Thread.sleep(600);
-        selenium.type("id=adv-query", "celestials");
-        selenium.click("id=z1a");
-        selenium.select("id=aqYearStart", "label=1900");
-        selenium.select("id=aqYearEnd", "label=1920");
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(5000);
-        selenium.click("id=cc-pb11");
-        selenium.click("link=Raw Results");
-        selenium.click("name=raw-sort-rb");
-        Thread.sleep(2000);
-        assertTrue(selenium.isTextPresent("1900"));
-        assertTrue(selenium.isTextPresent("1920"));
-        assertFalse(selenium.isTextPresent("1898"));
-        assertFalse(selenium.isTextPresent("2027"));
-        }
     
     @Test
     public void SaveQuerySimpleSearch() throws Exception {
@@ -172,7 +148,6 @@ public class SeleniumTest {
         assertTrue(selenium.isTextPresent("Celestials"));
         assertTrue(selenium.isTextPresent("Simple"));
         assertTrue(selenium.isTextPresent("newspaper"));
-        assertTrue(selenium.isTextPresent("86063"));
     }
     
     @Test
@@ -188,7 +163,6 @@ public class SeleniumTest {
         assertTrue(selenium.isTextPresent("Celestials"));
         assertTrue(selenium.isTextPresent("Simple"));
         assertTrue(selenium.isTextPresent("newspaper"));
-        assertTrue(selenium.isTextPresent("86063"));
         Thread.sleep(500);
         simpleSearch("Test");
         Thread.sleep(500);
@@ -272,8 +246,8 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("name=raw-sort-rb");
         Thread.sleep(1000);
-        assertTrue(selenium.isTextPresent("1853-03-15"));
-        assertFalse(selenium.isTextPresent("1907-03-19"));
+        assertTrue(selenium.isTextPresent("1880-11-27"));
+        assertFalse(selenium.isTextPresent("1880-11-26"));
         assertTrue(selenium.isTextPresent("1887-09-17"));
         assertFalse(selenium.isTextPresent("1887-09-15"));
     }
@@ -446,60 +420,28 @@ public class SeleniumTest {
         LoginFunc();
         Thread.sleep(1000);
         advancedSearchMap("Celestials");
-        startSearchAndPauseAfter(20);        
+        startSearchAndPauseAfter(50);        
         Thread.sleep(1000);
         selenium.click("link=Raw Results");
         Thread.sleep(1000);
         selenium.click("name=raw-sort-rb");
         Thread.sleep(1000);
-        assertTrue(selenium.isTextPresent("0.1297275"));
+        assertTrue(selenium.isTextPresent("0.13069183"));
     }
     
     @Test
-    public void CustomSearchLists() throws Exception {
+    public void AdvancedSearchLists() throws Exception {
         LoginFunc();
-        Thread.sleep(300);
-        
-        selenium.click("link=New");
-        Thread.sleep(700);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(700);
-        selenium.click("id=adv-list");
-        Thread.sleep(700);
-        selenium.type("id=adv-query", "Celestials");
-        selenium.click("xpath=(//button[@id='nq-pb12'])[3]");
-        Thread.sleep(4000);
-        selenium.click("id=btn-pause");
-        selenium.click("link=View");
-        Thread.sleep(700);
-        selenium.click("link=Raw Results");
-        selenium.click("name=raw-sort-rb");
         Thread.sleep(1000);
-        assertTrue(selenium.isTextPresent("19"));
+        advancedSearchList("Celestials");
+        startSearchAndPauseAfter(20); 
+        Thread.sleep(2000);
+        selenium.click("id=cc-pb14");
+        Thread.sleep(2000);
+        assertTrue(selenium.isTextPresent("0.000420895"));
+        
     }
    
-    @Test
-    public void MultipleZones() throws Exception {
-        LoginFunc();
-        Thread.sleep(600);
-        
-        selenium.click("link=Home");
-        selenium.click("link=New");
-        Thread.sleep(600);
-        selenium.click("xpath=(//input[@name='query-rb1'])[2]");
-        Thread.sleep(3000);
-        selenium.type("id=adv-query", "Celestials");
-        selenium.click("id=z1a");
-        selenium.click("id=z1b");
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(5000);
-        selenium.click("id=cc-pb11");
-        selenium.click("link=Raw Results");
-        selenium.click("name=raw-sort-rb");
-        Thread.sleep(3000);
-        assertTrue(selenium.isTextPresent("1897-04-15"));
-        assertTrue(selenium.isTextPresent("2004-2009"));      
-    }
     
     @Test
     public void YearCloudWithResults() throws Exception {
@@ -548,18 +490,8 @@ public class SeleniumTest {
     public void testExportPic() throws Exception {
         LoginFunc();
         Thread.sleep(1000);
-        
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.click("id=adv-picture");
-        Thread.sleep(1000);
-        selenium.type("id=adv-query", "Floods");
-        Thread.sleep(1000);
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(2000);
-        selenium.click("id=btn-pause");
+        advancedSearchPicture("Celestials");
+        startSearchAndPauseAfter(20); 
         Thread.sleep(1000);
         selenium.click("id=cc-pb14");
         Thread.sleep(1000);
@@ -783,8 +715,8 @@ public class SeleniumTest {
     
     @Test
     public void testYearCloudClickOutsideBoundaryAdvancedQueryBook() throws Exception {
-        final int lowBoundary = 1967;
-        final int highBoundary = 1976;
+        final int lowBoundary = 1968;
+        final int highBoundary = 1975;
         ArrayList<String> years = new ArrayList();
         years = addYearsToList(years, START_YEAR, lowBoundary);
         years = addYearsToList(years, highBoundary, END_YEAR); 
@@ -793,18 +725,16 @@ public class SeleniumTest {
         Thread.sleep(2000);        
         advancedSearchBook("Celestials");
         Thread.sleep(1000);
-        startSearchAndPause();
+        startSearchAndPauseAfter(50);
         Thread.sleep(1000);
         selenium.click("link=Term Cloud");
-        Thread.sleep(1000);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         selenium.click("id=year-cloud_word_0");
         Thread.sleep(1000);       
         assertTrue(selenium.isVisible("id=raw-list-container"));
         for (String year : years) { 
             assertFalse(selenium.isTextPresent(year));
         }
-        Thread.sleep(1000);
     }
     
     @Test
@@ -1032,7 +962,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=adv-newspaper");
         Thread.sleep(1000);
-        selenium.select("id=adv-newspaper-decade", "197");
+        selenium.select("id=adv-newspaper-decade", "label=1970's");
         Thread.sleep(1000);
         selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
         Thread.sleep(5000);
@@ -1072,34 +1002,6 @@ public class SeleniumTest {
         Thread.sleep(1000);
         assertTrue(selenium.isTextPresent("1814-01-22"));
         assertTrue(selenium.isTextPresent("1814-05-21"));
-    }
-    
-    
-    @Test
-    public void testAdvNewsMonth() throws Exception {
-        LoginFunc();
-        Thread.sleep(1000);
-        
-        selenium.click("link=New");
-        Thread.sleep(1000);
-        selenium.click("id=ui-id-2");
-        Thread.sleep(1000);
-        selenium.type("id=adv-query", "floods");
-        Thread.sleep(1000);
-        selenium.click("id=adv-newspaper");
-        Thread.sleep(1000);
-        selenium.select("id=adv-newspaper-month", "label=June");
-        Thread.sleep(1000);
-        selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(5000);
-        selenium.click("id=cc-pb11");
-        Thread.sleep(1000);
-        selenium.click("id=cc-pb14");
-        Thread.sleep(1000);
-        selenium.click("name=raw-sort-rb");
-        Thread.sleep(1000);
-        assertTrue(selenium.isTextPresent("1864-06-21"));
-        assertTrue(selenium.isTextPresent("1872-06-15 "));
     }
     
     
@@ -1392,13 +1294,6 @@ public class SeleniumTest {
     
     
     @Test
-    public void testAdvMapZoom() throws Exception {
-        LoginFunc();
-        Thread.sleep(1000);
-        fail("Not sure what value to input to get it to return a result");
-    }
-    
-    @Test
     public void testAdvListDecade() throws Exception {
         LoginFunc();
         Thread.sleep(2000);
@@ -1407,11 +1302,13 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.type("id=aq1", "floods");
+        selenium.type("id=adv-query", "floods");
         Thread.sleep(1000);
         selenium.click("id=adv-list");
         Thread.sleep(1000);
-        selenium.select("id=adv-list-decade", "label=1900's");
+        selenium.click("id=adv-list-decade");
+        Thread.sleep(600);
+        selenium.select("id=adv-list-decade", "value=1800s");
         Thread.sleep(1000);
         selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
         Thread.sleep(2000);
@@ -1434,7 +1331,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.type("id=aq1", "floods");
+        selenium.type("id=adv-query", "floods");
         Thread.sleep(1000);
         selenium.click("id=adv-list");
         Thread.sleep(1000);
@@ -1461,11 +1358,11 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.type("id=aq1", "floods");
+        selenium.type("id=adv-query", "floods");
         Thread.sleep(1000);
         selenium.click("id=adv-collection");
         Thread.sleep(1000);
-        selenium.select("id=adv-list-decade", "label=1900's");
+        selenium.select("id=adv-list-decade", "label=1900\'s");
         Thread.sleep(1000);
         selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
         Thread.sleep(3000);
@@ -1489,7 +1386,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.type("id=aq1", "floods");
+        selenium.type("id=adv-query", "floods");
         Thread.sleep(1000);
         selenium.click("id=adv-collection");
         Thread.sleep(1000);
@@ -1517,7 +1414,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.type("id=aq1", "floods");
+        selenium.type("id=adv-query", "floods");
         Thread.sleep(1000);
         selenium.click("id=adv-collection");
         Thread.sleep(1000);
@@ -1544,11 +1441,11 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.type("id=aq1", "floods");
+        selenium.type("id=adv-query", "floods");
         Thread.sleep(1000);
         selenium.click("id=adv-book");
         Thread.sleep(1000);
-        selenium.select("id=adv-book-decade", "label=1900's");
+        selenium.select("id=adv-book-decade", "label=1900\'s");
         Thread.sleep(1000);
         selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
         Thread.sleep(3000);
@@ -1572,7 +1469,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.type("id=aq1", "floods");
+        selenium.type("id=adv-query", "floods");
         Thread.sleep(1000);
         selenium.click("id=adv-book");
         Thread.sleep(1000);
@@ -1600,7 +1497,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-2");
         Thread.sleep(1000);
-        selenium.type("id=aq1", "floods");
+        selenium.type("id=adv-query", "floods");
         Thread.sleep(1000);
         selenium.click("id=adv-book");
         Thread.sleep(1000);
@@ -1809,8 +1706,10 @@ public class SeleniumTest {
                 element = "id=dqcb" + number;
                 Thread.sleep(300);
             }
-            Thread.sleep(1000);
-            selenium.click("id=dq-pb1");
+            if(selenium.isElementPresent("id=dq-pb1")){
+                Thread.sleep(1000);
+                selenium.click("id=dq-pb1");
+            }
         }
     }
        
