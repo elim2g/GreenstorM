@@ -17,7 +17,7 @@
  */
 
 // The webapp base URI is set by ANT build task
-var temp2 = new Array();
+var zoneArray = new Array();
 
 var PM_URI = '@PM_PREFIX@';
 
@@ -1926,7 +1926,7 @@ function _createQueryString () {
 			searchFacets="";
 			searchIncludes="";
 			m_currentZone = null;
-			temp2.forEach(function(zone) {
+			zoneArray.forEach(function(zone) {
 				if (m_currentZone) {
 					m_currentZone += ',' + zone;
 				} else {
@@ -3745,6 +3745,7 @@ function test() {
 
 /** 
  * Gets a list of newspaper titles from trove and populates the appropriate select box
+ * @author josh-wright
  */
 function _getNewspaperTitles() {
 	var queryStr = TROVE_NEWS_TITLES + m_user.key;
@@ -3765,6 +3766,7 @@ function _getNewspaperTitles() {
 /**
  * Gets a list of newspaper titles from trove and populates the appropriate
  * select box
+ * @author josh-wright
  */
 function _getTroveContributors(id) {
 	var queryStr = "http://api.trove.nla.gov.au/contributor?encoding=json&callback=?&key="
@@ -3779,16 +3781,26 @@ function _getTroveContributors(id) {
 	});
 }
 
-
+/**
+ * Adds/removes the provided zone from the zone array
+ * @author josh-wright
+ * @param zone (string, zone to be added/removed from the array)
+ * @param add (boolean, add or remove from array)
+ */
 function _zoneChange(zone, add) {
 	if (add) {
-		temp2.push(zone);
+		zoneArray.push(zone);
 	} else {
-		temp2.splice(temp2.indexOf(zone), 1);
+		zoneArray.splice(zoneArray.indexOf(zone), 1);
 	}
 	_changeCriteria();
 }
 
+/**
+ * 
+ * @param date
+ * @returns
+ */
 function _extractYearFromDate(date) {
 	if (date === undefined) {
 		return "unknown date";
@@ -3803,6 +3815,10 @@ function _extractYearFromDate(date) {
 	}
 }
 
+/**
+ * goes though and updates the values on the custom query page to show based on the criteria file
+ * @param criteria (JSON object of values to show/hide)
+ */
 function _customHideCriteria(criteria) {
 	for ( var key in criteria) {
 		if (!criteria[key]) {
@@ -3814,11 +3830,17 @@ function _customHideCriteria(criteria) {
 	;
 }
 
+/**
+ * changes the values to display on the custom search page based on which zones the user has selected
+ * to reduce the amount of data displayed/reduce redundant fields for zones,
+ * users are only shown common criteria
+ * see mapping declarations at the top of this file
+ */
 function _changeCriteria() {
 	var tempStore = new Array();
 	var displayUpdate = null;
-	for ( var i = 0; i < temp2.length; i++) {
-		tempStore.push(zoneMappings[temp2[i]]);
+	for ( var i = 0; i < zoneArray.length; i++) {
+		tempStore.push(zoneMappings[zoneArray[i]]);
 	}
 	;
 	if (tempStore.length == 0) {
@@ -3838,6 +3860,10 @@ function _changeCriteria() {
 	_customHideCriteria(displayUpdate);
 }
 
+/**
+ * Checks if a zone has been selected/deselected, passes zone info based on id
+ * @param id (string, id of checkbox that has changed)
+ */
 function _zoneCheck(id) {
 	var zone = id.replace("#custom-zone-", "");
 	if ($(id).prop('checked')) {
@@ -3848,12 +3874,20 @@ function _zoneCheck(id) {
 	;
 };
 
+/**
+ * Adds decades to a combo box to limit user inputs
+ * @param id (string, id of html select object for datepicker to be added to)
+ */
 function _addDecades(id) {
 	for ( var i = (MINYEAR / 10); i <= (MAXYEAR / 10); i++) {
 		$(id).append('<option value="' + i + '">' + i + '0&apos;s</option>');
 	}
 }
 
+/**
+ * Adds years to a combo box to limit user inputs
+ * @param id (string, id of html select object for datepicker to be added to)
+ */
 function _addYears(id) {
 	for ( var i = MINYEAR; i <= MAXYEAR; i++) {
 		if (i % 10 == 0) {
@@ -3864,6 +3898,11 @@ function _addYears(id) {
 	}
 }
 
+/**
+ * Builds jQuery datepicker object to suit Trove specs
+ * @author josh-wright
+ * @param id (string, id of html input type="text" object for datepicker to be added to)
+ */
 function _datePicker(id) {
 	$(id).datepicker();
 	$(id).datepicker('option', 'dateFormat', 'yy-mm-ddT00:00:00Z');
