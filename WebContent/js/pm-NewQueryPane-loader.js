@@ -34,6 +34,7 @@ _addDecades('#adv-newspaper-decade');
 _addDecades('#adv-picture-decade');
 
 _addDecades('#custom-facet-decade-search');
+_addDecades('#custom-index-decade-search');
 
 _addYears('#adv-article-year');
 _addYears('#adv-book-year');

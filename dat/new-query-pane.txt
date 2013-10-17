@@ -621,12 +621,8 @@
 				</tr>
 			</table>
 		</fieldset>
-		<fieldset id="custom-search">
-			<legend><b>Search Criteria</b></legend>
-			<div id="custom-index-anbdid">
-				<label for="custom-index-anbdid-search">Libraries Australia Record Identifier <i> - Example: 46285585</i></label>
-				<input type="text" id="custom-index-anbdid-search"/>
-			</div>
+		<fieldset id="custom-facet">
+			<legend><b>Search Criteria - Trove Facets</b></legend>
 			<div id="custom-facet-audience">
 				<label for="custom-facet-audience-search">Audience</label>
 				<select id="custom-facet-audience-search">
@@ -671,59 +667,11 @@
 					<option value="Literature">Literature</option>
 				</select>
 			</div>
-			<div id="custom-index-commentlastupdated">
-				<table>
-					<tr>
-						<td colspan="4"><label>Comments Last Updated <i> - * is wildcard. Finds everything that has been commented on in Trove. Only available from March 2012</i></label></td>
-					</tr>
-					<tr>
-						<td colspan="2"><label for="custom-index-commentlastupdated-search_start">Start</label></td>
-						<td colspan="2"><label for="custom-index-commentlastupdated-search_finish">Finish</label></td>
-					</tr>
-					<tr>
-						<td colspan="2"><input type="text" id="custom-index-commentlastupdated-search_start"/></td>
-						<td colspan="2"><input type="text" id="custom-index-commentlastupdated-search_finish"/></td>
-					</tr>
-				</table>
-			</div>
-			<div id="custom-index-creator">
-				<label for="custom-index-creator-search">Creator</label>
-				<input type="text" id="custom-index-creator-search"/>
-			</div>
-			<div id="custom-index-date">
-				<table>
-					<tr>
-						<td colspan="4"><label>Date of Publication <i> - * is wildcard</i></label></td>
-					</tr>
-					<tr>
-						<td colspan="2"><label for="custom-index-date-search_start">Start</label></td>
-						<td colspan="2"><label for="custom-index-date-search_finish">Finish</label></td>
-					</tr>
-					<tr>
-						<td colspan="2"><input type="text" id="custom-index-date-search_start"/></td>
-						<td colspan="2"><input type="text" id="custom-index-date-search_finish"/></td>
-					</tr>
-				</table>
-			</div>
-			<div id="custom-index-ddc">
-				<label for="custom-index-ddc-search">Dewey Decimal Classification number <i> - Example: 791.4372</i></label>
-				<input type="text" id="custom-index-ddc-search"/>
-			</div>
 			<div id="custom-facet-decade">
 				<label for="custom-facet-decade-search">Publication Decade (Facet)</label>
 				<select id="custom-facet-decade-search">
 					<option value="" selected></option>
 				</select>
-			</div>
-			<div id="custom-index-decade">
-				<label for="custom-index-decade-search">Publication Decade (Index)</label>
-				<select id="custom-index-decade-search">
-					<option value="" selected></option>
-				</select>
-			</div>
-			<div id="custom-index-exact_creator">
-				<label for="custom-index-exact_creator-search">Creator</label>
-				<input type="text" id="custom-index-exact_creator-search"/>
 			</div>
 			<div id="custom-facet-format">
 				<label for="custom-facet-format-search">Format (Facet)</label>
@@ -774,6 +722,138 @@
 					<option value="Video">Video</option>
 					<option value="Video/Captioned">&#8594;Captioned</option>
 				</select>
+			</div>
+			<div id="custom-facet-illtype">
+				<!-- Trove isn't very clear as to what this requires/does - JW -->
+			</div>
+			<div id="custom-facet-illustrated">
+				<table>
+					<tr>
+						<td colspan="4"><label >Illustrated <i> - Is a newspaper article illustrated?</i></label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="checkbox" id="custom-facet-illustrated-search" value="y"/><label for="custom-facet-illustrated-search">Illustrated</label></td>
+						<td colspan="2"></td>
+					</tr>
+				</table>
+			</div>
+			<div id="custom-facet-language">
+				<label for="custom-facet-language-search">Language (Facet)</label>
+				<input id="custom-facet-language-search" type="text" />
+			</div>
+			<div id="custom-facet-month">
+				<label for="custom-facet-month-search">Publication Month</label>
+				<select id="custom-facet-month-search">
+					<option value="" selected></option>
+					<option value="01">January</option>
+					<option value="02">February</option>
+					<option value="03">March</option>
+					<option value="04">April</option>
+					<option value="05">May</option>
+					<option value="06">June</option>
+					<option value="07">July</option>
+					<option value="08">August</option>
+					<option value="09">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+			</div>
+			<div id="custom-facet-occupation">
+				<label for="custom-facet-occupation-search">Occupation?</label>
+				<input type="text" id="custom-facet-occupation-search">
+			</div>
+			<div id="custom-facet-title">
+				<label for="custom-facet-title-search">Title (Facet)</label>
+				<input type="text" id="custom-facet-title-search"/>
+			</div>
+			<div id="custom-facet-vendor">
+				<label for="custom-facet-vendor-search">Vendor</label>
+				<select id="custom-facet-vendor-search">
+				  <option value="" selected></option>
+				  <option value="GALE">GALE</option>
+				  <option value="Informit">Informit</option>
+				</select>
+			</div>
+			<div id="custom-facet-vendordb">
+				<label for="custom-facet-vendordb-search">Vendor Database Code</label>
+				<input type="text" id="custom-facet-vendordb-search">
+			</div>
+			<div id="custom-facet-word">	
+				<label for="custom-facet-word-search">Article Word Count</label>
+				<input type="text" id="custom-facet-word-search">
+			</div>
+			<div id="custom-facet-year">
+				<label for="custom-facet-year-search">Publication Year</label>
+				<select id="custom-facet-year-search">
+					<option value="" selected></option>
+				</select>
+			</div>
+			<div id="custom-facet-year_newspaper">
+				<label for="custom-facet-year_newspaper">Publication Year</label>
+				<select id="custom-facet-year_newspaper">
+					<option value="" selected></option>
+				</select>
+			</div>
+			<div id="custom-facet-zoom">
+				<label for="custom-facet-zoom-search">Map Zoom</label>
+				<input id="custom-facet-zoom-search" type="text" />
+			</div>
+		</fieldset>
+		<fieldset id="custom-index">
+			<legend><b>Search Criteria - Trove Indexes</b></legend>
+			<p>Text fields in this search allow for <i>NOT</i> statements. To include this simply type <i>NOT</i> between the terms, example: <i>John NOT Smith</i></p><br>
+			<div id="custom-index-anbdid">
+				<label for="custom-index-anbdid-search">Libraries Australia Record Identifier <i> - Example: 46285585</i></label>
+				<input type="text" id="custom-index-anbdid-search"/>
+			</div>
+			<div id="custom-index-commentlastupdated">
+				<table>
+					<tr>
+						<td colspan="4"><label>Comments Last Updated <i> - * is wildcard. Finds everything that has been commented on in Trove. Only available from March 2012</i></label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><label for="custom-index-commentlastupdated-search_start">Start</label></td>
+						<td colspan="2"><label for="custom-index-commentlastupdated-search_finish">Finish</label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="text" id="custom-index-commentlastupdated-search_start"/></td>
+						<td colspan="2"><input type="text" id="custom-index-commentlastupdated-search_finish"/></td>
+					</tr>
+				</table>
+			</div>
+			<div id="custom-index-creator">
+				<label for="custom-index-creator-search">Creator</label>
+				<input type="text" id="custom-index-creator-search"/>
+			</div>
+			<div id="custom-index-date">
+				<table>
+					<tr>
+						<td colspan="4"><label>Date of Publication <i> - * is wildcard</i></label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><label for="custom-index-date-search_start">Start</label></td>
+						<td colspan="2"><label for="custom-index-date-search_finish">Finish</label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="text" id="custom-index-date-search_start"/></td>
+						<td colspan="2"><input type="text" id="custom-index-date-search_finish"/></td>
+					</tr>
+				</table>
+			</div>
+			<div id="custom-index-ddc">
+				<label for="custom-index-ddc-search">Dewey Decimal Classification number <i> - Example: 791.4372</i></label>
+				<input type="text" id="custom-index-ddc-search"/>
+			</div>
+			<div id="custom-index-decade">
+				<label for="custom-index-decade-search">Publication Decade (Index)</label>
+				<select id="custom-index-decade-search">
+					<option value="" selected></option>
+				</select>
+			</div>
+			<div id="custom-index-exact_creator">
+				<label for="custom-index-exact_creator-search">Creator</label>
+				<input type="text" id="custom-index-exact_creator-search"/>
 			</div>
 			<div id="custom-index-format">
 				<label for="custom-index-format-search">Format (Index)</label>
@@ -848,20 +928,6 @@
 				<label for="custom-index-identifier-search">Identifier <i> - Any identifiers included with the work but not including local identifiers. Example: ISBN, ISSN, ISMN</i></label>
 				<input type="text" id="custom-index-identifier-search"/>
 			</div>
-			<div id="custom-facet-illtype">
-				<!-- Trove isn't very clear as to what this requires/does - JW -->
-			</div>
-			<div id="custom-facet-illustrated">
-				<table>
-					<tr>
-						<td colspan="4"><label >Illustrated <i> - Is a newspaper article illustrated?</i></label></td>
-					</tr>
-					<tr>
-						<td colspan="2"><input type="checkbox" id="custom-facet-illustrated-search" value="y"/><label for="custom-facet-illustrated-search">Illustrated</label></td>
-						<td colspan="2"></td>
-					</tr>
-				</table>
-			</div>
 			<div id="custom-index-isbn">
 				<label for="custom-index-isbn-search">International Standard Book Number (ISBN) <i> - Example: 0333337352</i></label>
 				<input type="text" id="custom-index-isbn-search"/>
@@ -869,10 +935,6 @@
 			<div id="custom-index-issn">
 				<label for="custom-index-issn-search">International Standard Serial Number (ISSN) <i> - Example: 15386597</i></label>
 				<input type="text" id="custom-index-issn-search"/>
-			</div>
-			<div id="custom-facet-language">
-				<label for="custom-facet-language-search">Language (Facet)</label>
-				<input id="custom-facet-language-search" type="text" />
 			</div>
 			<div id="custom-index-language">
 				<label for="custom-index-language-search">Language (Index)</label>
@@ -893,33 +955,11 @@
 					</tr>
 				</table>
 			</div>
-			<div id="custom-facet-month">
-				<label for="custom-facet-month-search">Publication Month</label>
-				<select id="custom-facet-month-search">
-					<option value="" selected></option>
-					<option value="01">January</option>
-					<option value="02">February</option>
-					<option value="03">March</option>
-					<option value="04">April</option>
-					<option value="05">May</option>
-					<option value="06">June</option>
-					<option value="07">July</option>
-					<option value="08">August</option>
-					<option value="09">September</option>
-					<option value="10">October</option>
-					<option value="11">November</option>
-					<option value="12">December</option>
-				</select>
-			</div>
 			<div id="custom-index-nuc">
 				<label for="custom-index-nuc-search">NUC <i> - NUC (id) of an organisation who has a copy of the work</i></label>
 				<select id="custom-index-nuc-search">
 					<option value="" selected></option>
 				</select>
-			</div>
-			<div id="custom-facet-occupation">
-				<label for="custom-facet-occupation-search">Occupation?</label>
-				<input type="text" id="custom-facet-occupation-search">
 			</div>
 			<div id="custom-index-publictag">
 				<label for="custom-index-publictag-search">Public Tag <i> - This is an EXACT search; Example: &apos;Sydney&apos; does not return &apos;Sydney Harbour&apos;</i></label>
@@ -964,45 +1004,9 @@
 				<label for="custom-index-title-search">Title (Index)</label>
 				<input type="text" id="custom-index-title-search"/>
 			</div>
-			<div id="custom-facet-title">
-				<label for="custom-facet-title-search">Title (Facet)</label>
-				<input type="text" id="custom-facet-title-search"/>
-			</div>
-			<div id="custom-facet-vendor">
-				<label for="custom-facet-vendor-search">Vendor</label>
-				<select id="custom-facet-vendor-search">
-				  <option value="" selected></option>
-				  <option value="GALE">GALE</option>
-				  <option value="Informit">Informit</option>
-				</select>
-			</div>
-			<div id="custom-facet-vendordb">
-				<label for="custom-facet-vendordb-search">Vendor Database Code</label>
-				<input type="text" id="custom-facet-vendordb-search">
-			</div>
-			<div id="custom-facet-word">	
-				<label for="custom-facet-word-search">Article Word Count</label>
-				<input type="text" id="custom-facet-word-search">
-			</div>
-			<div id="custom-facet-year">
-				<label for="custom-facet-year-search">Publication Year</label>
-				<select id="custom-facet-year-search">
-					<option value="" selected></option>
-				</select>
-			</div>
-			<div id="custom-facet-year_newspaper">
-				<label for="custom-facet-year_newspaper">Publication Year</label>
-				<select id="custom-facet-year_newspaper">
-					<option value="" selected></option>
-				</select>
-			</div>
-			<div id="custom-facet-zoom">
-				<label for="custom-facet-zoom-search">Map Zoom</label>
-				<input id="custom-facet-zoom-search" type="text" />
-			</div>
 		</fieldset>
 		<fieldset>
-			<div class="pm-button-bar" style="float:right;">
+			<div class="pm-button-bar" style="float:right; display:inline-block;">
 				<button id="nq-pb11" onClick="resetQueryPane()">Reset</button>
 				<button id="nq-pb12" onClick="_doQuery(0)">Search</button>
 			</div>
