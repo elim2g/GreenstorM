@@ -790,8 +790,8 @@
 				</select>
 			</div>
 			<div id="custom-facet-year_newspaper">
-				<label for="custom-facet-year_newspaper">Publication Year</label>
-				<select id="custom-facet-year_newspaper">
+				<label for="custom-facet-year_newspaper-search">Publication Year</label>
+				<select id="custom-facet-year_newspaper-search">
 					<option value="" selected></option>
 				</select>
 			</div>

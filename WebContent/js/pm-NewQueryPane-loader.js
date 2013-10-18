@@ -46,7 +46,7 @@ _addYears('#adv-newspaper-year');
 _addYears('#adv-picture-year');
 
 _addYears('#custom-facet-year-search');
-_addYears('#custom-facet-year_newspaper');
+_addYears('#custom-facet-year_newspaper-search');
 
 $('#adv-newspaper-decade').change(
         function() {
