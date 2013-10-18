@@ -1,6 +1,9 @@
 package tests;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 import com.thoughtworks.selenium.*;
@@ -477,8 +480,7 @@ public class SeleniumTest {
         Thread.sleep(2000);
         assertTrue(selenium.isTextPresent("0.000420895"));
         
-    }
-   
+    }   
     
     @Test
     public void YearCloudWithResults() throws Exception {
@@ -892,8 +894,6 @@ public class SeleniumTest {
         selenium.click("id=adv-picture");
         Thread.sleep(1500);
         selenium.select("id=adv-picture-decade", "label=1840's");
-        Thread.sleep(1500);
-        selenium.click("css=#adv-picture-decade > option[value=\"184\"]");
         Thread.sleep(1000);
         selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
         Thread.sleep(1000);
@@ -919,8 +919,6 @@ public class SeleniumTest {
         selenium.click("id=adv-picture");
         Thread.sleep(1000);
         selenium.select("id=adv-picture-year", "label=1841");
-        Thread.sleep(1000);
-        selenium.click("css=#adv-picture-year > option[value=\"1841\"]");
         Thread.sleep(1000);
         selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
         Thread.sleep(1000);
@@ -1009,8 +1007,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("name=raw-sort-rb");
         Thread.sleep(1000);
-        assertTrue(selenium.isTextPresent("1970-01-03"));
-        assertTrue(selenium.isTextPresent("1970-01-19"));
+        assertTrue(selenium.isTextPresent("1970"));
     }
     
     
@@ -1234,15 +1231,11 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.select("id=adv-map-decade", "label=1900's");
         Thread.sleep(1000);
-        selenium.click("css=#adv-map-decade > option[value=\"190\"]");
-        Thread.sleep(1000);
         selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         selenium.click("id=cc-pb14");
         Thread.sleep(1000);
-        selenium.click("link=0.16337785");
-        Thread.sleep(1000);
-        assertTrue(selenium.isTextPresent("map"));
+        assertTrue(selenium.isTextPresent("0.1"));
     }
     
     
@@ -1269,11 +1262,7 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
         Thread.sleep(1000);
-        selenium.click("id=cc-pb14");
-        Thread.sleep(1000);
-        selenium.click("link=0.16337785");
-        Thread.sleep(1000);
-        assertTrue(selenium.isTextPresent("map"));
+        assertTrue(selenium.isTextPresent("0.1"));
     }
     
     
@@ -1345,18 +1334,12 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=adv-list-decade");
         Thread.sleep(600);
-        selenium.select("id=adv-list-decade", "value=1800s");
+        selenium.select("id=adv-list-decade", "label=1800's");
         Thread.sleep(1000);
         selenium.click("xpath=(//button[@id='nq-pb12'])[2]");
         Thread.sleep(2000);
-        selenium.click("id=btn-pause");
-        Thread.sleep(1000);
-        selenium.click("id=cc-pb14");
-        Thread.sleep(1000);
-        selenium.click("name=raw-sort-rb");
-        Thread.sleep(1000);
         
-        assertTrue(selenium.isTextPresent("undefined"));
+        assertTrue(getTotalRecs() == 0);
     }
     
     @Test
@@ -1491,7 +1474,7 @@ public class SeleniumTest {
         selenium.click("id=cc-pb14");
         Thread.sleep(1000);
         selenium.click("name=raw-sort-rb");
-        Thread.sleep(10000);
+        Thread.sleep(1000);
         
         assertTrue(selenium.isTextPresent("1900"));
         assertFalse(selenium.isTextPresent("1911"));
@@ -1606,6 +1589,103 @@ public class SeleniumTest {
     }
     
     @Test
+    public void CustomSearchArticleAddingParametersChangeResults() throws Exception {
+        int totalResultsNoParameters = 0;
+        int totalResultsWithParameters = 0;
+        HashMap<String, String> parameters = new HashMap<String, String>();
+        parameters.put("select:id=custom-facet-audience-search", "label=Trade");
+        parameters.put("textbox:id=custom-index-identifier-search", "ISBN");
+        
+        LoginFunc();
+        Thread.sleep(1000);
+        customSearch("article", "Celestials");
+        Thread.sleep(1000);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(1000);
+        totalResultsNoParameters = getTotalRecs();
+        Thread.sleep(1000);
+        customSearch("article", "Celestials", parameters);
+        Thread.sleep(1000);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(1000);
+        totalResultsWithParameters = getTotalRecs();
+        Thread.sleep(1000);
+        assertFalse(totalResultsNoParameters == totalResultsWithParameters);
+    }
+    
+    @Test
+    public void CustomSearchNewspaperAddingParametersChangeResults() throws Exception {
+        int totalResultsNoParameters = 0;
+        int totalResultsWithParameters = 0;
+        HashMap<String, String> parameters = new HashMap<String, String>();
+        parameters.put("select:id=custom-facet-category-search", "Article");
+        
+        LoginFunc();
+        Thread.sleep(1000);
+        customSearch("newspaper", "Celestials");
+        Thread.sleep(1000);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(1000);
+        totalResultsNoParameters = getTotalRecs();
+        Thread.sleep(1000);
+        customSearch("newspaper", "Celestials", parameters);
+        Thread.sleep(1000);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(1000);
+        totalResultsWithParameters = getTotalRecs();
+        Thread.sleep(1000);
+        assertFalse(totalResultsNoParameters == totalResultsWithParameters);
+    }
+    
+    @Test
+    public void CustomSearchBookAddingParametersChangeResults() throws Exception {
+        int totalResultsNoParameters = 0;
+        int totalResultsWithParameters = 0;
+        HashMap<String, String> parameters = new HashMap<String, String>();
+        parameters.put("checkbox:id=custom-facet-australian-search", "");
+        
+        LoginFunc();
+        Thread.sleep(1000);
+        customSearch("book", "Celestials");
+        Thread.sleep(1000);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(1000);
+        totalResultsNoParameters = getTotalRecs();
+        Thread.sleep(1000);
+        customSearch("book", "Celestials", parameters);
+        Thread.sleep(1000);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(1000);
+        totalResultsWithParameters = getTotalRecs();
+        Thread.sleep(1000);
+        assertFalse(totalResultsNoParameters == totalResultsWithParameters);
+    }
+    
+    @Test
+    public void CustomSearchMusicAddingParametersChangeResults() throws Exception {
+        int totalResultsNoParameters = 0;
+        int totalResultsWithParameters = 0;
+        HashMap<String, String> parameters = new HashMap<String, String>();
+        parameters.put("checkbox:id=custom-facet-australian-search", "");
+        
+        LoginFunc();
+        Thread.sleep(1000);
+        customSearch("music", "Celestials");
+        Thread.sleep(1000);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(1000);
+        totalResultsNoParameters = getTotalRecs();
+        Thread.sleep(1000);
+        customSearch("music", "Celestials", parameters);
+        Thread.sleep(1000);
+        startSearchAndPauseAfter(20);
+        Thread.sleep(1000);
+        totalResultsWithParameters = getTotalRecs();
+        Thread.sleep(1000);
+        assertFalse(totalResultsNoParameters == totalResultsWithParameters);
+    }
+    
+    @Test
     public void CustomSearchNewspapersBooks() throws Exception {
         ArrayList<String> zones = new ArrayList();
         zones.add("newspaper");
@@ -1661,11 +1741,48 @@ public class SeleniumTest {
         return list;
     }
     
+    // Perform a custom search with a single zone and a map of parameter(s) 
+    // HashMap parameters: id: value
+    private void customSearch(String zone, String searchTerm, HashMap<String, String> parameters) throws Exception { 
+        String element = "";
+        String value = "";
+        String[] elements = new String[2];
+        
+        selenium.click("link=New");
+        Thread.sleep(1000);
+        selenium.click("id=ui-id-3");
+        Thread.sleep(1000);
+        if (!selenium.isChecked("id=custom-zone-" + zone)) {
+            selenium.click("id=custom-zone-" + zone);  
+        }          
+        Thread.sleep(1000);
+        for (String key : parameters.keySet()) {
+            element = key;
+            value = parameters.get(key);
+            elements = element.split(":");
+            String elementType = elements[0].toString();
+            String elementId = elements[1].toString();
+            if (elementType.contains("select")) {
+                selenium.select(elementId, value);
+            } else if (elementType.contains("textbox")) {
+                selenium.type(elementId, value);
+            } else if (elementType.contains("radio") || elementType.contains("checkbox")) {
+                selenium.click(elementId);
+            }
+            Thread.sleep(1000);
+        }
+        Thread.sleep(1000);
+        selenium.type("id=cus-query", searchTerm);
+    }
+    
     private void customSearch(String zone, String searchTerm) throws Exception {
         selenium.click("link=New");
         Thread.sleep(1000);
         selenium.click("id=ui-id-3");
-        selenium.click("id=custom-zone-" + zone);            
+        Thread.sleep(1000);
+        if (!selenium.isChecked("id=custom-zone-" + zone)) {
+            selenium.click("id=custom-zone-" + zone);  
+        }               
         Thread.sleep(1000);
         selenium.type("id=cus-query", searchTerm);
     }
@@ -1675,7 +1792,9 @@ public class SeleniumTest {
         Thread.sleep(1000);
         selenium.click("id=ui-id-3");
         for (int i = 0; i < zones.size(); i++) {
-            selenium.click("id=custom-zone-" + zones.get(i));            
+            if (!selenium.isChecked("id=custom-zone-" + zones.get(i))) {
+                selenium.click("id=custom-zone-" + zones.get(i));  
+            }               
         }
         Thread.sleep(1000);
         selenium.type("id=cus-query", searchTerm);
@@ -1837,6 +1956,24 @@ public class SeleniumTest {
         }
     }
 
+    private int getTotalRecs() throws Exception {
+        String split[];
+        String text = "";
+        String records = "";
+        String rec = "";
+        int totalRecords;
+        
+        if (!selenium.isVisible("id=progress")) {
+            return 0;
+        }
+        
+        text = selenium.getText("id=progress");
+        split = text.split(" / ");
+        records = split[1].split("%20")[0].split("r")[0];
+        rec = records.substring(0, records.length() - 1);
+        totalRecords = Integer.parseInt(rec);
+        return totalRecords;
+    }
     
        
     @After
