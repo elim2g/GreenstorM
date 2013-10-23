@@ -1749,6 +1749,7 @@ function _createQueryString () {
 			$('#current-included_data-row').hide();
 			$('#current-selected_indexes-row').hide();
 			$('#current-selected_facets-row').hide();
+			$('#current-but_not-row').hide();
 			break;
 		case Q_ADVANCED:
 			// Add Selected Zone
@@ -1761,6 +1762,10 @@ function _createQueryString () {
 			if ($('#adv-query-not').val() != '') {
 				str += encodeURIComponent(' NOT ' + $('#adv-query-not').val());
 			}
+			
+			$('#current-but_not-row').show();
+			$('#current-but_not').empty();
+			$('#current-but_not').append($('#adv-query-not').val());
 			
 			///////////////////////////////////////////////////////////////////////////////
 			// Don't Touch the logic before you've actually read how the trove api works //
@@ -1920,6 +1925,7 @@ function _createQueryString () {
 			$('#current-included_data-row').hide();
 			$('#current-selected_indexes-row').hide();
 			$('#current-selected_facets-row').hide();
+			//$('#current-but_not-row').hide();
 			break;
 		case Q_CUSTOM:
 			searchIndexes="";
@@ -1948,52 +1954,52 @@ function _createQueryString () {
 			if($('#custom-include-all').is(":checked")){
 				if(!include){include=$('#custom-include-all').val();} 
 				else {include += ',' + $('#custom-include-all').val();}
-				if(!searchIncludes) { searchIncludes += 'All, ';}
+				searchIncludes += 'All, ';
 			} else {
 				if($('#custom-include-articletext').is("checked")){
 					if(!include){include=$('#custom-include-articletext').val();} 
 					else {include += ',' + $('#custom-include-articletext').val();}
-					if(!searchIncludes) { searchIncludes += 'Article Text, ';}
+					searchIncludes += 'Article Text, ';
 				}
 				if($('#custom-include-comments').is("checked")){
 					if(!include){include=$('#custom-include-comments').val();} 
 					else {include += ',' + $('#custom-include-comments').val();}
-					if(!searchIncludes) { searchIncludes += 'Comments, ';}
+					searchIncludes += 'Comments, ';
 				}
 				if($('#custom-include-holdings').is("checked")){
 					if(!include){include=$('#custom-include-holdings').val();} 
 					else {include += ',' + $('#custom-include-holdings').val();}
-					if(!searchIncludes) { searchIncludes += 'Holdings, ';}
+					searchIncludes += 'Holdings, ';
 				}
 				if($('#custom-include-links').is("checked")){
 					if(!include){include=$('#custom-include-links').val();} 
 					else {include += ',' + $('#custom-include-links').val();}
-					if(!searchIncludes) { searchIncludes += 'Links, ';}
+					searchIncludes += 'Links, ';
 				}
 				if($('#custom-include-listitems').is("checked")){
 					if(!include){include=$('#custom-include-listitems').val();} 
 					else {include += ',' + $('#custom-include-listitems').val();}
-					if(!searchIncludes) { searchIncludes += 'List Items, ';}
+					searchIncludes += 'List Items, ';
 				}
 				if($('#custom-include-lists').is("checked")){
 					if(!include){include=$('#custom-include-lists').val();} 
 					else {include += ',' + $('#custom-include-lists').val();}
-					if(!searchIncludes) { searchIncludes += 'Lists, ';}
+					searchIncludes += 'Lists, ';
 				}
 				if($('#custom-include-subscribinglibs').is("checked")){
 					if(!include){include=$('#custom-include-subscribinglibs').val();} 
 					else {include += ',' + $('#custom-include-subscribinglibs').val();}
-					if(!searchIncludes) { searchIncludes += 'Subscribing Libraries, ';}
+					searchIncludes += 'Subscribing Libraries, ';
 				}
 				if($('#custom-include-tags').is("checked")){
 					if(!include){include=$('#custom-include-tags').val();} 
 					else {include += ',' + $('#custom-include-tags').val();}
-					if(!searchIncludes) { searchIncludes += 'Tags, ';}
+					searchIncludes += 'Tags, ';
 				}
 				if($('#custom-include-workversions').is("checked")){
 					if(!include){include=$('#custom-include-workversions').val();} 
 					else {include += ',' + $('#custom-include-workversions').val();}
-					if(!searchIncludes) {searchIncludes += 'Work Versions';}
+					searchIncludes += 'Work Versions, ';
 				}
 				str += '&include=' + encodeURI(include);
 			}
@@ -2001,198 +2007,204 @@ function _createQueryString () {
 			//facets
 			if($('#custom-facet-format-search').val()) { 
 				str += "&l-format="; str += encodeURI($('#custom-facet-format-search').val()); 
-				if(!searchFacets) { searchFacets += 'Format, ';}
+				searchFacets += 'Format, ';
 			}
 			if($('#custom-facet-decade-search').val()) { 
 				str += "&l-decade="; str += encodeURI($('#custom-facet-decade-search').val()); 
-				if(!searchFacets) { searchFacets += 'Decade, ';}
+				searchFacets += 'Decade, ';
 			}
 			if($('#custom-facet-year-search').val()) { 
 				str += "&l-year="; str += encodeURI($('#custom-facet-year-search').val()); 
-				if(!searchFacets) { searchFacets += 'Year, ';}
+				searchFacets += 'Year, ';
 			}
 			if($('#custom-facet-month-search').val()) { 
 				str += "&l-month="; str += encodeURI($('#custom-facet-month-search').val()); 
-				if(!searchFacets) { searchFacets += 'Month, ';}
+				searchFacets += 'Month, ';
 			}
 			if($('#custom-facet-language-search').val()) { 
 				str += "&l-language="; str += encodeURI($('#custom-facet-language-search').val()); 
-				if(!searchFacets) { searchFacets += 'Language, ';}
+				searchFacets += 'Language, ';
 			}
 			if($('#custom-facet-availability-search').val()) { 
 				str += "&l-availability="; str += encodeURI($('#custom-facet-availability-search').val()); 
-				if(!searchFacets) { searchFacets += 'Availability, ';}
+				searchFacets += 'Availability, ';
 			}
 			if($('#custom-facet-australian-search').is(":checked")) { 
 				str += "&l-australian="; str += encodeURI($('#custom-facet-australian-search').val()); 
-				if(!searchFacets) { searchFacets += 'Australian, ';}
+				searchFacets += 'Australian, ';
 			}
 			if($('#custom-facet-occupation-search').val()) { 
 				str += "&l-occupation="; str += encodeURI($('#custom-facet-occupation-search').val()); 
-				if(!searchFacets) { searchFacets += 'Occupation, ';}
+				searchFacets += 'Occupation, ';
 			}
 			if($('#custom-facet-zoom-search').val()) { 
 				str += "&l-zoom="; str += encodeURI($('#custom-facet-zoom-search').val()); 
-				if(!searchFacets) { searchFacets += 'Zoom, ';}
+				searchFacets += 'Zoom, ';
 			}
 			if($('#custom-facet-vendordb-search').val()) { 
 				str += "&l-vendordb="; str += encodeURI($('#custom-facet-zoom-search').val()); 
-				if(!searchFacets) { searchFacets += 'Vendor Database, ';}
+				searchFacets += 'Vendor Database, ';
 			}
 			if($('#custom-facet-vendor-search').val()) { 
 				str += "&l-vendor="; str += encodeURI($('#custom-facet-vendor-search').val()); 
-				if(!searchFacets) { searchFacets += 'Vendor, ';}
+				searchFacets += 'Vendor, ';
 			}
 			if($('#custom-facet-audience-search').val()) { 
 				str += "&l-audience="; str += encodeURI($('#custom-facet-audience-search').val()); 
-				if(!searchFacets) { searchFacets += 'Audience, ';}
+				searchFacets += 'Audience, ';
 			}
 			if($('#custom-facet-title-search').val()) { 
 				str += "&l-title="; str += encodeURI($('#custom-facet-title-search').val()); 
-				if(!searchFacets) { searchFacets += 'Title, ';}
+				searchFacets += 'Title, ';
 			}
 			if($('#custom-facet-category-search').val()) { 
 				str += "&l-category="; str += encodeURI($('#custom-facet-category-search').val()); 
-				if(!searchFacets) { searchFacets += 'Category, ';}
+				searchFacets += 'Category, ';
 			}
 			if($('#custom-facet-illustrated-search').is(':checked')) { 
 				str += "&l-illustrated="; str += encodeURI($('#custom-facet-illustrated-search').val()); 
-				if(!searchFacets) { searchFacets += 'Illustrated, ';}
+				searchFacets += 'Illustrated, ';
 			}
 			if($('#custom-facet-word-search').val()) { 
 				str += "&l-word="; str += encodeURI($('#custom-facet-word-search').val()); 
-				if(!searchFacets) {searchFacets += 'Word Count';}
+				searchFacets += 'Word Count, ';
 			}
 			
 			//Indexes
 			if($('#custom-index-creator-search').val()) {
 				str += '&' + encodeURI('creator:(' + $('#custom-index-creator-search').val() + ')');
-				if(!searchIndexes) { searchIndexes += 'Creator, ';}
+				searchIndexes += 'Creator, ';
 			}
 			if($('#custom-index-subject-search').val()) {
 				str += '&' + encodeURI('subject:(' + $('#custom-index-subject-search').val() + ')');
-				if(!searchIndexes) { searchIndexes += 'Subject, ';}
+				searchIndexes += 'Subject, ';
 			}
 			if($('#custom-index-title-search').val()) {
 				str += '&' + encodeURI('title:(' + $('#custom-index-title-search').val() + ')');
-				if(!searchIndexes) { searchIndexes += 'Title, ';}
+				searchIndexes += 'Title, ';
 			}
 			if($('#custom-index-s_creator-search').val()) {
 				str += '&' + encodeURI('s_creator:(' + $('#custom-index-s_creator-search').val() + ')');
-				if(!searchIndexes) { searchIndexes += 'Stemmed Creator, ';}
+				searchIndexes += 'Stemmed Creator, ';
 			}
 			if($('#custom-index-s_subject-search').val()) {
 				str += '&' + encodeURI('s_subject:(' + $('#custom-index-s_subject-search').val() + ')');
-				if(!searchIndexes) { searchIndexes += 'Stemmed Subject, ';}
+				searchIndexes += 'Stemmed Subject, ';
 			}
 			if($('#custom-index-s_title-search').val()) {
 				str += '&' + encodeURI('creator:(' + $('#custom-index-s_title-search').val() + ')');
-				if(!searchIndexes) { searchIndexes += 'Stemmed Title, ';}
+				searchIndexes += 'Stemmed Title, ';
 			}
 			if($('#custom-index-exact_creator-search').val()) {
 				str += '&' + encodeURI('exact_creator:(' + $('#custom-index-exact_creator-search').val() + ')');
-				if(!searchIndexes) { searchIndexes += 'Exact Creator, ';}
+				searchIndexes += 'Exact Creator, ';
 			}
 			if($('#custom-index-format-search').val()) {
 				str += '&' + encodeURI('format:' + $('#custom-index-format-search').val());
-				if(!searchIndexes) { searchIndexes += 'Format, ';}
+				searchIndexes += 'Format, ';
 			}
 			if($('#custom-index-language-search').val()) {
 				str += '&' + encodeURI('language:' + $('#custom-index-language-search').val());
-				if(!searchIndexes) { searchIndexes += 'Language, ';}
+				searchIndexes += 'Language, ';
 			}
 			if($('#custom-index-isbn-search').val()) {
 				str += '&' + encodeURI('isbn:' + $('#custom-index-isbn-search').val());
-				if(!searchIndexes) { searchIndexes += 'ISBN, ';}
+				searchIndexes += 'ISBN, ';
 			}
 			if($('#custom-index-issn-search').val()) {
 				str += '&' + encodeURI('issn:' + $('#custom-index-issn-search').val());
-				if(!searchIndexes) { searchIndexes += 'ISBN, ';}
+				searchIndexes += 'ISBN, ';
 			}
 			if($('#custom-index-publictag-search').val()) {
 				str += '&' + encodeURI('publictag:(' + $('#custom-index-publictag-search').val() + ')');
-				if(!searchIndexes) { searchIndexes += 'Public Tags, ';}
+				searchIndexes += 'Public Tags, ';
 			}
 			if($('#custom-index-nuc-search').val()) {
 				str += '&' + encodeURI('nuc:' + $('#custom-index-nuc-search').val());
-				if(!searchIndexes) { searchIndexes += 'NUC, ';}
+				searchIndexes += 'NUC, ';
 			}
 			if($('#custom-index-id-search').val()) {
 				str += '&' + encodeURI('id:' + $('#custom-index-id-search').val());
-				if(!searchIndexes) { searchIndexes += 'ID, ';}
+				searchIndexes += 'ID, ';
 			}
 			if($('#custom-index-identifier-search').val()) {
 				str += '&' + encodeURI('identifier:' + $('#custom-index-identifier-search').val());
-				if(!searchIndexes) { searchIndexes += 'Identifier, ';}
+				searchIndexes += 'Identifier, ';
 			}
 			if($('#custom-index-anbdid-search').val()) {
 				str += '&' + encodeURI('anbdid:' + $('#custom-index-anbdid-search').val());
-				if(!searchIndexes) { searchIndexes += 'Libraries Australia Identifier, ';}
+				searchIndexes += 'Libraries Australia Identifier, ';
 			}
 			if($('#custom-index-ddc-search').val()) {
 				str += '&' + encodeURI('ddc:' + $('#custom-index-ddc-search').val());
-				if(!searchIndexes) { searchIndexes += 'Dewey Decimal Classification number, ';}
+				searchIndexes += 'Dewey Decimal Classification number, ';
 			}
 			if($('#custom-index-decade-search').val()) {
 				str += '&' + encodeURI('decade:' + $('#custom-index-decade-search').val());
-				if(!searchIndexes) { searchIndexes += 'Decade, ';}
+				searchIndexes += 'Decade, ';
 			}
 			if($('#custom-index-text-search').val()) {
 				str += '&' + encodeURI('text:' + $('#custom-index-text-search').val());
-				if(!searchIndexes) { searchIndexes += 'Text, ';}
+				searchIndexes += 'Text, ';
 			}
 			if($('#custom-index-fulltext-search').val()) {
 				str += '&' + encodeURI('fulltext:' + $('#custom-index-fulltext-search').val());
-				if(!searchIndexes) { searchIndexes += 'Full Text, ';}
+				searchIndexes += 'Full Text, ';
 			}
-			if($('#custom-index-has-search_tags').is("checked")){
+			if($('#custom-index-has-search_tags').is(":checked")){
 				str += '&' + encodeURI('has:tags');
-				if(!searchIndexes) { searchIndexes += 'Has Tags, ';}
+				searchIndexes += 'Has Tags, ';
 			}
-			if($('#custom-index-has-search_comments').is("checked")){
+			if($('#custom-index-has-search_comments').is(":checked")){
 				str += '&' + encodeURI('has:comments');
-				if(!searchIndexes) { searchIndexes += 'Has Comments, ';}
+				searchIndexes += 'Has Comments, ';
 			}
 			if(($('#custom-index-lastupdated-search_start').val())||($('#custom-index-lastupdated-search_finish').val())){
 				if($('#custom-index-lastupdated-search_start').val()) {str += '&' + encodeURI('lastupdated:[' + $('#custom-index-lastupdated-search_start').val());} 
 					else {str += '&' + encodeURI('lastupdated:[*');}
 				if($('#custom-index-lastupdated-search_finish').val()) {str += '&' + encodeURI(' TO ' + $('#custom-index-lastupdated-search_finish').val() + ']');} 
 					else {str += '&' + encodeURI(' TO *]');}
-				if(!searchIndexes) { searchIndexes += 'Last Updated, ';}
+				searchIndexes += 'Last Updated, ';
 			}
 			if(($('#custom-index-taglastupdated-search_start').val())||($('#custom-index-taglastupdated-search_finish').val())){
 				if($('#custom-index-taglastupdated-search_start').val()) {str += '&' + encodeURI('taglastupdated:[' + $('#custom-index-taglastupdated-search_start').val());} 
 					else {str += '&' + encodeURI('taglastupdated:[*');}
 				if($('#custom-index-taglastupdated-search_finish').val()) {str += '&' + encodeURI(' TO ' + $('#custom-index-taglastupdated-search_finish').val() + ']');} 
 					else {str += '&' + encodeURI(' TO *]');}
-				if(!searchIndexes) { searchIndexes += 'Tag Last Updated, ';}
+				searchIndexes += 'Tag Last Updated, ';
 			}	
 			if(($('#custom-index-commentlastupdated-search_start').val())||($('#custom-index-commentlastupdated-search_finish').val())){	
 				if($('#custom-index-commentlastupdated-search_start').val()) {str += '&' + encodeURI('commentlastupdated:[' + $('#custom-index-commentlastupdated-search_start').val());} 
 					else {str += '&' + encodeURI('commentlastupdated:[*');}
 				if($('#custom-index-commentlastupdated-search_finish').val()) {str += '&' + encodeURI(' TO ' + $('#custom-index-commentlastupdated-search_finish').val() + ']');} 
 					else {str += '&' + encodeURI(' TO *]');}
-				if(!searchIndexes) { searchIndexes += 'Comment Last Updated, ';}
+				searchIndexes += 'Comment Last Updated, ';
 			}	
 			if(($('#custom-index-date-search_start').val())||($('#custom-index-date-search_finish').val())){	
 				if($('#custom-index-date-search_start').val()) {str += '&' + encodeURI('date:[' + $('#custom-index-date-search_start').val());} 
 					else {str += '&' + encodeURI('date:[*');}
 				if($('#custom-index-date-search_finish').val()) {str += '&' + encodeURI(' TO ' + $('#custom-index-date-search_finish').val() + ']');} 
 					else {str += '&' + encodeURI(' TO *]');}
-				if(!searchIndexes) {searchIndexes += 'Date';}
+				searchIndexes += 'Date, ';
 			}	
 			//<<< Custom Search Fields >>>\\
 			
-			if(searchIndexes.charAt(searchIndexes.length-1) == ' ') {searchIndexes.slice(-2);}
-			if(searchFacets.charAt(searchFacets.length-1) == ' ') {searchFacets.slice(-2);}
-			if(searchIncludes.charAt(searchIncludes.length-1) == ' ') {searchIncludes.slice(-2);}
+			searchIndexes = searchIndexes.slice(0,-2);
+			searchFacets = searchFacets.slice(0,-2);
+			searchIncludes = searchIncludes.slice(0,-2);
 			
 			$('#current-included_data-row').show();
+			$('#current-included_data').empty();
 			$('#current-included_data').append(searchIncludes);
 			$('#current-selected_indexes-row').show();
+			$('#current-selected_indexes').empty();
 			$('#current-selected_indexes').append(searchIndexes);
 			$('#current-selected_facets-row').show();
+			$('#current-selected_facets').empty();
 			$('#current-selected_facets').append(searchFacets);
+			$('#current-but_not-row').show();
+			$('#current-but_not').empty();
+			$('#current-but_not').append($('#cus-query-not').val());
 	
 			break;
 		default:

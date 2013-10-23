@@ -3,35 +3,39 @@
 	<p>&nbsp;
 	<table id="curr-query-form">
 		<tr>
-			<td class="td-name">Search Term:</td>
+			<td class="td-name"><b>Search Term:</b></td>
 			<td id="q11"></td>
 		</tr>
+		<tr id="current-but_not-row">
+			<td class="td-name"><b>But Not:</b></td>
+			<td id="current-but_not"></td>
+		</tr>
 		<tr>
-			<td class="td-name">Search Zone:</td>
+			<td class="td-name"><b>Search Zone:</b></td>
 			<td id="z11"></td>
 		</tr>
 		<tr id="current-included_data-row">
-			<td class="td-name">Included Data:</td>
+			<td class="td-name"><b>Included Data:</b></td>
 			<td id="current-included_data"></td>
 		</tr>
 		<tr id="current-selected_facets-row">
-			<td class="td-name">Selected Facets:</td>
+			<td class="td-name"><b>Selected Facets:</b></td>
 			<td id="current-selected_facets"></td>
 		</tr>
 		<tr id="current-selected_indexes-row">
-			<td class="td-name">Selected Indexes:</td>
+			<td class="td-name"><b>Selected Indexes:</b></td>
 			<td id="current-selected_indexes"></td>
 		</tr>
 		<tr>
-			<td class="td-name">Result Total:</td>
+			<td class="td-name"><b>Result Total:</b></td>
 			<td id="n11"></td>
 		</tr>
 		<tr>
-			<td class="td-name">Retrieved:</td>
+			<td class="td-name"><b>Retrieved:</b></td>
 			<td id="n12"></td>
 		</tr>
 		<tr>
-			<td class="td-name">Elapsed Time:</td>
+			<td class="td-name"><b>Elapsed Time:</b></td>
 			<td id="n13"></td>
 		</tr>
 		<tr>
